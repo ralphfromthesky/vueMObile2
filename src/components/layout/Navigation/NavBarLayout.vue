@@ -115,7 +115,7 @@ const toggleArrow = () => {
 };
 
 const showLoginModal = () => {
-  loginModal.value = !loginModal.value
+  loginModal.value = !loginModal.value 
 }
 
 const showDeposit = () => {

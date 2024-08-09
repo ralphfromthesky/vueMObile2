@@ -165,7 +165,7 @@
           </div> -->
       <SpinLoader v-if="isFetching" />
 
-        <Slots :gameTypePass="gameTypeName" class="hidden"/>
+        <Slots :gameTypePass="gameTypeName" :headerName="headTitle"/>
     
     
     </div>
@@ -179,7 +179,7 @@ const { lang } = changeLang();
 import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import SupportLink from "@/components/SupportLink/SupportLink.vue";
 import Login from "@/components/layout/LoginComponent/LoginForm.vue";
-
+const headTitle = ref('')
 const loginModal = ref(false);
 const regModal = ref(false);
 import SpinLoader from "@/components/antUi/spinLoader.vue";
@@ -262,11 +262,13 @@ const fetchGames = (url, popFrame, gameTabType) => {
 
 const getTabName = (tabName) => {
   if(tabName === 'Slots') {
+    // alert(tabName)
+    headTitle.value = 'Slots'
     gameType.value = "pg";
     getGameType.value = 2;
     // alert(getGameType.value)
     getGame.refetch()
-    router.push('slots')
+    router.push('/slots')
 
   }
   if(tabName === "Fishing") {
@@ -274,7 +276,7 @@ const getTabName = (tabName) => {
      getGameType.value = 7;
     //  alert(getGameType.value)
      getGame.refetch()
-     router.push('slots')
+     router.push('/slots')
 
   }
   if(tabName === "Live Casino"){
@@ -282,7 +284,7 @@ const getTabName = (tabName) => {
          getGameType.value = 1;
     //  alert(getGameType.value)
      getGame.refetch()
-     router.push('slots')
+     router.push('/slots')
 
   }
   if(tabName === "Sports" ) {
@@ -290,7 +292,7 @@ const getTabName = (tabName) => {
          getGameType.value = 0;
     //  alert(getGameType.value)
      getGame.refetch()
-     router.push('slots')
+     router.push('/slots')
 
   }
 

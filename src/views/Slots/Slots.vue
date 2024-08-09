@@ -10,11 +10,12 @@
         class="w-screen h-screen"
       ></iframe>
     </div>
+
     <div class="h-screen w-screen" v-if="hideMain">
       <div>
         <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
-          <router-link to='/'> <span class="text-[.5rem]"><</span></router-link>
-          <span class="text-[.5rem]">{{ props.gameTypePass }}</span>
+          <router-link to="/"> <span class="text-[.5rem]"><</span></router-link>
+          <span class="text-[.5rem]">--{{ headerTitle }} -- {{ showTitle }}</span>
           <span></span>
         </div>
         <div class="border-3"></div>
@@ -47,26 +48,42 @@
                     : 'bg-[#05309F] text-[#a0c5fb]'
                 "
               >
-                <span class="flex h-[2rem] items-center">
-                  {{ btn.czCode }}</span
-                >
-                <!-- <span><img :src="`/api${btn.imgUrl}`" alt="" srcset=""></span> -->
+                <span class="flex flex-col items-center p-[.1rem]">
+                  <img
+                    v-if="showImage(btn.czCode)"
+                    :src="imgSrc(btn.czCode)"
+                    alt=""
+                    srcset=""
+                    class="h-[.6rem]"
+                  />
+
+                  {{ btn.czCode }}
+                </span>
               </div>
             </div>
             <div class="">
               <div class="flex justify-center gap-[.1rem]">
                 <span
-                  :class="['p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]', popular ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]']"
+                  :class="[
+                    'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
+                    popular ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
+                  ]"
                   @click="showPopular"
                   >Popular</span
                 >
                 <span
-                :class="['p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]', recent ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]']"
+                  :class="[
+                    'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
+                    recent ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
+                  ]"
                   @click="showRecent"
                   >Recente</span
                 >
                 <span
-                :class="['p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]', favorites ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]']"
+                  :class="[
+                    'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
+                    favorites ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
+                  ]"
                   @click="showFavorites"
                   >Favorites</span
                 >
@@ -140,7 +157,6 @@
                   </div>
                 </div>
               </div> -->
-              
             </div>
           </div>
         </div>
@@ -184,37 +200,84 @@ const liveGameUrl = ref("");
 const spinLoads = ref(false);
 const loginModal = ref(false);
 const regModal = ref(false);
-const popular = ref(false)
-const recent = ref(false)
-const favorites = ref(false)
-const allGames = ref(true)
+const popular = ref(false);
+const recent = ref(false);
+const favorites = ref(false);
+const allGames = ref(true);
+const headerTitle = ref('')
 
 const showPopular = () => {
   // allGames.value = false
-popular.value = true
-  recent.value = false
-  favorites.value =false
-}
+  popular.value = true;
+  recent.value = false;
+  favorites.value = false;
+};
 const showRecent = () => {
   // allGames.value = false
-popular.value = false
-  recent.value = true
-  favorites.value =false
-}
+  popular.value = false;
+  recent.value = true;
+  favorites.value = false;
+};
 
 const showFavorites = () => {
   // allGames.value = false
-popular.value = false
-  recent.value = false
-  favorites.value = true
-}
+  popular.value = false;
+  recent.value = false;
+  favorites.value = true;
+};
 const showAllGames = () => {
   // allGames.value = true
-  popular.value = false
-  recent.value = false
-  favorites.value = false
-  fetchGames()
-}
+  popular.value = false;
+  recent.value = false;
+  favorites.value = false;
+  fetchGames();
+};
+
+const imgMap = ref({
+  pg: "/turnlateImages/fac_pg_select.png",
+  pgn: "/turnlateImages/fac_pg_select.png",
+  npt: "/turnlateImages/fac_npt_select.png",
+  pgone: "/turnlateImages/fac_pg_select.png",
+  mga: "/turnlateImages/fac_mga_select.png",
+  bs: "/turnlateImages/fac_bs_select.png",
+  jdb: "/turnlateImages/fac_jdb_select.png",
+  ag: "/turnlateImages/fac_ag_select.png",
+  bbin: "/turnlateImages/fac_bbin_select.png",
+  cq9: "/turnlateImages/fac_cq9_select.png",
+  evo: "/turnlateImages/fac_evo_select.png",
+  fg: "/turnlateImages/fac_fg_select.png",
+  pp: "/turnlateImages/fac_pp_select.png",
+  jl: "/turnlateImages/fac_jl_select.png",
+  ws168: "",
+  bbin2: "/turnlateImages/fac_ptn_select.png",
+  ptn: "/turnlateImages/fac_pg_select.png",
+  bbinFish:  "/turnlateImages/fac_bbin_select.png",
+  cq9Fish: "/turnlateImages/fac_cq9_select.png",
+  agLive: "/turnlateImages/fac_ag_select.png", 
+  bbinLive: "/turnlateImages/fac_bbin_select.png", 
+  dgLive: "/turnlateImages/fac_dgLive_select.png",
+  evolution: "/turnlateImages/fac_evolution_select.png",
+  ppLive: "/turnlateImages/fac_ppLive_select.png",
+  bbin2Live: "",
+  tysbSport: "/turnlateImages/fac_tysbSport_select.png",
+  ppSport: "/turnlateImages/fac_ppSport_select.png",
+  fb: "/turnlateImages/fac_fb_select.png",
+
+
+
+
+
+
+
+
+});
+
+const showImage = (index) => {
+  return Boolean(imgMap.value[index]);
+};
+const imgSrc = (czcode) => {
+  return imgMap.value[czcode];
+};
 
 const props = defineProps({
   gamePass: {
@@ -231,6 +294,10 @@ const props = defineProps({
   },
   gameTabsPass: {
     type: String,
+    default: "",
+  },
+  headerName: {
+    type: String,
     default: ''
   }
 });
@@ -246,17 +313,34 @@ watch(
   () => props.gameTypePass,
   (newVal) => {
     if (newVal) {
-      alert(newVal);
+      // alert(newVal);
       refetch();
     }
   }
 );
+watch(() => props.headerName, (newVal) => {
+  alert(newVal)
+  headerTitle.value = newVal
+  alert(`this is the ${headerTitle.value}`)
+  return headerTitle.value
 
-watch(() => props.gameTabsPass, (newVal) => {
-  if(newVal) {
-    alert(newVal)
-    getGameType.value  = newVal;
-    tabs()
+})
+
+watch(
+  () => props.gameTabsPass,
+  (newVal) => {
+    if (newVal) {
+      alert(newVal);
+      getGameType.value = newVal;
+      tabs();
+    }
+  }
+);
+
+const showTitle = computed(() => {
+  if(headerTitle.value) {
+    return headerTitle.value
+
   }
 })
 
@@ -283,7 +367,6 @@ const { refetch: tabs } = useQuery({
     gameTabs.value = data;
   },
 });
-
 
 const { refetch: fetchGames, isFetching } = useQuery({
   queryKey: ["liveGames"],
@@ -313,9 +396,9 @@ const { refetch: transOut } = useQuery({
 const getTypes = (gameTypes, index) => {
   getGameType.value = gameTypes;
   activeBtn.value = index;
+  alert(gameTypes);
   tabs();
 };
-
 
 watch(gameUrl, (newVal) => {
   // if (newVal) {
@@ -341,6 +424,9 @@ const showIframGames = computed(() => {
   return liveGameUrl.value;
 });
 
-onMounted(() => {
+const showBtnImg = computed((index) => {
+  return imgBtn.value[index];
 });
+
+onMounted(() => {});
 </script>

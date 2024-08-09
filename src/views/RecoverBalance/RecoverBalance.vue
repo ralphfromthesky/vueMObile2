@@ -14,8 +14,12 @@
             />
           </div>
           <div class="flex flex-col">
-            <span class="text-[#a89d81] text-[.25rem] font-bold">{{ store.state.userInfo.username }}</span>
-            <span class="text-[#a89d81] text-[.25rem] font-bold">{{ store.state.userInfo.userId }}</span>
+            <span class="text-[#a89d81] text-[.25rem] font-bold">{{
+              store.state.userInfo.username
+            }}</span>
+            <span class="text-[#a89d81] text-[.25rem] font-bold">{{
+              store.state.userInfo.userId
+            }}</span>
           </div>
         </div>
         <img
@@ -28,31 +32,34 @@
         <div class="flex items-center justify-around">
           <div class="flex flex-col items-center justify-center">
             <span class="text-[#a89d81] text-[.25rem] font-bold">Balance</span>
-            <span class="text-[#a89d81] text-[.25rem] font-bold"
-              >{{ store.state.userInfo.money }}</span
-            >
+            <span class="text-[#a89d81] text-[.25rem] font-bold">{{
+              store.state.userInfo.money
+            }}</span>
           </div>
           <div class="flex flex-col items-center justify-center">
             <span class="text-[#a89d81] text-[.25rem] font-bold"
               >Bonus Wallet</span
             >
-            <span class="text-[#a89d81] text-[.25rem] font-bold"
-              >{{ store.state.userInfo.giftMoney }}</span
-            >
+            <span class="text-[#a89d81] text-[.25rem] font-bold">{{
+              store.state.userInfo.giftMoney
+            }}</span>
           </div>
         </div>
       </div>
       <div class="flex items-center justify-around px-[.2rem] pt-[.2rem]">
+        <RouterLink to="/withdraw">
+          <div class="">
+            <button
+              class="text-white w-[2.5rem] bg-[#f0c059] rounded-[.1rem] p-[.2rem] leading-none text-[.3rem]"
+            >
+              Withdrawal
+            </button>
+          </div>
+        </RouterLink>
         <div class="">
           <button
             class="text-white w-[2.5rem] bg-[#f0c059] rounded-[.1rem] p-[.2rem] leading-none text-[.3rem]"
-          >
-            Withdrawal
-          </button>
-        </div>
-        <div class="">
-          <button
-            class="text-white w-[2.5rem] bg-[#f0c059] rounded-[.1rem] p-[.2rem] leading-none text-[.3rem]"
+            @click="showDeposit"
           >
             Deposit
           </button>
@@ -178,7 +185,7 @@
                   class="text-[.25rem] text-[#687079] font-bold break-all"
                   >{{ transferGameValue.title }}</span
                 >
-                <span class="text-[.25rem] text-[#687079] font-bold"
+                <span class="text-[.25rem] text-[#687079] font-bold" ref="elementTransfer"
                   >Balance:
                   <span class="">{{ transferGameValue.balance }}</span></span
                 >
@@ -188,7 +195,8 @@
               >
                 <button
                   class="text-white min-w-full bg-[#f0c059] rounded-[.1rem] p-[.2rem] leading-none text-[.2rem]"
-                >
+                @click="openTransfer = !openTransfer"
+                  >
                   Transfer
                 </button>
                 <button
@@ -218,27 +226,59 @@
         </div>
       </div>
       <Slots :gameTypePass="gameType" class="hidden" :gameTabsPass="gameName" />
+      <div
+        v-if="isLogin"
+        class="w-screen h-screen bg-[#000000b3] fixed top-0 z-20"
+      >
+        <div
+          v-if="isLogin"
+          class="flex flex-col slide-in-bottom absolute top-0 right-0 ease-in-out"
+        >
+          <Deposit @close="closeDeposit" />
+        </div>
+      </div>
+      <AntModal
+        :isOpen="openTransfer"
+        :componentPass="Transfer"
+        :backGrounds="true"
+        
+        
+      />
+      
     </div>
   </PageLayout>
 </template>
 <script setup>
 import PageLayout from "@/components/layout/PageLayout.vue";
-import {getGamesTab} from '@/global/games.js'
-const {getGameType, getGame} = getGamesTab()
-import {useGameType} from '@/global/games.js'
-const {gameDatas, typeGame, useType} = useGameType()
+import Deposit from "@/components/deposit/Deposit.vue";
+
+import { getGamesTab } from "@/global/games.js";
+const { getGameType, getGame } = getGamesTab();
+import { useGameType } from "@/global/games.js";
+import Transfer from '@/components/Transfer/transfer.vue'
+const { gameDatas, typeGame, useType } = useGameType();
 import Slots from "@/views/Slots/Slots.vue";
 import { onMounted, ref, watch } from "vue";
 import { useMutation, useQuery } from "@tanstack/vue-query";
 import { axiosGet2, axiosPost2 } from "../../components/axios/AxiosHook.js";
 import router from "@/router";
 import { useStore } from "@/store/store";
-const store = useStore()
+const store = useStore();
 const activeTab = ref(2);
 const transferData = ref([]);
 const gameType = ref(2);
-const gameName = ref('')
+const gameName = ref("");
 const transferGameData = ref([]);
+const isLogin = ref(false);
+const elementTransfer = ref(null)
+const openTransfer = ref(false)
+const closeDeposit = () => {
+  isLogin.value = false;
+};
+
+const showDeposit = () => {
+  isLogin.value = !isLogin.value;
+};
 
 function transferClick(event, type) {
   activeTab.value = event;
@@ -283,8 +323,8 @@ const { refetch: redirect } = useQuery({
 
 const transferGames = (type) => {
   if (getGameType.value) {
-    gameName.value = type
-    alert(gameName.value)
+    gameName.value = type;
+    alert(gameName.value);
     getGame.refetch();
     router.push("/slots");
   }
@@ -292,9 +332,8 @@ const transferGames = (type) => {
 
 const clickType = (type) => {
   gameType.value = type;
-  getGameType.value = type
+  getGameType.value = type;
   alert(gameType.value);
-
 };
 
 onMounted(() => {

@@ -16,7 +16,6 @@
         <div class="text-[.7rem] text-[#d4d0d0]">{{ props.elementPass }}</div>  
         <span class="text-[.7rem] text-[red]">Receive</span>
       </div>
-
       <span
         class="absolute left-[45%] bottom-[-.8rem]"
         id="handleThis"
@@ -81,6 +80,7 @@ const props = defineProps({
     required: false,
     default: "",
   },
+
 });
 
 const open = ref(props.isOpen);
