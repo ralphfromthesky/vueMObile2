@@ -50,10 +50,10 @@
           ><CloseOutlined /></span
         >
       </div>
-      <div class="mt-[.2rem]" v-if="showScro">
-        <div class="h-[1rem] w-[1rem] border-2  border-[#3a61c2] flex justify-center items-center rounded-[.1rem]" @click="scrollToTop">
-            <img src="/public/rocket.png" alt="">
-            <span class=" text-txt2 text-[.2rem]">Top</span>
+      <div class="mt-[.2rem] bg-[#05309f]" @click="scrollUp">
+        <div class="h-[1rem] w-[1rem] border-2  border-[#3a61c2] flex flex-col justify-center items-center rounded-[.1rem]" @click="scrollToTop">
+          <img src="/scrollImages/Dior.png" class="h-[.5rem]" alt="">
+          <span class=" text-txt2 text-[.2rem]">Top</span>  
         </div>
       </div>
     </div>
@@ -88,7 +88,6 @@ const openRedpacket = ref(false);
 const openVipLogin = ref(false);
 const store = useStore();
 const countBadge = ref(0)
-const showScrollTop = ref(window.scrollY > 400);
 
 
 const goToLink = () => {
@@ -98,18 +97,13 @@ const goChat = () => {
   window.open("https://mt0.yibo22.com/api/chatroom/goChat.do?isPc=true", "_blank");
 }
 
-// onMounted(() => {
-//   window.addEventListener('scroll', alert('fasfasfasdf'));
-// });
-
-// onUnmounted(() => {
-//   window.removeEventListener('scroll', updateScrollPosition);
-// });
-
+const emit = defineEmits(['scrollTo'])
+const scrollUp = () => {
+  emit('scrollTo')
+}
 </script>
 
 <style scoped>
-/* For demo */
 :deep(.slick-slide) {
   text-align: center;
   line-height: 160px;

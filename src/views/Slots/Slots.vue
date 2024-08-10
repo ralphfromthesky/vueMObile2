@@ -11,17 +11,19 @@
       ></iframe>
     </div>
 
-    <div class="h-screen w-screen" v-if="hideMain">
+    <div class="w-screen relative" v-if="hideMain">
       <div>
         <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
           <router-link to="/"> <span class="text-[.5rem]"><</span></router-link>
-          <span class="text-[.5rem]">--{{ headerTitle }} -- {{ showTitle }}</span>
+          <span class="text-[.5rem]"
+            >{{ store.state.forwardGame }}</span
+          >
           <span></span>
         </div>
         <div class="border-3"></div>
 
         <div
-          class="text-white h-screen overflow-auto w-screen p-[.2rem] bg-[#1A45B1]"
+          class="text-white overflow-auto w-screen p-[.2rem] bg-[#1A45B1]"
         >
           <div class="flex justify-center my-[.1rem] relative">
             <a-input
@@ -89,7 +91,7 @@
                 >
               </div>
               <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[12rem] p-[.2rem] overflow-auto"
+                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11.1rem] p-[.2rem] overflow-auto"
                 v-if="allGames"
               >
                 <div
@@ -159,6 +161,17 @@
               </div> -->
             </div>
           </div>
+          <div class="mt-[.3rem] pl-[1rem] flex justify-center">
+            <div>
+              <a-pagination
+                v-model:current="currentPage"
+                :total="50"
+                show-less-items
+                class="custom-pagination"
+                @change="handlePagination"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -204,7 +217,8 @@ const popular = ref(false);
 const recent = ref(false);
 const favorites = ref(false);
 const allGames = ref(true);
-const headerTitle = ref('')
+const headerTitle = ref("");
+const currentPage = ref(1);
 
 const showPopular = () => {
   // allGames.value = false
@@ -251,10 +265,10 @@ const imgMap = ref({
   ws168: "",
   bbin2: "/turnlateImages/fac_ptn_select.png",
   ptn: "/turnlateImages/fac_pg_select.png",
-  bbinFish:  "/turnlateImages/fac_bbin_select.png",
+  bbinFish: "/turnlateImages/fac_bbin_select.png",
   cq9Fish: "/turnlateImages/fac_cq9_select.png",
-  agLive: "/turnlateImages/fac_ag_select.png", 
-  bbinLive: "/turnlateImages/fac_bbin_select.png", 
+  agLive: "/turnlateImages/fac_ag_select.png",
+  bbinLive: "/turnlateImages/fac_bbin_select.png",
   dgLive: "/turnlateImages/fac_dgLive_select.png",
   evolution: "/turnlateImages/fac_evolution_select.png",
   ppLive: "/turnlateImages/fac_ppLive_select.png",
@@ -262,14 +276,6 @@ const imgMap = ref({
   tysbSport: "/turnlateImages/fac_tysbSport_select.png",
   ppSport: "/turnlateImages/fac_ppSport_select.png",
   fb: "/turnlateImages/fac_fb_select.png",
-
-
-
-
-
-
-
-
 });
 
 const showImage = (index) => {
@@ -298,8 +304,8 @@ const props = defineProps({
   },
   headerName: {
     type: String,
-    default: ''
-  }
+    default: "",
+  },
 });
 
 watch(gameType, (newVal) => {});
@@ -318,13 +324,15 @@ watch(
     }
   }
 );
-watch(() => props.headerName, (newVal) => {
-  alert(newVal)
-  headerTitle.value = newVal
-  alert(`this is the ${headerTitle.value}`)
-  return headerTitle.value
-
-})
+watch(
+  () => props.headerName,
+  (newVal) => {
+    alert(newVal);
+    headerTitle.value = newVal;
+    alert(`this is the ${headerTitle.value}`);
+    return headerTitle.value;
+  }
+);
 
 watch(
   () => props.gameTabsPass,
@@ -337,12 +345,23 @@ watch(
   }
 );
 
-const showTitle = computed(() => {
-  if(headerTitle.value) {
-    return headerTitle.value
+watch(gameUrl, (newVal) => {
+  // if (newVal) {
+  //   alert(newVal);
+  // }
+});
 
+watch(currentPage, (newPage) => {
+  if (gamesData.value.content[newPage - 1]) {
+    activeBtn.value = newPage - 1;
   }
-})
+});
+
+const showTitle = computed(() => {
+  if (headerTitle.value) {
+    return headerTitle.value;
+  }
+});
 
 const { refetch } = useQuery({
   queryKey: ["gameTab"],
@@ -396,15 +415,21 @@ const { refetch: transOut } = useQuery({
 const getTypes = (gameTypes, index) => {
   getGameType.value = gameTypes;
   activeBtn.value = index;
+  currentPage.value = index + 1;
   alert(gameTypes);
-  tabs();
+  alert("fasfasfasdf");
 };
 
-watch(gameUrl, (newVal) => {
-  // if (newVal) {
-  //   alert(newVal);
-  // }
-});
+const handlePagination = (page) => {
+  currentPage.value = page;
+  activeBtn.value = page - 1;
+  const btn = gamesData.value?.content[activeBtn.value];
+  if (btn) {
+    getGameType.value = btn.gameType;
+    tabs();
+  }
+};
+
 const showGames = (url) => {
   gameUrl.value = url;
   if (!store.state.userInfo.isLogin) {
@@ -424,9 +449,49 @@ const showIframGames = computed(() => {
   return liveGameUrl.value;
 });
 
-const showBtnImg = computed((index) => {
-  return imgBtn.value[index];
-});
-
 onMounted(() => {});
 </script>
+
+<!-- <style scoped>
+::v-deep :where(.css-dev-only-do-not-override-19iuou).ant-pagination .ant-pagination-item-active a {
+    /* color: #05309f;
+    font-size: .3rem;
+    background-color: #05309f */
+    background-color: white;
+}
+::v-deep :where(.css-dev-only-do-not-override-19iuou).ant-pagination .ant-pagination-item a {
+color: white;
+background-color: #05309f;
+border-radius: 5px;
+height: 50px;
+width: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+} -->
+<!-- 
+</style> -->
+<style scoped>
+::v-deep .custom-pagination .ant-pagination-item-active {
+  background-color: #fff0bb !important;
+  border-color: #05309f !important;
+}
+
+::v-deep .custom-pagination .ant-pagination .ant-pagination-item a {
+  background-color: #05309f;
+}
+
+::v-deep .custom-pagination .ant-pagination-item {
+  background-color: #05309f;
+}
+
+::v-deep
+  :where(.css-dev-only-do-not-override-19iuou).ant-pagination
+  .ant-pagination-item
+  a {
+  display: block;
+  padding: 0 6px;
+  color: rgb(255 255 255 / 88%);
+  transition: none;
+}
+</style>

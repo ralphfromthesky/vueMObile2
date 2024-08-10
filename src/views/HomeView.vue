@@ -10,11 +10,11 @@
     ></iframe>
   </div>
   <MainLayout v-if="hideMain">
-    
-    <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]">
+    <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" ref="mainDiv">
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
           class="flex w-full h-[2rem] rounded-[.2rem] bg-[#1A45B1] overflow-hidden"
+          id="topElement"
         >
           <Carousel />
         </div>
@@ -46,33 +46,36 @@
           <img src="/images/unread.png" class="w-[.4rem]" alt="" />
         </div>
       </div>
+
       <div
         class="flex items-center w-full bg-[#05309f] border-b border-b-[#3A61C2] overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]"
+        ref="scrollContainer"
       >
         <div class="flex items-center gap-[.7rem] mx-[.2rem]">
           <div
             v-for="({ games, tab }, index) in games"
             :key="index"
             @click="() => gameClick(index, tab.code)"
-            :class="
-              index === gameActive
-                ? `flex flex-col items-center p-[.1rem] pb-[.17rem] border-b-[.05rem]`
-                : `flex flex-col items-center p-[.1rem] pb-[.17rem]`
-            "
+            :class="[
+              'transition-class', // Apply the transition effect
+              index === gameActive ? 'active-state' : 'inactive-state', // Apply active or inactive state classes
+            ]"
+            ref="itemRefs"
           >
             <img
               :src="`/logo/` + tab.code + `_active.png`"
               class="h-[.46rem]"
             />
-            <a
-              :href="`#${tab.id}_tab`"
-              class="text-white text-[.25rem] text-nowrap"
+            <button
+              @click="scrollToSection(tab.id)"
+              class="text-white text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
             >
               {{ tab.name }}
-            </a>
+            </button>
           </div>
         </div>
       </div>
+
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
           v-for="({ games, tab }, index) in games"
@@ -86,6 +89,7 @@
                 :src="`/logo/` + tab.code + `_active.png`"
                 class="h-[.55rem]"
               />
+
               <div class="text-white text-[.3rem]">{{ tab.name }}</div>
             </div>
             <div class="flex">
@@ -135,7 +139,7 @@
         </div>
         <!-- <Toast/> -->
         <div class="absolute top-[7rem] right-0">
-          <SupportLink />
+          <SupportLink @scroll-to="scrollToUp" />
         </div>
       </div>
       <!-- <div v-if="store.state?.userInfo?.isLogin">
@@ -145,6 +149,7 @@
       <AntModal :isOpen="true" :componentPass="Test" />
 
  -->
+
       <AntModal
         :isOpen="loginModal"
         :componentPass="Login"
@@ -165,9 +170,11 @@
           </div> -->
       <SpinLoader v-if="isFetching" />
 
-        <Slots :gameTypePass="gameTypeName" :headerName="headTitle"/>
-    
-    
+      <Slots
+        :gameTypePass="gameTypeName"
+        class="hidden"
+        :headerName="headTitle"
+      />
     </div>
   </MainLayout>
 </template>
@@ -179,16 +186,16 @@ const { lang } = changeLang();
 import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import SupportLink from "@/components/SupportLink/SupportLink.vue";
 import Login from "@/components/layout/LoginComponent/LoginForm.vue";
-const headTitle = ref('')
+const headTitle = ref("");
 const loginModal = ref(false);
 const regModal = ref(false);
 import SpinLoader from "@/components/antUi/spinLoader.vue";
 import MainLayout from "../components/layout/MainLayout.vue";
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, nextTick } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../components/axios/AxiosHook.js";
-import {getGamesTab} from '@/global/games.js'
-const {getGameType, getGame} = getGamesTab()
+import { getGamesTab } from "@/global/games.js";
+const { getGameType, getGame } = getGamesTab();
 import { getOnlineStatus } from "@/global/userConfig";
 const { getOnline } = getOnlineStatus();
 import CountUp from "@/components/antUi/countUp.vue";
@@ -205,7 +212,6 @@ const forwardGame = ref([]);
 import { useStore } from "@/store/store.js";
 const store = useStore();
 const openModal = ref(true);
-const showUpButtons = ref(window.scrollX > 300);
 const showGames = ref(false);
 const hideMain = ref(true);
 const gameUrl = ref("");
@@ -213,6 +219,11 @@ const games = ref([]);
 const gameType = ref("");
 const gameButtons = ref([]);
 import router from "@/router";
+const mainDiv = ref(null);
+const gameActive = ref(0);
+
+const scrollContainer = ref(null);
+const itemRefs = ref([]);
 
 const backlush = () => {
   transOut();
@@ -238,8 +249,6 @@ const {} = useQuery({
   },
 });
 
-const gameActive = ref(0);
-
 const gameClick = (index, id) => {
   gameActive.value = index;
 };
@@ -261,41 +270,62 @@ const fetchGames = (url, popFrame, gameTabType) => {
 };
 
 const getTabName = (tabName) => {
-  if(tabName === 'Slots') {
+  if (tabName === "Slots") {
     // alert(tabName)
-    headTitle.value = 'Slots'
+    headTitle.value = "Slots";
     gameType.value = "pg";
     getGameType.value = 2;
     // alert(getGameType.value)
-    getGame.refetch()
-    router.push('/slots')
-
+    getGame.refetch();
+    router.push("/slots");
+    store.commit("setForwardname", "Slots");
   }
-  if(tabName === "Fishing") {
-    gameType.value = 'bbinFish';
-     getGameType.value = 7;
+  if (tabName === "Fishing") {
+    gameType.value = "bbinFish";
+    getGameType.value = 7;
     //  alert(getGameType.value)
-     getGame.refetch()
-     router.push('/slots')
-
+    getGame.refetch();
+    router.push("/slots");
+    store.commit("setForwardname", "Fishing");
   }
-  if(tabName === "Live Casino"){
+  if (tabName === "Live Casino") {
     gameType.value = "agLive";
-         getGameType.value = 1;
+    getGameType.value = 1;
     //  alert(getGameType.value)
-     getGame.refetch()
-     router.push('/slots')
-
+    getGame.refetch();
+    router.push("/slots");
+    store.commit("setForwardname", "Live Casino");
   }
-  if(tabName === "Sports" ) {
+  if (tabName === "Sports") {
     gameType.value = "tysbSport";
-         getGameType.value = 0;
+    getGameType.value = 0;
     //  alert(getGameType.value)
-     getGame.refetch()
-     router.push('/slots')
-
+    getGame.refetch();
+    router.push("/slots");
+    store.commit("setForwardname", "Sports");
   }
+};
 
+const slide = async (newIndex) => {
+  await nextTick();
+  const container = scrollContainer.value;
+  const item = itemRefs.value[newIndex];
+
+  if (container && item) {
+    const containerRect = container.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const scrollTo =
+      itemRect.left -
+      containerRect.left +
+      container.scrollLeft -
+      containerRect.width / 2 +
+      itemRect.width / 2;
+
+    container.scrollTo({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+  }
 };
 
 const { refetch, isLoading, isFetching } = useQuery({
@@ -310,19 +340,70 @@ const { refetch, isLoading, isFetching } = useQuery({
   },
 });
 
+const scrollToSection = (id) => {
+  const element = document.getElementById(`${id}_tab`);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+const scrollToUp = () => {
+  const topElement = document.getElementById("topElement");
+  if (topElement) {
+    topElement.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const showIframe = computed(() => {
   return forwardGame.value?.url || "";
 });
 
 const gameTypeName = computed(() => {
-    return gameType.value
+  return gameType.value;
+});
 
-})
+watch(
+  () => store.state.scrollTo,
+   (newVal) => {
+    const convertedVal = {
+      129: 0,
+      501: 1,
+      263: 2,
+      503: 3,
+      124: 4,
+      127: 5,
+      123: 6,
+      279: 7,
+      322: 8,
+      125: 9,
+      322: 10,
+      280: 11,
+    };
+
+    gameClick(convertedVal[newVal]);
+    scrollToSection(newVal);
+  }
+);
+
 
 onMounted(() => {
   initTWE({ Dropdown, Ripple });
   getOnline.refetch();
-  // alert(window.scrollY)
 });
 </script>
+
+<style scoped>
+.transition-class {
+  transition: transform 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease;
+}
+
+.active-state {
+  border-bottom: 2px solid #f8fafd;
+  padding-bottom: 0.2rem;
+}
+
+.inactive-state {
+  border-bottom: none;
+  padding-bottom: 0.2rem;
+}
+</style>

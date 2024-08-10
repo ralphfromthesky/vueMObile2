@@ -28,8 +28,8 @@ const store = createStore({
     useGetGames: [],
     userSignInRule: [],
     userMissiontask: [],
-
-
+    scrollTo: "",
+    forwardGame: '',
   },
   mutations: {
     setLogin(state, user) {
@@ -51,13 +51,13 @@ const store = createStore({
       state.userInfo = payload;
     },
     setUserProfile(state, payload) {
-      state.userProfile = payload
+      state.userProfile = payload;
     },
     setWithdrawBank(state, payload) {
-      state.withdrawBankAccounts = payload
+      state.withdrawBankAccounts = payload;
     },
     setUserConfig(state, payload) {
-      state.userConfig = payload
+      state.userConfig = payload;
     },
     setMessageList(state, payload) {
       state.userMessage = payload;
@@ -66,44 +66,50 @@ const store = createStore({
       state.useNotice = payload;
     },
     setDegreeInfo(state, payload) {
-      state.degreeInfo = payload
+      state.degreeInfo = payload;
     },
     setWithdrawConfig(state, payload) {
-      state.withdrawConfig = payload
+      state.withdrawConfig = payload;
     },
     setRegisterConfig(state, payload) {
-      state.registerConfig = payload
+      state.registerConfig = payload;
     },
     setUserRecords(state, payload) {
-      state.userRecords = payload
+      state.userRecords = payload;
     },
     setUserPlayturn(state, payload) {
-      state.userPlayTurn = payload
+      state.userPlayTurn = payload;
     },
     setUserTurnRecord(state, payload) {
-      state.userTurnRecord = payload
+      state.userTurnRecord = payload;
     },
     setUserConfigValues(state, payload) {
-      state.userConfigValues = payload
+      state.userConfigValues = payload;
     },
     setUserTurnLateActivity(state, payload) {
-      state.userTurnLateActivity = payload
+      state.userTurnLateActivity = payload;
     },
     setUserGetAppLogin(state, payload) {
-      state.userGetAppLogin = payload
+      state.userGetAppLogin = payload;
     },
     setUserFakeData(state, payload) {
-      state.userFakeData = payload
+      state.userFakeData = payload;
     },
     setGetGames(state, payload) {
-      state.useGetGames = payload
+      state.useGetGames = payload;
     },
     setSignInRule(state, payload) {
-      state.userSignInRule = payload
+      state.userSignInRule = payload;
     },
     setMissiontask(state, payload) {
-      state.userMissiontask = payload
-    }
+      state.userMissiontask = payload;
+    },
+    setScrollTo(state, id) {
+      state.scrollTo = id;
+    },
+    setForwardname(state, payload) {
+      state.forwardGame = payload 
+    },
 
   },
   actions: {
@@ -113,9 +119,7 @@ const store = createStore({
     logOut(context) {
       context.commit("logOutUser");
     },
-    // setUserData(context, payload){
-    //     context.commit('setUserInfo', payload)
-    // }
+
   },
   getters: {
     getUserData(state) {
@@ -159,11 +163,7 @@ const store = createStore({
         userFakeData: state.userFakeData,
         useGetGames: state.useGetGames,
         userSignInRule: state.userSignInRule,
-        userMissiontask: state.userMissiontask
-
-
-
-
+        userMissiontask: state.userMissiontask,
       }),
     }),
   ],
@@ -173,4 +173,3 @@ export default store;
 export const useStore = () => {
   return store;
 };
-

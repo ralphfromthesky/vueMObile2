@@ -8,6 +8,7 @@
           v-for="({ games, tab }, index) in games"
           :key="index"
           class="flex flex-col items-center justify-center spicyHotdog"
+          @click="scrollToGames(tab.id)"
         >
           <img :src="`/logo/` + tab.code + `_active.png`" class="h-[.4rem]" />
           <div class="text-white text-[.16rem] text-nowrap">{{ tab.name }}</div>
@@ -178,17 +179,18 @@
 <script setup>
 import { ref } from "vue";
 import { useQuery } from "@tanstack/vue-query";
+import { store } from "../../../store";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import Register from "../RegisterComponent/RegisterForm.vue";
 import { useStore } from "@/store/store";
 import Language from '@/global/Translation/Language.vue'
 const popLanguage = ref(false)
-const store = useStore();
+const stores = useStore();
 const loginModal = ref(false);
 import { navigateTo } from "@/global/navigation.js";
 const games = ref([]);
 const showRegModal = () => {
-  !store.state.userInfo.isLogin
+  !stores.state.userInfo.isLogin
     ? (loginModal.value = !loginModal.value)
     : navigateTo("/bettingrecords");
 };
@@ -201,4 +203,11 @@ const { isLoading } = useQuery({
     games.value = data;
   },
 });
+
+
+const scrollToGames = (id) => {
+  stores.commit('setScrollTo', id)
+  store.OpenClose()
+  stores.commit('setScrollSide', id)
+}
 </script>

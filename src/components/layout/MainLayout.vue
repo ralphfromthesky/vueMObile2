@@ -33,11 +33,9 @@ const { userConfig } = useGetUserConfig()
 
 watchEffect(() => {
     userConfig.refetch()
+    
 })
 
-watch(window.scrollY > 300, () => {
-alert(window.scrollY)
-})
 
 </script>
 
