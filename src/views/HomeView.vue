@@ -57,8 +57,8 @@
             :key="index"
             @click="() => gameClick(index, tab.code)"
             :class="[
-              'transition-class', // Apply the transition effect
-              index === gameActive ? 'active-state' : 'inactive-state', // Apply active or inactive state classes
+              'transition-class',
+              index === gameActive ? 'active-state' : 'inactive-state',
             ]"
             ref="itemRefs"
           >
@@ -98,40 +98,47 @@
           </div>
           <div class="grid grid-cols-3 gap-[.2rem] justify-items-center">
             <div
-              v-for="(gameItems, indexes) in games"
+              v-for="(gameItems, indexes) in getFirstThreeImages(games, tab.id)"
               class="flex w-[2.1rem] h-[2.792rem] rounded-[.2rem] bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative"
               @click="getTabName(tab.name)"
             >
-              <img
-                :src="
-                  gameItems.imgUrl.match('https')
-                    ? gameItems.imgUrl
-                    : `api` + gameItems.imgUrl
-                "
-                class="w-[2.1rem] h-[2.792rem] rounded-[.2rem]"
-                @click="
-                  () =>
-                    fetchGames(
-                      gameItems?.forwardUrl,
-                      gameItems?.popFrame,
-                      gameItems?.gameTabType
-                    )
-                "
-              />
-              <img
-                src="/images/star.png"
-                alt=""
-                class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
-              />
+              <div>
+                <img
+                  :src="
+                    gameItems.imgUrl.match('https')
+                      ? gameItems.imgUrl
+                      : `api` + gameItems.imgUrl
+                  "
+                  class="w-[2.1rem] h-[2.792rem] rounded-[.2rem]"
+                  @click="
+                    () =>
+                      fetchGames(
+                        gameItems?.forwardUrl,
+                        gameItems?.popFrame,
+                        gameItems?.gameTabType
+                      )
+                  "
+                />
+                <img
+                  src="/images/star.png"
+                  alt=""
+                  class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
+                />
+              </div>
             </div>
           </div>
-          <div class="flex flex-col w-full items-center justify-center">
+          <div class="flex flex-col w-full items-center justify-center"
+          v-if="games.length > 3"
+          >
             <span class="text-[#6FA4EF] text-[.26rem]">{{
               lang("ts0004")
             }}</span>
-            <div class="flex gap-[.1rem] items-center">
+            <div
+              class="flex gap-[.1rem] items-center"
+              @click="toggleShowAll(tab.id)"
+            >
               <span class="text-[#A0C5FB] text-[.26rem]">
-                {{ lang("ts0005") }}
+                {{ lang("ts0005") }} 
               </span>
               <img class="w-[.25rem]" src="/images/arrow-down.png" alt="" />
             </div>
@@ -221,9 +228,10 @@ const gameButtons = ref([]);
 import router from "@/router";
 const mainDiv = ref(null);
 const gameActive = ref(0);
-
+const showAllGames = ref({});
 const scrollContainer = ref(null);
 const itemRefs = ref([]);
+const scrolled = ref(false)
 
 const backlush = () => {
   transOut();
@@ -271,11 +279,9 @@ const fetchGames = (url, popFrame, gameTabType) => {
 
 const getTabName = (tabName) => {
   if (tabName === "Slots") {
-    // alert(tabName)
     headTitle.value = "Slots";
     gameType.value = "pg";
     getGameType.value = 2;
-    // alert(getGameType.value)
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Slots");
@@ -283,7 +289,6 @@ const getTabName = (tabName) => {
   if (tabName === "Fishing") {
     gameType.value = "bbinFish";
     getGameType.value = 7;
-    //  alert(getGameType.value)
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
@@ -291,7 +296,6 @@ const getTabName = (tabName) => {
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
     getGameType.value = 1;
-    //  alert(getGameType.value)
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Live Casino");
@@ -299,7 +303,6 @@ const getTabName = (tabName) => {
   if (tabName === "Sports") {
     gameType.value = "tysbSport";
     getGameType.value = 0;
-    //  alert(getGameType.value)
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Sports");
@@ -344,7 +347,9 @@ const scrollToSection = (id) => {
   const element = document.getElementById(`${id}_tab`);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
+
   }
+
 };
 
 const scrollToUp = () => {
@@ -362,9 +367,18 @@ const gameTypeName = computed(() => {
   return gameType.value;
 });
 
+const getFirstThreeImages = (games, tabId) => {
+  return showAllGames.value[tabId] ? games : games.slice(0, 3);
+};
+
+const toggleShowAll = (tabId) => {
+ showAllGames.value[tabId] === undefined ? showAllGames.value[tabId] = false : showAllGames.value[tabId] = !showAllGames.value[tabId];
+  
+};
+
 watch(
   () => store.state.scrollTo,
-   (newVal) => {
+  (newVal) => {
     const convertedVal = {
       129: 0,
       501: 1,
@@ -381,10 +395,12 @@ watch(
     };
 
     gameClick(convertedVal[newVal]);
-    scrollToSection(newVal);
+    slide(convertedVal[newVal]);
+    setTimeout(() => {
+      scrollToSection(newVal);
+    }, 400);
   }
 );
-
 
 onMounted(() => {
   initTWE({ Dropdown, Ripple });

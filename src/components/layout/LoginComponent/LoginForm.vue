@@ -29,7 +29,7 @@
                         <img src="/images/30X30.png" alt="" class="w-[.3rem]" />
                         <span class="relative top-[.06rem] text-[#FF4A4A]">*</span>
                     </div>
-                    <input :type="showPW ? 'text' : 'password'" placeholder="Senha" v-model="userLogin.password"
+                    <input :type="showPW ? 'text' : 'password'" placeholder="Senhaha" v-model="userLogin.password"
                         @input="passwordInput = false" :class="{ 'border-2 border-red-500': passwordInput }"
                         class="w-full outline-none bg-transparent text-white border border-[#3a61c2] rounded-[.1rem] p-[.1rem] pl-[.7rem] pr-[.6rem] focus:border-[#FFF0BB] focus:font-bold placeholder:text-[#6FA4EF]" />
                     <img :src="showPW ? '/eye_30X30.png' : '/eye-slash_30X30.png'" alt=""
@@ -66,7 +66,7 @@
                         Lembrar Senha
                     </label>
                 </div>
-                <span class="text-[.22rem] text-[#FFF0BB] cursor-pointer">Esqueceu a Senha?</span>
+                <span class="text-[.22rem] text-[#FFF0BB] cursor-pointer" @click="router.push('/passwordRetrieval')">eceu a Senha?</span>
             </div>
             <div class="flex w-full my-[.2rem]">
                 <button
@@ -75,13 +75,14 @@
                 </button>
             </div>
             <div class="flex justify-around">
-                <span class="text-[#FFF0BB] text-[.22rem]">Suporte</span>
+                <span class="text-[#FFF0BB] text-[.22rem]" @click=" () => router.push('/support')">Suporte</span>
                 <span class="text-[#FFF0BB] text-[.22rem]" @click="regGuest">Jogar Grátis</span>
-                <span class="text-[#FFF0BB] text-[.22rem]" data-twe-toggle="modal" data-twe-target="#exampleModalCenter2"
-                    data-twe-ripple-init>Registra uma Conta</span>
+                <span class="text-[#FFF0BB] text-[.22rem]" @click="isReg = !isReg">Registra uma Conta</span>
             </div>
         </div>
     </form>
+    <AntModal :isOpen="isReg" :componentPass=Register :backGrounds=true />
+
 </template>
 
 <script setup>
@@ -89,19 +90,23 @@ import Toast from "@/components/ToastComponent/Toast.vue";
 import {useGetUserInfo} from '@/global/getUserInfo.js'
 import { useStore } from "@/store/store.js";
 import { useLogin } from "@/global/loginQuery.js";
-
+import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import { ref } from "vue";
 import {registerGuest} from '@/global/missionEvent.js'
 import { messageApi } from "@/components/antUi/antMessage";
+import router from "@/router";
 const {guest} = registerGuest()
+const isReg = ref(false)
 const isUp = ref(false);
 const isRotate = ref(false);
 const isLogin = ref(false)
 const { userData, query } = useGetUserInfo();
+const showPW = ref(false)
 const store = useStore();
 const regGuest = () => {
     guest.mutate();
     query.refetch()
+    messageApi.info('Succesfully Guest Register')
 }
 const userConfig = store.state.userConfig.content
 
@@ -118,6 +123,7 @@ const {
     verifyInput,
     loginVerifyCodeUrl,
 } = useLogin();
+
 
 
 </script>

@@ -17,7 +17,7 @@
     </main>
 </template>
 <script setup>
-import { onMounted, ref, watchEffect, watch } from 'vue';
+import { onMounted, ref, watchEffect, watch, onUnmounted } from 'vue';
 import NavBar from './Navigation/NavBarLayout.vue'
 import SideBar from './Sidebar/SidebarLayout.vue'
 import Footer from './Footer/FooterLayout.vue'
@@ -28,12 +28,24 @@ const newStore = useStore()
 import { useGetUserConfig } from '@/global/userConfig';
 import { messageApi } from '../antUi/antMessage';
 import router from '@/router';
+const scrolled = ref(false)
 
 const { userConfig } = useGetUserConfig()
-
 watchEffect(() => {
     userConfig.refetch()
     
+})
+
+watch(() => scrolled.value, (newval) => {
+    // alert(newval)
+})
+const handleScroll = () => {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  scrolled.value = scrollY > viewportHeight;
+}
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll)
 })
 
 

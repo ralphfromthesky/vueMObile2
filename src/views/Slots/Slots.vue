@@ -176,7 +176,7 @@
       </div>
     </div>
 
-    <SpinLoader v-if="isFetching" />
+    <SpinLoader v-if="isFetching || tabsfetching" />
     <AntModal
       :isOpen="loginModal"
       :componentPass="Login"
@@ -327,9 +327,7 @@ watch(
 watch(
   () => props.headerName,
   (newVal) => {
-    alert(newVal);
     headerTitle.value = newVal;
-    alert(`this is the ${headerTitle.value}`);
     return headerTitle.value;
   }
 );
@@ -338,7 +336,6 @@ watch(
   () => props.gameTabsPass,
   (newVal) => {
     if (newVal) {
-      alert(newVal);
       getGameType.value = newVal;
       tabs();
     }
@@ -375,7 +372,7 @@ const { refetch } = useQuery({
   },
 });
 
-const { refetch: tabs } = useQuery({
+const { refetch: tabs, isFetching: tabsfetching } = useQuery({
   queryKey: ["gameTab"],
   queryFn: () =>
     axiosGet2(
@@ -416,8 +413,8 @@ const getTypes = (gameTypes, index) => {
   getGameType.value = gameTypes;
   activeBtn.value = index;
   currentPage.value = index + 1;
-  alert(gameTypes);
-  alert("fasfasfasdf");
+  tabs();
+
 };
 
 const handlePagination = (page) => {

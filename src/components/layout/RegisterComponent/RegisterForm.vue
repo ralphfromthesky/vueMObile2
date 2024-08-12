@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center w-full gap-[.2rem] my-[.25rem] relative"
+                    <div class="flex items-center flex-col w-full my-[.2rem] relative"
                         :class="regConfigData?.eleName === 'rpwd' && `mt-0`">
                         <div class="flex items-center absolute left-[.15rem] gap-[.05rem]">
                             <img :src="`/images/` + regConfigData?.eleName + `.png`" alt="" class="w-[.3rem]" />
@@ -45,8 +45,14 @@
                         <input
                             :type="regConfigData?.eleName === 'pwd' || regConfigData?.eleName === 'rpwd' ? `password` : `text`"
                             :placeholder="regConfigData.name" :name="regConfigData.eleName" @change="(e) => handleChange(e)"
-                            class="w-full outline-none bg-transparent text-white border border-[#3a61c2] rounded-[.1rem] p-[.1rem] pl-[.7rem] pr-[.6rem] focus:border-[#FFF0BB] focus:font-bold placeholder:text-[#6FA4EF]" />
-                        <img v-if="regConfigData?.eleName === 'captcha'" :src="registerCode" alt=""
+                            class="w-full outline-none bg-transparent text-white border  rounded-[.1rem] p-[.1rem] pl-[.7rem] pr-[.6rem] focus:border-[#FFF0BB] focus:font-bold placeholder:text-[#6FA4EF]" 
+                            :class="data?.success === false ?  'border-[.05rem] border-[red]' : 'border-[#3a61c2]'"
+                            />
+                        <!-- <p v-if="data?.success === false" class="text-[#FFF0BB] text-[.2rem] mb-0">
+                            {{ data?.msg }}</p> -->
+                            
+                            
+                            <img v-if="regConfigData?.eleName === 'captcha'" :src="registerCode" alt=""
                             class="w-[1rem] absolute right-[.15rem] rounded-[.11rem]" />
                         <img v-if="regConfigData?.eleName === 'pwd' || regConfigData?.eleName === 'rpwd'"
                             src="/profileImages/eye-1.png" alt="" class="w-[.4rem] absolute right-[.15rem]" />
@@ -73,28 +79,34 @@
             <div class="flex w-full my-[.2rem]">
                 <button @click="register"
                     class="w-full bg-[#FFF0BB] border border-[#FFF0BB] text-[.24rem] h-[.7rem] text-[#05309F] rounded-[.14rem]">
-                    Login
+                    Register
                 </button>
             </div>
             <div class="flex justify-around">
-                <span class="text-[#FFF0BB] text-[.22rem]">Suporte</span>
+                <span class="text-[#FFF0BB] text-[.22rem]" @click="() => router.push('/support')">Suporte</span>
                 <span class="text-[#FFF0BB] text-[.22rem]" @click="regGuest">Jogar Grátis</span>
-                <span class="text-[#FFF0BB] text-[.22rem]" data-twe-toggle="modal" data-twe-target="#exampleModalCenter"
-                    data-twe-ripple-init>Login uma Conta</span>
+                <span class="text-[#FFF0BB] text-[.22rem]" @click="loginModal = !loginModal">Login uma Conta</span>
             </div>
         </div>
     </form>
+    <AntModal
+        :isOpen="loginModal"
+        :componentPass="Login"
+        :backGrounds="true"
+      />
 </template>
 <script setup>
 import Toast from "@/components/ToastComponent/Toast.vue";
 import { useRegister } from "@/global/registerQuery.js";
+import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 import {useGetUserInfo} from '@/global/getUserInfo.js'
 const {query } = useGetUserInfo();
-
+import router from "@/router";
 import { useStore } from "@/store/store.js";
 import { onMounted, ref, watchEffect } from 'vue';
 import { useGetGlobalConfigInfo } from "@/global/globalConfigInformation.js";
 import {registerGuest} from '@/global/missionEvent.js'
+const loginModal = ref(false)
 const {guest} = registerGuest()
 const regGuest = () => {
     guest.mutate();
@@ -104,6 +116,7 @@ const store = useStore()
 
 const regConfig = ref([])
 const { registration } = useGetGlobalConfigInfo()
+const {data} = registration;
 const { registerCode } = useGetGlobalConfigInfo()
 
 var formData = {}
@@ -117,6 +130,8 @@ function handleChange(e) {
 }
 
 function register() {
+
     registration.mutate(formData)
+    
 }
 </script>

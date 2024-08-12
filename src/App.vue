@@ -3,9 +3,20 @@ import {contextHolder} from '@/components/antUi/antMessage.js'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { useGetDegreeInfo } from '@/global/getDegreeInfo.js';
-import { onMounted } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useStore } from './store/store';
+const scrolled = ref(false)
 
+const handleScroll = () => {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  scrolled.value = scrollY > viewportHeight;
+}
+
+
+watch(() => scrolled.value, (newval) => {
+    alert(newval)
+})
 
 // const store = useStore()
 const { degreeInfo } = useGetDegreeInfo()
@@ -15,6 +26,9 @@ onMounted(() => {
   // if (accountInfo.isLogin === false) {
   //   registerConfig.refetch()
   // }
+    window.addEventListener('scroll', handleScroll)
+
+
   degreeInfo.refetch()
   // if(!store.state.degreeInfo.isLogin) {
   //   messageApi.info(store.state.degreeInfo.msg);
