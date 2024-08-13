@@ -10,21 +10,17 @@
         class="w-screen h-screen"
       ></iframe>
     </div>
-
+ 
     <div class="w-screen relative" v-if="hideMain">
       <div>
         <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
           <router-link to="/"> <span class="text-[.5rem]"><</span></router-link>
-          <span class="text-[.5rem]"
-            >{{ store.state.forwardGame }}</span
-          >
+          <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
-        <div class="border-3"></div>
+        <div class="border-3">{{ store.state.gameTypes }}</div>
 
-        <div
-          class="text-white overflow-auto w-screen p-[.2rem] bg-[#1A45B1]"
-        >
+        <div class="text-white overflow-auto w-screen p-[.2rem] bg-[#1A45B1]">
           <div class="flex justify-center my-[.1rem] relative">
             <a-input
               placeholder="ID de Membro"
@@ -165,7 +161,7 @@
             <div>
               <a-pagination
                 v-model:current="currentPage"
-                :total="50"
+                :total="totalPage"
                 show-less-items
                 class="custom-pagination"
                 @change="handlePagination"
@@ -176,7 +172,7 @@
       </div>
     </div>
 
-    <SpinLoader v-if="isFetching || tabsfetching" />
+    <SpinLoader v-if="isFetching || tabsfetching || nextPageFetching" />
     <AntModal
       :isOpen="loginModal"
       :componentPass="Login"
@@ -217,8 +213,33 @@ const popular = ref(false);
 const recent = ref(false);
 const favorites = ref(false);
 const allGames = ref(true);
-const headerTitle = ref("");
 const currentPage = ref(1);
+const pageIndex = ref("");
+const totalSizeValue = ref();
+
+const pagevalue = ref({
+    74: 30,
+    84: 30,
+    53: 20,
+    351: 120,
+    7: 10,
+    13: 10,
+    28: 10,
+    48: 20,
+    24: 1,
+    32: 20,
+    186: 70,
+    124: 50,
+    123: 50,
+    93: 40,
+    1: 10,
+    65: 30,
+    87: 30,
+  });
+const totalPage = computed(() => {
+ return pagevalue.value[totalSizeValue.value]
+
+});
 
 const showPopular = () => {
   // allGames.value = false
@@ -319,16 +340,18 @@ watch(
   () => props.gameTypePass,
   (newVal) => {
     if (newVal) {
-      // alert(newVal);
+      alert("------" + newVal);
+      getGameType.value = newVal;
       refetch();
+      // getTypes(newVal)
     }
   }
 );
+
 watch(
-  () => props.headerName,
+  () => store.state.gameTypes,
   (newVal) => {
-    headerTitle.value = newVal;
-    return headerTitle.value;
+    alert("++++=" + newVal);
   }
 );
 
@@ -336,6 +359,7 @@ watch(
   () => props.gameTabsPass,
   (newVal) => {
     if (newVal) {
+      alert("new tabs" + newVal);
       getGameType.value = newVal;
       tabs();
     }
@@ -348,17 +372,15 @@ watch(gameUrl, (newVal) => {
   // }
 });
 
-watch(currentPage, (newPage) => {
-  if (gamesData.value.content[newPage - 1]) {
-    activeBtn.value = newPage - 1;
+watch(
+  () => pageIndex.value,
+  (newVal) => {
+    if (newVal) {
+      alert(newVal);
+      nextPage();
+    }
   }
-});
-
-const showTitle = computed(() => {
-  if (headerTitle.value) {
-    return headerTitle.value;
-  }
-});
+);
 
 const { refetch } = useQuery({
   queryKey: ["gameTab"],
@@ -369,6 +391,8 @@ const { refetch } = useQuery({
   enabled: false,
   select: (data) => {
     gameTabs.value = data;
+    totalSizeValue.value = data.content[0]?.totalSize;
+    // console.log(totalSizeValue.value)
   },
 });
 
@@ -406,25 +430,37 @@ const { refetch: fetchGames, isFetching } = useQuery({
 
 const { refetch: transOut } = useQuery({
   queryKey: ["transOut"],
+  enabled:false,
   queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
 });
 
+const { refetch: nextPage, isFetching: nextPageFetching } = useQuery({
+  queryKey: ["gamePage"],
+  queryFn: () =>
+    axiosGet2(
+      `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.gameTypes}&lan=en&pageSize=30&pageIndex=${pageIndex.value}`
+    )
+    ,
+  enabled: false,
+  
+  select: (data) => {
+    gameTabs.value = data;
+    store.commit('setGameTypes', getGameType.value)
+  },
+});
+
 const getTypes = (gameTypes, index) => {
+  alert(gameTypes);
   getGameType.value = gameTypes;
   activeBtn.value = index;
   currentPage.value = index + 1;
-  tabs();
-
+  store.commit('setGameTypes', gameTypes)
+   tabs();
 };
 
 const handlePagination = (page) => {
-  currentPage.value = page;
-  activeBtn.value = page - 1;
-  const btn = gamesData.value?.content[activeBtn.value];
-  if (btn) {
-    getGameType.value = btn.gameType;
-    tabs();
-  }
+  pageIndex.value = page;
+  nextPage();
 };
 
 const showGames = (url) => {
@@ -449,25 +485,6 @@ const showIframGames = computed(() => {
 onMounted(() => {});
 </script>
 
-<!-- <style scoped>
-::v-deep :where(.css-dev-only-do-not-override-19iuou).ant-pagination .ant-pagination-item-active a {
-    /* color: #05309f;
-    font-size: .3rem;
-    background-color: #05309f */
-    background-color: white;
-}
-::v-deep :where(.css-dev-only-do-not-override-19iuou).ant-pagination .ant-pagination-item a {
-color: white;
-background-color: #05309f;
-border-radius: 5px;
-height: 50px;
-width: 50px;
-display: flex;
-justify-content: center;
-align-items: center;
-} -->
-<!-- 
-</style> -->
 <style scoped>
 ::v-deep .custom-pagination .ant-pagination-item-active {
   background-color: #fff0bb !important;

@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch, onMounted, defineExpose } from "vue";
+import { ref, watch, onMounted, defineExpose, onUnmounted } from "vue";
 import { CloseOutlined } from "@ant-design/icons-vue";
 import { useLogin } from "@/global/loginQuery.js";
 const { loginMutation } = useLogin();
@@ -78,7 +78,6 @@ const props = defineProps({
   elementPass: {
     type: Object,
     required: false,
-    default: "",
   },
 
 });
@@ -98,6 +97,7 @@ watch(
 //     closed.click()
 //   }
 // });
+
 </script>
 
 <style>

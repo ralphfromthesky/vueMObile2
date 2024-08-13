@@ -9,7 +9,9 @@
       class="w-screen h-screen"
     ></iframe>
   </div>
+
   <MainLayout v-if="hideMain">
+    
     <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" ref="mainDiv">
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
@@ -364,7 +366,9 @@ const showIframe = computed(() => {
 });
 
 const gameTypeName = computed(() => {
+  store.commit('setGameTypes', gameType.value);
   return gameType.value;
+  
 });
 
 const getFirstThreeImages = (games, tabId) => {

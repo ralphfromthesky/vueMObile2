@@ -30,7 +30,8 @@ const store = createStore({
     userMissiontask: [],
     scrollTo: "",
     forwardGame: '',
-    showLoginModal: false
+    showLoginModal: false,
+    gameTypes: ''
   },
   mutations: {
     setLogin(state, user) {
@@ -113,6 +114,9 @@ const store = createStore({
     },
     setShowLoginModal(state, payload) {
       state.showLoginModal = payload
+    },
+    setGameTypes(state, payload) {
+      state.gameTypes = payload
     }
 
   },

@@ -15,7 +15,7 @@ const handleScroll = () => {
 
 
 watch(() => scrolled.value, (newval) => {
-    alert(newval)
+    alert('----->' + newval)
 })
 
 // const store = useStore()
