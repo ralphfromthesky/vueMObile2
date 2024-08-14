@@ -32,6 +32,7 @@ const store = createStore({
     forwardGame: '',
     showLoginModal: false,
     gameTypes: ''
+    
   },
   mutations: {
     setLogin(state, user) {

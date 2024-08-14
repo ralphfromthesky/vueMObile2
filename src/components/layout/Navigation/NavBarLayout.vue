@@ -17,7 +17,7 @@
           @click="showRegModal">
           Register
         </button>
-        <img src="/images/search.png" class="w-[.35rem] h-[.35rem]" />
+        <img src="/images/search.png" class="w-[.35rem] h-[.35rem]" @click="router.push('/search')">
       </div>
       <div class="text-white flex items-center gap-[.06rem]" v-if="newStore.state.userInfo.isLogin">
         <div class="flex items-center border-[.01rem] gap-[.05rem] rounded border-[#3a61c2]">
@@ -31,7 +31,7 @@
         </div>
         <div class="flex items-center gap-[.1rem] bg-[#FFF0BB] text-[#1A45B1] rounded-[.1rem] px-[.1rem]"
           data-twe-dropdown-ref>
-          <span class="text-[.2rem]" @click="showDeposit">Deposito</span>
+          <span class="text-[.2rem] h-[.64rem] flex items-center" @click="showDeposit">Deposito</span>
           <span>|</span>
           <span>
             <img :class="`w-[.30rem] h-[.30rem] transition-transform duration-300 ${isUp ? 'rotate-180' : ''
@@ -58,8 +58,8 @@
           <span></span>
         </div>
 
-        <div>
-          <img src="/images/search.png" class="w-[.30rem] h-[.30rem]" />
+        <div class="ml-[.1rem]">
+          <img src="/images/search.png" class="w-[.30rem] h-[.30rem]" @click="router.push('/search')" />
         </div>
       </div>
     </div>
@@ -85,6 +85,7 @@ import ModalRegister from "@/components/ModalComponent/ModalRegister.vue";
 import {useLogin} from '@/global/loginQuery.js'
 const {mutation} = useLogin()
 const closedModal = ref(null)
+import router from "@/router";
 
 import { ref, computed, watch,onMounted } from "vue";
 import { Dropdown, Ripple, initTWE } from "tw-elements";

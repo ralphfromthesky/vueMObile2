@@ -18,7 +18,7 @@
           <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
-        <div class="border-3">{{ store.state.gameTypes }}</div>
+        <div class="border-3"></div>
 
         <div class="text-white overflow-auto w-screen p-[.2rem] bg-[#1A45B1]">
           <div class="flex justify-center my-[.1rem] relative">
@@ -340,7 +340,7 @@ watch(
   () => props.gameTypePass,
   (newVal) => {
     if (newVal) {
-      alert("------" + newVal);
+      // alert("------" + newVal);
       getGameType.value = newVal;
       refetch();
       // getTypes(newVal)
@@ -351,7 +351,7 @@ watch(
 watch(
   () => store.state.gameTypes,
   (newVal) => {
-    alert("++++=" + newVal);
+    // alert("++++=" + newVal);
   }
 );
 

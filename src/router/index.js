@@ -54,6 +54,7 @@ import Sports from '@/views/Sports/Sports.vue'
 import VipLoginBonus from "@/components/VipLoginBonus/VipLoginBonus.vue";
 import TurnTableGame from '@/views/TurnTableGame/TurnTableGame.vue'
 import PasswordRetrieval from '@/views/PasswordRetrieval/PasswordRetrieval.vue'
+import SearchPage from "@/views/SearchPage/SearchPage.vue";
 
 
 
@@ -373,13 +374,19 @@ const router = createRouter({
     {
       path: '/turntablegame',
       name: 'turntablegame',
-      component: TurnTableGame
+      component: TurnTableGame 
   
     },
     {
       path: '/passwordRetrieval',
       name: 'passwordRetrieval',
       component: PasswordRetrieval
+  
+    },
+    {
+      path: '/search',
+      name: 'searchPage',
+      component: SearchPage
   
     },
 
