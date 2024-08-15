@@ -250,7 +250,6 @@ const totalPage = computed(() => {
 
 const showFavorites = (section) => {
   allGames.value = false;
-  alert(section);
   popular.value = false;
   recent.value = false;
   favorites.value = false;
@@ -363,7 +362,7 @@ watch(
   () => props.gameTabsPass,
   (newVal) => {
     if (newVal) {
-      alert("new tabs" + newVal);
+      // alert("new tabs" + newVal);
       getGameType.value = newVal;
       tabs();
     }
@@ -380,7 +379,7 @@ watch(
   () => pageIndex.value,
   (newVal) => {
     if (newVal) {
-      alert(newVal);
+      // alert(newVal);
       nextPage();
     }
   }
@@ -458,7 +457,7 @@ const { refetch: nextPage, isFetching: nextPageFetching } = useQuery({
 });
 
 const getTypes = (gameTypes, index) => {
-  alert(gameTypes);
+  // alert(gameTypes);
   getGameType.value = gameTypes;
   activeBtn.value = index;
   currentPage.value = index + 1;

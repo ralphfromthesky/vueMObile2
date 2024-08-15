@@ -22,20 +22,11 @@ watch(() => scrolled.value, (newval) => {
 const { degreeInfo } = useGetDegreeInfo()
 
 onMounted(() => {
-  // const accountInfo = store.state.userInfo
-  // if (accountInfo.isLogin === false) {
-  //   registerConfig.refetch()
-  // }
-    window.addEventListener('scroll', handleScroll)
-
-
+ window.addEventListener('scroll', handleScroll)
+ if(!degreeInfo.data.success) {
   degreeInfo.refetch()
-  // if(!store.state.degreeInfo.isLogin) {
-  //   messageApi.info(store.state.degreeInfo.msg);
+ }
 
-  //       localStorage.clear();
-  //       router.push('/')
-  //   }
 })
 </script>
 

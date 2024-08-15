@@ -191,7 +191,7 @@
         </a-tab-pane>
       </a-tabs>
     </div>
-    <AntDrawer
+    <antDrawer
       :isOpen="showDrawer"
       :imageData="socialImage"
       :headerTitle="title"
