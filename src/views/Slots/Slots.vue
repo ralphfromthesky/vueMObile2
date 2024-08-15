@@ -10,7 +10,7 @@
         class="w-screen h-screen"
       ></iframe>
     </div>
- 
+
     <div class="w-screen relative" v-if="hideMain">
       <div>
         <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
@@ -38,7 +38,7 @@
               <div
                 v-for="(btn, index) in gamesData?.content"
                 :key="index"
-                class="h-[1rem] w-[1.5rem] border-2 border-[#3a61c2] rounded-[.1rem] flex justify-center items-center my-[.1rem]"
+                class="h-[1rem] w-[1.5rem] z-10 border-2 border-[#3a61c2] rounded-[.1rem] flex justify-center items-center my-[.1rem]"
                 @click="getTypes(btn.gameType, index)"
                 :class="
                   activeBtn === index
@@ -66,7 +66,7 @@
                     'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
                     popular ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
                   ]"
-                  @click="showPopular"
+                  @click="showFavorites('Popular')"
                   >Popular</span
                 >
                 <span
@@ -74,7 +74,7 @@
                     'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
                     recent ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
                   ]"
-                  @click="showRecent"
+                  @click="showFavorites('Recente')"
                   >Recente</span
                 >
                 <span
@@ -82,22 +82,24 @@
                     'p-[.2rem] rounded-[.2rem] bg-[#05309F] border-2 border-[#3a61c2]',
                     favorites ? 'bg-[#FFF0BB] text-[black]' : 'bg-[#05309F]',
                   ]"
-                  @click="showFavorites"
+                  @click="showFavorites('Favorites')"
                   >Favorites</span
                 >
               </div>
+              <transition name="route">
+
               <div
                 class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11.1rem] p-[.2rem] overflow-auto"
                 v-if="allGames"
               >
                 <div
-                  class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center"
+                  class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] h-[2rem] bg-[length:1.2rem] bg-no-repeat bg-center"
                   v-for="(tab, index) in gameTabs?.content"
                   :key="index"
                   @click="showGames(tab.finalRelatveUrl)"
                 >
                   <div class="relative">
-                    <span class="bg-[red]">
+                    <span>
                       <img
                         :src="`/api/${tab.buttonImagePath}`"
                         alt=""
@@ -111,54 +113,59 @@
                   </div>
                 </div>
               </div>
-              <!-- <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[12rem] p-[.2rem] border-2 border-[red] overflow-auto"
+            </transition>
+
+              <transition name="route">
+
+        
+                <div
+                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
                 v-if="popular"
               >
-                <div
-                  class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center"
-              
-                >
-                  <div class="relative">
-                    <span class="bg-[red]">
-                      <img
-                        alt=""
-                        srcset=""
-                    /></span>
-                    <img
-                      src="/images/star.png"
-                      alt=""
-                      class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
-                    />
-                  </div>
+                <div>
+                  <img
+                    class="w-[2.5rem]"
+                    src="/nodataImages/img_none_jl.png"
+                    alt=""
+                  />
                 </div>
               </div>
+            </transition>
+                <transition name="route">
+
               <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[12rem] p-[.2rem] border-2 border-[red] overflow-auto"
+                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
                 v-if="recent"
               >
-                <div
-                  class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center"
-              
-                >
-                  <div class="relative">
-                    <span class="bg-[red]">
-                      <img
-                        alt=""
-                        srcset=""
-                    /></span>
-                    <img
-                      src="/images/star.png"
-                      alt=""
-                      class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
-                    />
-                  </div>
+                <div>
+                  <img
+                    class="w-[2.5rem]"
+                    src="/nodataImages/img_none_jl.png"
+                    alt=""
+                  />
                 </div>
-              </div> -->
+              </div>
+            </transition>
+            <transition name="route">
+
+              <div
+                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
+                v-if="favorites"
+              >
+                <div>
+                  <img
+                    class="w-[2.5rem]"
+                    src="/nodataImages/img_none_jl.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </transition>
+
             </div>
           </div>
           <div class="mt-[.3rem] pl-[1rem] flex justify-center">
-            <div>
+            <div v-if="allGames">
               <a-pagination
                 v-model:current="currentPage"
                 :total="totalPage"
@@ -197,6 +204,7 @@ import { useStore } from "@/store/store";
 import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 import { axiosGet2 } from "@/components/axios/AxiosHook";
+import { messageApi } from "@/components/antUi/antMessage";
 const store = useStore();
 const { gamesData, getGame, getGameType } = getGamesTab();
 const gameType = ref("");
@@ -218,47 +226,43 @@ const pageIndex = ref("");
 const totalSizeValue = ref();
 
 const pagevalue = ref({
-    74: 30,
-    84: 30,
-    53: 20,
-    351: 120,
-    7: 10,
-    13: 10,
-    28: 10,
-    48: 20,
-    24: 1,
-    32: 20,
-    186: 70,
-    124: 50,
-    123: 50,
-    93: 40,
-    1: 10,
-    65: 30,
-    87: 30,
-  });
+  74: 30,
+  84: 30,
+  53: 20,
+  351: 120,
+  7: 10,
+  13: 10,
+  28: 10,
+  48: 20,
+  24: 1,
+  32: 20,
+  186: 70,
+  124: 50,
+  123: 50,
+  93: 40,
+  1: 10,
+  65: 30,
+  87: 30,
+});
 const totalPage = computed(() => {
- return pagevalue.value[totalSizeValue.value]
-
+  return pagevalue.value[totalSizeValue.value];
 });
 
-const showPopular = () => {
-  // allGames.value = false
-  popular.value = true;
-  recent.value = false;
-  favorites.value = false;
-};
-const showRecent = () => {
-  // allGames.value = false
-  popular.value = false;
-  recent.value = true;
-  favorites.value = false;
-};
-
-const showFavorites = () => {
-  // allGames.value = false
+const showFavorites = (section) => {
+  allGames.value = false;
+  alert(section);
   popular.value = false;
   recent.value = false;
-  favorites.value = true;
+  favorites.value = false;
+  if (section === "Popular") {
+    popular.value = true;
+  }
+  if (section === "Recente") {
+    recent.value = true;
+  }
+  if (section === "Favorites") {
+    favorites.value = true;
+  }
 };
 const showAllGames = () => {
   // allGames.value = true
@@ -423,6 +427,11 @@ const { refetch: fetchGames, isFetching } = useQuery({
       hideMain.value = false;
       nowShowingGames.value = true;
     }
+    if (data.msg) {
+      messageApi.info(data?.msg);
+      hideMain.value = true;
+      nowShowingGames.value = false;
+    }
   },
 
   onError: (err) => alert(err),
@@ -430,7 +439,7 @@ const { refetch: fetchGames, isFetching } = useQuery({
 
 const { refetch: transOut } = useQuery({
   queryKey: ["transOut"],
-  enabled:false,
+  enabled: false,
   queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
 });
 
@@ -439,13 +448,12 @@ const { refetch: nextPage, isFetching: nextPageFetching } = useQuery({
   queryFn: () =>
     axiosGet2(
       `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.gameTypes}&lan=en&pageSize=30&pageIndex=${pageIndex.value}`
-    )
-    ,
+    ),
   enabled: false,
-  
+
   select: (data) => {
     gameTabs.value = data;
-    store.commit('setGameTypes', getGameType.value)
+    store.commit("setGameTypes", getGameType.value);
   },
 });
 
@@ -454,8 +462,12 @@ const getTypes = (gameTypes, index) => {
   getGameType.value = gameTypes;
   activeBtn.value = index;
   currentPage.value = index + 1;
-  store.commit('setGameTypes', gameTypes)
-   tabs();
+  store.commit("setGameTypes", gameTypes);
+  allGames.value = true;
+  popular.value = false;
+  recent.value = false;
+  favorites.value = false;
+  tabs();
 };
 
 const handlePagination = (page) => {
@@ -507,5 +519,22 @@ onMounted(() => {});
   padding: 0 6px;
   color: rgb(255 255 255 / 88%);
   transition: none;
+}
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(10rem);
+}
+
+.route-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(-10rem);
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
 }
 </style>

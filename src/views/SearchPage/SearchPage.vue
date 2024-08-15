@@ -1,6 +1,16 @@
 <template>
   <div>
-    <div class="bg-[#1A45B1] h-screen w-screen">
+    <div v-if="nowShowingGames" class="relative">
+      <div class="absolute top-[1rem] left-[.1rem]" @click="backlush">
+        <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
+      </div>
+      <iframe
+        :src="showIframGames"
+        frameborder="0"
+        class="w-screen h-screen"
+      ></iframe>
+    </div>
+    <div class="bg-[#1A45B1] h-screen w-screen" v-if="hideMain">
       <div
         class="border-b-[.02rem] h-[1rem] flex gap-[1rem] text-[#FFFFFF] justify-around items-center"
       >
@@ -164,17 +174,21 @@
             <div
               v-for="{ games, tab } in store.state.useGetGames"
               :key="tab"
-              class="grid grid-cols-3 gap-[.5rem]"
+              class="grid grid-cols-3 gap-[.5rem] "
+              
             >
-              <div v-for="(name, index) in filteredGames(games)" :key="index">
+              <div v-for="(name, index) in filteredGames(games)" :key="index"
+              @click="playSearchGames(name.forwardUrl)"
+
+              >
                 <span
-                  class="text-[white] text-[.22rem] flex flex-wrap w-[1.5rem]"
+                  class="text-[white] text-[.22rem] flex flex-wrap w-[1.5rem] "
                   >{{ name.name }}</span
                 >
                 <span
                   ><img
                     :src="`/api/${name.imgUrl}`"
-                    class="h-[2.5rem]"
+                    class="h-[2.5rem] "
                     alt=""
                     srcset=""
                 /></span>
@@ -200,6 +214,8 @@
     :backGrounds="true"
     v-if="!store.state.userInfo.isLogin"
   />
+  <SpinLoader v-if="isFetching || gameFetch"/>
+
 </template>
 
 <script setup>
@@ -221,19 +237,31 @@ import { useStore } from "@/store/store";
 const store = useStore();
 const searchGames = ref([]);
 const loginModal = ref(false);
+const forwardUrl = ref("");
+const nowShowingGames = ref(false)
+const hideMain = ref(true)
+const liveGameUrl = ref("")
 
-const games = [
-  { name: "anna" },
-  { name: "jjjj" },
-  { name: "banana" },
-  { name: "tes" },
-  { name: "mango" },
-  { name: "cake" },
-  { name: "gas" },
-  { name: "annie" },
-  { name: "leslie" },
-  { name: "sandra" },
-];
+
+watch(
+  () => forwardUrl.value,
+  (newVal) => {}
+);
+
+watch(liveGameUrl, (newVal) => {
+if(newVal) {
+  alert(newVal)
+}
+})
+const showIframGames = computed(() => {
+  return liveGameUrl.value
+})
+
+const backlush = () => {
+  nowShowingGames.value = false;
+  hideMain.value = true
+  // transOut()
+}
 
 const filteredGames = (games) => {
   const query = search.value.toLowerCase();
@@ -280,23 +308,63 @@ const showGames = (section) => {
     : (showPopular.value = false);
 };
 
+const playSearchGames = (url) => {
+  forwardUrl.value = url
+  if (!store.state.userInfo.isLogin) {
+    loginModal.value = !loginModal.value;
+    return;
+  }
+  if(forwardUrl.value) {
+    refetchGames()
+  nowShowingGames.value = true;
+  hideMain.value = false;
+  }
+}
+
 const playGames = (url) => {
-  alert(url)
   if (store.state.userInfo.isLogin) {
-    const { refetch } = useQuery({
-      queryKey: ["gamesUrl"],
-      queryFn: () => axiosGet2(`/api${url}`),
-      select: (data) => {},
-      onError: (err) => alert(err),
-    });
+    forwardUrl.value = url;
+
     if (url) {
-      alert(url);
-      refetch();
+      refetchGames();
+      nowShowingGames.value = true 
+      hideMain.value = false
     }
+  } else {
+    loginModal.value = !loginModal.value;
   }
 };
 
-const {} = useQuery({
+
+
+const { refetch: refetchGames, isFetching } = useQuery({
+  queryKey: ["gamesUrl"],
+  queryFn: () => axiosGet2(`/api${forwardUrl.value}`),
+  select: (data) => {
+    if(data.url) {
+      liveGameUrl.value = data?.url
+    }
+    if(data.html) {
+      liveGameUrl.value = data?.html
+    }
+    if(data.msg) {
+      messageApi.info(data.msg)
+      hideMain.value = true;
+      nowShowingGames.value = false;
+    }
+
+  },
+  onError: (err) => alert(err),
+});
+
+
+const { refetch: transOut } = useQuery({
+  queryKey: ["transOut"],
+  enabled:false,
+  queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
+});
+
+const {isFetching: gameFetch} = useQuery({
   queryKey: ["popular"],
   queryFn: () =>
     axiosGet(

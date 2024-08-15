@@ -208,6 +208,6 @@ const { isLoading } = useQuery({
 const scrollToGames = (id) => {
   stores.commit('setScrollTo', id)
   store.OpenClose()
-  stores.commit('setScrollSide', id)
+  // stores.commit('setScrollSide', id)
 }
 </script>

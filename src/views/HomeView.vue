@@ -101,7 +101,7 @@
           <div class="grid grid-cols-3 gap-[.2rem] justify-items-center">
             <div
               v-for="(gameItems, indexes) in getFirstThreeImages(games, tab.id)"
-              class="flex w-[2.1rem] h-[2.792rem] rounded-[.2rem] bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative"
+              class="flex w-[2.1rem] h-[2.792rem] rounded-[.2rem] bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center  relative"
               @click="getTabName(tab.name)"
             >
               <div>
@@ -151,13 +151,11 @@
           <SupportLink @scroll-to="scrollToUp" />
         </div>
       </div>
-      <!-- <div v-if="store.state?.userInfo?.isLogin">
+      <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
-      <AntModal :isOpen="true" :componentPass="GetApplogin" />
-      <AntModal :isOpen="true" :componentPass="Test" />
-
- -->
+      <!-- <AntModal :isOpen="true" :componentPass="GetApplogin" />
+      <AntModal :isOpen="true" :componentPass="Test" /> -->
 
       <AntModal
         :isOpen="loginModal"
@@ -170,13 +168,13 @@
         :componentPass="Register"
         :backGrounds="true"
       />
-      <!-- <div v-if="store.state?.userInfo?.isLogin">
+      <div v-if="store.state?.userInfo?.isLogin">
             <AntModal
               :isOpen="openModal"
               :pass="dataPass"
               :componentPass="TurnLate"
             />
-          </div> -->
+          </div>
       <SpinLoader v-if="isFetching" />
 
       <Slots
@@ -191,6 +189,7 @@
 <script setup>
 import { changeLang } from "@/global/Translation/translation.js";
 import Slots from "@/views/Slots/Slots.vue";
+import TurnLate from "@/components/turnLate/turnLate.vue";
 const { lang } = changeLang();
 import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import SupportLink from "@/components/SupportLink/SupportLink.vue";
@@ -294,6 +293,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
+    alert(tabName)
   }
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
