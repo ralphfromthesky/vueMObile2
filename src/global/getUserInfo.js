@@ -17,6 +17,8 @@ import {
   yesterday
 } from "@/components/functions/Function";
 import { useReducer } from "vue-use-reducer";
+import { messageApi } from "@/components/antUi/antMessage";
+
 const store = useStore();
 
 export const useGetUserInfo = () => {
@@ -181,11 +183,12 @@ export const updateAccount = () => {
     facebook: "",
     telegram: "",
     email: "",
+    birthday: '',
   });
   const client = useQueryClient();
   const mutateProfile = useMutation({
-    mutationFn: async () =>
-      axiosPost("/api/native/v2/updateAccountInfo2.do", obj.value),
+    mutationFn: async (payload) =>
+      axiosPost("/api/native/v2/updateAccountInfo2.do", payload),
     onMutate: (data) => {
       // updated.value = true;
     },
@@ -193,9 +196,10 @@ export const updateAccount = () => {
       client.invalidateQueries({ queryKey: ["secure"] });
       updated.value = true;
       if (data.data.success) {
-        msgInfo.value = successMsg.value;
+        messageApi.info( successMsg.value);
       } else if (data.data.msg) {
-        msgInfo.value = data.data.msg;
+        messageApi.info(data.data.msg);
+
       }
       setTimeout(() => {
         updated.value = false;

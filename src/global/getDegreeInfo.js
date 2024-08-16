@@ -19,8 +19,8 @@ export const useGetDegreeInfo = () => {
             degreeData.value = data
             if(data.msg) {
                 messageApi.info(data.msg)
-                // localStorage.removeItem("setUser");
             }
+ 
         },
         onError: (error) => {
             console.log(`error: ${error}`);

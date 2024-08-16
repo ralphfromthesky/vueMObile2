@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="closeDatePicker">
     <van-date-picker
       v-model="currentDate"
       title="Selecione"
@@ -7,16 +7,26 @@
       :max-date="maxDate"
       confirm-button-text="Confirmar"
       cancel-button-text="Cancelar"
+      @confirm="setBday"
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const currentDate = ref(["2021", "01", "01"]);
 const minDate = ref(new Date(1950, 0, 1));
 const maxDate = ref(new Date(3000, 5, 1));
+const closeDatePicker = ref(true)
+
+const emits = defineEmits(["bday", 'closed']);
+
+const setBday = () => {
+  // alert(currentDate.value);
+  emits("bday", currentDate.value);
+  emits('closed', false)
+};
 </script>
 
 <style scoped>

@@ -329,6 +329,7 @@ const router = createRouter({
       path: '/commission',
       name: 'commission',
       component: Commission
+      
     },
     {
       path: '/promoTutorial',

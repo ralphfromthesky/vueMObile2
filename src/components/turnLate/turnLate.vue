@@ -7,7 +7,6 @@
     </div>
 
     <transition name="fade">
-    
       <div v-if="store.state.userPlayTurn.success">
         <div class="flex items-center justify-center gap-[.1rem] my-[.2rem]">
           <span><img src="/money.png" class="h-[.4rem]" /></span>
@@ -41,7 +40,10 @@
     </transition>
     <!-- {{ eventData.data.content.awards }} -->
     <div class="relative">
-       <div class="relative" v-if="store?.state?.userTurnLateActivity?.awards?.length === 8">
+      <div
+        class="relative"
+        v-if="store?.state?.userTurnLateActivity?.awards?.length === 8"
+      >
         <div
           class="relative"
           :class="rotate ? 'img-rotate' : ''"
@@ -68,47 +70,47 @@
             </div>
           </div>
         </div>
-      </div> 
-      <div
-        class="relative overflow-hidden rounded-[5rem] border-2 border-[white]"
-        v-if="store?.state?.userTurnLateActivity?.awards?.length === 5"
-        :class="rotate ? 'img-rotate' : ''"
-        ref="turnTable"
-      >
-      <div
-          v-for="(data, index) in store.state.userTurnLateActivity.awards"
-          :key="index"
-          class="absolute z-10 bottom-[5rem] right-[2rem] text-white font-bold flex justify-center flex-col items-center"
-          :style="absolutePosition(index)"
+      </div>
+      <div>
+        <div
+          class="relative overflow-hidden rounded-[5rem]"
+          v-if="store?.state?.userTurnLateActivity?.awards?.length === 5"
+          :class="rotate ? 'img-rotate' : ''"
+          ref="turnTable"
         >
-          <span class="font-[1rem]">{{ data.awardName }}</span>
-          <span
-                  ><img
-                    src="/turnlateImages/img_zphdjp_s1.png"
-                    class="h-[1rem]"
-                /></span>
+          <div
+            v-for="(data, index) in store.state.userTurnLateActivity.awards"
+            :key="index"
+            class="absolute z-10 bottom-[5rem] right-[2rem] text-white font-bold flex justify-center flex-col items-center"
+            :style="absolutePosition(index)"
+          >
+            <span class="font-[1rem]">{{ data.awardName }}</span>
+            <span
+              ><img src="/turnlateImages/img_zphdjp_s1.png" class="h-[1rem]"
+            /></span>
+          </div>
+          <img src="/turnlateImages/round.png" class="z-50" />
+          <div
+            class="h-[4rem] border-2 border-white absolute right-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
+            style="transform: rotate(0deg) skewY(-20deg)"
+          ></div>
+          <div
+            class="h-[4rem] border-2 border-white absolute left-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
+            style="transform: rotate(0deg) skewY(20deg)"
+          ></div>
+          <div
+            class="h-[4rem] border-2 border-white absolute left-[-1.2rem] w-[3rem] transform bg-[#327dff] bottom-[-.2rem]"
+            style="transform: rotate(216deg) skewY(-10deg)"
+          ></div>
+          <div
+            class="h-[4rem] border-2 border-white absolute right-[-80px] w-[3rem] transform bg-[#327dff] bottom-[.4rem]"
+            style="transform: rotate(67deg) skewY(-16deg)"
+          ></div>
+          <div
+            class="h-[4rem] border-2 border-white absolute right-[1.1rem] w-[3rem] transform bg-[#28b5fe] bottom-[-2rem]"
+            style="transform: rotate(144deg) skewY(-18deg)"
+          ></div>
         </div>
-        <img src="/turnlateImages/round.png" class="z-50" />
-        <div
-          class="h-[4rem] border-2 border-white absolute right-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
-          style="transform: rotate(0deg) skewY(-20deg)"
-        ></div>
-        <div
-          class="h-[4rem] border-2 border-white absolute left-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
-          style="transform: rotate(0deg) skewY(20deg)"
-        ></div>
-        <div
-          class="h-[4rem] border-2 border-white absolute left-[-1.2rem] w-[3rem] transform bg-[#327dff] bottom-[-.2rem]"
-          style="transform: rotate(216deg) skewY(-10deg)"
-        ></div>
-        <div
-          class="h-[4rem] border-2 border-white absolute right-[-80px] w-[3rem] transform bg-[#327dff] bottom-[.4rem]"
-          style="transform: rotate(67deg) skewY(-16deg)"
-        ></div>
-        <div
-          class="h-[4rem] border-2 border-white absolute right-[1.1rem] w-[3rem] transform bg-[#28b5fe] bottom-[-2rem]"
-          style="transform: rotate(144deg) skewY(-18deg)"
-        ></div>
       </div>
       <div>
         <img src="/turnlateImages/round.png" class="absolute top-0" />
@@ -229,8 +231,6 @@ const showReward = computed(() => {
   return playTurn.value.data?.content?.awardName;
 });
 
-
-
 const socialImage = ref([
   {
     title: "Telegram",
@@ -267,17 +267,28 @@ const absolutePosition = (index) => {
   ]);
 
   const newPositions = ref([
-    { top: "1.8rem", right: "1.5rem", transform: "rotate(40deg)", width: '1rem'},
+    {
+      top: "1.8rem",
+      right: "1.5rem",
+      transform: "rotate(40deg)",
+      width: "1rem",
+    },
     { top: "1.8rem", left: ".4rem", transform: "rotate(-40deg)" },
-    { top: "3.5rem", right: "3.4rem", transform: "rotate(-110deg)", width: '2rem', textAlign: 'center'},
+    {
+      top: "3.5rem",
+      right: "3.4rem",
+      transform: "rotate(-110deg)",
+      width: "2rem",
+      textAlign: "center",
+    },
     { top: "3.4rem", right: ".9rem", transform: "rotate(110deg)" },
     { bottom: ".7rem", right: "2.2rem", transform: "rotate(180deg)" },
   ]);
-  if(store.state.userTurnLateActivity.awards.length === 5) {
-  return newPositions.value[index] || { top: "0", left: "0" };
+  if (store.state.userTurnLateActivity.awards.length === 5) {
+    return newPositions.value[index] || { top: "0", left: "0" };
   }
-  if(store.state.userTurnLateActivity.awards.length === 8) {
-  return positions.value[index] || { top: "0", left: "0" };
+  if (store.state.userTurnLateActivity.awards.length === 8) {
+    return positions.value[index] || { top: "0", left: "0" };
   }
 };
 const title = ref("Invites friends to help");
@@ -324,8 +335,6 @@ onMounted(() => {
 }
 .img-rotate {
   animation: slowDown 10s ease-out forwards;
-  
-  
 }
 
 @keyframes slowDown {

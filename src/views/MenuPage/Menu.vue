@@ -297,7 +297,7 @@
       <LogOutModal>
         <div class="text-white text-center">
           <div class="text-[.5rem] text-[#a0c5fb]">Lembrette</div>
-          <div class="text-[.4rem]">Log out kana?</div>
+          <div class="text-[.4rem] logOutModalButton">Log out kana?</div>
           <div class="flex justify-center gap-[.2rem] mt-[.5rem] mb-1">
             <button @click="logOutUser.mutate()"
               class="text-nowrap w-[3rem] py-[.25rem] rounded-[.15rem] text-[.3rem] bg-transparent border border-[#FFF0BB] text-[#FFF0BB]">
@@ -345,17 +345,6 @@ const toggleRotate = () => {
   query.refetch();
 };
 
-// const logOutUser = () => {
-//     const { isLoading } = useQuery({
-//         queryKey: ["userGames"],
-//         queryFn: async () =>
-//             await axiosPost3("/api/native/v2/logout.do"),
-//         staleTime: 0,
-//         select: (data) => {
-
-//         },
-//     });
-// }
 
 const logOutUser = useMutation({
   mutationFn: () => axiosPost2("api/native/v2/logout.do"),
@@ -364,6 +353,7 @@ const logOutUser = useMutation({
     if (data.success === true) {
       query.refetch();
       document.querySelector(".logOutModalButton").click();
+      localStorage.clear()
       window.location.href = "/";
     }
   },

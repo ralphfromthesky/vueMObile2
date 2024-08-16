@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-screen h-full bg-[#000000b3] absolute top-0 backdrop-blur-[.1rem] bg-opacity-10"
+    class="w-screen h-full  bg-[#000000b3] absolute top-0 backdrop-blur-[.1rem] bg-opacity-10"
     @click="closeModal"
   >
   <div>
@@ -19,6 +19,9 @@ const props = defineProps({
   show: Boolean,
   msg: String,
   componentPass: Object,
+  closed: {
+    type: Boolean,
+  }
 });
 const emits = defineEmits(["close"]);
 const closeModal = () => {

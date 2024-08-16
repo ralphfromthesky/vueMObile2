@@ -25,7 +25,7 @@
 
       <div class="flex flex-col p-[.2rem] gap-[.5rem]">
         <div
-          class="w-full border-[.01rem] border-[#3A61C2] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
+          class="w-full border-[.01rem]  border-[#3A61C2] bg-[#05309F] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
         >
           <img src="/images/username.png" alt="" class="w-[.3rem]" />
           <input
@@ -36,30 +36,32 @@
           />
         </div>
         <div
-          class="w-full border-[.01rem] border-[#3A61C2] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
+          class="w-full border-[.01rem]  border-[#3A61C2] bg-[#05309F] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
         >
           <img src="/images/phone.png" alt="" class="w-[.3rem]" />
           <input
-            readonly
+            :readonly="store.state.userProfile.userData?.phone ? true : false"
             class="text-white text-[.22rem] bg-transparent outline-none"
-            type="text"
+            v-model="phone"
+            type="number"
             :placeholder="
-              store.state.userProfile.userData.phone
-                ? store.state.userProfile.userData.phone
+              store.state.userProfile.userData?.phone
+                ? store.state.userProfile.userData?.phone
                 : ''
             "
           />
         </div>
         <div
-          class="w-full border-[.01rem] border-[#3A61C2] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
+          class="w-full border-[.01rem]  border-[#3A61C2] bg-[#05309F] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
         >
           <img src="/images/email.png" alt="" class="w-[.3rem]" />
           <div class="flex justify-between w-full">
             <input
-              readonly
+              :readonly="store.state.userProfile?.userData.email ? true : false"
               class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none"
               type="text"
-              :placeholder="store.state.userProfile.userData.email"
+              :placeholder="store.state.userProfile?.userData?.email"
+              v-model="email"
             />
             <span
               class="text-[.22rem] text-[#fff0bb]"
@@ -68,11 +70,11 @@
               data-twe-ripple-init
               >Ir para Vinculação
             </span>
-            <Toast
+            <!-- <Toast
               v-if="updated"
               :updateMessage="msgInfo"
               class="absolute top-[5rem] right-[.5rem]"
-            />
+            /> -->
           </div>
         </div>
         <div
@@ -80,10 +82,11 @@
         >
           <img src="/images/whatsapp.png" alt="" class="w-[.3rem]" />
           <input
+          :readonly="store.state.userProfile?.userData?.whatsapp ? true : false"
             class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none"
-            v-model="obj.whatsapp"
-            :placeholder="store.state.userProfile.userData.whatsapp"
+            :placeholder="store.state.userProfile?.userData?.whatsapp"
             type="text"
+            v-model="whatsapp"
           />
         </div>
         <div
@@ -91,10 +94,11 @@
         >
           <img src="/images/fbook.png" alt="" class="w-[.3rem]" />
           <input
+          :readonly="store.state.userProfile?.userData?.facebook ? true : false"
             class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none w-full"
-            v-model="obj.facebook"
-            :placeholder="store.state.userProfile.userData.facebook"
+            :placeholder="store.state.userProfile?.userData?.facebook"
             type="text"
+            v-model="facebook"
           />
         </div>
         <div
@@ -102,10 +106,12 @@
         >
           <img src="/images/telegram.png" alt="" class="w-[.3rem]" />
           <input
+          :readonly="store.state.userProfile?.userData?.telegram ? true : false"
+
             class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none w-full"
             type="text"
-            v-model="obj.telegram"
-            :placeholder="store.state.userProfile.userData.telegram"
+            v-model="telegram"
+            :placeholder="store.state.userProfile?.userData?.telegram"
           />
         </div>
       </div>
@@ -123,7 +129,7 @@
           >
             <input
               class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none w-full"
-              :placeholder="store.state.userProfile.userData.birthday"
+              :placeholder="store.state.userProfile?.userData?.birthday || bdate"
               type="text"
               readonly
               @click="handleBirthday"
@@ -145,7 +151,13 @@
           </button>
           <button
             className=" rounded-[.1rem] h-[.7rem] w-[3.45rem] text-[.24rem] text-center text-[#05309F] border-[#FFF0BB] bg-[#FFF0BB]"
-            @click="mutateProfile.mutate(obj.value)"
+            @click="mutateProfile.mutate({
+              phone: phone,
+              email: email,
+              whatsapp: whatsapp,
+              facebook: facebook,
+              telegram: telegram
+            })"
           >
             Salvar
           </button>
@@ -201,18 +213,29 @@
           </div>
         </div>
       </Alert>
-      <ReusableModal
+
+      <!-- <DatePicker class="hidden"  @bday="handleBday" @closed="handleBday"/> -->
+      <!-- <ReusableModal
         :msg="message"
         v-if="showModal"
         @close="showModal = false"
         :component-pass="DatePicker"
+      /> -->
+
+      <antDrawer
+        :isOpen="showModal"
+        :headerTitle="title"
+        :componentPass="DatePicker"
+        @bDates="handleBday"
+        @closed="handleDatePicker"
       />
+
       <div></div>
     </div>
   </PageLayout>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import DatePicker from "@/components/datePick/DatePicker.vue";
 import LogOutModal from "@/components/ModalComponent/LogOutModal.vue";
 import Alert from "@/components/ModalComponent/AlertBox2.vue";
@@ -221,16 +244,44 @@ import { navigateTo } from "@/global/navigation.js";
 import Toast from "@/components/ToastComponent/Toast.vue";
 import PageLayout from "@/components/layout/PageLayout.vue";
 import store from "@/store/store";
+import dayjs from "dayjs";
+
 import { getSecurityInfo } from "@/global/getUserInfo.js";
 const showModal = ref(false);
-const message = ref("");
 const { securityData, useSecurity } = getSecurityInfo();
 import { updateAccount } from "@/global/getUserInfo.js";
 const { mutateProfile, obj, updated, msgInfo } = updateAccount();
+const bdate = ref("");
+const phone = ref('')
+const email = ref('')
+const whatsapp = ref('')
+const facebook = ref('')
+const telegram = ref('')
+
 
 const handleBirthday = () => {
   if (!store.state.userProfile.hasBirthday) {
-    showModal.value = true;
+    showModal.value = !showModal.value;
   }
 };
+
+const handleBday = (bday) => {
+  if (bday) {
+    obj.value.birthday = dayjs(bday).format('YYYY-DD-MM');
+    console.log(bdate.value);
+  }
+};
+const handleDatePicker = (close) => {
+  showModal.value = close
+  // alert(close)
+}
+
+watch(
+  () => bdate.value,
+  (newVal) => {
+    // alert(newVal);
+  }
+);
+
+
 </script>

@@ -2,16 +2,15 @@
   <!-- <a-button type="primary" @click="showDrawer">Open</a-button> -->
   <a-drawer
     v-model:open="open"
-    class="custom-class"
-    root-class-name="root-class-name"
-    :root-style="{ color: 'blue' }"
+    :root-style="{ color: 'blue'}"
     style="color: #1A45B1"
     placement="bottom"
     @after-open-change="afterOpenChange"
-    height="4rem"
+    :height=" closedElement ? '7rem': '5rem'"
     :closable="false"
+    
   >
-  <template #title>
+  <template #title v-if="closedElement">
       <div class="flex justify-between items-center w-full">
         <div>
           <span class="text-txt">{{ headerTitle }}</span>
@@ -24,7 +23,12 @@
       </div>
     </template>
 
-    <div class="flex justify-between">
+    <div>
+      <component :is="componentPass" @bday="showBday" @closed="afterOpenChange"></component>
+
+    </div>
+
+    <div class="flex justify-between" v-if="closedElement">
       <div
         class="flex flex-col items-center"
         v-for="(images, index) in props.imageData"
@@ -36,7 +40,7 @@
         <div class="text-[.2rem] text-txt">{{ images.title }}</div>
       </div>
     </div>
-    <div class="flex items-center mt-[.3rem]">
+    <div class="flex items-center mt-[.3rem]" v-if="closedElement">
         <span class="h-[.4rem] border-[.009rem] border-txt w-[10rem] rounded-[.1rem]">
           Lorem ipsum dolor sit amet.
         </span>
@@ -50,7 +54,6 @@
 import { ref, watch } from "vue";
 // import AntMessage from "@/components/antUi/antMessage.vue";
 import { CopyOutlined } from "@ant-design/icons-vue";
-
 import { CloseOutlined } from '@ant-design/icons-vue';
 
 const props = defineProps({
@@ -70,8 +73,12 @@ const props = defineProps({
   },
   imageData: {
     type: Object,
-    default: "",
+    default: () => {},
   },
+  closedElement: {
+    type: Boolean,
+    default: false,
+  }
 
 });
 const open = ref(props.isOpen);
@@ -85,8 +92,24 @@ watch(
 
 const afterOpenChange = (bool) => {
   console.log("open", bool);
+  emits('closed', bool )
+  // alert(bool)
+
 };
 const showDrawer = () => {
   open.value = false;
 };
+
+const emits = defineEmits(['bDates', 'closed'])
+
+const showBday = (bday) => {
+  emits('bDates', bday)
+}
 </script>
+
+<style scoped>
+
+/* .noPadding .ant-drawer .ant-drawer-body {
+  padding: 0 !important;
+} */
+</style>

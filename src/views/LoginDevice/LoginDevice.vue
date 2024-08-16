@@ -9,11 +9,11 @@
                     <div class="flex items-center justify-around">
                         <div class="flex items-center gap-[.1rem]">
                             <span class="text-[#6FA4EF] text-[.22rem]">ID:</span>
-                            <span class="text-[.22rem] text-white">448469079</span>
+                            <span class="text-[.22rem] text-white">{{store.state.userInfo.userId}}</span>
                         </div>
                         <div class="flex gap-[.1rem] items-center">
                             <span class="text-[#6FA4EF] text-[.22rem]">Conta:</span>
-                            <span class="text-[.22rem] text-white">nilo26</span>
+                            <span class="text-[.22rem] text-white">{{store.state.userInfo.username}}</span>
                         </div>
                     </div>
                 </div>
@@ -77,4 +77,7 @@
 </template>
 <script setup>
 import PageLayout from '@/components/layout/PageLayout.vue';
+
+import {useStore} from '@/store/store.js'
+const store = useStore()
 </script>

@@ -13,8 +13,8 @@
 
     <div class="w-screen relative" v-if="hideMain">
       <div>
-        <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
-          <router-link to="/"> <span class="text-[.5rem]"><</span></router-link>
+        <div class=" text-white flex justify-between font-[1rem]">
+          <router-link to="/"> <span class="text-[.5rem] pl-[.5rem]"><</span></router-link>
           <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
