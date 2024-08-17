@@ -198,6 +198,7 @@ export const updateAccount = () => {
       if (data.data.success) {
         messageApi.info( successMsg.value);
       } else if (data.data.msg) {
+        msgInfo.value = data.data.msg;;
         messageApi.info(data.data.msg);
 
       }

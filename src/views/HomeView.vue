@@ -151,11 +151,11 @@
           <SupportLink @scroll-to="scrollToUp" />
         </div>
       </div>
-      <div v-if="store.state?.userInfo?.isLogin">
+      <!-- <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
       <AntModal :isOpen="true" :componentPass="GetApplogin" v-if="store.state.userGetAppLogin?.length" />
-      <AntModal :isOpen="true" :componentPass="Test" />
+      <AntModal :isOpen="true" :componentPass="Test" /> -->
 
       <AntModal
         :isOpen="loginModal"

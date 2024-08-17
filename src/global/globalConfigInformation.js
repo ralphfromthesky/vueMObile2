@@ -1,11 +1,20 @@
 import { axiosGet2, axiosPost2, axiosPost3 } from "@/components/axios/AxiosHook";
-import { useQuery, useMutation } from "@tanstack/vue-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/vue-query";
 import { useStore } from "@/store/store.js";
 import { useGetUserInfo } from '@/global/getUserInfo.js'
 import { messageApi } from "@/components/antUi/antMessage";
 
-
 export const useGetGlobalConfigInfo = () => {
+    const client = useQueryClient()
+    
+    const {refetch: signIn} = useQuery({
+        queryKey: ['signIn'],
+        enabled: false,
+        queryFn: () => axiosGet2('/api/native/v2/signInData.do'),
+
+    })
+
+
     const store = useStore()
     const accountInfo = useGetUserInfo()
     const registerCode = `api/registerVerifycode.do?timestamp=` + Date.now()
@@ -22,17 +31,16 @@ export const useGetGlobalConfigInfo = () => {
     const registration = useMutation({
         mutationFn: (payload) => axiosPost2('api/register.do', payload),
         onSuccess: (data) => {
-            messageApi.info(data.msg)
+             //messageApi.info(data.msg)
+            //  client.invalidateQueries({ queryKey: ["userDetails"] });
             if (data.success === true) {
-                window.location.href = "/"
+                //  window.location.href = "/"
                 document.querySelector(".registerModalButton").click()
-                accountInfo.refetch()
                 messageApi.info('Successfully Registered')
-                // setTimeout(() => {
-                //     window.location.href = '/'
-                // }, 2000)
+           
+
             } else if (data.success === false) {
-                console.log(data.msg)
+                messageApi.info(data.msg)
                 return registerCode;
             }
         }
