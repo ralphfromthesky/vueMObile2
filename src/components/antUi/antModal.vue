@@ -17,7 +17,7 @@
         <span class="text-[.7rem] text-[red]">Receive</span>
       </div>
       <span
-        class="absolute left-[45%] bottom-[-.8rem]"
+        class="absolute registerModalButton left-[45%] bottom-[-.8rem]"
         id="handleThis"
         @click="handleOk"
       >

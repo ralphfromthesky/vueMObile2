@@ -57,7 +57,7 @@
           <img src="/images/email.png" alt="" class="w-[.3rem]" />
           <div class="flex justify-between w-full">
             <input
-              :readonly="store.state.userProfile?.userData.email ? true : false"
+              :readonly="store.state.userProfile?.userData?.email ? true : false"
               class="text-[#A0C5FB] text-[.22rem] bg-transparent outline-none"
               type="text"
               :placeholder="store.state.userProfile?.userData?.email"

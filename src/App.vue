@@ -22,7 +22,7 @@ watch(() => scrolled.value, (newval) => {
 const { degreeInfo } = useGetDegreeInfo()
 
 onMounted(() => {
- window.addEventListener('scroll', handleScroll)
+// window.addEventListener('scroll', handleScroll)
  if(!degreeInfo.data.success) {
   degreeInfo.refetch()
  }

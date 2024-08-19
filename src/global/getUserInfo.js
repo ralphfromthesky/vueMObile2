@@ -27,7 +27,7 @@ export const useGetUserInfo = () => {
     queryKey: ["userDetails"],
     staleTime: 6000,
     refetchInterval: 1800000,
-    enabled: false,
+    enabled: true,
     queryFn: async () => await axiosGet2("/api/userCenter/info/getAccInfo.do"),
     select: (data) => {
       userData.value = data;

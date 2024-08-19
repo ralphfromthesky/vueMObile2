@@ -9,10 +9,8 @@
       class="w-screen h-screen"
     ></iframe>
   </div>
-
   <MainLayout v-if="hideMain">
-    
-    <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" ref="mainDiv">
+    <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" id="mainDiv">
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
           class="flex w-full h-[2rem] rounded-[.2rem] bg-[#1A45B1] overflow-hidden"
@@ -101,7 +99,7 @@
           <div class="grid grid-cols-3 gap-[.2rem] justify-items-center">
             <div
               v-for="(gameItems, indexes) in getFirstThreeImages(games, tab.id)"
-              class="flex w-[2.1rem] h-[2.792rem] rounded-[.2rem] bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center  relative"
+              class="flex w-[2.1rem] h-[2.792rem] rounded-[.2rem] bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative"
               @click="getTabName(tab.name)"
             >
               <div>
@@ -129,8 +127,9 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col w-full items-center justify-center"
-          v-if="games.length > 3"
+          <div
+            class="flex flex-col w-full items-center justify-center"
+            v-if="games.length > 3"
           >
             <span class="text-[#6FA4EF] text-[.26rem]">{{
               lang("ts0004")
@@ -140,7 +139,7 @@
               @click="toggleShowAll(tab.id)"
             >
               <span class="text-[#A0C5FB] text-[.26rem]">
-                {{ lang("ts0005") }} 
+                {{ lang("ts0005") }}
               </span>
               <img class="w-[.25rem]" src="/images/arrow-down.png" alt="" />
             </div>
@@ -148,14 +147,24 @@
         </div>
         <!-- <Toast/> -->
         <div class="absolute top-[7rem] right-0">
-          <SupportLink @scroll-to="scrollToUp" />
+          <SupportLink
+            @scroll-to="scrollToUp"
+            :hideScrollTop="hideScrollToView"
+          />
         </div>
       </div>
-      <!-- <div v-if="store.state?.userInfo?.isLogin">
+      <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
       <AntModal :isOpen="true" :componentPass="GetApplogin" v-if="store.state.userGetAppLogin?.length" />
-      <AntModal :isOpen="true" :componentPass="Test" /> -->
+      <AntModal :isOpen="true" :componentPass="Test" />
+    
+            <AntModal
+          :isOpen="openModal"
+          :pass="dataPass"
+          :componentPass="TurnLate"
+        />
+      <!-- <AntModal :isOpen="true" :componentPass="NewNotice"/> -->
 
       <AntModal
         :isOpen="loginModal"
@@ -168,13 +177,7 @@
         :componentPass="Register"
         :backGrounds="true"
       />
-      <div v-if="store.state?.userInfo?.isLogin">
-            <AntModal
-              :isOpen="openModal"
-              :pass="dataPass"
-              :componentPass="TurnLate"
-            />
-          </div>
+      <div v-if="store.state?.userInfo?.isLogin"></div>
       <SpinLoader v-if="isFetching" />
 
       <Slots
@@ -213,6 +216,7 @@ import { Dropdown, Ripple, initTWE } from "tw-elements";
 import Carousel from "@/components/carousel/carousel.vue";
 import RedPacket from "@/components/redPacket/redpacket.vue";
 import GetApplogin from "@/components/getApplogin/getApplogin.vue";
+import NewNotice from "@/components/NewNotice/NewNotice.vue";
 import Test from "@/components/test/tested.vue";
 import { useLogin } from "@/global/loginQuery.js";
 const { mutation } = useLogin();
@@ -227,12 +231,12 @@ const games = ref([]);
 const gameType = ref("");
 const gameButtons = ref([]);
 import router from "@/router";
-const mainDiv = ref(null);
 const gameActive = ref(0);
 const showAllGames = ref({});
 const scrollContainer = ref(null);
 const itemRefs = ref([]);
-const scrolled = ref(false)
+const noticeData = ref([]);
+const hideScrollToView = ref(true);
 
 const backlush = () => {
   transOut();
@@ -261,6 +265,14 @@ const {} = useQuery({
 const gameClick = (index, id) => {
   gameActive.value = index;
 };
+
+const {} = useQuery({
+  queryFn: () => axiosGet2("/api/native/v2/new_notice_v2.do?lan=en&type=19"),
+  select: (data) => {
+    noticeData.value = data;
+  },
+  onError: (err) => console.log(err),
+});
 
 const fetchGames = (url, popFrame, gameTabType) => {
   if (!store.state.userInfo.isLogin) {
@@ -293,7 +305,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
-    alert(tabName)
+    alert(tabName);
   }
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
@@ -346,12 +358,15 @@ const { refetch, isLoading, isFetching } = useQuery({
 });
 
 const scrollToSection = (id) => {
+  
   const element = document.getElementById(`${id}_tab`);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
-
   }
 
+  if (id === 263) {
+    hideScrollToView.value = false;
+  }
 };
 
 const scrollToUp = () => {
@@ -361,14 +376,15 @@ const scrollToUp = () => {
   }
 };
 
+
+
 const showIframe = computed(() => {
   return forwardGame.value?.url || "";
 });
 
 const gameTypeName = computed(() => {
-  store.commit('setGameTypes', gameType.value);
+  store.commit("setGameTypes", gameType.value);
   return gameType.value;
-  
 });
 
 const getFirstThreeImages = (games, tabId) => {
@@ -376,8 +392,9 @@ const getFirstThreeImages = (games, tabId) => {
 };
 
 const toggleShowAll = (tabId) => {
- showAllGames.value[tabId] === undefined ? showAllGames.value[tabId] = false : showAllGames.value[tabId] = !showAllGames.value[tabId];
-  
+  showAllGames.value[tabId] === undefined
+    ? (showAllGames.value[tabId] = false)
+    : (showAllGames.value[tabId] = !showAllGames.value[tabId]);
 };
 
 watch(

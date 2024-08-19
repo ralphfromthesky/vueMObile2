@@ -28,7 +28,6 @@ const newStore = useStore()
 import { useGetUserConfig } from '@/global/userConfig';
 import { messageApi } from '../antUi/antMessage';
 import router from '@/router';
-const scrolled = ref(false)
 
 const { userConfig } = useGetUserConfig()
 watchEffect(() => {
@@ -36,17 +35,6 @@ watchEffect(() => {
     
 })
 
-watch(() => scrolled.value, (newval) => {
-    // alert(newval)
-})
-const handleScroll = () => {
-  const scrollY = window.scrollY;
-  const viewportHeight = window.innerHeight;
-  scrolled.value = scrollY > viewportHeight;
-}
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-})
 
 
 </script>

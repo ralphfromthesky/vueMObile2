@@ -50,7 +50,7 @@
           ><CloseOutlined /></span
         >
       </div>
-      <div class="mt-[.2rem] bg-[#05309f]" @click="scrollUp">
+      <div class="mt-[.2rem] bg-[#05309f]" @click="scrollUp" v-if="props.hideScrollTop">
         <div class="h-[1rem] w-[1rem] border-2  border-[#3a61c2] flex flex-col justify-center items-center rounded-[.1rem]" @click="scrollToTop">
           <img src="/scrollImages/Dior.png" class="h-[.5rem]" alt="">
           <span class=" text-txt2 text-[.2rem]">Top</span>  
@@ -101,6 +101,13 @@ const emit = defineEmits(['scrollTo'])
 const scrollUp = () => {
   emit('scrollTo')
 }
+
+const props = defineProps({
+  hideScrollTop: {
+    type: Boolean,
+    default: true
+  }
+})
 </script>
 
 <style scoped>

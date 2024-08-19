@@ -5,16 +5,7 @@ import { useGetUserInfo } from '@/global/getUserInfo.js'
 import { messageApi } from "@/components/antUi/antMessage";
 
 export const useGetGlobalConfigInfo = () => {
-    const client = useQueryClient()
-    
-    const {refetch: signIn} = useQuery({
-        queryKey: ['signIn'],
-        enabled: false,
-        queryFn: () => axiosGet2('/api/native/v2/signInData.do'),
-
-    })
-
-
+    const client = useQueryClient();
     const store = useStore()
     const accountInfo = useGetUserInfo()
     const registerCode = `api/registerVerifycode.do?timestamp=` + Date.now()
@@ -31,14 +22,17 @@ export const useGetGlobalConfigInfo = () => {
     const registration = useMutation({
         mutationFn: (payload) => axiosPost2('api/register.do', payload),
         onSuccess: (data) => {
-             //messageApi.info(data.msg)
-            //  client.invalidateQueries({ queryKey: ["userDetails"] });
+            // messageApi.info(data.msg)
             if (data.success === true) {
+                // document.querySelector(".registerModalButton").click()
+                // accountInfo.refetch()
+                // messageApi.info('Successfully Registered')
                 //  window.location.href = "/"
-                document.querySelector(".registerModalButton").click()
-                messageApi.info('Successfully Registered')
-           
+                 client.invalidateQueries({ queryKey: ["userDetails"] });
 
+                // setTimeout(() => {
+                //     window.location.href = '/'
+                // }, 2000)
             } else if (data.success === false) {
                 messageApi.info(data.msg)
                 return registerCode;

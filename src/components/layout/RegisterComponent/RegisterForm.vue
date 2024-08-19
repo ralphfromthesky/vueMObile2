@@ -79,7 +79,7 @@
             </div>
             <div class="flex w-full my-[.2rem]">
                 <button @click="register"
-                    class="w-full bg-[#FFF0BB] border border-[#FFF0BB] text-[.24rem] h-[.7rem] text-[#05309F] rounded-[.14rem]">
+                    class="w-full registerModalButton bg-[#FFF0BB] border border-[#FFF0BB] text-[.24rem] h-[.7rem] text-[#05309F] rounded-[.14rem]">
                     Register
                 </button>
             </div>
@@ -141,9 +141,11 @@ function handleChange(e) {
 function register() {
 
     registration.mutate(formData)
-    query.refetch()
+    // query.refetch()
 
 }
+
+
 
 function calculatePasswordStrength(password) {
   let strength = 0;
