@@ -153,17 +153,22 @@
           />
         </div>
       </div>
-      <div v-if="store.state?.userInfo?.isLogin">
+      <!-- <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
-      <AntModal :isOpen="true" :componentPass="GetApplogin" v-if="store.state.userGetAppLogin?.length" />
+      <AntModal
+        :isOpen="true"
+        :componentPass="GetApplogin"
+        v-if="store.state.userGetAppLogin?.length"
+      />
       <AntModal :isOpen="true" :componentPass="Test" />
-    
-            <AntModal
-          :isOpen="openModal"
-          :pass="dataPass"
-          :componentPass="TurnLate"
-        />
+
+      <AntModal
+        :isOpen="openModal"
+        :pass="dataPass"
+        :componentPass="TurnLate"
+        v-if="store.state.degreeInfo.success"
+      /> -->
       <!-- <AntModal :isOpen="true" :componentPass="NewNotice"/> -->
 
       <AntModal
@@ -305,7 +310,6 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
-    alert(tabName);
   }
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
@@ -358,7 +362,7 @@ const { refetch, isLoading, isFetching } = useQuery({
 });
 
 const scrollToSection = (id) => {
-  
+  // alert(id)
   const element = document.getElementById(`${id}_tab`);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
@@ -375,8 +379,6 @@ const scrollToUp = () => {
     topElement.scrollIntoView({ behavior: "smooth" });
   }
 };
-
-
 
 const showIframe = computed(() => {
   return forwardGame.value?.url || "";
@@ -400,6 +402,7 @@ const toggleShowAll = (tabId) => {
 watch(
   () => store.state.scrollTo,
   (newVal) => {
+    // alert(`this alert from home ${newVal}`)
     const convertedVal = {
       129: 0,
       501: 1,

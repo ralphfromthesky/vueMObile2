@@ -430,18 +430,17 @@ const absolutePosition2 = (index) => {
   const positions = ref([
     {
       top: ".8rem",
-      right: ".5rem",
+      right: "1rem",
       transform: "rotate(40deg)",
     },
-    { top: ".8rem", left: ".5rem", transform: "rotate(-40deg)" },
+    { top: ".6rem", left: "1.2rem", transform: "rotate(-40deg)" },
     {
-      top: "2.3rem",
-      left: "0",
+      top: "2.2rem",
+      left: "0.5rem",
       transform: "rotate(-110deg)",
-      width: "2rem",
       textAlign: "center",
     },
-    { top: "2.4rem", right: "0", transform: "rotate(110deg)" },
+    { top: "2.4rem", right: ".69rem", transform: "rotate(110deg)" },
     { bottom: ".6rem", left: "1.8rem", transform: "rotate(180deg)" },
   ]);
   return positions.value[index] || { top: "0", left: "0" };
@@ -457,13 +456,12 @@ const absolutePosition3 = (index) => {
     { top: ".7rem", left: ".9rem", transform: "rotate(-40deg)" },
     {
       top: "2.3rem",
-      left: "0",
+      left: ".5rem",
       transform: "rotate(-110deg)",
-      width: "2rem",
       textAlign: "center",
     },
     { top: "2.2rem", right: ".7rem", transform: "rotate(110deg)" },
-    { bottom: ".6rem", left: "1.8rem", transform: "rotate(180deg)" },
+    { bottom: ".6rem", left: "2rem", transform: "rotate(180deg)" },
   ]);
   return positions.value[index] || { top: "0", left: "0" };
 };

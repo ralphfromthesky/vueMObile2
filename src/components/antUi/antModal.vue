@@ -9,13 +9,19 @@
       :closable="false"
       centered
       :class="{ modas: props.bgColor, customColor: props.backGrounds }"
-      @cancel="open"
+      @cancel="handeClose"
     >
       <component :is="componentPass" @close="handleOk"></component>
       <div class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] h-[4rem] flex-col text-center" v-if="props.elementPass">
         <div class="text-[.7rem] text-[#d4d0d0]">{{ props.elementPass }}</div>  
         <span class="text-[.7rem] text-[red]">Receive</span>
       </div>
+      <div class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] flex-col text-center" v-if="props.dataCode">
+        <span><img src="/public/turnlateImages/pic2.81cd4374.png"/></span>
+        <div class="text-[.3rem] h-[5rem] overflow-auto text-left bg-bg border-2 border-txt rounded-[.2rem] text-txt p-[.1rem]">{{ props.dataCode }}</div> 
+        <div><a href="https://vk8.me/app/mg_MP6D" target="_blank"> <span class="bg-bg w-[4rem] p-[.2rem] text-txt border-2 border-txt rounded-[.2rem]">App Download</span></a></div>
+      </div>
+      
       <span
         class="absolute registerModalButton left-[45%] bottom-[-.8rem]"
         id="handleThis"
@@ -39,9 +45,9 @@ const store = useStore();
 const showModal = () => {
   open.value = true;
 };
-const handleOk = (e) => {
+const handleOk = () => {
   open.value = false;
-  emits("closed", open.value);
+  emits("closed", false);
 };
 
 const handeClose = () => {
@@ -79,6 +85,11 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  dataCode: {
+    type: String,
+    required: false,
+    default: ''
+  }
 
 });
 

@@ -191,6 +191,8 @@
       :componentPass="Register"
       :backGrounds="true"
     />
+    <AntModal :isOpen="showFalseData" :dataCode="dataCode" :bgColor="true" @closed="handleshowFalseData" />
+
   </div>
 </template>
 
@@ -224,6 +226,20 @@ const allGames = ref(true);
 const currentPage = ref(1);
 const pageIndex = ref("");
 const totalSizeValue = ref();
+const dataCode = ref('')
+const showFalseData = ref(false)
+
+const handleshowFalseData = (value) => {
+  showFalseData.value = value
+  alert(`alert from modal - ${showFalseData.value}`)
+}
+
+watch(showFalseData, (newVal) => {
+  alert(newVal)
+  if(newVal === false) {
+    alert(`newVal = ${newVal}`)
+  }
+})
 
 const pagevalue = ref({
   74: 30,
@@ -312,7 +328,7 @@ const imgSrc = (czcode) => {
 const props = defineProps({
   gamePass: {
     type: String,
-    required: true,
+    required: false,
   },
   passive: {
     type: String,
@@ -427,9 +443,16 @@ const { refetch: fetchGames, isFetching } = useQuery({
       nowShowingGames.value = true;
     }
     if (data.msg) {
-      messageApi.info(data?.msg);
+      // messageApi.info(data?.msg);
       hideMain.value = true;
       nowShowingGames.value = false;
+    }
+    if(data.code === "2300") {
+      showFalseData.value = true;
+      dataCode.value = data.msg
+    } else {
+      showFalseData.value = false;
+
     }
   },
 
@@ -476,6 +499,7 @@ const handlePagination = (page) => {
 
 const showGames = (url) => {
   gameUrl.value = url;
+  // alert(url)
   if (!store.state.userInfo.isLogin) {
     loginModal.value = !loginModal.value;
     return;
