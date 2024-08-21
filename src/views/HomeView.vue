@@ -153,7 +153,7 @@
           />
         </div>
       </div>
-      <!-- <div v-if="store.state?.userInfo?.isLogin">
+      <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
       <AntModal
@@ -165,11 +165,10 @@
 
       <AntModal
         :isOpen="openModal"
-        :pass="dataPass"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      /> -->
-      <!-- <AntModal :isOpen="true" :componentPass="NewNotice"/> -->
+      />
+      <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
 
       <AntModal
         :isOpen="loginModal"
@@ -221,7 +220,7 @@ import { Dropdown, Ripple, initTWE } from "tw-elements";
 import Carousel from "@/components/carousel/carousel.vue";
 import RedPacket from "@/components/redPacket/redpacket.vue";
 import GetApplogin from "@/components/getApplogin/getApplogin.vue";
-import NewNotice from "@/components/NewNotice/NewNotice.vue";
+import Notice from '@/components/Notice/Notice.vue'
 import Test from "@/components/test/tested.vue";
 import { useLogin } from "@/global/loginQuery.js";
 const { mutation } = useLogin();
@@ -240,7 +239,6 @@ const gameActive = ref(0);
 const showAllGames = ref({});
 const scrollContainer = ref(null);
 const itemRefs = ref([]);
-const noticeData = ref([]);
 const hideScrollToView = ref(true);
 
 const backlush = () => {
@@ -271,13 +269,6 @@ const gameClick = (index, id) => {
   gameActive.value = index;
 };
 
-const {} = useQuery({
-  queryFn: () => axiosGet2("/api/native/v2/new_notice_v2.do?lan=en&type=19"),
-  select: (data) => {
-    noticeData.value = data;
-  },
-  onError: (err) => console.log(err),
-});
 
 const fetchGames = (url, popFrame, gameTabType) => {
   if (!store.state.userInfo.isLogin) {

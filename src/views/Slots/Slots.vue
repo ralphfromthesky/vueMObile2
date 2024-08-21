@@ -13,8 +13,10 @@
 
     <div class="w-screen relative" v-if="hideMain">
       <div>
-        <div class=" text-white flex justify-between font-[1rem]">
-          <router-link to="/"> <span class="text-[.5rem] pl-[.5rem]"><</span></router-link>
+        <div class="text-white flex justify-between font-[1rem]">
+          <router-link to="/">
+            <span class="text-[.5rem] pl-[.5rem]"><</span></router-link
+          >
           <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
@@ -87,81 +89,75 @@
                 >
               </div>
               <transition name="route">
-
-              <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11.1rem] p-[.2rem] overflow-auto"
-                v-if="allGames"
-              >
                 <div
-                  class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] h-[2rem] bg-[length:1.2rem] bg-no-repeat bg-center"
-                  v-for="(tab, index) in gameTabs?.content"
-                  :key="index"
-                  @click="showGames(tab.finalRelatveUrl)"
+                  class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11.1rem] p-[.2rem] overflow-auto"
+                  v-if="allGames"
                 >
-                  <div class="relative">
-                    <span>
+                  <div
+                    class="w-[1.45rem] rounded-[.1rem] bg-[url('/images/BG.png')] h-[2rem] bg-[length:1.2rem] bg-no-repeat bg-center"
+                    v-for="(tab, index) in gameTabs?.content"
+                    :key="index"
+                    @click="showGames(tab.finalRelatveUrl)"
+                  >
+                    <div class="relative">
+                      <span>
+                        <img
+                          :src="`/api/${tab.buttonImagePath}`"
+                          alt=""
+                          srcset=""
+                      /></span>
                       <img
-                        :src="`/api/${tab.buttonImagePath}`"
+                        src="/images/star.png"
                         alt=""
-                        srcset=""
-                    /></span>
+                        class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </transition>
+
+              <transition name="route">
+                <div
+                  class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
+                  v-if="popular"
+                >
+                  <div>
                     <img
-                      src="/images/star.png"
+                      class="w-[2.5rem]"
+                      src="/nodataImages/img_none_jl.png"
                       alt=""
-                      class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
                     />
                   </div>
                 </div>
-              </div>
-            </transition>
-
+              </transition>
               <transition name="route">
-
-        
                 <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
-                v-if="popular"
-              >
-                <div>
-                  <img
-                    class="w-[2.5rem]"
-                    src="/nodataImages/img_none_jl.png"
-                    alt=""
-                  />
+                  class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
+                  v-if="recent"
+                >
+                  <div>
+                    <img
+                      class="w-[2.5rem]"
+                      src="/nodataImages/img_none_jl.png"
+                      alt=""
+                    />
+                  </div>
                 </div>
-              </div>
-            </transition>
-                <transition name="route">
-
-              <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
-                v-if="recent"
-              >
-                <div>
-                  <img
-                    class="w-[2.5rem]"
-                    src="/nodataImages/img_none_jl.png"
-                    alt=""
-                  />
+              </transition>
+              <transition name="route">
+                <div
+                  class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
+                  v-if="favorites"
+                >
+                  <div>
+                    <img
+                      class="w-[2.5rem]"
+                      src="/nodataImages/img_none_jl.png"
+                      alt=""
+                    />
+                  </div>
                 </div>
-              </div>
-            </transition>
-            <transition name="route">
-
-              <div
-                class="w-[5.3rem] flex flex-wrap gap-1 justify-center h-[11rem] p-[.2rem] overflow-auto"
-                v-if="favorites"
-              >
-                <div>
-                  <img
-                    class="w-[2.5rem]"
-                    src="/nodataImages/img_none_jl.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </transition>
-
+              </transition>
             </div>
           </div>
           <div class="mt-[.3rem] pl-[1rem] flex justify-center">
@@ -191,8 +187,12 @@
       :componentPass="Register"
       :backGrounds="true"
     />
-    <AntModal :isOpen="showFalseData" :dataCode="dataCode" :bgColor="true" @closed="handleshowFalseData" />
-
+      <AntModal
+        :isOpen="store.state.modalErr"
+        :dataCode="dataCode"
+        :bgColor="true"
+        @closed="handleshowFalseData"
+      />
   </div>
 </template>
 
@@ -226,20 +226,22 @@ const allGames = ref(true);
 const currentPage = ref(1);
 const pageIndex = ref("");
 const totalSizeValue = ref();
-const dataCode = ref('')
-const showFalseData = ref(false)
+const dataCode = ref("");
+const showFalseData = ref(false);
 
 const handleshowFalseData = (value) => {
-  showFalseData.value = value
-  alert(`alert from modal - ${showFalseData.value}`)
-}
+  showFalseData.value = value;
+  // alert(`alert from modal - ${showFalseData.value}`)
+};
 
 watch(showFalseData, (newVal) => {
-  alert(newVal)
-  if(newVal === false) {
-    alert(`newVal = ${newVal}`)
+  alert(newVal);
+  if (newVal === false) {
+    // alert(`newVal = ${newVal}`)
   }
-})
+});
+
+watch(() => store.state.modalErr, (newVal) => {console.log(`alert from slots ${newVal}`)})
 
 const pagevalue = ref({
   74: 30,
@@ -427,34 +429,56 @@ const { refetch: tabs, isFetching: tabsfetching } = useQuery({
   },
 });
 
+const handleApiResponse = (data) => {
+  if (data.url) {
+    liveGameUrl.value = data.url;
+  }
+  if (data.html) {
+    liveGameUrl.value = data.html;
+  }
+  if (data) {
+    hideMain.value = false;
+    nowShowingGames.value = true;
+  }
+  if (data.msg) {
+    hideMain.value = true;
+    nowShowingGames.value = false;
+  }
+  if (data.code === "2300") {
+    dataCode.value = data.msg;
+    store.commit('setModalErr', true); 
+    // alert(store.state.modalErr)
+  }
+};
+
 const { refetch: fetchGames, isFetching } = useQuery({
   queryKey: ["liveGames"],
   queryFn: () => axiosGet2(`/api${gameUrl.value}`),
   enabled: false,
-  select: (data) => {
-    if (data.url) {
-      liveGameUrl.value = data.url;
-    }
-    if (data.html) {
-      liveGameUrl.value = data.html;
-    }
-    if (data) {
-      hideMain.value = false;
-      nowShowingGames.value = true;
-    }
-    if (data.msg) {
-      // messageApi.info(data?.msg);
-      hideMain.value = true;
-      nowShowingGames.value = false;
-    }
-    if(data.code === "2300") {
-      showFalseData.value = true;
-      dataCode.value = data.msg
-    } else {
-      showFalseData.value = false;
+  select: handleApiResponse,
+  // select: (data) => {
+  //   increment.value ++
+  //   console.log('fdsfasd')
+  //   if (data.url) {
+  //     liveGameUrl.value = data.url;
+  //   }
+  //   if (data.html) {
+  //     liveGameUrl.value = data.html;
+  //   }
+  //    if (data) {
+  //      hideMain.value = false;
+  //      nowShowingGames.value = true;
+  //    }
+  //   if (data.msg) {
+  //     messageApi.info(data?.msg);
+  //     hideMain.value = true;
+  //     nowShowingGames.value = false;
+  //   }
+  //    if (data.code === "2300") {
+  //      dataCode.value = data.msg;
+  //   }
+  // },
 
-    }
-  },
 
   onError: (err) => alert(err),
 });
@@ -504,8 +528,12 @@ const showGames = (url) => {
     loginModal.value = !loginModal.value;
     return;
   }
-  fetchGames();
+  fetchGames({ exact: true });
   // showAllGames()
+  // store.commit("setModalErr", true);
+  console.log('dfsa')
+
+
 };
 const backlush = () => {
   hideMain.value = true;

@@ -10,7 +10,7 @@
           class="flex flex-col items-center justify-center spicyHotdog"
           @click="scrollToGames(tab.id)"
         >
-          <img :src="`/logo/` + tab.code + `_active.png`" class="h-[.4rem]" />
+          <img :src="`/logo/` + tab?.code + `_active.png`" class="h-[.4rem]" />
           <div class="text-white text-[.16rem] text-nowrap">{{ tab.name }}</div>
         </div>
       </div>

@@ -13,7 +13,6 @@
           <span class="text-txt text-[.4rem] font-bold">{{
             store.state.userPlayTurn.content.awardName
           }}</span>
-
           <span>
             <a-button class="bg-bg text-txt font-bold" @click="showModal"
               >Details</a-button
@@ -213,6 +212,7 @@ const { fake, fakeData } = getFakeData();
 import { ShareAltOutlined } from "@ant-design/icons-vue";
 import { getTurnRecord, playTurnLate } from "@/global/missionEvent.js";
 import { useStore } from "@/store/store";
+import Notice from '@/components/Notice/Notice.vue'
 const time = ref(4 * 20 * 20 * 1000);
 const store = useStore();
 const turnTable = ref(null);

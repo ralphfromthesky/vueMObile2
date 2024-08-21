@@ -29,10 +29,7 @@ export const useGetGlobalConfigInfo = () => {
                 // messageApi.info('Successfully Registered')
                 //  window.location.href = "/"
                  client.invalidateQueries({ queryKey: ["userDetails"] });
-
-                // setTimeout(() => {
-                //     window.location.href = '/'
-                // }, 2000)
+                 messageApi.info('Successfully Register')
             } else if (data.success === false) {
                 messageApi.info(data.msg)
                 return registerCode;

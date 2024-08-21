@@ -130,7 +130,6 @@ const closeDeposit = () => {
 
 
 watch(newStore.state.userInfo.isLogin, (newval) => {loginModal.value = false;
-alert(`${loginModal.value} - ${newStore.state.userInfo.isLogin}`)
 })
 
 watch(() => newStore.state.userInfo.isLogin, (newVal) => {

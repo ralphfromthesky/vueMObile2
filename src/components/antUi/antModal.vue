@@ -21,6 +21,7 @@
         <div class="text-[.3rem] h-[5rem] overflow-auto text-left bg-bg border-2 border-txt rounded-[.2rem] text-txt p-[.1rem]">{{ props.dataCode }}</div> 
         <div><a href="https://vk8.me/app/mg_MP6D" target="_blank"> <span class="bg-bg w-[4rem] p-[.2rem] text-txt border-2 border-txt rounded-[.2rem]">App Download</span></a></div>
       </div>
+      {{ props.pass }}
       
       <span
         class="absolute registerModalButton left-[45%] bottom-[-.8rem]"
@@ -48,6 +49,7 @@ const showModal = () => {
 const handleOk = () => {
   open.value = false;
   emits("closed", false);
+  store.commit('setModalErr', false)
 };
 
 const handeClose = () => {
@@ -68,7 +70,8 @@ const props = defineProps({
   componentPass: {
     type: Object,
     default: () => ({}),
-  },
+  },   
+
   bgColor: {
     type: Boolean,
     default: false,
@@ -101,13 +104,6 @@ watch(
   }
 );
 
-// onMounted(() => {
-//   const closed = document.getElementById("handleThis");
-//   if (store.state.userInfo.isLogin === true) {
-//     closed.addEventListener("click", handleOk);
-//     closed.click()
-//   }
-// });
 
 </script>
 

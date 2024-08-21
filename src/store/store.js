@@ -31,7 +31,8 @@ const store = createStore({
     scrollTo: "",
     forwardGame: '',
     showLoginModal: false,
-    gameTypes: ''
+    gameTypes: '',
+    modalErr: false
     
   },
   mutations: {
@@ -118,6 +119,9 @@ const store = createStore({
     },
     setGameTypes(state, payload) {
       state.gameTypes = payload
+    },
+    setModalErr(state, payload) {
+      state.modalErr = payload
     }
 
   },
