@@ -3,6 +3,12 @@
     class="bg-[#05309F] h-[calc(100vh-.9rem)] w-[3rem] p-[.15rem] overflow-auto"
   >
     <div class="flex flex-col w-full gap-[.1rem]">
+      <span
+        class="h-[.8rem] bg-[url('https://mt0.yibo22.com/mobile/wap2/dist/static/img/heijinBg.b70d1998.png')] bg-[#25200b] bg-cover bg-center text-[#dfd54b] flex items-center font-bold justify-start p-[.1rem] rounded-[.1rem]"
+        @click="stores.commit('setAntMOdal', true)"
+        >Exclusive</span
+      >
+
       <div class="grid grid-cols-2 gap-[.1rem]">
         <div
           v-for="({ games, tab }, index) in games"
@@ -122,7 +128,10 @@
         </div>
       </div>
       <div class="flex flex-col gap-[.1rem]">
-        <div class="flex gap-[.1rem] items-center" @click="popLanguage = !popLanguage">
+        <div
+          class="flex gap-[.1rem] items-center"
+          @click="popLanguage = !popLanguage"
+        >
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/globe.png" alt="" class="w-[.3rem]" />
           </div>
@@ -183,8 +192,8 @@ import { store } from "../../../store";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import Register from "../RegisterComponent/RegisterForm.vue";
 import { useStore } from "@/store/store";
-import Language from '@/global/Translation/Language.vue'
-const popLanguage = ref(false)
+import Language from "@/global/Translation/Language.vue";
+const popLanguage = ref(false);
 const stores = useStore();
 const loginModal = ref(false);
 import { navigateTo } from "@/global/navigation.js";
@@ -204,10 +213,9 @@ const { isLoading } = useQuery({
   },
 });
 
-
 const scrollToGames = (id) => {
-  stores.commit('setScrollTo', id)
-  store.OpenClose()
+  stores.commit("setScrollTo", id);
+  store.OpenClose();
   // stores.commit('setScrollSide', id)
-}
+};
 </script>

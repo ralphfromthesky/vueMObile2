@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import Deposit from '@/components/deposit/Deposit.vue';
 import { useStore } from '@/store/store.js'
 import Modal from '../../../components/ModalComponent/Modal.vue'
@@ -80,6 +80,11 @@ const closeDeposit = () => {
     isLogin.value = false;
     // hideThis()
 }
+
+watch(() => store.state.openDeposit, (newVal) => {
+    // alert(`alert from  bottom ${newVal}`)
+    showDeposit()
+})
 
 </script>
 

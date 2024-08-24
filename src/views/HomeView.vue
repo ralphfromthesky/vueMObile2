@@ -153,7 +153,7 @@
           />
         </div>
       </div>
-      <div v-if="store.state?.userInfo?.isLogin">
+      <!-- <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
       </div>
       <AntModal
@@ -161,13 +161,13 @@
         :componentPass="GetApplogin"
         v-if="store.state.userGetAppLogin?.length"
       />
-      <AntModal :isOpen="true" :componentPass="Test" />
+       <AntModal :isOpen="true" :componentPass="Test" />
 
-      <AntModal
+       <AntModal
         :isOpen="openModal"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      />
+      /> -->
       <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
 
       <AntModal
@@ -180,6 +180,13 @@
         :isOpen="regModal"
         :componentPass="Register"
         :backGrounds="true"
+      />
+      <AntModal
+        :isOpen="store.state.antMOdal"
+        :componentPass="NewTask"
+        :bgColor="true"
+        v-if="store.state.userInfo.isLogin"
+
       />
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <SpinLoader v-if="isFetching" />
@@ -195,6 +202,7 @@
 
 <script setup>
 import { changeLang } from "@/global/Translation/translation.js";
+import NewTask from '@/components/Task/NewTask.vue'
 import Slots from "@/views/Slots/Slots.vue";
 import TurnLate from "@/components/turnLate/turnLate.vue";
 const { lang } = changeLang();

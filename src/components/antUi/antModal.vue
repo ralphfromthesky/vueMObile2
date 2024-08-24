@@ -7,6 +7,7 @@
       :v-if="isOpen"
       :footer="null"
       :closable="false"
+      :maskClosable="false"
       centered
       :class="{ modas: props.bgColor, customColor: props.backGrounds }"
       @cancel="handeClose"
@@ -49,7 +50,9 @@ const showModal = () => {
 const handleOk = () => {
   open.value = false;
   emits("closed", false);
-  store.commit('setModalErr', false)
+  store.commit('setModalErr', false);
+  store.commit('setAntMOdal', false);
+
 };
 
 const handeClose = () => {
@@ -103,6 +106,12 @@ watch(
     open.value = newVal;
   }
 );
+
+watch(() => store.state.openDeposit, (newVal) => {
+if(newVal) {
+  handleOk()
+}
+})
 
 
 </script>

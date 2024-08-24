@@ -29,11 +29,12 @@ const store = createStore({
     userSignInRule: [],
     userMissiontask: [],
     scrollTo: "",
-    forwardGame: '',
+    forwardGame: "",
     showLoginModal: false,
-    gameTypes: '',
-    modalErr: false
-    
+    gameTypes: "",
+    modalErr: false,
+    openDeposit: false,
+    antMOdal: true,
   },
   mutations: {
     setLogin(state, user) {
@@ -112,18 +113,25 @@ const store = createStore({
       state.scrollTo = id;
     },
     setForwardname(state, payload) {
-      state.forwardGame = payload 
+      state.forwardGame = payload;
     },
     setShowLoginModal(state, payload) {
-      state.showLoginModal = payload
+      state.showLoginModal = payload;
     },
     setGameTypes(state, payload) {
-      state.gameTypes = payload
+      state.gameTypes = payload;
     },
     setModalErr(state, payload) {
-      state.modalErr = payload
-    }
+      state.modalErr = payload;
+    },
+    setOpenDeposit(state, payload) {
+      state.openDeposit = payload;
+    },
+    setAntMOdal(state, payload) {
+      state.antMOdal = payload;
+    },
 
+    
   },
   actions: {
     updateUser(context, user) {
@@ -132,7 +140,6 @@ const store = createStore({
     logOut(context) {
       context.commit("logOutUser");
     },
-
   },
   getters: {
     getUserData(state) {
