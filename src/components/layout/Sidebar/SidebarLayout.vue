@@ -5,9 +5,24 @@
     <div class="flex flex-col w-full gap-[.1rem]">
       <span
         class="h-[.8rem] bg-[url('https://mt0.yibo22.com/mobile/wap2/dist/static/img/heijinBg.b70d1998.png')] bg-[#25200b] bg-cover bg-center text-[#dfd54b] flex items-center font-bold justify-start p-[.1rem] rounded-[.1rem]"
-        @click="stores.commit('setAntMOdal', true)"
+        @click="exclusive"
         >Exclusive</span
       >
+      <span>
+        <span class=" bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end">
+          <span class="jackpot-text mr-[.3rem] z-10">TRY ME!
+
+          </span>
+          <span class="relative">
+          <img src="/public/turnlateImages/rotate.png" class="rotate"  alt="" />
+          <img src="/public/turnlateImages/rotate2.png" class="absolute h-[.9rem] top-[.32rem] left-[.53rem] transform -translate-x-1/2 -translate-y-1/2" alt="" />
+
+        </span>
+
+        
+
+        </span>
+      </span>
 
       <div class="grid grid-cols-2 gap-[.1rem]">
         <div
@@ -218,4 +233,28 @@ const scrollToGames = (id) => {
   store.OpenClose();
   // stores.commit('setScrollSide', id)
 };
+
+const exclusive = () => {
+  if (!stores.state.userInfo.isLogin) {
+    loginModal.value = !loginModal.value;
+  }
+  stores.commit("setAntMOdal", true);
+};
 </script>
+
+<style scoped>
+.rotate {
+  animation: rotates 6s linear infinite;
+}
+
+@keyframes rotates{
+  100% {
+  transform: rotate(1800deg)
+  }
+}
+.jackpot-text {
+    @apply  font-bold relative text-yellow-400;  
+    text-shadow: 1px 1px 0px red, -1px -1px 0px red, 1px -1px 0px red, -1px 1px 0px rgb(236, 227, 227);
+  }
+  
+</style>

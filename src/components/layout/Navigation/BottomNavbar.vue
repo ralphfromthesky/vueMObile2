@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center bg-[#032B92] w-full h-[1.32rem] fixed bottom-0 p-[.2rem]">
+    <div class="btom flex items-center bg-[#032B92] w-full h-[1.32rem] fixed bottom-0 p-[.2rem]">
         <div class="grid grid-cols-5 gap-[.5rem] justify-between w-full">
             <router-link to="/">
                 <div class="flex flex-col items-center">
@@ -106,5 +106,11 @@ watch(() => store.state.openDeposit, (newVal) => {
         transform: translateY(0);
         opacity: 1;
     }
+}
+@media (min-width: 431px) {
+    .btom {
+        width: 22.5%;
+    }
+  
 }
 </style>

@@ -106,6 +106,7 @@ import router from "@/router";
 import { useStore } from "@/store/store.js";
 import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useGetGlobalConfigInfo } from "@/global/globalConfigInformation.js";
+const {registerConfig} = useGetGlobalConfigInfo()
 import {registerGuest} from '@/global/missionEvent.js'
 import { messageApi } from "@/components/antUi/antMessage";
 
@@ -189,4 +190,8 @@ const showPW = (name) => {
     }
     
 }
+
+onMounted(() => {
+    registerConfig.refetch()
+})
 </script>

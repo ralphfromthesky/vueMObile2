@@ -11,6 +11,7 @@
       centered
       :class="{ modas: props.bgColor, customColor: props.backGrounds }"
       @cancel="handeClose"
+      class="modal431px"
     >
       <component :is="componentPass" @close="handleOk"></component>
       <div class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] h-[4rem] flex-col text-center" v-if="props.elementPass">
@@ -123,5 +124,12 @@ if(newVal) {
 
 .customColor .ant-modal-content {
   background-color: #05309f;
+}
+@media (min-width: 431px) {
+.modal431px {
+  width: 5.5rem !important;
+}
+
+  
 }
 </style>

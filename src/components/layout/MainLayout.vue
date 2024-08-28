@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="mainDiv">
         <NavBar></NavBar>
         <div class="flex bg-[#05309F] bg-[url('/images/bg_pattern_tile.png')] relative">
             <div @click="store.OpenClose()" :class="store.SideBareSate ? `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeIn transition-all` : `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeOut transition-all`" :hidden="store.SideBareSate"></div>
@@ -135,4 +135,12 @@ watchEffect(() => {
         opacity: 0;
     }
 }
+
+ @media (min-width: 431px) {
+  .mainDiv {
+    width: 100%;
+    overflow: hidden;
+ 
+  }
+} 
 </style>

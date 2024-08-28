@@ -109,7 +109,7 @@
                       ? gameItems.imgUrl
                       : `api` + gameItems.imgUrl
                   "
-                  class="w-[2.1rem] h-[2.792rem] rounded-[.2rem]"
+                  class="w-[2rem] h-[2.792rem] rounded-[.2rem]"
                   @click="
                     () =>
                       fetchGames(
@@ -444,5 +444,13 @@ onMounted(() => {
 .inactive-state {
   border-bottom: none;
   padding-bottom: 0.2rem;
+}
+@media (min-width: 431px) {
+#mainDiv {
+  width: 100%;
+  padding: 0 5px 0 5px;
+}
+
+  
 }
 </style>
