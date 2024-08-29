@@ -167,8 +167,8 @@
         :isOpen="openModal"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      /> -->
-      <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
+      />  -->
+       <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
 
       <AntModal
         :isOpen="loginModal"
@@ -181,13 +181,13 @@
         :componentPass="Register"
         :backGrounds="true"
       />
-      <AntModal
+      <!-- <AntModal
         :isOpen="store.state.antMOdal"
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
 
-      />
+      /> -->
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <SpinLoader v-if="isFetching" />
 

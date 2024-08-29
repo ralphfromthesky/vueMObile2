@@ -111,7 +111,7 @@
       </div>
     </div>
     <div
-      class="flex gap-[.2rem] fixed bottom-0 bg-[#05309F] h-[1.7rem] w-full p-[.2rem] items-center border-t-[.02rem] border-t-[#3a61c2]"
+      class="flex gap-[.2rem] fixed bottom-0 bg-[#05309F] h-[1.7rem]  p-[.2rem] items-center border-t-[.02rem] border-t-[#3a61c2]"
     >
       <div class="flex gap-[.2rem]">
         <div class="flex flex-col gap-[.1rem] w-fit leading-none">

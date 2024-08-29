@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="flex items-center fixed top-0 h-[.9rem] w-full bg-[#05309F] border-b border-b-[#3A61C2]">
+        <div class="flex items-center custom1 h-[.9rem] w-full bg-[#05309F] border-b border-b-[#3A61C2]">
             <div class="flex items-center relative w-screen p-[.2rem]">
                 <div class="flex items-center bg-[#05309F] w-full">
                     <div class="mr-[.2rem]" @click="this.$router.go(-1)">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="flex bg-[#1a45b1]">
-            <section class="bg-[#1a45b1] h-[calc(100vh-.9rem)] mt-[.9rem] w-screen overflow-auto">
+            <section class="bg-[#1a45b1] h-[calc(100vh-.9rem)] custom2  w-screen overflow-auto">
                 <slot></slot>
             </section>
         </div>
@@ -76,5 +76,21 @@ function openCards() {
 .router-link-active .link-content {
     border-bottom: 3px solid hsl(47, 100%, 87%);
     color: hsl(47, 100%, 87%);
+}
+@media (min-width: 431px) {
+  .custom1 {
+    width: auto;
+  }
+ 
+@media (max-width: 431px) {
+.custom1 {
+    position: fixed;
+    top: 0;
+}
+ .custom2 {
+    margin-top: .9rem;
+}
+}
+
 }
 </style>

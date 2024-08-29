@@ -1,6 +1,6 @@
 <template>
   <PageLayout title="Recuperar o saldo">
-    <div class="flex flex-col">
+    <div class="mainDiv flex flex-col">
       <router-link
         to="/profile"
         class="flex items-center justify-between w-full h-auto bg-[#05309F] border-b-[.01rem] border-b-[#1a45b1] p-[.2rem]"
@@ -38,7 +38,7 @@
           </div>
           <div class="flex flex-col items-center justify-center">
             <span class="text-[#a89d81] text-[.25rem] font-bold"
-              >Bonus Wallet</span
+              >Bonus Wallets</span
             >
             <span class="text-[#a89d81] text-[.25rem] font-bold">{{
               store.state.userInfo.giftMoney
@@ -130,7 +130,7 @@
                   :key="indexes"
                   :class="
                     activeTab == transferValue.type
-                      ? `w-[1.5rem] h-[1rem] rounded-[.1rem] bg-amber-100 flex flex-col justify-center items-center relative`
+                      ? `w-[1.5rem] h-[1rem] rounded-[.1rem] bg-red flex flex-col justify-center items-center relative`
                       : `bg-[#05309F] w-[1.5rem] h-[1rem] rounded-[.1rem] flex flex-col justify-center items-center relative`
                   "
                 >
@@ -166,7 +166,7 @@
             </div>
           </div>
           <div
-            class="flex flex-col w-full h-[calc(100vh-4.81rem)] overflow-auto gap-[.2rem]"
+            class="mainDiv flex flex-col w-full h-[calc(100vh-4.81rem)] overflow-auto gap-[.2rem]"
           >
             <div
               v-for="(transferGameValue, indexes) in transferGameData?.content"
@@ -345,3 +345,12 @@ onMounted(() => {
   getGameType.value = 2;
 });
 </script>
+
+<style scoped>
+
+@media (min-width: 432px) {
+      .mainDiv {
+        width: auto;
+
+      }}
+</style>

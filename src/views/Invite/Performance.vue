@@ -75,7 +75,7 @@
         </div>
       </div>
       <div
-        class="flex gap-[.2rem] fixed bottom-0 bg-[#05309F] h-[1.7rem] w-full items-center border-t-[.02rem] border-t-[#3a61c2] p-[.2rem]"
+        class="flex gap-[.2rem]  bottom-0 bg-[#05309F] h-[1.7rem] w-full items-center border-t-[.02rem] border-t-[#3a61c2] p-[.2rem]"
       >
         <div class="flex gap-[.2rem]">
           <div class="flex flex-col gap-[.1rem] w-fit leading-none">

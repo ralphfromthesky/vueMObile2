@@ -1,57 +1,12 @@
-<!-- <template>
-    <main>
-        <NavBarTab></NavBarTab>
-        <div class="flex bg-[#1a45b1]">
-            <section class="h-[calc(100vh-1.7rem)] pb-[.2rem] w-full overflow-auto">
-                <div class="flex items-center justify-center w-full">
-           
-                    <transition name="route" appear>
-                        <div v-if="$slots.default">
-                            <slot></slot>
-                        </div>
-                    </transition>
-
-                </div>
-            </section>
-        </div>
-        <BottomNavbar></BottomNavbar>
-    </main>
-</template>
-<script setup>
-import BottomNavbar from './Navigation/BottomNavbar.vue'
-import NavBarTab from './Navigation/NavBarTab.vue'
-</script>
-
-
-<style scoped>
-.route-enter-from {
-    opacity: 0;
-    transform: translateX(10rem);
-}
-
-.route-enter-active {
-
-    transition: all 0.3s ease-out;
-}
-
-.route-leave-to {
-    opacity: 0;
-    transform: translateX(-10rem);
-}
-
-.route-leave-active {
-    transition: all 0.3s ease-in;
-}
-</style> -->
 
 <template>
   <main>
       <NavBarTab></NavBarTab>
-      <div class="flex bg-[#1a45b1]">
-        <section class="h-[calc(100vh-1.7rem)] pb-[.2rem] w-full overflow-auto">
-          <div class="flex items-center justify-center w-full">
+      <div class="mainDiv2 flex bg-[#1a45b1]">
+        <section class=" h-[calc(100vh-1.7rem)] pb-[.2rem] w-full overflow-auto">
+          <div class=" flex items-center justify-center w-full">
             <transition :name="transitionName" appear>
-              <div v-if="$slots.default">
+              <div v-if="$slots.default" class="mainDiv">
                 <slot></slot>
               </div>
             </transition>
@@ -117,13 +72,13 @@ router.beforeEach((to, from, next) => {
 .route-backward-leave-active {
   transition: all 0.3s ease-in;
 }
+@media (min-width: 432px) {
+      .mainDiv {
+        width: auto;
 
-@media (min-width: 431px) {
-  .main {
-    overflow: hidden !important;
-    overflow-x: hidden;
-    z-index: 50;
-    border: 2px solid red;
-  }
-}
+      }
+      .mainDiv2 {
+      }
+    }
+
 </style>

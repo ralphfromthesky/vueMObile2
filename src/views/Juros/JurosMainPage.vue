@@ -1,6 +1,6 @@
 <template>
     <PageLayout>
-        <div class="w-screen h-[100vh-.9rem] ">
+        <div class="mainDiv w-screen h-[100vh-.9rem] ">
             <!-- <div class="bg-[#05309F] w-full h-auto">
                 <div class="flex justify-between p-[.2rem]">
                     <div class="flex items-center gap-[.1rem] relative mt-[.2rem]">

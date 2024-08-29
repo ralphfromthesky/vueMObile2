@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div class="w-screen px-[.2rem]">
+        <div class="mainDiv w-screen px-[.2rem]">
             <div class="flex justify-end px-1 mt-1 items-center">
                 <div>
                     <span class="text-white text-[.3rem]">Bonus</span> <span class="text-[#ffaa09]">0,00</span>

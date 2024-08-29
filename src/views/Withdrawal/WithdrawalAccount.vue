@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex items-baseline absolute bottom-0 w-full p-[.2rem] bg-[#05309F] rounded-t-[.1rem]">
+        <div class="flex items-baseline custom1 bottom-0 w-full p-[.2rem] bg-[#05309F] rounded-t-[.1rem]">
             <div data-twe-toggle="modal" data-twe-target="#exampleModalCenter" data-twe-ripple-init
                 class="flex border border-[#3A61C2] rounded-[.1rem] p-[.2rem] h-[.8rem] relative overflow-hidden w-full">
                 <div class="flex items-center gap-[.2rem] w-full">
@@ -108,3 +108,12 @@ function setActiveAccount(data) {
     activeAccount.value = data
 }
 </script>
+
+<style scoped>
+    @media screen and(max-width: 432px){
+        .custom1 {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+</style>

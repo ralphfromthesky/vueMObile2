@@ -68,7 +68,7 @@
                         extremamente importante. Mantenha-a em segredo para evitar qualquer perda financeira.</span>
                 </div>
             </div>
-            <div class="flex items-center justify-center fixed bottom-0 p-[.2rem] w-full bg-[#05309F]">
+            <div class="flex items-center justify-center fixed bottom-0 p-[.2rem] w-[7.3rem] bg-[#05309F]">
                 <button @click="setWithdrawPassword"
                     class="w-[6rem] h-[.7rem] bg-[#FFF0BB] border-[#FFF0BB] text-[#05309F] rounded-[.15rem]">Confirmar</button>
             </div>

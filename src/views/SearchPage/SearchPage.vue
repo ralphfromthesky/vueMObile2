@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainDiv">
     <div v-if="nowShowingGames" class="relative">
       <div class="absolute top-[1rem] left-[.1rem]" @click="backlush">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
@@ -10,7 +10,7 @@
         class="w-screen h-screen"
       ></iframe>
     </div>
-    <div class="bg-[#1A45B1] h-screen w-screen" v-if="hideMain">
+    <div class="mainDiv bg-[#1A45B1] h-screen w-screen" v-if="hideMain">
       <div
         class="border-b-[.02rem] h-[1rem] flex gap-[1rem] text-[#FFFFFF] justify-around items-center"
       >
@@ -416,5 +416,14 @@ onMounted(() => {
 
 .route-leave-active {
   transition: all 0.3s ease-in;
+}
+@media (min-width: 431px) {
+.mainDiv {
+  height: auto; 
+    width: auto; 
+}
+
+
+  
 }
 </style>

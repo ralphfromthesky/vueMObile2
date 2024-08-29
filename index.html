@@ -11,26 +11,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #ffffff;
-      height: 100vh;
+      background-color: #030000;
+      height: 932px;
       background-image: url("/images/logo.png");
       background-repeat: no-repeat;
       background-position: center center;
       margin: 0;
     }
-    #app {
-      width: 432px;
-      height: 932px;
-      background-color: #05309f;
-      overflow: hidden;
-      background-image: url("/images/logo.png");
-      background-repeat: no-repeat;
-      background-position: center center;
+    
+/* .appContainer{
+  border: 2px solid gray;
+  width: 432px;
+  display: flex;
+  justify-content: center;
+} */
+    @media (min-width: 432px) {
+      #app {
+        width: 432px;
+        height: 100vh;
+        background-color: #05309f;
+        background-image: url("/images/logo.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
     }
-
   </style>
   <body>
-    <div id="app"></div>
+    <div class="appContainer">
+      <div id="app"></div>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

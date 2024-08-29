@@ -5,7 +5,7 @@
         <div data-twe-modal-dialog-ref
             class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center justify-center flex-col gap-[.2rem] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
             <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-[.2rem] bg-[#05309F] border border-[#3A61C2] bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
+                class="pointer-events-auto relative flex w-auto flex-col rounded-[.2rem] bg-[#05309F] border border-[#3A61C2] bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
                 <div class="relative p-[.2rem]">
                     <slot></slot>
                 </div>

@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="flex flex-col w-screen gap-[.2rem] p-[.2rem]">
+    <div class="mainDiv flex flex-col w-screen gap-[.2rem] p-[.2rem]">
       <div class="flex items-center bg-[#05309F] rounded-[.1rem] p-[.2rem] relative w-full h-[2rem]">
         <div
           class="flex items-center justify-center p-[.05rem] bg-[#FF4A4A] top-0 left-0 w-[1.5rem] rounded-tl-[.1rem] rounded-br-[.1rem] absolute">

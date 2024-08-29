@@ -8,7 +8,7 @@
 
 @media (min-width: 431px) {
   :root {
-    font-size: calc(100vw /(720 / 25)) !important;
+    font-size: calc(100vw /(720 / 22)) !important;
   }
   
 }

@@ -1,6 +1,6 @@
 <template>
-    <div class=" flex items-center p-[.2rem] bg-[#05309F] border-b-[.055rem] border-b-[#3A61C2] w-full h-[.9rem] fixed top-0 z-10">
-        <div class="  flex navbartab gap-[.7rem] items-center overflow-x-auto text-white">
+    <div class="mainDiv flex items-center p-[.2rem] bg-[#05309F] border-b-[.055rem] border-b-[#3A61C2]  h-[.9rem]  top-0 z-10">
+        <div class=" flex gap-[.7rem] items-center overflow-x-auto text-white">
             <router-link to="/event">
                 <div class="flex link-content items-center justify-center relative h-[.9rem]">
                     <span class="text-[.27rem]">Eventos</span>
@@ -53,5 +53,15 @@ const showRegModal = (path) => {
     color: hsl(47, 100%, 87%);
 }
 
+@media (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
 
+@media (max-width: 431px) {
+  .mainDiv {
+    position: fixed;
+}
+}
 </style>
