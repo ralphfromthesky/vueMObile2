@@ -35,6 +35,7 @@ const store = createStore({
     modalErr: false,
     openDeposit: false,
     antMOdal: true,
+    isDataFetching: true
   },
   mutations: {
     setLogin(state, user) {

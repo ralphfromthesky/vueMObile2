@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=" bg-[#1A45B1] h-screen">
     <div v-if="nowShowingGames" class="relative">
       <div class="absolute top-[1rem] left-[.1rem]" @click="backlush">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
@@ -11,18 +11,17 @@
       ></iframe>
     </div>
 
-    <div class="w-screen relative" v-if="hideMain">
+    <div class="custom2 relative bg-[#1A45B1]" v-if="hideMain">
       <div>
-        <div class="text-white flex justify-between font-[1rem]">
-          <router-link to="/">
-            <span class="text-[.5rem] pl-[.5rem]"><</span></router-link
-          >
+        <div class="text-white flex items-center justify-between pt-[.3rem] font-[1rem]">
+            <span class="text-[.5rem] pl-[.5rem]" @click="router.push('/')"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
+          
           <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
         <div class="border-3"></div>
 
-        <div class="text-white overflow-auto w-screen p-[.2rem] bg-[#1A45B1]">
+        <div class="text-white overflow-auto custom1 w-auto p-[.2rem] bg-[#1A45B1]">
           <div class="flex justify-center my-[.1rem] relative">
             <a-input
               placeholder="ID de Membro"
@@ -175,7 +174,6 @@
       </div>
     </div>
 
-    <SpinLoader v-if="isFetching || tabsfetching || nextPageFetching" />
     <AntModal
       :isOpen="loginModal"
       :componentPass="Login"
@@ -193,7 +191,10 @@
         :bgColor="true"
         @closed="handleshowFalseData"
       />
+      
   </div>
+  <SpinLoader v-if="isFetching || tabsfetching || nextPageFetching" :is-align="true"/>
+
 </template>
 
 <script setup>
@@ -207,6 +208,7 @@ import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
 import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 import { axiosGet2 } from "@/components/axios/AxiosHook";
 import { messageApi } from "@/components/antUi/antMessage";
+import router from "@/router";
 const store = useStore();
 const { gamesData, getGame, getGameType } = getGamesTab();
 const gameType = ref("");
@@ -587,5 +589,16 @@ onMounted(() => {});
 
 .route-leave-active {
   transition: all 0.3s ease-in;
+}
+@media screen and (min-width: 432px) {
+  .custom1 {
+    width: 7.33rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .custom2 {
+    width: 100vw;
+  }
 }
 </style>

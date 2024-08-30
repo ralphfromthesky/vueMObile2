@@ -1,5 +1,6 @@
 <template>
   <div class="mainDiv">
+    
     <div v-if="nowShowingGames" class="relative">
       <div class="absolute top-[1rem] left-[.1rem]" @click="backlush">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
@@ -14,7 +15,7 @@
       <div
         class="border-b-[.02rem] h-[1rem] flex gap-[1rem] text-[#FFFFFF] justify-around items-center"
       >
-        <span class="text-[.4rem]" @click="router.push('/')"><</span>
+        <span class="text-[.4rem]" @click="router.push('/')"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
         <span class="text-[.4rem]">Search</span>
         <span></span>
       </div>
@@ -207,6 +208,8 @@
         </transition>
       </div>
     </div>
+    <SpinLoader v-if="isFetching || gameFetch" :isAlign="true"/>
+
   </div>
   <AntModal
     :isOpen="loginModal"
@@ -214,7 +217,6 @@
     :backGrounds="true"
     v-if="!store.state.userInfo.isLogin"
   />
-  <SpinLoader v-if="isFetching || gameFetch"/>
 
 </template>
 
@@ -420,7 +422,8 @@ onMounted(() => {
 @media (min-width: 431px) {
 .mainDiv {
   height: auto; 
-    width: auto; 
+    width: auto;
+    position: relative;
 }
 
 

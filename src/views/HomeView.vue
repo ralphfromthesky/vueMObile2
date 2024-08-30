@@ -181,20 +181,20 @@
         :componentPass="Register"
         :backGrounds="true"
       />
-      <!-- <AntModal
+      <AntModal
         :isOpen="store.state.antMOdal"
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
 
-      /> -->
+      />
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <SpinLoader v-if="isFetching" />
 
       <Slots
         :gameTypePass="gameTypeName"
-        class="hidden"
         :headerName="headTitle"
+        v-if="false"
       />
     </div>
   </MainLayout>

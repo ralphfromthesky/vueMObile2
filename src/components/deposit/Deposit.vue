@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text-white w-screen h-screen px-1 bg-[#05309F] mt-[.89rem] rounded-t-[.2rem]">
+        <div class="text-white custom1 h-screen px-1 bg-[#05309F] mt-[.89rem] rounded-t-[.2rem]">
             <div class="flex justify-between items-center mt-[.5rem]">
                 <span @click="closeDeposit"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
                 <span class="text-[.35rem] absolute left-[2.8rem]">Deposito</span>
@@ -190,5 +190,10 @@ onMounted(() => {
 
 .active-button {
     border: .02rem solid #fff0bb;
+}
+@media screen and (min-width: 430px) {
+    .custom1 {
+        width: 7.3rem;
+    }
 }
 </style>

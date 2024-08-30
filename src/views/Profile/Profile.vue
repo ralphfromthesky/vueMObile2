@@ -139,7 +139,7 @@
         </div>
       </div>
 
-      <div class="w-full bg-[#05309F] bottom-0 fixed">
+      <div class="w-full custom1 bg-[#05309F] bottom-0 fixed">
         <div class="flex gap-[.2rem] p-[.2rem]">
           <button
             className=" rounded-[.1rem] h-[.7rem] w-[3.45rem] text-[.24rem] text-center text-[#FFF0BB] border-[#FFF0BB] border bg-transparent"
@@ -285,3 +285,11 @@ watch(
 
 
 </script>
+
+<style scoped>
+@media screen and (min-width: 430px) {
+  .custom1 {
+    width: 7.4rem
+  }
+}
+</style>

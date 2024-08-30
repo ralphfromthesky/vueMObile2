@@ -54,19 +54,22 @@
         </div>
     </div>
     <AntModal :isOpen="loginModal" :componentPass=Login :backGrounds=true />
-    <div v-if="isLogin" class="w-screen h-screen bg-[#000000b3] fixed top-0 z-20">
-        <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 right-0 ease-in-out">
+    <div v-if="isLogin" class="h-screen bg-[#000000b3] fixed top-0 z-20">
+        <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 left-0 ease-in-out">
             <Deposit @close="closeDeposit" />
         </div>
     </div>
+    <!-- <AntDrawer :isOpen="true":componentPass="Deposit" :isDeposit="true"/> -->
 </template>
 
 <script setup>
+
 import { onMounted, ref, watch } from 'vue'
 import Deposit from '@/components/deposit/Deposit.vue';
 import { useStore } from '@/store/store.js'
 import Modal from '../../../components/ModalComponent/Modal.vue'
 import Login from "../LoginComponent/LoginForm.vue";
+import AntDrawer from '@/components/antUi/antDrawer.vue';
 const loginModal = ref(false)
 const store = useStore()
 
@@ -113,4 +116,5 @@ watch(() => store.state.openDeposit, (newVal) => {
     }
   
 }
+
 </style>

@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import { useGetDegreeInfo } from '@/global/getDegreeInfo.js';
 import { onMounted, ref, watch } from 'vue';
 import { useStore } from './store/store';
+const store = useStore()
 const scrolled = ref(false)
 
 const handleScroll = () => {
@@ -34,6 +35,8 @@ onMounted(() => {
     <context-holder />
 
   <RouterView />
+      <!-- <SpinLoader v-if="store.state.isDataFetching"  :is-align="true"/> -->
+
 </template>
 
 <style scoped></style>

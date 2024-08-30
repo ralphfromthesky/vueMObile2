@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="flex items-baseline absolute bottom-0 w-full p-[.2rem] pb-[.4rem] bg-[#05309F]">
+  <div class="flex items-baseline custom1 p-[.2rem] pb-[.4rem] bg-[#05309F]">
     <button
       class="text-[.24rem] text-[#05309F] bg-[#FFF0BB] border border-[#FFF0BB] w-full h-[.7rem] leading-[.22rem] rounded-[.1rem]"
       @click="saveAdvice.mutate(adviceObj.value)">
@@ -48,3 +48,19 @@ import Toast from "@/components/ToastComponent/Toast.vue";
 import { useAdvice } from "@/global/messageCenter.js";
 const { adviceObj, saveAdvice, showToast, toastMsg } = useAdvice();
 </script>
+
+<style scoped>
+
+@media screen and (max-width: 430px) {
+  .custom1 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 430px) {
+  .custom1 {
+    margin-top: 1rem;
+  }
+}
+</style> custom1

@@ -6,8 +6,12 @@
     style="color: #1A45B1"
     placement="bottom"
     @after-open-change="afterOpenChange"
-    :height=" closedElement ? '7rem': '5rem'"
+    :height=" closedElement ? '7rem': '12rem'"
     :closable="false"
+    :style="props.isDeposit ? {background: 'none', width: '7.4rem', border: '2px solid red'} : {}"
+  
+
+    
     
   >
   <template #title v-if="closedElement">
@@ -25,7 +29,6 @@
 
     <div>
       <component :is="componentPass" @bday="showBday" @closed="afterOpenChange"></component>
-
     </div>
 
     <div class="flex justify-between" v-if="closedElement">
@@ -78,6 +81,10 @@ const props = defineProps({
   closedElement: {
     type: Boolean,
     default: false,
+  },
+  isDeposit: {
+    type: Boolean,
+    default: false
   }
 
 });

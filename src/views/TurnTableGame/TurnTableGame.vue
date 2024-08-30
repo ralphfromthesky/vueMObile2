@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div ref="prize">
+    <!-- <div ref="prize">
       <span>Receive</span>
-    </div>
-    <div class="h-screen w-screen">
+    </div> -->
+    <div class="h-screen w-auto">
       <div>
         <div class="p-[.3rem] text-white flex justify-between font-[1rem]">
-          <router-link to="/"> <span class="text-[.5rem]"><</span></router-link>
+          <router-link to="/"> <span class="text-[.5rem]"><img src="/images/back.png" alt="" class="w-[.3rem]"></span></router-link>
           <span class="text-[.4rem] ml-[1rem]">big turntable</span>
           <router-link to="/records">
           <span class="text-[.25rem]">Record col....</span>
@@ -14,7 +14,7 @@
         </div>
         <div class="border-3"></div>
         <div
-          class="text-white h-screen overflow-auto w-screen p-[.2rem] bg-[#1A45B1]"
+          class="text-white h-screen overflow-auto w-auto p-[.2rem] bg-[#1A45B1]"
         >
           <div class="flex rounded-[.1rem] p-[.1rem] pb-1 bg-[#05309F]">
             <div class="flex flex-col overflow-auto">
