@@ -77,8 +77,7 @@ router.beforeEach((to, from, next) => {
         width: auto;
 
       }
-      .mainDiv2 {
-      }
+
     }
 
 </style>
