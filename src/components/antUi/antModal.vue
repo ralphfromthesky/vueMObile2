@@ -127,7 +127,7 @@ if(newVal) {
 }
 @media (min-width: 431px) {
 .modal431px {
-  width: 7.5rem !important;
+  width: 7rem !important;
 }
 
   

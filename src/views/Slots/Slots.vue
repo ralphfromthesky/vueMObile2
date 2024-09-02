@@ -7,14 +7,14 @@
       <iframe
         :src="showIframGames"
         frameborder="0"
-        class="w-screen h-screen"
+        class="gameContainer w-screen h-screen"
       ></iframe>
     </div>
 
     <div class="custom2 relative bg-[#1A45B1]" v-if="hideMain">
       <div>
         <div class="text-white flex items-center justify-between pt-[.3rem] font-[1rem]">
-            <span class="text-[.5rem] pl-[.5rem]" @click="router.push('/')"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
+            <span class="text-[.5rem] pl-[.5rem]" @click="goBack"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
           
           <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
@@ -193,7 +193,7 @@
       />
       
   </div>
-  <SpinLoader v-if="isFetching || tabsfetching || nextPageFetching" :is-align="true"/>
+  <!-- <SpinLoader v-if="isFetching || tabsfetching || nextPageFetching" :is-align="true"/> -->
 
 </template>
 
@@ -236,14 +236,12 @@ const handleshowFalseData = (value) => {
   // alert(`alert from modal - ${showFalseData.value}`)
 };
 
-watch(showFalseData, (newVal) => {
-  alert(newVal);
-  if (newVal === false) {
-    // alert(`newVal = ${newVal}`)
-  }
-});
-
-watch(() => store.state.modalErr, (newVal) => {console.log(`alert from slots ${newVal}`)})
+const goBack = () => {
+  router.push('/')
+setTimeout(() => {
+  window.location.reload()
+}, 500)
+}
 
 const pagevalue = ref({
   74: 30,
@@ -371,6 +369,16 @@ watch(
   }
 );
 
+watch(showFalseData, (newVal) => {
+  alert(newVal);
+  if (newVal === false) {
+    // alert(`newVal = ${newVal}`)
+  }
+});
+
+watch(() => store.state.modalErr, (newVal) => {console.log(`alert from slots ${newVal}`)})
+
+
 watch(
   () => store.state.gameTypes,
   (newVal) => {
@@ -431,55 +439,36 @@ const { refetch: tabs, isFetching: tabsfetching } = useQuery({
   },
 });
 
-const handleApiResponse = (data) => {
-  if (data.url) {
-    liveGameUrl.value = data.url;
-  }
-  if (data.html) {
-    liveGameUrl.value = data.html;
-  }
-  if (data) {
-    hideMain.value = false;
-    nowShowingGames.value = true;
-  }
-  if (data.msg) {
-    hideMain.value = true;
-    nowShowingGames.value = false;
-  }
-  if (data.code === "2300") {
-    dataCode.value = data.msg;
-    store.commit('setModalErr', true); 
-    // alert(store.state.modalErr)
-  }
-};
 
 const { refetch: fetchGames, isFetching } = useQuery({
   queryKey: ["liveGames"],
   queryFn: () => axiosGet2(`/api${gameUrl.value}`),
   enabled: false,
-  select: handleApiResponse,
-  // select: (data) => {
-  //   increment.value ++
-  //   console.log('fdsfasd')
-  //   if (data.url) {
-  //     liveGameUrl.value = data.url;
-  //   }
-  //   if (data.html) {
-  //     liveGameUrl.value = data.html;
-  //   }
-  //    if (data) {
-  //      hideMain.value = false;
-  //      nowShowingGames.value = true;
-  //    }
-  //   if (data.msg) {
-  //     messageApi.info(data?.msg);
-  //     hideMain.value = true;
-  //     nowShowingGames.value = false;
-  //   }
-  //    if (data.code === "2300") {
-  //      dataCode.value = data.msg;
-  //   }
-  // },
+  select: (data) => {
+    if (data.url) {
+      liveGameUrl.value = data.url;
+    }
+    if (data.html) {
+      liveGameUrl.value = data.html;
+    }
+    if (data.gameURL) {
+      liveGameUrl.value = data.gameURL;
+      // hideMain.value = false;
+      //   nowShowingGames.value = true;
+    }
+    if (data) {
+      hideMain.value = false;
+      nowShowingGames.value = true;
+    }
+    // if (data.msg) {
+    //   messageApi.info(data?.msg);
+    //   hideMain.value = true;
+    //   nowShowingGames.value = false;
+    // }
+    if (data.code === "2300") {
+      dataCode.value = data.msg;
+    }
+  },
 
 
   onError: (err) => alert(err),
@@ -547,7 +536,11 @@ const showIframGames = computed(() => {
   return liveGameUrl.value;
 });
 
-onMounted(() => {});
+onMounted(() => {
+  store.state.getTypes ? getTypes(store.state.getTypes, 0) : "";
+  store.commit('setDataFetching', tabsfetching || isFetching)
+  
+});
 </script>
 
 <style scoped>
@@ -599,6 +592,11 @@ onMounted(() => {});
 @media screen and (max-width: 440px) {
   .custom2 {
     width: 100vw;
+  }
+}
+@media screen and (min-width: 431px) {
+  .gameContainer {
+    width: 7.4rem;
   }
 }
 </style>

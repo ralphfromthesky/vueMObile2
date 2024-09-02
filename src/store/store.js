@@ -32,6 +32,7 @@ const store = createStore({
     forwardGame: "",
     showLoginModal: false,
     gameTypes: "",
+    getTypes: "",
     modalErr: false,
     openDeposit: false,
     antMOdal: true,
@@ -122,6 +123,9 @@ const store = createStore({
     setGameTypes(state, payload) {
       state.gameTypes = payload;
     },
+    setTypes(state, payload) {
+      state.getTypes = payload;
+    },
     setModalErr(state, payload) {
       state.modalErr = payload;
     },
@@ -131,6 +135,9 @@ const store = createStore({
     setAntMOdal(state, payload) {
       state.antMOdal = payload;
     },
+    setDataFetching(state, payload) {
+      state.isDataFetching = payload
+    }
 
     
   },

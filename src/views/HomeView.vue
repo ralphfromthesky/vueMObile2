@@ -6,7 +6,7 @@
     <iframe
       :src="showIframe"
       frameborder="0"
-      class="w-screen h-screen"
+      class="gameContainer w-screen h-screen"
     ></iframe>
   </div>
   <MainLayout v-if="hideMain">
@@ -181,20 +181,22 @@
         :componentPass="Register"
         :backGrounds="true"
       />
-      <AntModal
+      <!-- <AntModal
         :isOpen="store.state.antMOdal"
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
 
-      />
+      /> -->
       <div v-if="store.state?.userInfo?.isLogin"></div>
-      <SpinLoader v-if="isFetching" />
+      <!-- <SpinLoader v-if="isFetching" /> -->
 
       <Slots
         :gameTypePass="gameTypeName"
         :headerName="headTitle"
         v-if="false"
+
+
       />
     </div>
   </MainLayout>
@@ -302,6 +304,8 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Slots");
+    store.commit('setTypes', gameType.value)
+
   }
   if (tabName === "Fishing") {
     gameType.value = "bbinFish";
@@ -309,6 +313,9 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
+    store.commit('setTypes', gameType.value)
+
+
   }
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
@@ -316,6 +323,9 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Live Casino");
+    store.commit('setTypes', gameType.value)
+
+
   }
   if (tabName === "Sports") {
     gameType.value = "tysbSport";
@@ -323,6 +333,9 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Sports");
+    store.commit('setTypes', gameType.value)
+
+
   }
 };
 
@@ -359,6 +372,7 @@ const { refetch, isLoading, isFetching } = useQuery({
     }
   },
 });
+
 
 const scrollToSection = (id) => {
   // alert(id)
@@ -428,6 +442,7 @@ watch(
 onMounted(() => {
   initTWE({ Dropdown, Ripple });
   getOnline.refetch();
+  store.commit('setDataFetching', isFetching)
 });
 </script>
 
@@ -450,7 +465,10 @@ onMounted(() => {
   width: 100%;
   padding: 0 5px 0 5px;
 }
-
+.gameContainer {
+    width: 7.4rem;
+  }
   
 }
+
 </style>

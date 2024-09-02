@@ -208,7 +208,7 @@
         </transition>
       </div>
     </div>
-    <SpinLoader v-if="isFetching || gameFetch" :isAlign="true"/>
+    <!-- <SpinLoader v-if="isFetching || gameFetch" :isAlign="true"/> -->
 
   </div>
   <AntModal
@@ -389,6 +389,7 @@ watch(
 );
 
 onMounted(() => {
+  store.commit('setDataFetching', gameFetch)
   showGames("Popular");
   const datafromLocal = localStorage.getItem("games");
   if (datafromLocal) {
