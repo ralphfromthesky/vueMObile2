@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full bg-[#05309F] bottom-0 fixed">
+        <div class="custom w-full bg-[#05309F] bottom-0 fixed">
             <div class="flex p-[.2rem] items-center justify-center w-full">
                 <button
                     className="rounded-[.1rem] h-[.7rem] w-full text-[.24rem] text-center text-[#05309F] border-[#FFF0BB] border bg-[#FFF0BB]">Seguintes</button>
@@ -46,3 +46,12 @@
 <script setup>
 import PageLayout from '@/components/layout/PageLayout.vue'
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+    .custom {
+        width: 7.3rem;
+    }
+}
+
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-[#1A45B1] h-screen w-screen">
+    <div class="bg-[#1A45B1] custom h-screen w-screen">
       <div
         class="border-b-[.02rem] h-[1rem] flex gap-[1rem] text-[#FFFFFF] justify-around items-center"
       >
@@ -11,7 +11,7 @@
 
       <form @submit.prevent="sendPwRet">
         <div class="flex flex-col gap-1 mt-[.7rem] mb-[1rem]">
-          <div class="w-screen px-[.2rem] relative">
+          <div class="w-auto px-[.2rem] relative">
             <input
               type="text"
               class="h-[.7rem] rounded-[.1rem] w-full pl-3"
@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="w-screen px-[.2rem]">
+        <div class="w-auto px-[.2rem]">
           <button
             class="bg-[#fff0bb] rounded-[.1rem] font-bold w-full h-[.8rem]"
           >
@@ -182,5 +182,11 @@ const sendPwRet = () => {
 <style scoped>
 ::v-deep .van-cell__value {
   display: flex;
+}
+
+@media screen and (min-width: 431px) {
+  .custom {
+    width: auto;
+  }
 }
 </style>

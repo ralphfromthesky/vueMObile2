@@ -74,7 +74,9 @@
   <AntModal :isOpen="regModal" :componentPass=Register :backGrounds=true />
 </template>
 <script setup>
-import Login from "../LoginComponent/LoginForm.vue";
+import { ref, computed, watch,onMounted, defineAsyncComponent } from "vue";
+// import Login from "../LoginComponent/LoginForm.vue";
+const Login = defineAsyncComponent(() => import("../LoginComponent/LoginForm.vue"))
 import Register from "../RegisterComponent/RegisterForm.vue";
 import Deposit from "@/components/deposit/Deposit.vue";
 import { useStore } from "@/store/store.js";
@@ -87,7 +89,6 @@ const {mutation} = useLogin()
 const closedModal = ref(null)
 import router from "@/router";
 
-import { ref, computed, watch,onMounted } from "vue";
 import { Dropdown, Ripple, initTWE } from "tw-elements";
 const isUp = ref(false);
 const isRotate = ref(false);

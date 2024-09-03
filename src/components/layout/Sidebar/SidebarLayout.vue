@@ -14,8 +14,8 @@
 
           </span>
           <span class="relative">
-          <img src="/public/turnlateImages/rotate.png" class="rotate"  alt="" />
-          <img src="/public/turnlateImages/rotate2.png" class="absolute h-[.9rem] top-[.32rem] left-[.53rem] transform -translate-x-1/2 -translate-y-1/2" alt="" />
+          <img src="/turnlateImages/rotate.png" class="rotate"  alt="" />
+          <img src="/turnlateImages/rotate2.png" class="absolute h-[.9rem] top-[.32rem] left-[.53rem] transform -translate-x-1/2 -translate-y-1/2" alt="" />
 
         </span>
 

@@ -203,39 +203,42 @@
 </template>
 
 <script setup>
-import { changeLang } from "@/global/Translation/translation.js";
-import NewTask from '@/components/Task/NewTask.vue'
-import Slots from "@/views/Slots/Slots.vue";
-import TurnLate from "@/components/turnLate/turnLate.vue";
-const { lang } = changeLang();
-import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
-import SupportLink from "@/components/SupportLink/SupportLink.vue";
-import Login from "@/components/layout/LoginComponent/LoginForm.vue";
-const headTitle = ref("");
-const loginModal = ref(false);
-const regModal = ref(false);
-import SpinLoader from "@/components/antUi/spinLoader.vue";
-import MainLayout from "../components/layout/MainLayout.vue";
-import { ref, onMounted, computed, watch, nextTick } from "vue";
+import { ref, onMounted, computed, watch, nextTick, defineAsyncComponent } from "vue";
+
+
+const Login = defineAsyncComponent(() => import ("@/components/layout/LoginComponent/LoginForm.vue"))
+const SpinLoader = defineAsyncComponent(() => import('@/components/antUi/spinLoader.vue'));
+const MainLayout = defineAsyncComponent(() => import('../components/layout/MainLayout.vue'));
+const CountUp = defineAsyncComponent(() => import('@/components/antUi/countUp.vue'));
+const Carousel = defineAsyncComponent(() => import('@/components/carousel/carousel.vue'));
+const RedPacket = defineAsyncComponent(() => import('@/components/redPacket/redpacket.vue'));
+const GetApplogin = defineAsyncComponent(() => import('@/components/getApplogin/getApplogin.vue'));
+const Notice = defineAsyncComponent(() => import('@/components/Notice/Notice.vue'));
+const Test = defineAsyncComponent(() => import('@/components/test/tested.vue'));
+const NewTask = defineAsyncComponent(() => import('@/components/Task/NewTask.vue'));
+const Slots = defineAsyncComponent(() => import('@/views/Slots/Slots.vue'));
+const TurnLate = defineAsyncComponent(() => import('@/components/turnLate/turnLate.vue'));
+const Register = defineAsyncComponent(() => import('@/components/layout/RegisterComponent/RegisterForm.vue'));
+const SupportLink = defineAsyncComponent(() => import('@/components/SupportLink/SupportLink.vue'));
+
+
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../components/axios/AxiosHook.js";
 import { getGamesTab } from "@/global/games.js";
 const { getGameType, getGame } = getGamesTab();
 import { getOnlineStatus } from "@/global/userConfig";
 const { getOnline } = getOnlineStatus();
-import CountUp from "@/components/antUi/countUp.vue";
 import { useGetUserInfo } from "@/global/getUserInfo.js";
 const { query } = useGetUserInfo();
-import { Dropdown, Ripple, initTWE } from "tw-elements";
-import Carousel from "@/components/carousel/carousel.vue";
-import RedPacket from "@/components/redPacket/redpacket.vue";
-import GetApplogin from "@/components/getApplogin/getApplogin.vue";
-import Notice from '@/components/Notice/Notice.vue'
-import Test from "@/components/test/tested.vue";
+import { useStore } from "@/store/store.js";
 import { useLogin } from "@/global/loginQuery.js";
 const { mutation } = useLogin();
+const headTitle = ref("");
+const loginModal = ref(false);
+const regModal = ref(false);
+import { changeLang } from "@/global/Translation/translation.js";
+const { lang } = changeLang();
 const forwardGame = ref([]);
-import { useStore } from "@/store/store.js";
 const store = useStore();
 const openModal = ref(true);
 const showGames = ref(false);
@@ -440,7 +443,6 @@ watch(
 );
 
 onMounted(() => {
-  initTWE({ Dropdown, Ripple });
   getOnline.refetch();
   store.commit('setDataFetching', isFetching)
 });
