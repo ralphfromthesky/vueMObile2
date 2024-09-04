@@ -59,7 +59,9 @@
               :style="absolutePosition(index)"
             >
               <div class="flex flex-col items-center">
-                <span class="text-[white] font-bold"> {{ act.awardName }}</span>
+                <span class="text-[white] font-bold">
+                  {{ act.awardName }}
+                </span>
                 <span
                   ><img
                     src="/turnlateImages/img_zphdjp_s1.png"
@@ -83,37 +85,17 @@
             class="absolute z-10 bottom-[5rem] right-[2rem] text-white font-bold flex justify-center flex-col items-center"
             :style="absolutePosition(index)"
           >
-            <span class="font-[1rem]">{{ data.awardName }}</span>
+            <span class="text-[.2rem]">{{ data.awardName }}</span>
             <span
-              ><img src="/turnlateImages/img_zphdjp_s1.png" class="h-[1rem]"
+              ><img src="/turnlateImages/img_zphdjp_s1.png" class="h-[.8rem]"
             /></span>
           </div>
-          <img src="/turnlateImages/round.png" class="z-50" />
-          <div
-            class="h-[4rem] border-2 border-white absolute right-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
-            style="transform: rotate(0deg) skewY(-20deg)"
-          ></div>
-          <div
-            class="h-[4rem] border-2 border-white absolute left-0 w-[3rem] transform bg-[#28b5fe] top-[-1.5rem]"
-            style="transform: rotate(0deg) skewY(20deg)"
-          ></div>
-          <div
-            class="h-[4rem] border-2 border-white absolute left-[-1.2rem] w-[3rem] transform bg-[#327dff] bottom-[-.2rem]"
-            style="transform: rotate(216deg) skewY(-10deg)"
-          ></div>
-          <div
-            class="h-[4rem] border-2 border-white absolute right-[-80px] w-[3rem] transform bg-[#327dff] bottom-[.4rem]"
-            style="transform: rotate(67deg) skewY(-16deg)"
-          ></div>
-          <div
-            class="h-[4rem] border-2 border-white absolute right-[1.1rem] w-[3rem] transform bg-[#28b5fe] bottom-[-2rem]"
-            style="transform: rotate(144deg) skewY(-18deg)"
-          ></div>
+          <span>
+            <img src="/turnlateImages/round5.png" class="z-50" />
+          </span>
         </div>
       </div>
-      <div>
-        <img src="/turnlateImages/round.png" class="absolute top-0" />
-      </div>
+
       <img
         src="/turnlateImages/zphd_ljcj_s3.png"
         class="h-[1.5rem] absolute top-[37%] left-[39%]"
@@ -212,7 +194,7 @@ const { fake, fakeData } = getFakeData();
 import { ShareAltOutlined } from "@ant-design/icons-vue";
 import { getTurnRecord, playTurnLate } from "@/global/missionEvent.js";
 import { useStore } from "@/store/store";
-import Notice from '@/components/Notice/Notice.vue'
+import Notice from "@/components/Notice/Notice.vue";
 const time = ref(4 * 20 * 20 * 1000);
 const store = useStore();
 const turnTable = ref(null);
@@ -223,6 +205,8 @@ const showDrawer = ref(false);
 const { turn, turnRecord, payload } = getTurnRecord();
 const rotate = ref(false);
 const eventData = ref([]);
+
+
 const showModal = () => {
   openModal.value = true;
 };
@@ -268,21 +252,19 @@ const absolutePosition = (index) => {
 
   const newPositions = ref([
     {
-      top: "1.8rem",
-      right: "1.5rem",
+      top: "2.1rem",
+      right: "1.7rem",
       transform: "rotate(40deg)",
-      width: "1rem",
     },
-    { top: "1.8rem", left: ".4rem", transform: "rotate(-40deg)" },
+    { top: "2.1rem", left: ".4rem", transform: "rotate(-40deg)" },
     {
-      top: "3.5rem",
-      right: "3.4rem",
+      top: "3.6rem",
+      right: "3.8rem",
       transform: "rotate(-110deg)",
-      width: "2rem",
       textAlign: "center",
     },
-    { top: "3.4rem", right: ".9rem", transform: "rotate(110deg)" },
-    { bottom: ".7rem", right: "2.2rem", transform: "rotate(180deg)" },
+    { top: "3.6rem", right: "1.2rem", transform: "rotate(110deg)" },
+    { bottom: "1.2rem", right: "2.4rem", transform: "rotate(180deg)" },
   ]);
   if (store.state.userTurnLateActivity.awards.length === 5) {
     return newPositions.value[index] || { top: "0", left: "0" };
@@ -314,6 +296,7 @@ const timeCreated = (time) => {
   return `${day}/${month}/${year}`;
 };
 onMounted(() => {
+
   turn.mutate(payload.value);
   if (turnTable.value) {
     turnTable.value.addEventListener("animationend", () => {

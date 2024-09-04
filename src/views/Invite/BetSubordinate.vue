@@ -23,5 +23,7 @@
     </PageLayout>
 </template>
 <script setup>
-import PageLayout from '../../components/layout/PageLayoutTab.vue';
+import {defineAsyncComponent} from 'vue'
+const PageLayout = defineAsyncComponent(() =>import('../../components/layout/PageLayoutTab.vue'))
+// import PageLayout from '../../components/layout/PageLayoutTab.vue';
 </script>

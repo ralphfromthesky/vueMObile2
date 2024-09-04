@@ -64,16 +64,17 @@
 
 <script setup>
 
-import { onMounted, ref, watch } from 'vue'
-import Deposit from '@/components/deposit/Deposit.vue';
+import { onMounted, ref, watch, defineAsyncComponent } from 'vue'
+const Deposit = defineAsyncComponent(() => import('@/components/deposit/Deposit.vue'))
+const Login = defineAsyncComponent(() => import("../LoginComponent/LoginForm.vue"))
+// import Login from "../LoginComponent/LoginForm.vue";
+// import Deposit from '@/components/deposit/Deposit.vue';
+
 import { useStore } from '@/store/store.js'
 import Modal from '../../../components/ModalComponent/Modal.vue'
-import Login from "../LoginComponent/LoginForm.vue";
 import AntDrawer from '@/components/antUi/antDrawer.vue';
 const loginModal = ref(false)
 const store = useStore()
-
-
 const isLogin = ref(false)
 
 const showDeposit = () => {

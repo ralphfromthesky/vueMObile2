@@ -32,7 +32,9 @@
 
 <script setup>
 import {ref} from 'vue'
-import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+// import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+const Login = defineAsyncComponent(() => import ("@/components/layout/LoginComponent/LoginForm.vue"))
+
 import {useStore} from '@/store/store';
 const store = useStore()
 const loginModal = ref(false)

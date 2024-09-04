@@ -27,7 +27,7 @@
         <div
           class="w-full border-[.01rem]  border-[#3A61C2] bg-[#05309F] flex items-center gap-[.2rem] rounded-[.1rem] p-[.2rem]"
         >
-          <img src="/images/username.png" alt="" class="w-[.3rem]" />
+          <img src="/images/username.png" alt="" class="w-[.3rem]" loading="lazy" />
           <input
             readonly
             class="text-white text-[.22rem] bg-transparent outline-none"

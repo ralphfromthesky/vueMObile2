@@ -163,13 +163,14 @@
       />
        <AntModal :isOpen="true" :componentPass="Test" />
 
+ -->
+       <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
+       
        <AntModal
         :isOpen="openModal"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      />  -->
-       <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
-
+      /> 
       <AntModal
         :isOpen="loginModal"
         :componentPass="Login"

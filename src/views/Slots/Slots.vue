@@ -198,14 +198,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch, computed, defineAsyncComponent } from "vue";
 import SpinLoader from "@/components/antUi/spinLoader.vue";
 import { getGamesTab } from "@/global/games.js";
 import { useQuery } from "@tanstack/vue-query";
 
 import { useStore } from "@/store/store";
-import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
-import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+// import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
+// import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+const Register = defineAsyncComponent(() => import("@/components/layout/RegisterComponent/RegisterForm.vue"))
+const Login = defineAsyncComponent(() => import("@/components/layout/LoginComponent/LoginForm.vue"))
+
 import { axiosGet2 } from "@/components/axios/AxiosHook";
 import { messageApi } from "@/components/antUi/antMessage";
 import router from "@/router";
@@ -538,7 +541,8 @@ const showIframGames = computed(() => {
 
 onMounted(() => {
   store.state.getTypes ? getTypes(store.state.getTypes, 0) : "";
-  store.commit('setDataFetching', tabsfetching || isFetching)
+  store.commit('setDataFetching', isFetching)
+
   
 });
 </script>

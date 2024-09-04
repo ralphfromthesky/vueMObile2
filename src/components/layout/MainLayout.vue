@@ -17,11 +17,16 @@
     </main>
 </template>
 <script setup>
-import { onMounted, ref, watchEffect, watch, onUnmounted } from 'vue';
-import NavBar from './Navigation/NavBarLayout.vue'
-import SideBar from './Sidebar/SidebarLayout.vue'
-import Footer from './Footer/FooterLayout.vue'
-import BottomNavbar from './Navigation/BottomNavbar.vue'
+import { onMounted, ref, watchEffect, watch, onUnmounted, defineAsyncComponent } from 'vue';
+// import NavBar from './Navigation/NavBarLayout.vue'
+const NavBar = defineAsyncComponent(() => import('./Navigation/NavBarLayout.vue'))
+const Footer = defineAsyncComponent(() => import('./Footer/FooterLayout.vue'))
+const BottomNavbar = defineAsyncComponent(() => import('./Navigation/BottomNavbar.vue'))
+
+const SideBar = defineAsyncComponent(() => import('./Sidebar/SidebarLayout.vue'))
+// import SideBar from './Sidebar/SidebarLayout.vue'
+// import Footer from './Footer/FooterLayout.vue'
+// import BottomNavbar from './Navigation/BottomNavbar.vue'
 import { store } from '../../store'
 import { useStore } from '@/store/store';
 const newStore = useStore()

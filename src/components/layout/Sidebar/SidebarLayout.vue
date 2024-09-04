@@ -201,13 +201,16 @@
 </style>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import { store } from "../../../store";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
-import Register from "../RegisterComponent/RegisterForm.vue";
 import { useStore } from "@/store/store";
-import Language from "@/global/Translation/Language.vue";
+// import Register from "../RegisterComponent/RegisterForm.vue";
+//import Language from "@/global/Translation/Language.vue";
+const Register = defineAsyncComponent(() => import("../RegisterComponent/RegisterForm.vue"))
+const Language = defineAsyncComponent(() => import("@/global/Translation/Language.vue"))
+
 const popLanguage = ref(false);
 const stores = useStore();
 const loginModal = ref(false);

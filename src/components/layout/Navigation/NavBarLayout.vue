@@ -77,8 +77,11 @@
 import { ref, computed, watch,onMounted, defineAsyncComponent } from "vue";
 // import Login from "../LoginComponent/LoginForm.vue";
 const Login = defineAsyncComponent(() => import("../LoginComponent/LoginForm.vue"))
-import Register from "../RegisterComponent/RegisterForm.vue";
-import Deposit from "@/components/deposit/Deposit.vue";
+const Register = defineAsyncComponent(() => import("../RegisterComponent/RegisterForm.vue"))
+const Deposit = defineAsyncComponent(() => import( "@/components/deposit/Deposit.vue"))
+
+// import Register from "../RegisterComponent/RegisterForm.vue";
+// import Deposit from "@/components/deposit/Deposit.vue";
 import { useStore } from "@/store/store.js";
 import { store } from "../../../store";
 import { useGetUserInfo } from "@/global/getUserInfo.js";

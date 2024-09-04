@@ -74,15 +74,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted  } from "vue";
+import { ref, onMounted, defineAsyncComponent, onUnmounted  } from "vue";
 import { MessageFilled } from "@ant-design/icons-vue";
 import { CloseOutlined } from "@ant-design/icons-vue";
-import Login from "@/components/layout/LoginComponent/LoginForm.vue";
-
+const Login = defineAsyncComponent(() => import("@/components/layout/LoginComponent/LoginForm.vue"))
+const RedPacket = defineAsyncComponent(() => import("@/components/redPacket/redpacket.vue"))
+const VipLoginBonus = defineAsyncComponent(() => import("../VipLoginBonus/VipLoginBonus.vue"))
+// import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+// import RedPacket from "@/components/redPacket/redpacket.vue";
+// import VipLoginBonus from "../VipLoginBonus/VipLoginBonus.vue";
 import router from "@/router";
 import { useStore } from "@/store/store";
-import RedPacket from "@/components/redPacket/redpacket.vue";
-import VipLoginBonus from "../VipLoginBonus/VipLoginBonus.vue";
 const loginModal = ref(false)
 const openRedpacket = ref(false);
 const openVipLogin = ref(false);

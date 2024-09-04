@@ -29,8 +29,10 @@
   </main>
 </template>
 <script setup>
+import {defineAsyncComponent} from 'vue'
 import Tabs from "./Tabs/TabPage.vue";
-import TabContainer from "./Tabs/TabContainer.vue";
+// import TabContainer from "./Tabs/TabContainer.vue";
+const TabContainer = defineAsyncComponent(() => import("./Tabs/TabContainer.vue"))
 const props = defineProps({
   title: { type: String, required: true },
 });

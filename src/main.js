@@ -1,12 +1,14 @@
+import { defineAsyncComponent } from 'vue'
+
 import './assets/main.css'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
-import AntModal from "@/components/antUi/antModal.vue";
-import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
-import Login from "@/components/layout/LoginComponent/LoginForm.vue";
+// import AntModal from "@/components/antUi/antModal.vue";
+const AntModal = defineAsyncComponent(() => import("@/components/antUi/antModal.vue"))
+
 
  import 'ant-design-vue/dist/reset.css';
 import Antd from 'ant-design-vue';
@@ -22,11 +24,14 @@ app.use(CountDown)
 app.use(RollingText)
 app.use(Dialog)
 app.use(Antd)
-app.use(AntModal)
+
+// app.use(AntModal)
+app.component('AntModal', AntModal)
 
 app.use(router)
 app.use(VueQueryPlugin)
 app.use(store)
+
 
 
 
