@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, defineAsyncComponent} from 'vue'
 // import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 const Login = defineAsyncComponent(() => import ("@/components/layout/LoginComponent/LoginForm.vue"))
 
