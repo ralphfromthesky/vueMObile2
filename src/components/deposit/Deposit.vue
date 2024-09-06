@@ -12,14 +12,20 @@
       </div>
       <div class="border-b-[.01rem] border-[#3a61c2] flex gap-1">
         <span
-          :class="['flex items-center text-[.25rem] gap-[.1rem] w-[2.4rem] pb-[.1rem]', onlineDeposit && 'border-b-[.06rem] ']"
+          :class="[
+            'flex items-center text-[.25rem] gap-[.1rem] w-[2.4rem] pb-[.1rem]',
+            onlineDeposit && 'border-b-[.06rem] ',
+          ]"
           @click="showTransferDep('online')"
         >
           <img src="/34X34.png" alt="" class="h-[.4rem]" />
           Deposito on-line
         </span>
         <span
-          :class="['flex items-center text-[.25rem] gap-[.1rem] w-[3rem] pb-[.1rem]', transferToDeposit && 'border-b-[.06rem]']"
+          :class="[
+            'flex items-center text-[.25rem] gap-[.1rem] w-[3rem] pb-[.1rem]',
+            transferToDeposit && 'border-b-[.06rem]',
+          ]"
           @click="showTransferDep('transfer')"
         >
           <img src="/34X34.png" alt="" class="h-[.4rem]" />
@@ -43,17 +49,51 @@
             </div>
           </div>
         </div>
+        <div class="py-2 flex flex-col" v-if="onlineDeposit">
+          <span> Amount of deposit: </span>
+          <span class="p-1">
+            <input
+              type="number"
+              v-model="depAmount"
+              class="w-full rounded-sm text-[black] mb-1 py-1 pl-1"
+              placeholder="Maximum amount of single deposit 1000"
+            />
+          </span>
+          <div class="flex justify-between py-1">
+            <span>Deposit Bonus: {{ depAmount }}</span>
+            <span class="flex items-center gap-[.1rem]">
+              <input type="checkbox" name="" id="" />
+
+              <label for="">Dont Participate in promotions</label>
+            </span>
+          </div>
+          <div>
+          <button
+            class="bg-bg text-txt py-1 w-full rounded-sm font-bold"
+            @click="onPay"
+          >
+            Recharge Now
+          </button>
+        </div>
+        </div>
+
         <div v-if="transferToDeposit">
           <div class="flex justify-center gap-1 py-1">
             <div v-for="(img, index) in transferDep?.content" :key="index">
               <span
-                :class="['py-[.3rem] px-2 flex items-center border-2 border-bord rounded-[.1rem]', visa && 'border-2 border-[red]']"
+                :class="[
+                  'py-[.3rem] px-2 flex items-center border-2 border-bord rounded-[.1rem]',
+                  visa && 'border-2 border-[red]',
+                ]"
                 v-if="index === 0"
                 @click="showVisaUsdt(index)"
                 ><img :src="img.icon" class="h-[.5rem]" /> VISA</span
               >
               <span
-              :class="['py-[.3rem] px-2 flex items-center border-2 border-bord rounded-[.1rem]', usdt && 'border-2 border-[red]']"
+                :class="[
+                  'py-[.3rem] px-2 flex items-center border-2 border-bord rounded-[.1rem]',
+                  usdt && 'border-2 border-[red]',
+                ]"
                 v-if="index === 1"
                 @click="showVisaUsdt(index)"
                 ><img :src="img.icon" class="h-[.5rem]" />USDT</span
@@ -69,7 +109,7 @@
                 }}</span>
                 <div class="border-2 border-[#3a61c2] p-1 rounded-[.1rem]">
                   <div class="flex items-center justify-between my-[.1rem]">
-                    <span>Account: {{ visa.bankCard }}</span>
+                    <span><span class="text-bg font-bold"> Account:</span> {{ visa.bankCard }}</span>
                     <span><img src="/copyIcons/1c64f5.png" alt="" /></span>
                   </div>
                 </div>
@@ -95,7 +135,7 @@
                         <span class="text-[.3rem] font-bold text-bg"
                           >USDT exchange rate:</span
                         >
-                        {{ usdt.usdtRate }}</span
+                        {{ usdt.usdtRate }} </span
                       >
                       <span>
                         <span class="text-[.3rem] font-bold text-bg"
@@ -123,10 +163,53 @@
               <div>
                 <span>Enter the transfer information:</span>
                 <div class="flex flex-col my-[.2rem]">
-                  <input type="text" class="py-1 rounded-sm my-[.1rem]" />
-                  <input type="text" class="py-1 rounded-sm my-[.1rem]" />
-                  <input type="text" class="py-1 rounded-sm my-[.1rem]" />
-                  <input type="text" class="py-1 rounded-sm my-[.1rem]" />
+                  <input
+                    type="text"
+                    v-model="usdtObject.money"
+                    class="py-1 rounded-sm my-[.1rem] pl-1 text-[black]"
+                    placeholder="Maximum amount of single deposit 1000000"
+                  />
+                  <div class="relative">
+                    <input
+                    readonly
+                      type="text"
+                      class="w-full rounded-sm py-1 text-[black] pl-[1.2rem]"
+                      :placeholder="usdtExhangeRate ? '': 'The USDT quantity is the amount divided by the USDT exchange rate'"
+
+                    />
+                    <div
+                      class="text-[.3rem] font-bold absolute top-[.22rem] left-1 text-[black]"
+                    >
+                      USDT  {{ usdtExhangeRate}} 
+
+                    </div>
+                  </div>
+                  <div class="relative my-[.1rem]">
+                    <input
+                      type="text"
+                      v-model="usdtObject.depositVirtualTransactionId"
+                      class="w-full rounded-sm py-1 text-[black] pl-[2.5rem]"
+                      placeholder="Please enter the transaction ID"
+                    />
+                    <div
+                      class="text-[.3rem] font-bold absolute top-[.22rem] left-1 text-[black]"
+                    >
+                      Transaction ID
+                    </div>
+                  </div>
+                  <div class="relative">
+                    <input
+                      type="text"
+                      v-model="usdtObject.depositor"
+                      class="w-full rounded-sm py-1 text-[black] pl-[2.1rem]"
+                      placeholder="Please enter the payer' name or OTL"
+                    />
+                    <div
+                      class="text-[.3rem] font-bold absolute top-[.22rem] left-1 text-[black]"
+                    >
+                      Order notes
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="flex justify-between py-1">
@@ -138,7 +221,7 @@
                 </span>
               </div>
               <div>
-                <button class="bg-bg text-txt py-1 w-full rounded-sm font-bold">
+                <button class="bg-bg text-txt py-1 w-full rounded-sm font-bold" @click="usdtPay">
                   Recharge Now
                 </button>
               </div>
@@ -158,14 +241,16 @@
                     >
                     <span><img src="/copyIcons/1c64f5.png" alt="" /></span>
                   </div>
-                  <div class="flex items-center justify-between my-[.1rem]">
+                  <div class="flex items-center justify-between my-[.1rem]"
+                  @click="copyToClipboard('tae')" 
+                  >
                     <span
                       ><span class="text-[.4rem] font-bold text-bg"
                         >Account:</span
                       >
                       {{ visa.bankCard }}</span
                     >
-                    <span><img src="/copyIcons/1c64f5.png" alt="" /></span>
+                    <span><img src="/copyIcons/1c64f5.png" alt=""/></span>
                   </div>
                   <div class="flex items-center justify-between">
                     <span
@@ -183,18 +268,27 @@
               <span> Enter the tranfer information: </span>
               <span class="p-1">
                 <input
-                  type="text"
-                  class="w-full rounded-sm py-1 pl-1"
+                  type="number"
+                  v-model="maxAmount"
+                  class="w-full rounded-sm text-[black] mb-1 py-1 pl-1"
                   placeholder="Maximum amount of single deposit 7000000"
                 />
-                <input
-                  type="text"
-                  class="w-full rounded-sm py-1 my-1 pl-1"
-                  placeholder="Please enter the payer' name"
-                />
+                <div class="relative">
+                  <input
+                    type="text"
+                    v-model="payNotes"
+                    class="w-full rounded-sm py-1 text-[black] pl-[2.1rem]"
+                    placeholder="Please enter the payer' name"
+                  />
+                  <div
+                    class="text-[.3rem] font-bold absolute top-[.22rem] left-1 text-[black]"
+                  >
+                    Order notes
+                  </div>
+                </div>
               </span>
               <div class="flex justify-between py-1">
-                <span>Deposit Bonus:</span>
+                <span>Deposit Bonus: 10% ({{ maxAmount }}) {{ payNotes }}</span>
                 <span class="flex items-center gap-[.1rem]">
                   <input type="checkbox" name="" id="" />
 
@@ -203,7 +297,10 @@
               </div>
             </div>
             <div>
-              <button class="bg-bg text-txt py-1 w-full rounded-sm font-bold">
+              <button
+                class="bg-bg text-txt py-1 w-full rounded-sm font-bold"
+                @click="mPay"
+              >
                 Recharge Now
               </button>
             </div>
@@ -350,16 +447,18 @@
 
 <script setup>
 import Toast from "@/components/ToastComponent/Toast.vue";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed,  } from "vue";
 import { useMutation, useQuery } from "@tanstack/vue-query";
 import {
   axiosGet2,
   axiosPost2,
+  axiosGet,
   axiosPost3,
 } from "../../components/axios/AxiosHook.js";
 import { DateToStr } from "../../components/functions/Function.js";
 import { useStore } from "@/store/store.js";
 import { Alert } from "ant-design-vue";
+import { messageApi } from "../antUi/antMessage";
 
 const store = useStore();
 const depositData = ref([]);
@@ -383,6 +482,43 @@ const transferToDeposit = ref(false);
 const onlineDeposit = ref(true);
 const visa = ref(true);
 const usdt = ref(false);
+const maxAmount = ref();
+const payNotes = ref("");
+const depAmount = ref(0);
+const usdtRate = ref()
+const usdtObject = ref(
+  {
+    
+    joinDepositGift: 2,
+    money: "",
+    bankId: 69,
+    depositor: "",
+    payMethod: 2,
+    rate: usdtRate.value,
+    bankCode: "USDT",
+    bankName: "USDT",
+    depositVirtualTransactionId: ""
+
+  }
+)
+
+const usdtExhangeRate = computed(() => {
+  const result = usdtObject.value?.money / usdtRate.value
+  return result ? result.toFixed(2) : ''
+})
+
+const copyToClipboard = (textToCopy) => {
+  alert(textToCopy)
+  alert('')
+  console.log(textToCopy)
+  // navigator.clipboard.writeText(textToCopy)
+  //   .then(() => {
+  //     messageApi.info(`Copied: ${textToCopy}`);
+  //   })
+  //   .catch(err => {
+  //     console.error('Failed to copy text: ', err);
+  //   });
+};
 
 const closeDeposit = () => {
   emits("close", false);
@@ -404,8 +540,14 @@ const showVisaUsdt = (index) => {
   usdt.value = false;
   if (index === 0) {
     visa.value = true;
+    
   }
-  usdt.value = index === 1 ? true : false;
+
+  if (index === 1) {
+    refetchUsdt();
+    refetcTronLink();
+    usdt.value = true
+  }
 };
 const setActive = (checkoutCounterByType, payName, id, index) => {
   activeButton.value = index;
@@ -467,6 +609,82 @@ const DepositMoney = useMutation({
   },
 });
 
+// //https://mt0.yibo22.com/native/v2/submit_pay.do
+// const {} = useMutation({
+// mutationFn: (payload) => axiosPost3
+// })
+
+const {refetch: refetchUsdt} = useQuery({
+  queryFn: () => axiosGet('/api/native/v2/usdtInfo.do'),
+  queryKey: ['usdt'],
+  select: (data) => {
+    usdtRate.value = data?.data?.content?.depositRate;
+  },
+  onError: (err) => console.log(err)
+})
+const {refetch: refetcTronLink} = useQuery({
+  queryFn: () => axiosGet('/api/native/v2/getUserTronLink.do'),
+  queryKey: ['tron'],
+  select: (data) => {},
+  onError: (err) => console.log(err)
+})
+
+const { mutate: onlinePay } = useMutation({
+  mutationFn: (payload) => axiosPost3("/api/native/v2/onlinePay.do", payload),
+  onSuccess: (data) => {
+    data?.msg && messageApi.info(data?.msg);
+  },
+  onError: (err) => console.log(err),
+});
+const onPay = () => {
+  if (!depAmount.value) {
+    messageApi.info("Input amount cant be blank!");
+    return;
+  }
+  onlinePay({
+    amount: depAmount.value,
+    payId: 114,
+    bankCode: "PIX",
+    joinDepositGift: 2,
+  });
+  depAmount.value = "";
+};
+
+const { mutate: mutatePay } = useMutation({
+  mutationFn: (payload) => axiosPost3("/api/native/v2/submit_pay.do", payload),
+  onSuccess: (data) => {
+    data?.message ? messageApi.info(data?.message) : "";
+  },
+  onError: (err) => console.log(`this is ${err}`),
+});
+
+const usdtPay = () => {
+  if(!usdtObject.value.money || !usdtObject.value.depositVirtualTransactionId || !usdtObject.value.depositor) {
+    messageApi.info('Dont Leave Blank')
+    return;
+  }
+  mutatePay(usdtObject.value)
+}
+
+const mPay = () => {
+  if (!maxAmount.value || !payNotes.value) {
+    messageApi.info(`input amount or payer's name!`);
+    return;
+  }
+  mutatePay({
+    joinDepositGift: 2,
+    money: maxAmount.value,
+    bankId: 30,
+    depositor: payNotes.value,
+    payMethod: 2,
+    bankCode: "VISA",
+    bankName: "VISA",
+    depositVirtualTransactionId: "",
+  });
+  maxAmount.value = "";
+  payNotes.value = "";
+};
+
 function depositGo() {
   DepositMoney.mutate({
     amount: amount.value,
@@ -484,6 +702,8 @@ const {} = useQuery({
     transferDep.value = data;
   },
 });
+
+
 
 onMounted(() => {
   Deposit.mutate({
