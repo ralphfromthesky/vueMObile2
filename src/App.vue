@@ -1,30 +1,25 @@
 <script setup>
-import {contextHolder} from '@/components/antUi/antMessage.js'
-import { RouterLink, RouterView } from 'vue-router'
-import { useGetDegreeInfo } from '@/global/getDegreeInfo.js';
-import { onMounted, ref, watch } from 'vue';
-import { useStore } from './store/store';
-const store = useStore()
-
+import { contextHolder } from "@/components/antUi/antMessage.js";
+import { RouterLink, RouterView } from "vue-router";
+import { useGetDegreeInfo } from "@/global/getDegreeInfo.js";
+import { onMounted, ref, watch } from "vue";
+import { useStore } from "./store/store";
+const store = useStore();
 
 // const store = useStore()
-const { degreeInfo } = useGetDegreeInfo()
+const { degreeInfo } = useGetDegreeInfo();
 
 onMounted(() => {
-// window.addEventListener('scroll', handleScroll)
- if(!degreeInfo.data.success) {
-  degreeInfo.refetch()
- }
-
-})
+  if (!degreeInfo.data.success) {
+    degreeInfo.refetch();
+  }
+});
 </script>
 
 <template>
-    <context-holder />
-
+  <context-holder />
   <RouterView />
-      <SpinLoader v-if="store.state.isDataFetching"  :is-align="true"/>
-
+  <SpinLoader v-if="store.state.isDataFetching" :is-align="true" />
 </template>
 
 <style scoped></style>

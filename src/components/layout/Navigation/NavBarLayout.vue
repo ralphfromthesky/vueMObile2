@@ -166,4 +166,5 @@ watch(() => newStore.state.userInfo.isLogin, (newVal) => {
   --van-rolling-text-item-width: 0.2rem;
   --van-rolling-text-gap: -0.05rem;
 }
+ 
 </style>

@@ -405,7 +405,7 @@ onMounted(() => {
 <style scoped>
 .route-enter-from {
   opacity: 0;
-  transform: translateX(10rem);
+  transform: translateX(-10rem);
 }
 
 .route-enter-active {
