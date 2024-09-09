@@ -36,15 +36,24 @@
         <div v-if="onlineDeposit">
           <div class="py-1">
             <div v-for="(trans, index) in transferDep?.content" :key="index">
-              <div v-if="index === 2">
+              <div v-if="index === 2" class="grid gap-1 mb-1 grid-cols-2">
                 <span
-                  class="py-[.3rem] px-2 flex items-center border-[.011rem] my-[.1rem]"
+                  class="py-[.3rem] px-2 flex  justify-center items-center border-b-[.1rem] my-[.01rem]"
                   >{{ trans.payType }}</span
                 >
-                <span
-                  class="py-[.3rem] px-2 flex items-center border-[.011rem]"
-                  >{{ trans.payName }}</span
+              </div>
+              <div class="flex flex-wrap">
+                <div
+                  :class="[
+                    'py-[.3rem] px-2 rounded-[.1rem] border-[.011rem] my-[.1rem]',
+                    trans.payName === payType ? 'bg-bg font-bold text-txt' : '',
+                  ]"
+                  v-if="trans.payName"
+                  @click="payName(trans.payName)"
                 >
+                  {{ trans.payName }}
+                </div>
+                
               </div>
             </div>
           </div>
@@ -68,7 +77,11 @@
               >
                 <span
                   class="p-[.02rem] w-[2rem] flex justify-center text-[.2rem] absolute top-0 left-[-.8rem] -rotate-45 bg-[red]"
-                  v-if="(dep.depositAmount == 100) || (dep.depositAmount === 1000) || (dep.depositAmount === 500)"
+                  v-if="
+                    dep.depositAmount == 100 ||
+                    dep.depositAmount === 1000 ||
+                    dep.depositAmount === 500
+                  "
                 >
                   HOT
                 </span>
@@ -78,6 +91,7 @@
                     'text-bg',
                     dep.depositAmount === selectAmt ? 'bg-bg text-txt' : '',
                   ]"
+                  v-if="dep.awardAmount"
                 >
                   +{{ dep.awardAmount }}% Bonus
                 </span>
@@ -91,7 +105,12 @@
               class="w-full rounded-sm text-[black] mb-1 py-1 pl-1"
               placeholder="Maximum amount of single deposit 10000"
             />
-            <span v-if="showX" @click="clearDep" class="py-[.1rem] px-[.15rem] font-bold m-0 rounded-[.5rem] absolute top-[.4rem] right-[.3rem] bg-txt">X</span>
+            <span
+              v-if="showX"
+              @click="clearDep"
+              class="py-[.1rem] px-[.15rem] font-bold m-0 rounded-[.5rem] absolute top-[.4rem] right-[.3rem] bg-txt"
+              >X</span
+            >
           </span>
           <div class="flex justify-between py-1">
             <span>Deposit Bonus: 5% ({{ depPercent }})</span>
@@ -435,9 +454,10 @@ const usdt = ref(false);
 const maxAmount = ref();
 const payNotes = ref("");
 const depAmount = ref(0);
-const showX = ref(false)
+const showX = ref(false);
 const usdtRate = ref();
-const selectAmt = ref(null);
+const selectAmt = ref("null");
+const payType = ref("xf collect");
 const usdtObject = ref({
   joinDepositGift: 2,
   money: "",
@@ -450,20 +470,32 @@ const usdtObject = ref({
   depositVirtualTransactionId: "",
 });
 
+const payName = (name) => {
+  payType.value = name;
+  if (name === "xf collect") {
+    payId114();
+    return;
+  }
+  if (name === "damson pay") {
+    payId111();
+    return;
+  }
+};
+
 const selectDep = (dep) => {
   depAmount.value = dep;
   selectAmt.value = dep;
-  showX.value  = true;
+  showX.value = true;
 };
 
 const clearDep = () => {
-  depAmount.value = ""
+  depAmount.value = "";
   showX.value = false;
-}
+};
 
-const depPercent  = computed(() => {
-  return depAmount.value * 0.05 ? depAmount.value * 0.05 : ''
-})
+const depPercent = computed(() => {
+  return depAmount.value * 0.05 ? depAmount.value * 0.05 : "";
+});
 
 const usdtExhangeRate = computed(() => {
   const result = usdtObject.value?.money / usdtRate.value;
@@ -552,11 +584,20 @@ const Deposit = useMutation({
   },
 });
 
-const {} = useQuery({
+const { refetch: payId114 } = useQuery({
   queryKey: ["depAmt"],
   enabled: true,
   queryFn: () =>
     axiosGet("/api/native/v2/getDiscountAmount.do?payId=114&depositType=1"),
+  select: (data) => {
+    depositedAmount.value = data;
+  },
+});
+const { refetch: payId111 } = useQuery({
+  queryKey: ["depAmt"],
+  enabled: true,
+  queryFn: () =>
+    axiosGet("/api/native/v2/getDiscountAmount.do?payId=111&depositType=1"),
   select: (data) => {
     depositedAmount.value = data;
   },
@@ -711,4 +752,3 @@ onMounted(() => {
   }
 }
 </style>
-

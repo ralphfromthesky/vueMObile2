@@ -575,10 +575,16 @@ const router = createRouter({
       component: () => import("@/views/PasswordRetrieval/PasswordRetrieval.vue"),
     },
     {
+      path: "/ending",
+      name: "endingGame",
+      component: () => import("@/views/Ending/EndingGame.vue"),
+    },
+    {
       path: "/search",
       name: "searchPage",
       component: () => import("@/views/SearchPage/SearchPage.vue"),
     },
+
   ],
 });
 

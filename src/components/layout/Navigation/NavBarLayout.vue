@@ -65,11 +65,11 @@
     </div>
   </div>
 
-  <div v-if="isLogin" class="w-screen h-screen bg-[#000000b3] fixed top-0 z-20">
-    <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 right-0 ease-in-out">
-      <Deposit @close="closeDeposit" />
+  <div v-if="isLogin" class="h-screen bg-[#000000b3] fixed top-0 z-20">
+        <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 left-0 ease-in-out">
+            <Deposit @close="closeDeposit" />
+        </div>
     </div>
-  </div>
   <AntModal :isOpen="loginModal" :componentPass=Login :backGrounds=true v-if="!newStore.state.userInfo.isLogin"/>
   <AntModal :isOpen="regModal" :componentPass=Register :backGrounds=true />
 </template>
@@ -166,5 +166,10 @@ watch(() => newStore.state.userInfo.isLogin, (newVal) => {
   --van-rolling-text-item-width: 0.2rem;
   --van-rolling-text-gap: -0.05rem;
 }
- 
+@media (min-width: 431px) {
+    .btom {
+        width: 22.5%;
+    }
+  
+}
 </style>

@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <context-holder />
   <RouterView />
-  <SpinLoader v-if="store.state.isDataFetching" :is-align="true" />
+  <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
 </template>
 
 <style scoped></style>
