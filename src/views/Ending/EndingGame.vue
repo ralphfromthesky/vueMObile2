@@ -46,7 +46,7 @@ const selectedNumber = (nums) => {
   selectedNum .value = nums
 }
 
-//stop hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+//t
 const betName = (name) => {
   bettor.value = { ...bettor.value, [nums.value]: name }; 
 };

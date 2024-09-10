@@ -50,10 +50,15 @@
           ><CloseOutlined /></span
         >
       </div>
-      <div class="mt-[.2rem] bg-[#05309f]" @click="scrollUp" v-if="props.hideScrollTop">
-        <div class="h-[1rem] w-[1rem] border-2  border-[#3a61c2] flex flex-col justify-center items-center rounded-[.1rem]" @click="scrollToTop">
+      <div :class="['mt-[.2rem]',
+    store.state.setThemes.darkTheme ? 'bg-[black] border-2 text-[white] border-[white]' : 'bg-[#05309f] border-2 border-[#3a61c2] text-text2',
+    store.state.setThemes.lightTheme ? 'bg-[#f08abd] border-2  border-[white] text-white' : 'bg-[#05309f] border-2 border-[#3a61c2] text-text2'
+
+    
+    ]" @click="scrollUp" v-if="props.hideScrollTop">
+        <div class="h-[1rem] w-[1rem] flex flex-col justify-center items-center rounded-[.1rem]" @click="scrollToTop">
           <img src="/scrollImages/Dior.png" class="h-[.5rem]" alt="">
-          <span class=" text-txt2 text-[.2rem]">Top</span>  
+          <span class="text-[.2rem]">Top</span>  
         </div>
       </div>
     </div>

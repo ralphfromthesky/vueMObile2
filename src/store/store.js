@@ -36,9 +36,20 @@ const store = createStore({
     modalErr: false,
     openDeposit: false,
     antMOdal: true,
-    isDataFetching: true
+    isDataFetching: true,
+    setThemes: {
+      lightTheme: false,
+      darkTheme: false
+    }
+
   },
   mutations: {
+    setLightTheme(state, payload) {
+      state.setThemes.lightTheme = payload;
+    },
+    setDarkTheme(state, payload) {
+      state.setThemes.darkTheme = payload;
+    },
     setLogin(state, user) {
       state.user = user;
       state.isLogin = true;
@@ -192,6 +203,12 @@ const store = createStore({
         useGetGames: state.useGetGames,
         userSignInRule: state.userSignInRule,
         userMissiontask: state.userMissiontask,
+        setThemes: {
+          lightTheme: state.setThemes.lightTheme,
+          darkTheme: state.setThemes.darkTheme
+        }
+      
+
       }),
     }),
   ],

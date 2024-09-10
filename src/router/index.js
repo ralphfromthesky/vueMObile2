@@ -589,6 +589,7 @@ const router = createRouter({
 });
 
 const protectedRoute = [
+  "/slots",
   "/vip",
   "/pendente",
   "/juros",
@@ -620,6 +621,9 @@ const protectedRoute = [
 router.beforeEach((to, from, next) => {
   if (!store.state.userInfo.isLogin && protectedRoute.includes(to.path)) {
     next("/");
+  }
+  if(window.location.pathname === '/slots') {
+    window.location.href = '/'
   } else {
     next();
   }

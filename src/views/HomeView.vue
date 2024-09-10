@@ -48,7 +48,10 @@
       </div>
 
       <div
-        class="flex items-center w-full bg-[#05309f] border-b border-b-[#3A61C2] overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]"
+        :class="['flex items-center w-full overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]',
+      store.state.setThemes.lightTheme ? 'bg-[#f08abd] text-[white]' : 'bg-[#05309f] border-b-[#3A61C2] text-[white]',
+      store.state.setThemes.darkTheme ? 'bg-[#1d1c1c] text-[white]' : 'bg-[#05309f] border-b-[#3A61C2] text-[white]'
+      ]"
         ref="scrollContainer"
       >
         <div class="flex items-center gap-[.7rem] mx-[.2rem]">
@@ -68,7 +71,7 @@
             />
             <button
               @click="scrollToSection(tab.id)"
-              class="text-white text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
+              class=" text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
             >
               {{ tab.name }}
             </button>
@@ -164,8 +167,8 @@
        <AntModal :isOpen="true" :componentPass="Test" />
 
  -->
-       <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
-<!--        
+      <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
+      <!--        
        <AntModal
         :isOpen="openModal"
         :componentPass="TurnLate"
@@ -196,32 +199,59 @@
         :gameTypePass="gameTypeName"
         :headerName="headTitle"
         v-if="false"
-
-
       />
     </div>
   </MainLayout>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch, nextTick, defineAsyncComponent } from "vue";
+import {
+  ref,
+  onMounted,
+  computed,
+  watch,
+  nextTick,
+  defineAsyncComponent,
+} from "vue";
 
-
-const Login = defineAsyncComponent(() => import ("@/components/layout/LoginComponent/LoginForm.vue"))
-const SpinLoader = defineAsyncComponent(() => import('@/components/antUi/spinLoader.vue'));
-const MainLayout = defineAsyncComponent(() => import('../components/layout/MainLayout.vue'));
-const CountUp = defineAsyncComponent(() => import('@/components/antUi/countUp.vue'));
-const Carousel = defineAsyncComponent(() => import('@/components/carousel/carousel.vue'));
-const RedPacket = defineAsyncComponent(() => import('@/components/redPacket/redpacket.vue'));
-const GetApplogin = defineAsyncComponent(() => import('@/components/getApplogin/getApplogin.vue'));
-const Notice = defineAsyncComponent(() => import('@/components/Notice/Notice.vue'));
-const Test = defineAsyncComponent(() => import('@/components/test/tested.vue'));
-const NewTask = defineAsyncComponent(() => import('@/components/Task/NewTask.vue'));
-const Slots = defineAsyncComponent(() => import('@/views/Slots/Slots.vue'));
-const TurnLate = defineAsyncComponent(() => import('@/components/turnLate/turnLate.vue'));
-const Register = defineAsyncComponent(() => import('@/components/layout/RegisterComponent/RegisterForm.vue'));
-const SupportLink = defineAsyncComponent(() => import('@/components/SupportLink/SupportLink.vue'));
-
+const Login = defineAsyncComponent(() =>
+  import("@/components/layout/LoginComponent/LoginForm.vue")
+);
+const SpinLoader = defineAsyncComponent(() =>
+  import("@/components/antUi/spinLoader.vue")
+);
+const MainLayout = defineAsyncComponent(() =>
+  import("../components/layout/MainLayout.vue")
+);
+const CountUp = defineAsyncComponent(() =>
+  import("@/components/antUi/countUp.vue")
+);
+const Carousel = defineAsyncComponent(() =>
+  import("@/components/carousel/carousel.vue")
+);
+const RedPacket = defineAsyncComponent(() =>
+  import("@/components/redPacket/redpacket.vue")
+);
+const GetApplogin = defineAsyncComponent(() =>
+  import("@/components/getApplogin/getApplogin.vue")
+);
+const Notice = defineAsyncComponent(() =>
+  import("@/components/Notice/Notice.vue")
+);
+const Test = defineAsyncComponent(() => import("@/components/test/tested.vue"));
+const NewTask = defineAsyncComponent(() =>
+  import("@/components/Task/NewTask.vue")
+);
+const Slots = defineAsyncComponent(() => import("@/views/Slots/Slots.vue"));
+const TurnLate = defineAsyncComponent(() =>
+  import("@/components/turnLate/turnLate.vue")
+);
+const Register = defineAsyncComponent(() =>
+  import("@/components/layout/RegisterComponent/RegisterForm.vue")
+);
+const SupportLink = defineAsyncComponent(() =>
+  import("@/components/SupportLink/SupportLink.vue")
+);
 
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../components/axios/AxiosHook.js";
@@ -283,7 +313,6 @@ const gameClick = (index, id) => {
   gameActive.value = index;
 };
 
-
 const fetchGames = (url, popFrame, gameTabType) => {
   if (!store.state.userInfo.isLogin) {
     loginModal.value = !loginModal.value;
@@ -308,8 +337,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Slots");
-    store.commit('setTypes', gameType.value)
-
+    store.commit("setTypes", gameType.value);
   }
   if (tabName === "Fishing") {
     gameType.value = "bbinFish";
@@ -317,9 +345,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Fishing");
-    store.commit('setTypes', gameType.value)
-
-
+    store.commit("setTypes", gameType.value);
   }
   if (tabName === "Live Casino") {
     gameType.value = "agLive";
@@ -327,9 +353,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Live Casino");
-    store.commit('setTypes', gameType.value)
-
-
+    store.commit("setTypes", gameType.value);
   }
   if (tabName === "Sports") {
     gameType.value = "tysbSport";
@@ -337,9 +361,7 @@ const getTabName = (tabName) => {
     getGame.refetch();
     router.push("/slots");
     store.commit("setForwardname", "Sports");
-    store.commit('setTypes', gameType.value)
-
-
+    store.commit("setTypes", gameType.value);
   }
 };
 
@@ -376,7 +398,6 @@ const { refetch, isLoading, isFetching } = useQuery({
     }
   },
 });
-
 
 const scrollToSection = (id) => {
   // alert(id)
@@ -445,7 +466,7 @@ watch(
 
 onMounted(() => {
   getOnline.refetch();
-  store.commit('setDataFetching', isFetching)
+  store.commit("setDataFetching", isFetching);
 });
 </script>
 
@@ -464,14 +485,12 @@ onMounted(() => {
   padding-bottom: 0.2rem;
 }
 @media (min-width: 431px) {
-#mainDiv {
-  width: 100%;
-  padding: 0 5px 0 5px;
-}
-.gameContainer {
+  #mainDiv {
+    width: 100%;
+    padding: 0 5px 0 5px;
+  }
+  .gameContainer {
     width: 7.4rem;
   }
-  
 }
-
 </style>

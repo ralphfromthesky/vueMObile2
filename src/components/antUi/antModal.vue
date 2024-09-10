@@ -21,6 +21,49 @@
         <div class="text-[.7rem] text-[#d4d0d0]">{{ props.elementPass }}</div>
         <span class="text-[.7rem] text-[red]">Receive</span>
       </div>
+      <div v-if="props.themePass">
+        <div
+          :class="[
+            'border-2  px-1 rounded-[.1rem]',
+            store.state.setThemes.lightTheme ? 'bg-[#f08abd] text-[white] border-[white]' : 'bg-[#05309F] text-[white]',
+            store.state.setThemes.darkTheme ? 'bg-[black] text-[red] border-[white]' : 'bg-[#05309F] text-[white]'
+          ]"
+        >
+          <div class="text-[.5rem] text-center">
+            {{ props.themePass }}
+          </div>
+          <div class="flex flex-col text-[.3rem]">
+            <span class="flex justify-between"
+              >Dark
+
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                @click="changeThisTheme('dark')"
+              />
+            </span>
+            <span class="flex justify-between"
+              >Light
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                @click="changeThisTheme('light')"
+              />
+            </span>
+            <span class="flex justify-between"
+              >Standard
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                @click="changeThisTheme('standard')"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
       <div
         class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] flex-col text-center"
         v-if="props.dataCode"
@@ -42,15 +85,26 @@
       </div>
       {{ props.pass }}
       <div v-if="props.numberPass" class="text-[white]">
-        <span class="text-[.7rem] flex justify-center">Bet {{ props.numberPass }}? </span>
+        <span class="text-[.7rem] flex justify-center"
+          >Bet {{ props.numberPass }}?
+        </span>
         <div class="mb-1">
-          <input type="text" class="py-[.2rem] rounded-[.1rem] pl-[.2rem] text-black w-full" v-model="nameInput" placeholder="Type your name here!">
+          <input
+            type="text"
+            class="py-[.2rem] rounded-[.1rem] pl-[.2rem] text-black w-full"
+            v-model="nameInput"
+            placeholder="Type your name here!"
+          />
         </div>
         <div class="flex justify-center gap-1">
-
-          <span class="p-[.1rem] px-2 rounded-[.1rem] font-bold bg-bg text-txt" @click="paided">Yes</span>
-          <span class="p-[.1rem] px-2 rounded-[.1rem] font-bold bg-bg text-txt">No</span>
-
+          <span
+            class="p-[.1rem] px-2 rounded-[.1rem] font-bold bg-bg text-txt"
+            @click="paided"
+            >Yes</span
+          >
+          <span class="p-[.1rem] px-2 rounded-[.1rem] font-bold bg-bg text-txt"
+            >No</span
+          >
         </div>
       </div>
 
@@ -74,7 +128,7 @@ const { loginMutation } = useLogin();
 import { useStore } from "@/store/store";
 import { messageApi } from "./antMessage";
 const store = useStore();
-const nameInput = ref('')
+const nameInput = ref("");
 const showModal = () => {
   open.value = true;
 };
@@ -86,21 +140,36 @@ const handleOk = () => {
 };
 
 const paided = () => {
-  if(nameInput.value === '') {
-    messageApi.info('Please Type Name')
-    return
+  if (nameInput.value === "") {
+    messageApi.info("Please Type Name");
+    return;
   }
-  emits('paid', true)
-  emits('selectedNums', props.numberPass)
-  emits('bettorName', nameInput.value)
-  console.log('fsf')
-}
+  emits("paid", true);
+  emits("selectedNums", props.numberPass);
+  emits("bettorName", nameInput.value);
+  console.log("fsf");
+};
 
 const handeClose = () => {
   open.value = false;
 };
 
-const emits = defineEmits(["closed", "paid", "selectedNums", 'bettorName']);
+const emits = defineEmits(["closed", "paid", "selectedNums", "bettorName"]);
+
+const changeThisTheme = (themes) => {
+  store.commit("setLightTheme", false);
+  store.commit("setDarkTheme", false);
+  if (themes === "light") {
+    store.commit("setLightTheme", true);
+  }
+  if (themes === "dark") {
+    store.commit("setDarkTheme", true);
+  }
+  if (themes === "standard") {
+    store.commit("setLightTheme", false);
+    store.commit("setDarkTheme", false);
+  }
+};
 
 const props = defineProps({
   isOpen: {
@@ -141,6 +210,11 @@ const props = defineProps({
     type: String,
     required: false,
     default: null,
+  },
+  themePass: {
+    type: String,
+    default: "",
+    required: false,
   },
 });
 

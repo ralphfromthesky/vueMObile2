@@ -1,6 +1,14 @@
 <template>
   <div
-    class="bg-[#05309F] h-[calc(100vh-.9rem)] w-[3rem] p-[.15rem] overflow-auto"
+    :class="[
+      ' h-[calc(100vh-.9rem)] w-[3rem] p-[.15rem] overflow-auto]',
+      stores.state.setThemes.lightTheme
+        ? 'bg-[#f08abd] text-[white]'
+        : 'bg-[#05309F] text-[white]',
+      stores.state.setThemes.darkTheme
+        ? 'bg-[black] text-[white] border-r-[.01rem] border-[#30302f]'
+        : 'bg-[#05309F] text-[white]',
+    ]"
   >
     <div class="flex flex-col w-full gap-[.1rem]">
       <span
@@ -9,18 +17,18 @@
         >Exclusive</span
       >
       <span>
-        <span class=" bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end">
-          <span class="jackpot-text mr-[.3rem] z-10">TRY ME!
-
-          </span>
+        <span
+          class="bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end"
+        >
+          <span class="jackpot-text mr-[.3rem] z-10">TRY ME! </span>
           <span class="relative">
-          <img src="/turnlateImages/rotate.png" class="rotate"  alt="" />
-          <img src="/turnlateImages/rotate2.png" class="absolute h-[.9rem] top-[.32rem] left-[.53rem] transform -translate-x-1/2 -translate-y-1/2" alt="" />
-
-        </span>
-
-        
-
+            <img src="/turnlateImages/rotate.png" class="rotate" alt="" />
+            <img
+              src="/turnlateImages/rotate2.png"
+              class="absolute h-[.9rem] top-[.32rem] left-[.53rem] transform -translate-x-1/2 -translate-y-1/2"
+              alt=""
+            />
+          </span>
         </span>
       </span>
 
@@ -32,7 +40,9 @@
           @click="scrollToGames(tab.id)"
         >
           <img :src="`/logo/` + tab?.code + `_active.png`" class="h-[.4rem]" />
-          <div class="text-white text-[.16rem] text-nowrap">{{ tab?.name }}</div>
+          <div class="text-white text-[.16rem] text-nowrap">
+            {{ tab?.name }}
+          </div>
         </div>
       </div>
       <div
@@ -150,21 +160,30 @@
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/globe.png" alt="" class="w-[.3rem]" />
           </div>
-          <div class="text-white text-[.22rem]">Language</div>
+          <div class="text-[.22rem]">Language</div>
+        </div>
+        <div
+          class="flex gap-[.1rem] items-center"
+          @click="setThemes = !setThemes"
+        >
+          <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
+            <img src="/images/globe.png" alt="" class="w-[.3rem]" />
+          </div>
+          <div class="text-[.22rem]">Themes</div>
         </div>
         <div class="flex gap-[.1rem] items-center">
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/down.png" alt="" class="w-[.5rem]" />
           </div>
           <a href="https://vk8.me/app/mg_MP6D" target="_blank">
-            <div class="text-white text-[.22rem]">Download App</div>
+            <div class="text-[.22rem]">Download App</div>
           </a>
         </div>
         <div class="flex gap-[.1rem] items-center">
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/call.png" alt="" class="w-[.5rem]" />
           </div>
-          <div class="text-white text-[.22rem]" @click="navigateTo('/support')">
+          <div class="text-[.22rem]" @click="navigateTo('/support')">
             Support
           </div>
         </div>
@@ -172,9 +191,7 @@
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/wenhao.png" alt="" class="w-[.5rem]" />
           </div>
-          <div class="text-white text-[.22rem]" @click="navigateTo('support')">
-            FAQ
-          </div>
+          <div class="text-[.22rem]" @click="navigateTo('support')">FAQ</div>
         </div>
       </div>
     </div>
@@ -188,6 +205,7 @@
       :componentPass="Language"
       :backGrounds="true"
     />
+    <AntModal :isOpen="setThemes" :bgColor="true" themePass="Change Themes" />
   </div>
 </template>
 <style>
@@ -208,10 +226,15 @@ import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import { useStore } from "@/store/store";
 // import Register from "../RegisterComponent/RegisterForm.vue";
 //import Language from "@/global/Translation/Language.vue";
-const Register = defineAsyncComponent(() => import("../RegisterComponent/RegisterForm.vue"))
-const Language = defineAsyncComponent(() => import("@/global/Translation/Language.vue"))
+const Register = defineAsyncComponent(() =>
+  import("../RegisterComponent/RegisterForm.vue")
+);
+const Language = defineAsyncComponent(() =>
+  import("@/global/Translation/Language.vue")
+);
 
 const popLanguage = ref(false);
+const setThemes = ref(false);
 const stores = useStore();
 const loginModal = ref(false);
 import { navigateTo } from "@/global/navigation.js";
@@ -250,14 +273,14 @@ const exclusive = () => {
   animation: rotates 6s linear infinite;
 }
 
-@keyframes rotates{
+@keyframes rotates {
   100% {
-  transform: rotate(1800deg)
+    transform: rotate(1800deg);
   }
 }
 .jackpot-text {
-    @apply  font-bold relative text-yellow-400;  
-    text-shadow: 1px 1px 0px red, -1px -1px 0px red, 1px -1px 0px red, -1px 1px 0px rgb(236, 227, 227);
-  }
-  
+  @apply font-bold relative text-yellow-400;
+  text-shadow: 1px 1px 0px red, -1px -1px 0px red, 1px -1px 0px red,
+    -1px 1px 0px rgb(236, 227, 227);
+}
 </style>
