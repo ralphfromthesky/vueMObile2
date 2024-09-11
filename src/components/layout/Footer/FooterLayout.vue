@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full p-[.01rem] bg-[#6FA4EF] m-auto my-[.5rem]"></div>
+        <div class="w-full p-[.01rem] m-auto my-[.5rem]"></div>
         <div class="flex flex-col gap-[.2rem]">
             <div class="flex gap-[.2rem] justify-center">
                 <img src="/images/img_facebook.png" class="w-[.7rem] h-[.7rem]" />
