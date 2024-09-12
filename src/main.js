@@ -8,9 +8,10 @@ import router from './router'
 import store from './store/store'
 // import AntModal from "@/components/antUi/antModal.vue";
 const AntModal = defineAsyncComponent(() => import("@/components/antUi/antModal.vue"))
+const AntButton = defineAsyncComponent(() => import('@/components/antUi/antButton.vue'))
 
 
- import 'ant-design-vue/dist/reset.css';
+import 'ant-design-vue/dist/reset.css';
 import Antd from 'ant-design-vue';
 import { Dialog } from 'vant';
 import { DatePicker } from 'vant';
@@ -24,6 +25,7 @@ app.use(CountDown)
 app.use(RollingText)
 app.use(Dialog)
 app.use(Antd)
+app.component('antButton',AntButton)
 
 // app.use(AntModal)
 app.component('AntModal', AntModal)

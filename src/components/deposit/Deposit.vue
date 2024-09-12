@@ -121,12 +121,9 @@
             </span>
           </div>
           <div>
-            <button
-              class="bg-bg text-txt py-1 w-full rounded-sm font-bold"
-              @click="onPay"
-            >
-              Recharge Now
-            </button>
+   
+            <AntButton title="Recharge Now" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".3rem" bl="bold" @click="onPay"/>
+
           </div>
         </div>
 
@@ -301,12 +298,9 @@
                 </span>
               </div>
               <div>
-                <button
-                  class="bg-bg text-txt py-1 w-full rounded-sm font-bold"
-                  @click="usdtPay"
-                >
-                  Recharge Now
-                </button>
+         
+                <AntButton title="Recharge Now" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".3rem" bl="bold" @click="usdtPay"/>
+
               </div>
             </div>
           </div>
@@ -393,12 +387,9 @@
               </div>
             </div>
             <div>
-              <button
-                class="bg-bg text-txt py-1 w-full rounded-sm font-bold"
-                @click="mPay"
-              >
-                Recharge Now
-              </button>
+ 
+              <AntButton title="Recharge Nows" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".3rem" bl="bold" @click="mPay"/>
+
             </div>
           </div>
         </div>

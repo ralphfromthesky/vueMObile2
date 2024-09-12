@@ -27,18 +27,9 @@
         class="flex gap-[.2rem] items-center"
         v-if="!newStore.state.userInfo.isLogin"
       >
-        <button
-          class="w-[1.1rem] h-[.5rem] rounded-[.15rem] text-[.2rem] bg-[#FFF0BB] text-[#1A45B1]"
-          @click="showLoginModal()"
-        >
-          Login
-        </button>
-        <button
-          class="w-[1.1rem] h-[.5rem] rounded-[.15rem] text-[.2rem] bg-transparent border border-[#FFF0BB] text-[#FFF0BB]"
-          @click="showRegModal"
-        >
-          Register
-        </button>
+        <AntButton title="Login" bg="#FFF0BB" h=".5rem" w="1rem" b=".1rem" ft=".22rem"  @click="showLoginModal()"/>
+        <AntButton title="Register" bg="#1a45b1" h=".5rem" w="1rem" b=".1rem" ft=".22rem" :cla="true"   @click="showRegModal()"/>
+
         <img
           src="/images/search.png"
           class="w-[.35rem] h-[.35rem]"
@@ -80,11 +71,8 @@
           class="flex items-center gap-[.1rem] bg-[#FFF0BB] text-[#1A45B1] rounded-[.1rem] px-[.1rem]"
           data-twe-dropdown-ref
         >
-          <span
-            class="text-[.2rem] h-[.64rem] flex items-center"
-            @click="showDeposit"
-            >Deposito</span
-          >
+          <AntButton title="Deposito" bg="#FFF0BB" h=".65rem" w="1rem" b=".1rem" ft=".24rem"  @click="showDeposit"/>
+
           <span>|</span>
           <span>
             <img

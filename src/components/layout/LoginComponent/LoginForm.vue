@@ -63,16 +63,13 @@
                         type="checkbox" value="" id="rememberCheckBox" />
                     <label class="inline-block ps-[0.15rem] hover:cursor-pointer text-white text-[.22rem]"
                         for="rememberCheckBox">
-                        Lembrar Senha
+                        Lembrar Senhas
                     </label>
                 </div>
                 <span class="text-[.22rem] text-[#FFF0BB] cursor-pointer" @click="router.push('/passwordRetrieval')">eceu a Senha?</span>
             </div>
-            <div class="flex w-full my-[.2rem]">
-                <button
-                    class="w-full bg-[#FFF0BB] border border-[#FFF0BB] text-[.24rem] h-[.7rem] text-[#05309F] rounded-[.14rem]">
-                    Login
-                </button>
+            <div class="w-full my-[.2rem]">
+                <AntButton title="Login" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".22rem"  @click="showLoginModal()"/>
             </div>
             <div class="flex justify-around">
                 <span class="text-[#FFF0BB] text-[.22rem]" @click=" () => router.push('/support')">Suporte</span>

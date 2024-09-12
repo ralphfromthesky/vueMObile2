@@ -77,11 +77,13 @@
                 </div>
                 <span class="text-[.22rem] text-[#FFF0BB] cursor-pointer">Esqueceu a Senha?</span>
             </div>
-            <div class="flex w-full my-[.2rem]">
-                <button @click="register"
+            <div class="w-full my-[.2rem]">
+                <!-- <button @click="register"
                     class="w-full registerModalButton bg-[#FFF0BB] border border-[#FFF0BB] text-[.24rem] h-[.7rem] text-[#05309F] rounded-[.14rem]">
                     Register
-                </button>
+                </button> -->
+                <AntButton title="Register" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".3rem"  @click="register"/>
+
             </div>
             <div class="flex justify-around">
                 <span class="text-[#FFF0BB] text-[.22rem]" @click="() => router.push('/support')">Suporte</span>

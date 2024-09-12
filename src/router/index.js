@@ -584,12 +584,17 @@ const router = createRouter({
       name: "searchPage",
       component: () => import("@/views/SearchPage/SearchPage.vue"),
     },
+    {
+      path: "/testPage",
+      name: "testPage",
+      component: () => import("@/components/test/testPage.vue"),
+    },
 
   ],
 });
 
 const protectedRoute = [
-  "/slots",
+  // "/slots",
   "/vip",
   "/pendente",
   "/juros",
