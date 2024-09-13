@@ -9,7 +9,7 @@
       :closable="false"
       :maskClosable="false"
       centered
-      :class="{ modas: props.bgColor, customColor: props.backGrounds }"
+      :class="{ modas: props.bgColor, customColor: props.backGrounds, customKadyot: store.state.setThemes.lightTheme, customKadyot2:store.state.setThemes.darkTheme }"
       @cancel="handeClose"
       class="modal431px"
     >
@@ -249,4 +249,14 @@ watch(
     width: 7rem !important;
   }
 }
+
+.customKadyot .ant-modal-content  {
+  background-color: rgb(219, 131, 183);
+}
+
+
+.customKadyot2 .ant-modal-content  {
+  background-color: rgb(48, 47, 47);
+}
+
 </style>

@@ -7,7 +7,7 @@
         : 'bg-[#062064]',
       stores.state.setThemes.darkTheme
         ? 'bg-[#1d1c1c]  text-[white]'
-        : 'bg-[#05309F] text-[white]',
+        : 'bg-[#05309F] text-[white]'
     ]"
   >
     <div class="flex justify-between w-full items-center">
