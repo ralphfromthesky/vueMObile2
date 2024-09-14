@@ -1,16 +1,5 @@
 <template>
   <div class="h-screen bg-white p-1">
-    <div class="font-bold text-center pb-2">this is the test page</div>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, velit a
-    ipsum dolore, omnis dolores nesciunt consequatur tempore officia nulla
-    repellat est quaerat quis nemo, non qui consectetur doloribus perspiciatis
-    sint distinctio! Velit eligendi officiis harum dolorem illo voluptate, modi
-    nihil dolor quas vel dignissimos nemo nulla recusandae! Aliquam et quisquam,
-    officia aliquid repellendus, dolorem autem, dolorum maxime minus voluptate
-    totam temporibus deleniti at tempora corporis eveniet quia nobis? Minima et
-    ipsam est harum porro beatae similique officiis ex architecto quae mollitia
-    laudantium autem, illo totam voluptas sunt error adipisci obcaecati
-    exercitationem. Quo perferendis illo quaerat commodi! Inventore, porro odio!
 
     <div>
       <button @click="changeComponent(0)" class="p-2 bg-[green]">0</button>
@@ -20,11 +9,42 @@
     <!-- <TestPage3/>
     <TestPage4/> -->
     <AntButton title="Login" bg="#FFF0BB" h=".4rem" w="2rem" b=".1rem" tx="red"/>
+    {{ datus }}
+    {{ showNames }}
+    {{ every() }}
+    {{ indexing }}
+
   </div>
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent, computed } from "vue";
+
+const students = [
+  { name: 'Alice', grade: 85 },
+  { name: 'Bob', grade: 92 },
+  { name: 'Charlie', grade: 78 },
+  { name: 'David', grade: 95 },
+  { name: 'Eva', grade: 88 }
+];
+
+const numbers = [1, 2, 3, 4, 5];
+const showNames = computed(() => {
+  return numbers.some((a) => a < 5)
+})
+
+const every = () => {
+  return numbers.every((a) => a > 3 )
+}
+
+const indexing = () => {
+  return students.includes('name')
+}
+
+const datus = computed(() => {
+  return students.filter((o) => o.grade === 85 )
+})
+
 
 const TestPage2 = defineAsyncComponent(() =>
   import("@/components/test/testPage2.vue")

@@ -1,57 +1,57 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
-import PromotionPage from "@/views/Promotion/PromotionPage.vue";
-import VipPage from "../views/Vip/VipPage.vue";
-import JurosPage from "@/views/Juros/JurosMainPage.vue";
-import TaskPage from "@/views/Task/task.vue";
-import historicoPage from "@/views/Records/historico.vue";
-import EventPage from "@/views/Event/EventPage.vue";
-import WithdrawalPasswordPage from "@/views/Withdrawal/WithdrawPassword/WithdrawPasswordPage.vue";
-import WithdrawalPage from "@/views/Withdrawal/WithdrawalPage.vue";
-import WithdrawalRecord from "@/views/Withdrawal/WithdrawalRecord.vue";
-import WithdrawalAudit from "@/views/Withdrawal/WithdrawalAudit.vue";
-import WithdrawalAccount from "@/views/Withdrawal/WithdrawalAccount.vue";
-import Deposit from "@/components/deposit/Deposit.vue";
-import RecoverBalance from "@/views/RecoverBalance/RecoverBalance.vue"; 
-import AcccountDetails from "@/views/AccountDetails/AcccountDetails.vue";
-import BettingRecords from "@/views/AccountDetails/BettingRecords.vue";
-import AccountDetailsRecord from "@/views/AccountDetails/AccountDetailsRecord.vue";
-import InterestRules from "@/views/Juros/components/InterestRules.vue";
-import Menu from "@/views/MenuPage/Menu.vue";
-import Pendente from "@/views/Pendente/Pendente.vue";
-import Invite from "@/views/Invite/PromoTutorial.vue";
-import Invitation from "@/views/Invite/InvitationPage.vue";
-import Profile from "@/views/Profile/Profile.vue";
-import SecurityCenter from "@/views/SecurityCenter/SecurityCenter.vue";
-import Support from "@/views/MessageCenter/Support.vue";
-import Suggestion from "@/views/MessageCenter/Suggestion.vue";
-import Email from "@/views/SecurityCenter/pages/Email.vue";
-import GoogleAuthenticator from "@/views/SecurityCenter/pages/GoogleAuthenticator.vue";
-import LoginPassword from "@/views/SecurityCenter/pages/LoginPassword.vue";
-import SecurityQuestion from "@/views/SecurityCenter/pages/SecurityQuestion.vue";
-import Notice from "@/views/MessageCenter/Notice.vue";
-import Notification from "@/views/MessageCenter/Notification.vue";
-import Announcement from "@/views/MessageCenter/Announcement.vue";
-import CommissionRate from "@/views/Invite/CommissionRate.vue";
-import SubordinatesRequests from "@/views/Invite/SubordinatesRequests.vue";
-import DataSubordinate from "@/views/Invite/DataSubordinate.vue";
-import BetSubordinate from "@/views/Invite/BetSubordinate.vue";
-import FinancesSubordinate from "@/views/Invite/FinancesSubordinate.vue";
-import AllData from "@/views/Invite/AllData.vue";
-import DirectBettingPage from "@/views/Invite/DirectBettingPage.vue";
-import DirectDataPage from "@/views/Invite/DirectDataPage.vue";
-import DirectFinancing from "@/views/Invite/DirectFinancing.vue";
-import PromoTutorial from "@/views/Invite/PromoTutorial.vue";
-import Performance from "@/views/Invite/Performance.vue";
-import Commission from "@/views/Invite/Commission.vue";
-import DirectReporting from "@/views/Invite/DirectReporting.vue";
-import LoginDevice from "@/views/LoginDevice/LoginDevice.vue";
-import Slots from "@/views/Slots/Slots.vue";
-import VipLoginBonus from "@/components/VipLoginBonus/VipLoginBonus.vue";
-import TurnTableGame from "@/views/TurnTableGame/TurnTableGame.vue";
-import PasswordRetrieval from "@/views/PasswordRetrieval/PasswordRetrieval.vue";
-import SearchPage from "@/views/SearchPage/SearchPage.vue";
+// import HomeView from "../views/HomeView.vue";
+// import AboutView from "../views/AboutView.vue";
+// import PromotionPage from "@/views/Promotion/PromotionPage.vue";
+// import VipPage from "../views/Vip/VipPage.vue";
+// import JurosPage from "@/views/Juros/JurosMainPage.vue";
+// import TaskPage from "@/views/Task/task.vue";
+// import historicoPage from "@/views/Records/historico.vue";
+// import EventPage from "@/views/Event/EventPage.vue";
+// import WithdrawalPasswordPage from "@/views/Withdrawal/WithdrawPassword/WithdrawPasswordPage.vue";
+// import WithdrawalPage from "@/views/Withdrawal/WithdrawalPage.vue";
+// import WithdrawalRecord from "@/views/Withdrawal/WithdrawalRecord.vue";
+// import WithdrawalAudit from "@/views/Withdrawal/WithdrawalAudit.vue";
+// import WithdrawalAccount from "@/views/Withdrawal/WithdrawalAccount.vue";
+// import Deposit from "@/components/deposit/Deposit.vue";
+// import RecoverBalance from "@/views/RecoverBalance/RecoverBalance.vue";
+// import AcccountDetails from "@/views/AccountDetails/AcccountDetails.vue";
+// import BettingRecords from "@/views/AccountDetails/BettingRecords.vue";
+// import AccountDetailsRecord from "@/views/AccountDetails/AccountDetailsRecord.vue";
+// import InterestRules from "@/views/Juros/components/InterestRules.vue";
+// import Menu from "@/views/MenuPage/Menu.vue";
+// import Pendente from "@/views/Pendente/Pendente.vue";
+// import Invite from "@/views/Invite/PromoTutorial.vue";
+// import Invitation from "@/views/Invite/InvitationPage.vue";
+// import Profile from "@/views/Profile/Profile.vue";
+// import SecurityCenter from "@/views/SecurityCenter/SecurityCenter.vue";
+// import Support from "@/views/MessageCenter/Support.vue";
+// import Suggestion from "@/views/MessageCenter/Suggestion.vue";
+// import Email from "@/views/SecurityCenter/pages/Email.vue";
+// import GoogleAuthenticator from "@/views/SecurityCenter/pages/GoogleAuthenticator.vue";
+// import LoginPassword from "@/views/SecurityCenter/pages/LoginPassword.vue";
+// import SecurityQuestion from "@/views/SecurityCenter/pages/SecurityQuestion.vue";
+// import Notice from "@/views/MessageCenter/Notice.vue";
+// import Notification from "@/views/MessageCenter/Notification.vue";
+// import Announcement from "@/views/MessageCenter/Announcement.vue";
+// import CommissionRate from "@/views/Invite/CommissionRate.vue";
+// import SubordinatesRequests from "@/views/Invite/SubordinatesRequests.vue";
+// import DataSubordinate from "@/views/Invite/DataSubordinate.vue";
+// import BetSubordinate from "@/views/Invite/BetSubordinate.vue";
+// import FinancesSubordinate from "@/views/Invite/FinancesSubordinate.vue";
+// import AllData from "@/views/Invite/AllData.vue";
+// import DirectBettingPage from "@/views/Invite/DirectBettingPage.vue";
+// import DirectDataPage from "@/views/Invite/DirectDataPage.vue";
+// import DirectFinancing from "@/views/Invite/DirectFinancing.vue";
+// import PromoTutorial from "@/views/Invite/PromoTutorial.vue";
+// import Performance from "@/views/Invite/Performance.vue";
+// import Commission from "@/views/Invite/Commission.vue";
+// import DirectReporting from "@/views/Invite/DirectReporting.vue";
+// import LoginDevice from "@/views/LoginDevice/LoginDevice.vue";
+// import Slots from "@/views/Slots/Slots.vue";
+// import VipLoginBonus from "@/components/VipLoginBonus/VipLoginBonus.vue";
+// import TurnTableGame from "@/views/TurnTableGame/TurnTableGame.vue";
+// import PasswordRetrieval from "@/views/PasswordRetrieval/PasswordRetrieval.vue";
+// import SearchPage from "@/views/SearchPage/SearchPage.vue";
 
 import { useStore } from "@/store/store.js";
 
@@ -344,10 +344,10 @@ const router = createRouter({
       name: "task",
       component: () => import("@/views/Task/task.vue"),
     },
-    { 
-      path: "/pendente", 
-      name: "pendente", 
-      component: () => import("@/views/Pendente/Pendente.vue") 
+    {
+      path: "/pendente",
+      name: "pendente",
+      component: () => import("@/views/Pendente/Pendente.vue"),
     },
     {
       path: "/records",
@@ -362,7 +362,8 @@ const router = createRouter({
     {
       path: "/withdrawpassword",
       name: "withdrawpassword",
-      component: () => import("@/views/Withdrawal/WithdrawPassword/WithdrawPasswordPage.vue"),
+      component: () =>
+        import("@/views/Withdrawal/WithdrawPassword/WithdrawPasswordPage.vue"),
     },
     {
       path: "/deposit",
@@ -397,7 +398,8 @@ const router = createRouter({
     {
       path: "/accountdetailsrecord",
       name: "accountdetailsrecord",
-      component: () => import("@/views/AccountDetails/AccountDetailsRecord.vue"),
+      component: () =>
+        import("@/views/AccountDetails/AccountDetailsRecord.vue"),
     },
     {
       path: "/menu",
@@ -462,7 +464,8 @@ const router = createRouter({
     {
       path: "/googleauthenticator",
       name: "googleauthenticator",
-      component: () => import("@/views/SecurityCenter/pages/GoogleAuthenticator.vue"),
+      component: () =>
+        import("@/views/SecurityCenter/pages/GoogleAuthenticator.vue"),
     },
     {
       path: "/loginpassword",
@@ -472,7 +475,8 @@ const router = createRouter({
     {
       path: "/securityquestion",
       name: "securityquestion",
-      component: () => import("@/views/SecurityCenter/pages/SecurityQuestion.vue"),
+      component: () =>
+        import("@/views/SecurityCenter/pages/SecurityQuestion.vue"),
     },
     {
       path: "/commissionrate",
@@ -572,7 +576,8 @@ const router = createRouter({
     {
       path: "/passwordRetrieval",
       name: "passwordRetrieval",
-      component: () => import("@/views/PasswordRetrieval/PasswordRetrieval.vue"),
+      component: () =>
+        import("@/views/PasswordRetrieval/PasswordRetrieval.vue"),
     },
     {
       path: "/ending",
@@ -583,6 +588,11 @@ const router = createRouter({
       path: "/search",
       name: "searchPage",
       component: () => import("@/views/SearchPage/SearchPage.vue"),
+    },
+    {
+      path: "/eventDetail",
+      name: "eventDetail",
+      component: () => import("@/views/Event/EventDetail.vue"),
     },
     {
       path: "/testPage",
@@ -619,22 +629,19 @@ const protectedRoute = [
   "/passwordRetrieval",
   "/viplogin",
   "/turntablegame",
-  '/securityquestion',
-  '/auditrecords'
+  "/securityquestion",
+  "/auditrecords",
 ];
 
 router.beforeEach((to, from, next) => {
   if (!store.state.userInfo.isLogin && protectedRoute.includes(to.path)) {
     next("/");
   }
-  if(window.location.pathname === '/slots') {
-    window.location.href = '/'
+  if (window.location.pathname === "/slots") {
+    window.location.href = "/";
   } else {
     next();
   }
 });
 
 export default router;
-
-
-

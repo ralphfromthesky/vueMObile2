@@ -6,6 +6,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
+
+
 // import AntModal from "@/components/antUi/antModal.vue";
 const AntModal = defineAsyncComponent(() => import("@/components/antUi/antModal.vue"))
 const AntButton = defineAsyncComponent(() => import('@/components/antUi/antButton.vue'))
@@ -17,6 +19,7 @@ import { Dialog } from 'vant';
 import { DatePicker } from 'vant';
 import { RollingText } from 'vant';
 import { CountDown } from 'vant';
+
 
 
 const app = createApp(App)

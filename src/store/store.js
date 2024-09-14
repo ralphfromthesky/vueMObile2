@@ -37,13 +37,22 @@ const store = createStore({
     openDeposit: false,
     antMOdal: true,
     isDataFetching: true,
+    propsData: [],
     setThemes: {
       lightTheme: false,
-      darkTheme: false
+      darkTheme: false,
+    },
+    setThemes2: {
+      light: 'light',
+      dark: 'dark',
+      standard: 'standard'
     }
 
   },
   mutations: {
+    setPropsData(state, payload) {
+      state.propsData = payload
+    },
     setLightTheme(state, payload) {
       state.setThemes.lightTheme = payload;
     },
@@ -205,8 +214,17 @@ const store = createStore({
         userMissiontask: state.userMissiontask,
         setThemes: {
           lightTheme: state.setThemes.lightTheme,
-          darkTheme: state.setThemes.darkTheme
-        }
+          darkTheme: state.setThemes.darkTheme,
+          setThemes2 : {
+            light: state.setThemes2.light,
+            dark: state.setThemes2.dark,
+            standard: state.setThemes2.standard
+
+
+            
+          }
+        },
+       
       
 
       }),

@@ -34,31 +34,41 @@
           </div>
           <div class="flex flex-col text-[.3rem]">
             <span class="flex justify-between"
+            @click="changeThisTheme('dark')"
+
               >Dark
 
               <input
-                type="checkbox"
+                type="radio"
+                v-model="selectedTheme"
+                :value="store.state.setThemes.setThemes2.dark"
                 name=""
                 id=""
-                @click="changeThisTheme('dark')"
               />
             </span>
             <span class="flex justify-between"
+            @click="changeThisTheme('light')"
+
               >Light
               <input
-                type="checkbox"
+                type="radio"
+                v-model="selectedTheme"
+                :value="store.state.setThemes.setThemes2.light"
                 name=""
                 id=""
-                @click="changeThisTheme('light')"
               />
             </span>
             <span class="flex justify-between"
+            @click="changeThisTheme('standard')"
+
               >Standard
               <input
-                type="checkbox"
+                type="radio"
+                v-model="selectedTheme"
                 name=""
+                :value="store.state.setThemes.setThemes2.standard"
                 id=""
-                @click="changeThisTheme('standard')"
+                value="standard"
               />
             </span>
           </div>
@@ -129,6 +139,10 @@ import { useStore } from "@/store/store";
 import { messageApi } from "./antMessage";
 const store = useStore();
 const nameInput = ref("");
+const a = ref()
+
+const selectedTheme = ref(a.value)
+
 const showModal = () => {
   open.value = true;
 };
@@ -161,14 +175,19 @@ const changeThisTheme = (themes) => {
   store.commit("setDarkTheme", false);
   if (themes === "light") {
     store.commit("setLightTheme", true);
+    a.value = store.state.setThemes2.light
   }
   if (themes === "dark") {
     store.commit("setDarkTheme", true);
+    a.value = store.state.setThemes2.dark
+
   }
   if (themes === "standard") {
+    a.value = store.state.setThemes2.standard
     store.commit("setLightTheme", false);
     store.commit("setDarkTheme", false);
   }
+  console.log(a.value)
 };
 
 const props = defineProps({
@@ -234,6 +253,11 @@ watch(
     }
   }
 );
+
+onMounted(() => {
+  console.log(a.value)
+
+})
 </script>
 
 <style>
