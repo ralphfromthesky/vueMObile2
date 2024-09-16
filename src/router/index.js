@@ -595,10 +595,16 @@ const router = createRouter({
       component: () => import("@/views/Event/EventDetail.vue"),
     },
     {
+      path: "/redemption",
+      name: "redemptioms",
+      component: () => import ('@/views/Redemption/redemption.vue')
+    },
+    {
       path: "/testPage",
       name: "testPage",
       component: () => import("@/components/test/testPage.vue"),
-    },
+    }
+
 
   ],
 });

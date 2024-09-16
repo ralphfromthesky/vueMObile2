@@ -10,7 +10,7 @@
         borderRadius: b,
         fontSize: ft,
         fontWeight: bl,
-        color: store.state.setThemes.lightTheme ? 'white' : store.state.setThemes.darkTheme ? 'white' : ''
+        color: store.state.setThemes.lightTheme ? 'white' : store.state.setThemes.darkTheme ? 'white' : textCol
       }"
     >
       {{ props.title }}
@@ -79,6 +79,11 @@ const props = defineProps({
     default: false,
   },
   bl: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  textCol: {
     type: String,
     required: false,
     default: "",

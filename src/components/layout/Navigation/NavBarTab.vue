@@ -14,13 +14,16 @@
                 <div class="flex link-content items-center justify-center relative h-[.9rem]" @click="showRegModal('/vip')">
                     <span class="text-[.27rem]">VIP</span>
                 </div>
-            
+                <div class="flex link-content items-center justify-center relative h-[.9rem]" @click="showRegModal('/redemption')">
+                    <span class="text-[.27rem]">Redemption</span>
+                </div>
                 <div class="flex link-content items-center justify-center relative h-[.9rem]"@click="showRegModal('/pendente')" >
                     <span class="text-[.27rem]">Pendente</span>
                 </div>
                 <div class="flex link-content items-center justify-center relative h-[.9rem]" @click="showRegModal('/juros')">
                     <span class="text-[.27rem]">Juros</span>
                 </div>
+             
                 <div class="flex link-content items-center justify-center relative h-[.9rem]" @click="showRegModal('/records')">
                     <span class="text-[.27rem]">History</span>
                 </div>

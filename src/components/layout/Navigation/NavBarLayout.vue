@@ -207,7 +207,6 @@ const showDeposit = () => {
 
 const closeDeposit = () => {
   isLogin.value = false;
-  hideThis();
 };
 
 watch(newStore.state.userInfo.isLogin, (newval) => {

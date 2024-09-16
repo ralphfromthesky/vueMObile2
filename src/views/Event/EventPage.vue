@@ -26,6 +26,13 @@
               <span class="text-[.2rem] text-blue-900">Historico</span>
             </div>
           </RouterLink>
+          <RouterLink to="/redemption">
+            <div
+              class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center items-center"
+            >
+              <span class="text-[.2rem] text-blue-900">Redemption</span>
+            </div>
+          </RouterLink>
         </div>
 
         <div class="flex flex-col gap-[.2rem] overflow-auto h-[13.05rem]">
@@ -69,7 +76,7 @@ const type = ref();
 
 
 const clickEvent = (id) => {
-    alert(id)
+  alert(id)
   eventDetails({ actId: id });
 };
 
