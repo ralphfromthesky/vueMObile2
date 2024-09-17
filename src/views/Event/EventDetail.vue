@@ -208,12 +208,12 @@
                   store.state.propsData?.data?.content.actDesc
                 }}</span
               >
-              
+              <!-- <span v-html='store.state.propsData?.data?.content.actDesc'></span> -->
             </div>
             <div>
               <div></div>
             </div>
-            <div class="text-center">
+            <div class="text-center" @click="() => alert('what?!?')">
               <AntButton
                 title="Submit apply"
                 bl="800"

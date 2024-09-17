@@ -6,6 +6,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
+import { Tab, Tabs } from 'vant';
 
 
 // import AntModal from "@/components/antUi/antModal.vue";
@@ -28,6 +29,10 @@ app.use(CountDown)
 app.use(RollingText)
 app.use(Dialog)
 app.use(Antd)
+
+app.use(Tab);
+app.use(Tabs);
+
 app.component('antButton',AntButton)
 
 // app.use(AntModal)

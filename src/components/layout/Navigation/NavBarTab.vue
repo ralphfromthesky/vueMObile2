@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+
 import {ref, defineAsyncComponent} from 'vue'
 // import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 const Login = defineAsyncComponent(() => import ("@/components/layout/LoginComponent/LoginForm.vue"))
@@ -43,6 +44,7 @@ const store = useStore()
 const loginModal = ref(false)
 import { navigateTo } from '@/global/navigation';
 import { useRouter } from 'vue-router';
+// import AntTab from '@/components/antUi/antTab.vue';
 
 const showRegModal = (path) => {
   !store.state.userInfo.isLogin

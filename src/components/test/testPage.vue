@@ -13,6 +13,12 @@
     {{ showNames }}
     {{ every() }}
     {{ indexing }}
+    <div class="cont">
+      <div class="items1">1</div>
+      <div class="items2">2</div>
+      <div class="items3">3</div>
+      <div class="items4">4</div>
+    </div>
 
   </div>
 </template>
@@ -63,4 +69,36 @@ const changeComponent = (comp) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.cont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.items1 {
+  /* height: 2rem; */
+  /* width: 1.5rem; */
+  background-color: red;
+  border: 2px solid white;
+  /* flex-grow: 1; */
+  /* flex-basis: 200 */
+  flex-grow: 1;
+}
+.items2 {
+  background-color: red;
+  border: 2px solid white;
+  flex-grow: 2;
+}
+.items3{
+  background-color: red;
+  border: 2px solid white;
+  flex-grow: 3;
+
+}
+.items4 {
+  background-color: red;
+  border: 2px solid white;
+  flex-grow: 4;
+
+}
+</style>

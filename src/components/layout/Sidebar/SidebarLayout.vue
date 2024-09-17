@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      ' h-[calc(100vh-.9rem)] w-[3rem] p-[.15rem] overflow-auto]',
+      ' h-[calc(100vh-.9rem) w-[3rem] p-[.15rem] overflow-auto]',
       stores.state.setThemes.lightTheme
         ? 'bg-[#f08abd] text-[white]'
         : 'bg-[#05309F] text-[white]',
@@ -16,7 +16,7 @@
         @click="exclusive"
         >Exclusive</span
       >
-      <span>
+      <!-- <span>
         <span
           class="bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end"
         >
@@ -30,7 +30,7 @@
             />
           </span>
         </span>
-      </span>
+      </span> -->
 
       <div class="grid grid-cols-2 gap-[.1rem]">
         <div

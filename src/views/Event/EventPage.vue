@@ -76,7 +76,6 @@ const type = ref();
 
 
 const clickEvent = (id) => {
-  alert(id)
   eventDetails({ actId: id });
 };
 
@@ -84,7 +83,6 @@ const { isLoading } = useQuery({
   queryKey: ["events"],
   queryFn: async () =>
     await axiosGet2("/api/native/v2/getActivityCenterList.do"),
-  staleTime: 0,
   select: (data) => {
     event.value = data;
   },
