@@ -1,6 +1,6 @@
 <template>
-  <Layout>
-    <div class="w-screen">
+  <!-- <Layout> -->
+    <div class="w-screen mainDiv">
       <div class="flex justify-between px-1 mt-1 items-center mb-[.5rem]">
         <div class="flex gap-1">
           <Select
@@ -113,7 +113,7 @@
       </div>
 
     </div>
-  </Layout>
+  <!-- </Layout> -->
 </template>
 
 <script setup>
@@ -224,3 +224,12 @@ const handleSelectedEvents = (event) => {
 };
 
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+
+</style>

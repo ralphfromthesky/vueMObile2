@@ -1,6 +1,6 @@
 <template>
-  <Layout>
-    <div class="w-screen flex p-[.3rem] gap-1 text-white">
+  <!-- <Layout> -->
+    <div class="w-screen mainDiv flex p-[.3rem] gap-1 text-white">
       <div class="flex flex-col gap-1">
         <Spinloader v-if="missionTasks.isLoading.value" />
         <div v-for="(value, ind) in buttonTasks" :key="ind">
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-  </Layout>
+  <!-- </Layout> -->
 </template>
 
 <script setup>
@@ -72,3 +72,10 @@ const handleClick = (index, data) => {
   missionData.push(data)
 };
 </script>
+<style scoped> 
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: 7.2rem;
+  }
+}
+</style>

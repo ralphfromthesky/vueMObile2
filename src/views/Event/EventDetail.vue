@@ -4,7 +4,7 @@
       <div
         class="bg-bg2 h-[1rem] flex justify-between px-1 items-center text-[white]"
       >
-        <RouterLink to="/event"
+        <RouterLink to="/mainNav"
           ><span><img src="/images/back.png" alt="" class="w-[.3rem]" /></span>
         </RouterLink>
         <span> {{ store.state.propsData?.data?.content.title }} </span

@@ -1,5 +1,5 @@
 <template>
-    <Layout>
+    <!-- <Layout> -->
         <div class="mainDiv w-screen px-[.2rem]">
             <div class="flex justify-end px-1 mt-1 items-center">
                 <div>
@@ -52,7 +52,7 @@
                 <NoData />
             </div> -->
         </div>
-    </Layout>
+    <!-- </Layout> -->
 </template>
 
 <script setup>
@@ -76,3 +76,11 @@ onMounted(() => {
 });
 
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+</style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="h-screen bg-white p-1">
+  <div class="h-screen bg-blue">
+
+
+<!-- <VantTabs :titleLinks="navLinks" :componentPass="[JurosMainPage,Task,VipPage, Redemption,]"/> -->
+
 
     <div>
       <button @click="changeComponent(0)" class="p-2 bg-[green]">0</button>
@@ -24,7 +28,29 @@
 </template>
 
 <script setup>
+
 import { ref, defineAsyncComponent, computed } from "vue";
+import VantTabs from "../vantUi/vantTabs.vue";
+import VipPage from "@/views/Vip/VipPage.vue";
+import Task from "@/views/Task/task.vue";
+import EventPage from "@/views/Event/EventPage.vue";
+import Redemption from "@/views/Redemption/redemption.vue";
+import JurosMainPage from "@/views/Juros/JurosMainPage.vue";
+
+
+
+
+
+const navLinks = ref([
+  {title: 'Events', link: '/event'},
+  {title: 'Mission', link: '/task'},
+  {title: 'Vip', link: '/vip'},
+  {title: 'Redemption', link: '/redemption'},
+  {title: 'Pendentets', link: '/pendente'},
+  {title: 'Juros', link: '/juros'},
+  {title: 'History', link: '/records'},
+
+])
 
 const students = [
   { name: 'Alice', grade: 85 },

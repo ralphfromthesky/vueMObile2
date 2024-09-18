@@ -5,22 +5,29 @@
       <div class="mainDiv2 flex bg-[#1a45b1]">
         <section class=" h-[calc(100vh-1.7rem)] pb-[.2rem] w-full overflow-auto">
           <div class=" flex items-center justify-center w-full">
-            <transition :name="transitionName" appear>
-              <div v-if="$slots.default" class="mainDiv">
+              <div class="mainDiv">
                 <slot></slot>
               </div>
-            </transition>
           </div>
         </section>
       </div>
+        
+
       <BottomNavbar></BottomNavbar>
   </main>
+
 </template>
 
 <script setup>
 import { ref } from "vue";
 import BottomNavbar from "./Navigation/BottomNavbar.vue";
 import NavBarTab from "./Navigation/NavBarTab.vue";
+import vantTabs from "../vantUi/vantTabs.vue";
+import VipPage from "@/views/Vip/VipPage.vue";
+import Task from "@/views/Task/task.vue";
+import EventPage from "@/views/Event/EventPage.vue";
+import Redemption from "@/views/Redemption/redemption.vue";
+import JurosMainPage from "@/views/Juros/JurosMainPage.vue";
 
 const transitionName = ref("route-forward");
 
@@ -34,6 +41,17 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+const navLinks = ref([
+  {title: 'Events', link: '/event'},
+  {title: 'Mission', link: '/task'},
+  {title: 'Vip', link: '/vip'},
+  {title: 'Redemption', link: '/redemption'},
+  {title: 'Pendentets', link: '/pendente'},
+  {title: 'Juros', link: '/juros'},
+  {title: 'History', link: '/records'},
+
+])
 </script>
 
 <style scoped>

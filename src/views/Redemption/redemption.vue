@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <!-- <Layout> -->
     <div class="p-[.2rem] w-screen custom">
      
         <div class="redeem-code">
@@ -37,7 +37,7 @@
         </div>
       </div>
    
-  </Layout>
+  <!-- </Layout> -->
 </template>
 
 <script setup>

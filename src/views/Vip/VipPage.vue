@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <!-- <Layout> -->
     <div class="mainDiv flex flex-col w-screen gap-[.2rem] p-[.2rem]">
       <div class="flex items-center bg-[#05309F] rounded-[.1rem] p-[.2rem] relative w-full h-[2rem]">
         <div
@@ -149,7 +149,7 @@
         </div>
       </div>
     </div>
-  </Layout>
+  <!-- </Layout> -->
 </template>
 
 <script setup>
@@ -206,5 +206,11 @@ const { isLevelLoading } = useQuery({
   top: 0;
   width: 100%;
   z-index: 0;
+}
+
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
 }
 </style>

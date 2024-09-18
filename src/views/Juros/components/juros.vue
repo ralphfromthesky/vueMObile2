@@ -1,12 +1,6 @@
 <template>
   <div class="flex justify-between p-[.2rem]">
     <div class="flex w-auto max-w-[3.15rem] min-w-[1.6rem] gap-[.2rem]">
-      <!-- <input
-                class="h-[0.5rem] w-[1.5rem] rounded-full px-[.2rem] text-[0.2rem] border-[.01rem] border-[#3A61C2]  bg-[#05309F]"
-                type="text" placeholder="Hoje" />
-            <input
-                class="h-[0.5rem] w-[1.5rem] rounded-full px-[.2rem] text-[0.2rem] border-[.01rem] border-[#3A61C2]  bg-[#05309F]"
-                type="text" placeholder="Tudos" /> -->
       <Select :pass="dates" title="Today" @selectedItem="handleSelectedDate" />
     </div>
     <div class="flex gap-[.1rem] items-center justify-center">
@@ -53,7 +47,7 @@ import BodyCell from "../../../components/TableComponent/BodyCell.vue";
 import { useMutation } from "@tanstack/vue-query";
 import { onMounted, ref } from "vue";
 import { axiosPost2 } from "../../../components/axios/AxiosHook.js";
-import {dateChartPayload} from '@/global/bettingRecords.js'
+import { dateChartPayload } from "@/global/bettingRecords.js";
 
 import Select from "@/components/antUi/select.vue";
 const dateLabel = ref([]);
@@ -69,17 +63,17 @@ const dates = ref([
 
 const handleSelectedDate = (date) => {
   console.log(date);
-  dateLabel.value = date
-  
+  dateLabel.value = date;
+
   const dateChart = ref({
-     "Today": () => juros.mutate(dateChartPayload.value.today),
-     "Yesterday": () => juros.mutate(dateChartPayload.value.yesterday),
-     "This Week": () => juros.mutate(dateChartPayload.value.thisWeek),
-     "Last Week": () => juros.mutate(dateChartPayload.value.lastWeek),
-     "This Month": () => juros.mutate(dateChartPayload.value.thisMonth),
-     "Last Month": () => juros.mutate(dateChartPayload.value.lastMonth) 
-});
-  dateChart.value[dateLabel.value]()
+    Today: () => juros.mutate(dateChartPayload.value.today),
+    Yesterday: () => juros.mutate(dateChartPayload.value.yesterday),
+    "This Week": () => juros.mutate(dateChartPayload.value.thisWeek),
+    "Last Week": () => juros.mutate(dateChartPayload.value.lastWeek),
+    "This Month": () => juros.mutate(dateChartPayload.value.thisMonth),
+    "Last Month": () => juros.mutate(dateChartPayload.value.lastMonth),
+  });
+  dateChart.value[dateLabel.value]();
 };
 
 const bonusData = ref([]);
@@ -101,3 +95,11 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+</style>

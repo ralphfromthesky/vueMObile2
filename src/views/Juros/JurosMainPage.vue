@@ -143,3 +143,12 @@ onMounted(() => {
     juros.mutate()
 })
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+
+</style>

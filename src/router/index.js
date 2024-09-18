@@ -603,6 +603,11 @@ const router = createRouter({
       path: "/testPage",
       name: "testPage",
       component: () => import("@/components/test/testPage.vue"),
+    },
+    {
+      path: "/mainNav",
+      name: "nav",
+      component: () => import("@/components/layout/Navigation/NavLayout.vue"),
     }
 
 

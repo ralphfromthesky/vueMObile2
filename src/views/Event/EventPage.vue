@@ -1,6 +1,6 @@
 <template>
-  <Layout>
-    <div class="bg-[#1A45B1] w-screen h-auto p-[.2rem]">
+  <!-- <Layout> -->
+    <div class="bg-[#1A45B1] mainDiv w-screen h-auto p-[.2rem]">
       <div class="flex gap-[.2rem] mb-[.2rem]">
         <div class="flex flex-col gap-[.2rem] items-center">
           <div
@@ -40,27 +40,27 @@
             v-for="(eventItems, indexes) in event.content"
             class="flex flex-col gap-[.2rem]"
           >
-          <router-link to="/eventDetail">
-            <div
-              class="w-auto h-auto bg-[#05309F] rounded-[.1rem] p-[.12rem]"
-              @click="clickEvent(eventItems.id)"
-            >
-              <img
-                class="min-h-[2.1rem] imgs"
-                :src="eventItems.titleImg"
-                alt=""
-              />
-            </div>
-        </router-link>
+            <router-link to="/eventDetail">
+              <div
+                class="w-auto h-auto bg-[#05309F] rounded-[.1rem] p-[.12rem]"
+                @click="clickEvent(eventItems.id)"
+              >
+                <img
+                  class="min-h-[2.1rem] imgs"
+                  :src="eventItems.titleImg"
+                  alt=""
+                />
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
     </div>
-  </Layout>
+  <!-- </Layout> -->
 </template>
 <script setup>
 import { useStore } from "@/store/store";
-const store = useStore()
+const store = useStore();
 import Layout from "@/components/layout/Layout.vue";
 import { ref } from "vue";
 import { useMutation, useQuery } from "@tanstack/vue-query";
@@ -73,7 +73,6 @@ import router from "@/router";
 const event = ref([]);
 const id = ref();
 const type = ref();
-
 
 const clickEvent = (id) => {
   eventDetails({ actId: id });
@@ -91,8 +90,8 @@ const { isLoading } = useQuery({
 const { mutate: eventDetails } = useMutation({
   mutationFn: (payload) => axiosPost("/api/native/v2/getActDetail.do", payload),
   onSuccess: (data) => {
-    store.commit('setPropsData', data)
-},
+    store.commit("setPropsData", data);
+  },
   onError: (err) => console.log(err),
 });
 </script>
@@ -102,6 +101,9 @@ const { mutate: eventDetails } = useMutation({
   .imgs {
     height: 3rem;
     width: 5rem;
+  }
+  .mainDiv {
+    width: auto;
   }
 }
 @media (max-width: 431px) {

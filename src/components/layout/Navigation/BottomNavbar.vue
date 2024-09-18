@@ -11,7 +11,7 @@
                     <div class="text-[.25rem]">Home</div>
                 </div>
             </router-link>
-            <router-link to="/event">
+            <router-link to="/mainNav">
                 <div class="flex flex-col items-center">
                     <!-- <div class="w-[.55rem] h-[.55rem] bg-[#1A45B1] rounded-[.1rem]"></div> -->
                     <img src="/bottomNavImages/3.png" alt="" class="w-[.6rem]">

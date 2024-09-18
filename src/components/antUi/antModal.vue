@@ -254,10 +254,6 @@ watch(
   }
 );
 
-onMounted(() => {
-  console.log(a.value)
-
-})
 </script>
 
 <style>
