@@ -1,5 +1,5 @@
 <template>
-  <MenuLayout>
+  <MenuLayout v-if="mainDiv">
     <div class="bg-[#05309F] w-screen bg-[url('/images/menu_bg.png')] bg-no-repeat bg-right-top bg-[length:100%]">
       <div class="flex flex-col p-[.2rem]">
         <div class="flex gap-[.2rem] w-full justify-end">
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <router-link to="/recoverbalance">
+          <router-link to="/recoverbalance" @click="showComponent">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/search2.png" alt="" class="w-[.45rem]" />
@@ -200,7 +200,7 @@
               </div>
             </div>
           </router-link>
-          <router-link to="/manageaccount" @click="bankAccount.refetch()">
+          <router-link to="/withdraw" @click="bankAccount.refetch()">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/card3.png" alt="" class="w-[.45rem]" />
@@ -337,6 +337,8 @@ const { query, userData } = useGetUserInfo();
 const store = useStore();
 const vipCurrentLevel = ref([]);
 const isRotate = ref(false);
+const mainDiv = ref(true);
+
 
 onMounted(() => {
   vipCurrentLevel.value = store.state.degreeInfo.content;
@@ -347,6 +349,9 @@ const toggleRotate = () => {
   query.refetch();
 };
 
+const showComponent = () => {
+  mainDiv.value = false
+}
 
 const logOutUser = useMutation({
   mutationFn: () => axiosPost2("api/native/v2/logout.do"),

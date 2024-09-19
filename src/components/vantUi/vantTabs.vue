@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <span
-      @click="router.push('/')"
+      @click="router.go(-1)"
       class="bg-[#05309F] py-[.224rem] pl-[.1rem] absolute top-[.2rem left-[0] z-10"
       ><img src="/images/back.png" alt="" class="w-[.3rem]"
     /></span>

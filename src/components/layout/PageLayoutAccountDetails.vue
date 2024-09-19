@@ -2,7 +2,7 @@
   <main>
     <div class="mainDiv flex flex-col">
       <div
-        class="flex items-center relative w-screen h-[.9rem] p-[.2rem] bg-[#05309F] border-b-[.03rem] border-b-[#3A61C2]"
+        class="flex items-center relative mainDiv w-screen h-[.9rem] p-[.2rem] bg-[#05309F] border-b-[.03rem] border-b-[#3A61C2]"
       >
         <div class="absolute mainDiv2" @click="this.$router.go(-1)">
           <img src="/images/return.png" class="w-[.3rem]" alt="" />

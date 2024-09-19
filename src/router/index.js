@@ -395,6 +395,11 @@ const router = createRouter({
       name: "accountdetails",
       component: () => import("@/views/AccountDetails/AcccountDetails.vue"),
     },
+    // {
+    //   path: "/accountdetails",
+    //   name: "accountdetails",
+    //   component: () => import("@/views/AccountDetails/NewAccuntDetails.vue"),
+    // },
     {
       path: "/bettingrecords",
       name: "bettingrecords",
@@ -411,6 +416,7 @@ const router = createRouter({
       name: "menu",
       component: () => import("@/views/MenuPage/Menu.vue"),
     },
+
     {
       path: "/interestrules",
       name: "interestrules",
@@ -440,6 +446,11 @@ const router = createRouter({
       path: "/support",
       name: "support",
       component: () => import("@/views/MessageCenter/Support.vue"),
+    },
+    {
+      path: "/newsupport",
+      name: "newsupport",
+      component: () => import("@/views/MessageCenter/NewSupport.vue"),
     },
     {
       path: "/notice",
