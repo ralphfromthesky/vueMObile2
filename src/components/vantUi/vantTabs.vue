@@ -1,13 +1,17 @@
 <template>
-  <div>
+  <div  class="relative">
+    <span @click="router.push('/')" class="bg-[#05309F] py-[.224rem] pl-[.1rem] absolute top-[.2rem left-[0] z-10"
+          ><img src="/images/back.png" alt="" class="w-[.3rem] "
+        /></span>
     <van-tabs v-model:active="active" @change="changeTab(active)" background="#05309F" color="white">
+
       <van-tab
         v-for="(tab, index) in props.titleLinks"
         :title="tab.title"
         :key="index"
+        
       >
-      
-        <div class="h-[10rem]">
+        <div>
           <component :is="props.componentPass[activeComponent]"></component>
         </div>
       </van-tab>
@@ -17,10 +21,11 @@
 
 <script setup>
 import { ref, watch } from "vue";
-
-const active = ref(0);
+import { useRouter } from "vue-router";
+const router = useRouter();
 const activeComponent =ref(0)
 const changeTab = (active) => {
+  alert(active)
   if(active === 0) {
   activeComponent.value = 0
 }
@@ -52,6 +57,11 @@ const props = defineProps({
     type: Array,
     required: true,
     default: ''
+  },
+  hasPaddingLeft: {
+    type: Boolean,
+    default: false,
+    required: false
   }
 });
 
@@ -61,16 +71,8 @@ const props = defineProps({
 ::v-deep .van-tab__text {
   color: white !important;
 }
-
+::v-deep .van-tabs--line .van-tabs__wrap {
+  padding-left: 20px;
+}
 </style>
 
-// const navLinks = ref([
-//   {title: 'Events', link: '/event'},
-//   {title: 'Mission', link: '/task'},
-//   {title: 'Vip', link: '/vip'},
-//   {title: 'Redemption', link: '/redemption'},
-//   {title: 'Pendentets', link: '/pendente'},
-//   {title: 'Juros', link: '/juros'},
-//   {title: 'History', link: '/records'},
-
-// ])

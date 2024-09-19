@@ -7,6 +7,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/store'
 import { Tab, Tabs } from 'vant';
+import VantTabs from '@/components/vantUi/vantTabs.vue';
 
 
 // import AntModal from "@/components/antUi/antModal.vue";
@@ -34,7 +35,7 @@ app.use(Tab);
 app.use(Tabs);
 
 app.component('antButton',AntButton)
-
+app.component('VantTabs', VantTabs)
 // app.use(AntModal)
 app.component('AntModal', AntModal)
 

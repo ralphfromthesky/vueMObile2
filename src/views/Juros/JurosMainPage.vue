@@ -1,5 +1,5 @@
 <template>
-    <PageLayout>
+    <!-- <PageLayout> -->
         <div class="mainDiv w-screen h-[100vh-.9rem] ">
             <!-- <div class="bg-[#05309F] w-full h-auto">
                 <div class="flex justify-between p-[.2rem]">
@@ -105,7 +105,7 @@
             <InterestRules v-if="showSomeTable" />
             <!-- End -->
         </div>
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
 import Juros from './components/juros.vue';

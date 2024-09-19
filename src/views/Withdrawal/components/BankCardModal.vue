@@ -1,5 +1,5 @@
 <template>
-    <Modal>
+    <!-- <Modal> -->
         <div class="flex flex-col gap-[.5rem] p-[.2rem]">
             <div class="flex items-center justify-center">
                 <span class="text-white text-[.3rem]">Please enter your withdrawal password</span>
@@ -31,7 +31,7 @@
             <button @click="withdraw"
                 class="text-white text-[.24rem] w-full h-[.7rem] bg-amber-500 rounded-[.2rem] font-bold">Confirm</button>
         </div>
-    </Modal>
+    <!-- </Modal> -->
     <CardBankModal>
         <div class="flex flex-col items-center justify-center gap-[.5rem] p-[.2rem] relative">
             <div v-if="userConfig.recent_card_validate === 'on' && bankAccounts.length !== 0"

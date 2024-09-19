@@ -370,10 +370,15 @@ const router = createRouter({
       name: "deposit",
       component: () => import("@/components/deposit/Deposit.vue"),
     },
+    // {
+    //   path: "/withdraw",
+    //   name: "withdraw",
+    //   component: () => import("@/views/Withdrawal/WithdrawalPage.vue"),
+    // },
     {
       path: "/withdraw",
       name: "withdraw",
-      component: () => import("@/views/Withdrawal/WithdrawalPage.vue"),
+      component: () => import("@/views/Withdrawal/NewWithdrawalPage.vue"),
     },
     {
       path: "/withdrawrecord",

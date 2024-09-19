@@ -1,5 +1,6 @@
 <template>
-    <WithdrawLayout>
+    <!-- <WithdrawLayout> -->
+        <div class="bg-[#1a45b1]">
         <div class="flex flex-col w-full p-[.2rem] gap-[.2rem]">
             <div class="flex w-full justify-between items-center">
                 <DatePicker :initialDate="initialMonth" />
@@ -52,7 +53,8 @@
                 </div>
             </div>
         </div>
-    </WithdrawLayout>
+    </div>
+    <!-- </WithdrawLayout> -->
 </template>
 <script setup>
     import WithdrawLayout from './components/WithdrawLayout.vue'
