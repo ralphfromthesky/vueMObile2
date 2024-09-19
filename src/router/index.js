@@ -416,10 +416,15 @@ const router = createRouter({
       name: "interestrules",
       component: () => import("@/views/Juros/components/InterestRules.vue"),
     },
+    // {
+    //   path: "/invite",
+    //   name: "invite",
+    //   component: () => import("@/views/Invite/PromoTutorial.vue"),
+    // },
     {
       path: "/invite",
       name: "invite",
-      component: () => import("@/views/Invite/PromoTutorial.vue"),
+      component: () => import('@/components/layout/NewInvitePage.vue')
     },
     {
       path: "/invitation",

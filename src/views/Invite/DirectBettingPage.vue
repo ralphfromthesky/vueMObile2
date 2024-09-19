@@ -1,6 +1,6 @@
 <template>
-  <PageLayout title="Invite">
-    <div class="w-screen">
+  <!-- <PageLayout title="Invite"> -->
+    <div class="mainDiv w-screen">
       <div class="flex gap-[.2rem] px-[.2rem] pt-[.2rem]">
         <!-- <div
                     class="flex items-center border rounded-full p-[.1rem] px-[.1rem] bg-[#05309F] h-[.5rem] w-[3.2rem]">
@@ -15,6 +15,7 @@
         <div>
           <AntCalendar @startDate="handleStartDate" @endDate="handleEndDate" />
         </div>
+        
       </div>
       <div class="flex flex-col h-[calc(100vh-4.1rem)] p-[.2rem] overflow-auto">
         <div
@@ -184,7 +185,7 @@
         </div>
       </div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from "../../components/layout/PageLayoutTab.vue";
@@ -232,3 +233,10 @@ onMounted(() => {
   });
 });
 </script>
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>

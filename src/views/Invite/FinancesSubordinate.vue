@@ -1,6 +1,6 @@
 <template>
-     <PageLayout>
-         <div class="w-screen p-[.2rem]">
+     <!-- <PageLayout> -->
+         <div class="mainDiv w-screen p-[.2rem]">
              <div class="flex gap-[.2rem] mb-[.2rem]">
                  <div
                      class="flex items-center border rounded-full p-[.1rem] px-[.1rem] bg-[#05309F] h-[.5rem] w-[3.2rem]">
@@ -20,8 +20,15 @@
                  </div>
              </div>
          </div>
-     </PageLayout>
+     <!-- </PageLayout> -->
 </template>
  <script setup>
  import PageLayout from '../../components/layout/PageLayoutTab.vue';
  </script>
+ <style scoped>
+ @media screen and (min-width: 431px) {
+     .mainDiv {
+         width:auto;
+     }
+ }
+ </style>

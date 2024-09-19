@@ -1,6 +1,6 @@
 <template>
-    <PageLayout title="Invite">
-        <div class="bg-[#1A45B1] w-screen h-auto">
+    <!-- <PageLayout title="Invite"> -->
+        <div class="bg-[#1A45B1] mainDiv w-screen h-auto">
 
             <div class="flex gap-[.2rem] mb-[.2rem] w-full h-[calc(100vh-2.1rem)] p-[.2rem]">
                 <div class="flex flex-col gap-[.2rem] items-center h-[calc(100vh-2.1rem)]">
@@ -96,7 +96,7 @@
 
 
 
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from '../../components/layout/PageLayoutTab.vue';
@@ -131,3 +131,11 @@ onMounted(() => {
     commission.mutate({ platform: 2 })
 })
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>

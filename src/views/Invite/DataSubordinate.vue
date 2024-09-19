@@ -1,5 +1,5 @@
 <template>
-     <PageLayout>
+     <!-- <PageLayout> -->
         <div class="w-screen p-[.2rem]">
             <div class="flex gap-[.2rem] mb-[.2rem]">
                 <div
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from '../../components/layout/PageLayoutTab.vue';

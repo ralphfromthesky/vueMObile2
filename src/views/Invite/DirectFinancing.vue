@@ -1,7 +1,7 @@
 <template>
-  <PageLayoutTab title="Invite">
+  <!-- <PageLayoutTab title="Invite"> -->
     <div
-      class="flex flex-col gap-[.2rem] w-screen h-[calc(100vh-1.7rem)] bg-[#05309F] text-white p-[.2rem]"
+      class="flex flex-col gap-[.2rem] mainDiv w-screen h-[calc(100vh-1.7rem)] bg-[#05309F] text-white p-[.2rem]"
     >
       <div class="flex gap-[.2rem]">
         <!-- <div
@@ -187,7 +187,7 @@
         </div>
       </div>
     </div>
-  </PageLayoutTab>
+  <!-- </PageLayoutTab> -->
 </template>
 
 <script setup>
@@ -237,4 +237,10 @@ onMounted(() => {
   });
 });
 </script>
-<style scoped></style>
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>

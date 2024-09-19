@@ -1,5 +1,5 @@
 <template>
-    <PageLayout title="Invite">
+    <!-- <PageLayout title="Invite"> -->
         <div>
             <div class="px-[.2rem] my-[.4rem]">
                 <div
@@ -207,7 +207,7 @@
                 </div>
             </div>
         </div>
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from '../../components/layout/PageLayoutTab.vue';

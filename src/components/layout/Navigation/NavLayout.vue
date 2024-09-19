@@ -1,14 +1,14 @@
 <template>
     <div class="bg-[#1a45b1] h-screen">
         <div>
-            <VantTabs :title-links="navLinks" has-padding-left=true :component-pass="[EventPage, Task, VipPage, Redemption, Pendente,JurosMainPage, Historico]"/>
+            <VantTabs :title-links="navLinks" :has-padding-left=true :component-pass="[EventPage, Task, VipPage, Redemption, Pendente,JurosMainPage, Historico]"/>
         </div>
         <BottomNavbar/>
     </div>
 </template>
 
 <script setup>
-// import VantTabs from '@/components/vantUi/vantTabs.vue';
+import VantTabs from '@/components/vantUi/vantTabs.vue';
 import BottomNavbar from './BottomNavbar.vue';
 import { ref, defineAsyncComponent } from 'vue';
 import VipPage from '@/views/Vip/VipPage.vue';

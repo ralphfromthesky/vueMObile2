@@ -1,5 +1,5 @@
 <template>
-    <PageLayout title="Invite">
+    <!-- <PageLayout title="Invite"> -->
         <div class="flex flex-col gap-[.2rem] p-[.2rem] w-full">
             <div class="flex bg-[#05309F] w-full rounded-[.1rem]">
                 <div class="flex w-[2.5rem] justify-center items-baseline relative">
@@ -213,7 +213,7 @@
                 </div>
             </div>
         </div>
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from '../../components/layout/PageLayoutTab.vue';

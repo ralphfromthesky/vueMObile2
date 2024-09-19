@@ -1,6 +1,6 @@
 <template>
-  <PageLayout title="Invite">
-    <div class="w-screen">
+  <!-- <PageLayout title="Invite"> -->
+    <div class="mainDiv w-screen">
       <div class="flex gap-[.2rem] p-[.2rem]">
         <!-- <div
                     class="flex items-center border-[.01rem] border-[#3A61C2] rounded-full p-[.1rem] px-[.1rem] bg-[#05309F] h-[.5rem] w-[3.2rem]">
@@ -163,7 +163,7 @@
         </div>
       </div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import PageLayout from "../../components/layout/PageLayoutTab.vue";
@@ -247,3 +247,10 @@ const acct = [
   { account: "mark", DateStart: "2024/05/24", income: "1000" },
 ];
 </script>
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>

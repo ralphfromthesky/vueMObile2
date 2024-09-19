@@ -1,6 +1,6 @@
 <template>
-  <PageLayout title="Invite">
-    <div class="w-screen p-[.2rem]">
+  <!-- <PageLayout title="Invite"> -->
+    <div class="mainDiv w-screen p-[.2rem]">
       <div class="flex gap-[.2rem] mb-[.2rem]">
         <!-- <div
                     class="flex items-center border rounded-full p-[.1rem] px-[.1rem] bg-[#05309F] h-[.5rem] w-[3.2rem]">
@@ -127,8 +127,8 @@
                         <span class="text-[#6FA4EF] text-[.25rem]">Sem Registros</span>
                     </div>
                 </div> -->
-  </PageLayout>
-</template>?""
+  <!-- </PageLayout> -->
+</template>
 <script setup>
 import PageLayout from "../../components/layout/PageLayoutTab.vue";
 import { onMounted, ref } from "vue";
@@ -176,3 +176,10 @@ onMounted(() => {
   });
 });
 </script>
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>

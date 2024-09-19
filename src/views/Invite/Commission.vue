@@ -1,69 +1,60 @@
 <template>
-  <PageLayout title="Invite">
-    <div class="flex flex-col gap-[.2rem] p-[.2rem] w-screen">
-      <div class="flex gap-[.2rem]">
-        <!-- <div
-                    class="flex items-center border-[.01rem] border-[#3A61C2] rounded-full p-[.1rem] px-[.1rem] bg-[#05309F] h-[.5rem] w-[3.2rem]">
-                    <input class="h-[.3rem] w-full  px-[.2rem] text-[0.2rem]  bg-transparent outline-none text-white"
-                        type="text" placeholder="22/05/2024 - 22/05/2024" />
-                </div> -->
-        <div>
-          <AntCalendar @startDate="handleStartDate" @endDate="handleEndDate"/>
+  <!-- <PageLayout title="Invite"> -->
+  <div class="flex flex-col gap-[.2rem] p-[.2rem] mainDiv w-screen" >
+    <div class="flex gap-[.2rem]">
+      <div>
+        <AntCalendar @startDate="handleStartDate" @endDate="handleEndDate" />
+      </div>
+    </div>
+    <div class="flex flex-col h-[calc(100vh-4.3rem)] overflow-auto">
+      <div
+        v-for="(commissionValue, indexes) in commissionData?.data?.content
+          ?.rows"
+        :key="indexes"
+        class="flex flex-col gap-[.1rem] leading-none p-[.25rem] rounded-[.1rem] odd:bg-[#3a61c2]"
+      >
+        <div class="grid grid-cols-2 gap-[.2rem]">
+          <div class="flex flex-col gap-[.1rem]">
+            <div class="flex items-center gap-[.1rem]">
+              <span class="flex items-center text-[#fff] text-[.2rem]"
+                >Time of Settlement {{ commissionValue?.statDateStr }}</span
+              >
+            </div>
+            <div class="flex items-center gap-[.1rem]">
+              <span class="flex items-center text-[#fff] text-[.2rem]"
+                >My Income {{ commissionValue?.oriBetNum }}</span
+              >
+            </div>
+          </div>
+          <div class="flex flex-col gap-[.1rem] justify-end">
+            <div class="flex items-center gap-[.1rem]">
+              <span class="flex items-center text-[#fff] text-[.2rem]"
+                >Type Slot</span
+              >
+            </div>
+            <div class="flex items-center gap-[.1rem]">
+              <span class="flex items-center text-[#fff] text-[.2rem]"
+                >Commission</span
+              >
+              <span class="flex items-center text-[#ffaa09] text-[.2rem]">{{
+                commissionValue?.money ? commissionValue?.money : "0"
+              }}</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex flex-col h-[calc(100vh-4.3rem)] overflow-auto">
-        <div
-          v-for="(commissionValue, indexes) in commissionData?.data?.content
-            ?.rows"
-          :key="indexes"
-          class="flex flex-col gap-[.1rem] leading-none p-[.25rem] rounded-[.1rem] odd:bg-[#3a61c2]"
-        >
-          <div class="grid grid-cols-2 gap-[.2rem]">
-            <div class="flex flex-col gap-[.1rem]">
-              <div class="flex items-center gap-[.1rem]">
-                <span class="flex items-center text-[#fff] text-[.2rem]"
-                  >Time of Settlement {{ commissionValue?.statDateStr }}</span
-                >
-              </div>
-              <div class="flex items-center gap-[.1rem]">
-                <span class="flex items-center text-[#fff] text-[.2rem]"
-                  >My Income {{ commissionValue?.oriBetNum }}</span
-                >
-              </div>
-            </div>
-            <div class="flex flex-col gap-[.1rem] justify-end">
-              <div class="flex items-center gap-[.1rem]">
-                <span class="flex items-center text-[#fff] text-[.2rem]"
-                  >Type Slot</span
-                >
-              </div>
-              <div class="flex items-center gap-[.1rem]">
-                <span class="flex items-center text-[#fff] text-[.2rem]"
-                  >Commission</span
-                >
-                <span class="flex items-center text-[#ffaa09] text-[.2rem]">{{
-                  commissionValue?.money ? commissionValue?.money : "0"
-                }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          v-if="commissionData?.data?.content?.rows?.length == 0"
-          class="flex flex-col items-center h-full overflow-auto w-full/"
-        >
-          <div class="flex flex-col h-full justify-center items-center">
-            <img
-              class="w-[2.5rem]"
-              src="/nodataImages/img_none_jl.png"
-              alt=""
-            />
-            <span class="text-[#6FA4EF] text-[.25rem]">Sem Registros</span>
-          </div>
+      <div
+        v-if="commissionData?.data?.content?.rows?.length == 0"
+        class="flex flex-col items-center h-full overflow-auto w-full/"
+      >
+        <div class="flex flex-col h-full justify-center items-center">
+          <img class="w-[2.5rem]" src="/nodataImages/img_none_jl.png" alt="" />
+          <span class="text-[#6FA4EF] text-[.25rem]">Sem Registros</span>
         </div>
       </div>
     </div>
-  </PageLayout>
+  </div>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import AntCalendar from "@/components/antUi/antCalendar.vue";
@@ -140,3 +131,11 @@ const handleStartDate = (start) => {
   startdates.value = dayjs(start).format("YYYY-MM-DD");
 };
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+    .mainDiv {
+        width:auto;
+    }
+}
+</style>
