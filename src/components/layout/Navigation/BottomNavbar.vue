@@ -35,7 +35,7 @@
                     <div class="text-[.25rem]">Saque</div>
                 </div>
             </router-link>
-            <router-link to="/support" v-if="!store.state.userInfo.isLogin">
+            <router-link to="/newsupport" v-if="!store.state.userInfo.isLogin">
                 <div class="flex flex-col items-center">
                     <!-- <div class="w-[.55rem] h-[.55rem] bg-[#1A45B1] rounded-[.1rem]"></div> -->
                     <img src="/bottomNavImages/15.png" alt="" class="w-[.6rem]">

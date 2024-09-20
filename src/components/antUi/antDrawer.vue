@@ -10,6 +10,7 @@
     @after-open-change="afterOpenChange"
     height="4rem"
     :closable="false"
+    width="5vw"
   >
   <template #title>
       <div class="flex justify-between items-center ">

@@ -1,5 +1,5 @@
 <template>
-  <PageLayout title="Centro de mensagens">
+  <!-- <PageLayout title="Centro de mensagens"> -->
     <div class="flex h-[calc(100vh-2.9rem)] items-center flex-col p-[.2rem] w-full gap-[.2rem]"
       v-if="showData">
       <div class="flex w-full bg-[#05309F] rounded-[.1rem] p-[.2rem]" v-for="(message, index) in messageData"
@@ -30,7 +30,7 @@
         <span> {{ messages }} </span>
       </div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import { onMounted, ref } from "vue";

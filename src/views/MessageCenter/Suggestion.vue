@@ -1,5 +1,5 @@
 <template>
-    <PageLayout title="Centro de mensagens">
+    <!-- <PageLayout title="Centro de mensagens"> -->
         <div class="flex flex-col w-full gap-[.2rem]">
             <div class="flex items-center w-full justify-between p-[.2rem] pb-0">
                 <div class="flex items-center leading-none gap-[.2rem]">
@@ -25,7 +25,7 @@
             <CreateFeedBack v-if="showCreate" />
             <MyFeedBack v-if="showFeedback" />
         </div>
-    </PageLayout>
+    <!-- </PageLayout> -->
 </template>
 <script setup>
     import PageLayout from '@/components/layout/MessageCenterLayout.vue';

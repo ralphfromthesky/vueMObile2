@@ -1,5 +1,5 @@
 <template>
-  <PageLayout title="Centro de mensagens">
+  <!-- <PageLayout title="Centro de mensagens"> -->
     <div class="flex flex-col gap-[.2rem] p-[.2rem]">
       <div class="flex gap-[.2rem] bg-[#05309F] rounded-[.1rem] p-[.2rem]">
         <div class="flex items-baseline">
@@ -182,7 +182,7 @@
         </div>
       </div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import { onMounted } from "vue";

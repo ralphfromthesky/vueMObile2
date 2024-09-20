@@ -29,8 +29,6 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const active = ref(0);
-const activeComponent = ref(0);
 const changeTab = (active) => {
   //  alert(active)
   if (active === 0) {
@@ -87,7 +85,16 @@ const props = defineProps({
     default: false,
     required: false,
   },
+  indexPass: {
+    type: Number,
+    required: false,
+    default: 0
+  }
 });
+const activeComponent = ref(props.indexPass ? props.indexPass : 0);
+const active = ref(props.indexPass ? props.indexPass : 0);
+
+
 </script>
 
 <style scoped>

@@ -46,10 +46,14 @@ const store = createStore({
       light: 'light',
       dark: 'dark',
       standard: 'standard'
-    }
+    },
+    indexPass: 0
 
   },
   mutations: {
+    setIndexPass(state, payload) {
+      state.indexPass = payload
+    },
     setPropsData(state, payload) {
       state.propsData = payload
     },

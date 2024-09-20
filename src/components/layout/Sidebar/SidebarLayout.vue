@@ -183,7 +183,7 @@
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/call.png" alt="" class="w-[.5rem]" />
           </div>
-          <div class="text-[.22rem]" @click="navigateTo('/support')">
+          <div class="text-[.22rem]" @click="navigateTo('/newsupport')">
             Support
           </div>
         </div>
@@ -266,6 +266,8 @@ const exclusive = () => {
   }
   stores.commit("setAntMOdal", true);
 };
+
+
 </script>
 
 <style scoped>

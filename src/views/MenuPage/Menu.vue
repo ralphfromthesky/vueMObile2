@@ -3,18 +3,16 @@
     <div class="bg-[#05309F] w-screen bg-[url('/images/menu_bg.png')] bg-no-repeat bg-right-top bg-[length:100%]">
       <div class="flex flex-col p-[.2rem]">
         <div class="flex gap-[.2rem] w-full justify-end">
-          <router-link to="/support">
+          <router-link to="/newsupport">
             <div class="flex flex-col items-center">
               <img class="w-[.35rem]" src="/menuImages/icon_suporte.png" alt="" />
               <span class="text-white text-[.2rem]">Suporte</span>
             </div>
           </router-link>
-          <router-link to="/notification">
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center" @click="showBonusDeSugestiao('/newsupport', 2)">
               <img class="w-[.35rem]" src="/menuImages/icon_message.png" alt="" />
               <span class="text-white text-[.2rem]">Mensahe</span>
             </div>
-          </router-link>
           <router-link to="/profile">
             <div class="flex flex-col items-center">
               <img class="w-[.35rem]" src="/menuImages/icon_dados.png" alt="" />
@@ -61,16 +59,14 @@
               <span class="text-white text-[.25]">Saque</span>
             </div>
           </router-link>
-          <div class="flex flex-col gap-[.1rem] items-center">
+          <div class="flex flex-col gap-[.1rem] items-center" @click="showDeposit">
             <img src="/menuImages/card2.png" alt="" class="w-[.55rem]" />
             <span class="text-white text-[.25]">Depositar</span>
           </div>
-          <router-link to="/juros">
-            <div class="flex flex-col gap-[.1rem] items-center">
+            <div class="flex flex-col gap-[.1rem] items-center" @click="showBonusDeSugestiao('/mainNav', 5)">
               <img src="/menuImages/pig.png" alt="" class="w-[.55rem]" />
               <span class="text-white text-[.25]">Juros</span>
             </div>
-          </router-link>
         </div>
         <div class="bg-[#FFF0BB] rounded-[.2rem] p-[.2rem]">
           <router-link to="/vip">
@@ -249,7 +245,7 @@
               </div>
             </div>
           </router-link>
-          <router-link to="/support">
+          <router-link to="/newsupport">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/icon_help.png" alt="" class="w-[.45rem]" />
@@ -260,8 +256,7 @@
               </div>
             </div>
           </router-link>
-          <router-link to="/suggestion">
-            <div class="flex items-center justify-between p-[.2rem]">
+            <div class="flex items-center justify-between p-[.2rem]" @click="showBonusDeSugestiao('/newsupport', 4)">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/icon_Suggestion1.png" alt="" class="w-[.43rem] h-[.45rem]" />
                 <span class="text-white text-[.26rem]">Bônus de Sugestão</span>
@@ -270,7 +265,6 @@
                 <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
               </div>
             </div>
-          </router-link>
           <router-link to="/deviceinfo">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
@@ -310,7 +304,11 @@
           </div>
         </div>
       </LogOutModal>
-
+      <div v-if="isLogin" class="h-screen bg-[#000000b3] fixed top-0 z-20">
+        <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 left-0 ease-in-out">
+            <Deposit @close="closeDeposit" />
+        </div>
+    </div>
       
     </div>
   </MenuLayout>
@@ -319,6 +317,10 @@
 import MenuLayout from "../../components/layout/MenuLayout.vue";
 import LogOutModal from "@/components/ModalComponent/LogOutModal.vue";
 import { useStore } from "@/store/store.js";
+import Deposit from "@/components/deposit/Deposit.vue";
+
+import { useRouter } from "vue-router";
+const router = useRouter()
 import { ref, onMounted } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import {
@@ -339,6 +341,15 @@ const vipCurrentLevel = ref([]);
 const isRotate = ref(false);
 const mainDiv = ref(true);
 
+const isLogin = ref(false)
+
+const showDeposit = () => {
+    isLogin.value = !isLogin.value
+}
+const closeDeposit = () => {
+    isLogin.value = false;
+    // hideThis()
+}
 
 onMounted(() => {
   vipCurrentLevel.value = store.state.degreeInfo.content;
@@ -368,6 +379,11 @@ const logOutUser = useMutation({
     console.log(`this error: ${error}`);
   },
 });
+
+const showBonusDeSugestiao = (link, pass) => {
+  router.push(link)
+  store.commit('setIndexPass', pass)
+}
 
 onMounted(() => {
   query.refetch();

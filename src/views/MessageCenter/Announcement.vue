@@ -1,5 +1,5 @@
 <template>
-  <PageLayout title="Centro de mensagens">
+  <!-- <PageLayout title="Centro de mensagens"> -->
     <div class="flex flex-col p-[.2rem] w-full gap-[.2rem]">
       <div @click="showNotice(notice.content)" class="flex justify-between w-full bg-[#05309F] rounded-[.1rem] p-[.2rem] h-[1.2rem]"
         v-for="(notice, index) in noticeData" :key="index" v-if="hideNotice">
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
