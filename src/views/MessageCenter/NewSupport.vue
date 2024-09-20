@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="text-center text-[.4rem] py-[.1rem] text-[white]">Centro de mensagens
-</div>
+
     <div>
-      <VantTabs :title-links="tabTitle" :component-pass="[Support, Notice, Notification, Announcement, Suggestion]" :indexPass=store.state.indexPass />
+      <VantTabs :title-links="tabTitle" :component-pass="[Support, Notice, Notification, Announcement, Suggestion]" :indexPass=store.state.indexPass title="Centro de mensagens"/>
     </div>
   </div>
 </template>

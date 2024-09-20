@@ -17,9 +17,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <context-holder />
-  <RouterView />
-  <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
+  <div class="overflow-hidden">
+    <context-holder />
+    <RouterView />
+    <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
+  </div>
 </template>
 
 <style scoped></style>

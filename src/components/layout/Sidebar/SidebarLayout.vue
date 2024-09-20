@@ -191,7 +191,7 @@
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/wenhao.png" alt="" class="w-[.5rem]" />
           </div>
-          <div class="text-[.22rem]" @click="navigateTo('support')">FAQ</div>
+          <div class="text-[.22rem]" @click="navigateTo('/newsupport')">FAQ</div>
         </div>
       </div>
     </div>

@@ -390,16 +390,16 @@ const router = createRouter({
       name: "recoverbalance",
       component: () => import("@/views/RecoverBalance/RecoverBalance.vue"),
     },
-    {
-      path: "/accountdetails",
-      name: "accountdetails",
-      component: () => import("@/views/AccountDetails/AcccountDetails.vue"),
-    },
     // {
     //   path: "/accountdetails",
     //   name: "accountdetails",
-    //   component: () => import("@/views/AccountDetails/NewAccuntDetails.vue"),
+    //   component: () => import("@/views/AccountDetails/AcccountDetails.vue"),
     // },
+    {
+      path: "/accountdetails",
+      name: "accountdetails",
+      component: () => import("@/views/AccountDetails/NewAccuntDetails.vue"),
+    },
     {
       path: "/bettingrecords",
       name: "bettingrecords",

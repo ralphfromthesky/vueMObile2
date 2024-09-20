@@ -19,20 +19,18 @@
               class="absolute w-[.5rem] bottom-0 right-0"
             />
           </div>
-          <RouterLink to="/records">
             <div
-              class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center items-center"
+              class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center pointer border-2 border-[red] items-center"
+              @click="navigateTo(6)"
             >
               <span class="text-[.2rem] text-blue-900">Historico</span>
             </div>
-          </RouterLink>
-          <RouterLink to="/redemption">
             <div
               class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center items-center"
+              @click="navigateTo(3)"
             >
               <span class="text-[.2rem] text-blue-900">Redemption</span>
             </div>
-          </RouterLink>
         </div>
 
         <div class="flex flex-col gap-[.2rem] overflow-auto h-[13.05rem]">
@@ -69,7 +67,9 @@ import {
   axiosGet,
   axiosPost,
 } from "../../components/axios/AxiosHook.js";
-import router from "@/router";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 const event = ref([]);
 const id = ref();
 const type = ref();
@@ -77,6 +77,11 @@ const type = ref();
 const clickEvent = (id) => {
   eventDetails({ actId: id });
 };
+
+const navigateTo = (index) => {
+store.commit('setIndexPass', index)
+}
+
 
 const { isLoading } = useQuery({
   queryKey: ["events"],

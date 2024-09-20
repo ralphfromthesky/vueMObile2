@@ -1,6 +1,6 @@
 <template>
-  <PageLayoutAccountDetails title="Relatório">
-    <div class="w-screen h-auto bg-[#1A45B1] p-[.2rem]">
+  <!-- <PageLayoutAccountDetails title="Relatório"> -->
+    <div class="mainDiv w-screen h-auto bg-[#1A45B1] p-[.2rem]">
       <div class="w-full flex p-[.2rem]">
         <div class="flex gap-[.2rem] items-center justify-start">
           <Select
@@ -116,7 +116,7 @@
             </div> -->
       <SpinLoader v-if="spin" />
     </div>
-  </PageLayoutAccountDetails>
+  <!-- </PageLayoutAccountDetails> -->
 </template>
 <script setup>
 import PageLayoutAccountDetails from "@/components/layout/PageLayoutAccountDetails.vue";
@@ -259,3 +259,11 @@ const account = useMutation({
   },
 });
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+</style>

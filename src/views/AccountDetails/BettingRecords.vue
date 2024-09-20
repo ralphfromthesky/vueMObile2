@@ -1,6 +1,6 @@
 <template>
-  <PageLayoutAccountDetails title="Relatório">
-    <div class="w-screen h-auto bg-[#1A45B1] p-[.2rem]">
+  <!-- <PageLayoutAccountDetails title="Relatório"> -->
+    <div class="mainDiv w-screen h-auto bg-[#1A45B1] p-[.2rem]">
       <div class="w-fullflex p-[.2rem]">
         <div class="flex gap-[.2rem] justify-center">
           <Select :pass="sched" title="Today" widthSize="2rem" @selected-item="handleSelecteditem" />
@@ -85,7 +85,7 @@
         <SpinLoader v-if="spinLoad" />
       </div>
     </div>
-  </PageLayoutAccountDetails>
+  <!-- </PageLayoutAccountDetails> -->
 </template>
 <script setup>
 import PageLayoutAccountDetails from "../../components/layout/PageLayoutAccountDetails.vue";
@@ -469,3 +469,12 @@ onMounted(() => {
 
 });
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+</style>
+

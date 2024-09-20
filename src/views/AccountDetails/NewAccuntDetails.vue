@@ -1,18 +1,19 @@
 <template>
     <div>
-      <div class="text-[.4rem] font-bold text-center text-[white] py-[.1rem]">
-        {{ props.title }}
-      </div>
+
       <VantTabs
         :title-links="tablink"
+        title="Relatario"
         :component-pass="[AccountDetails, BettingRecords, AccountDetailsRecord]"
-      />
+        :indexPass=store.state.indexPass
+        />
     </div>
   </template>
   
   <script setup>
   import { ref } from "vue";
-  
+  import { useStore } from "@/store/store";
+  const store = useStore()
   //   <TabContainer bg="#05309F">
   //     <Tabs title="Conta" link="/accountdetails" />
   //     <Tabs title="Apostas" link="/bettingrecords" />

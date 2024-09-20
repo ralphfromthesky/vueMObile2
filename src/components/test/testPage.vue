@@ -36,12 +36,10 @@ const toggleSlide = () => {
 
 .slide-right-enter-from {
   transform: translateX(100%);
-  opacity: 0;
 }
 
 .slide-right-leave-to {
   transform: translateX(-100%);
-  opacity: 0;
 }
 
 /* Slide from the left */
@@ -56,6 +54,5 @@ const toggleSlide = () => {
 
 .slide-left-leave-to {
   transform: translateX(100%);
-  opacity: 0;
 }
 </style>

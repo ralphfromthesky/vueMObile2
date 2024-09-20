@@ -1,7 +1,7 @@
 <template>
-  <PageLayoutAccountDetails title="Relatório">
+  <!-- <PageLayoutAccountDetails title="Relatório"> -->
     <div
-      class="flex flex-col gap-[.2rem] w-screen h-auto bg-[#1A45B1] p-[.2rem]"
+      class="flex flex-col gap-[.2rem] mainDiv w-screen h-auto bg-[#1A45B1] p-[.2rem]"
     >
       <div class="flex gap-[.1rem] items-center justify-between mt-[.2rem]">
         <!-- <div class="flex gap-[.2rem] overflow-y-auto w-full">
@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-  </PageLayoutAccountDetails>
+  <!-- </PageLayoutAccountDetails> -->
 </template>
 <script setup>
 import PageLayoutAccountDetails from "@/components/layout/PageLayoutAccountDetails.vue";
@@ -140,3 +140,11 @@ const handleSelecteditem = (date) => {
 
 };
 </script>
+
+<style scoped>
+@media screen and (min-width: 431px) {
+  .mainDiv {
+    width: auto;
+  }
+}
+</style>

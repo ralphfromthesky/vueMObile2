@@ -163,8 +163,7 @@
               </div>
             </div>
           </router-link>
-          <router-link to="/accountdetails">
-            <div class="flex items-center justify-between p-[.2rem]">
+            <div class="flex items-center justify-between p-[.2rem]"  @click="showBonusDeSugestiao('/accountdetails', 0)">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/poker2.png" alt="" class="w-[.45rem]" />
                 <span class="text-white text-[.26rem]">Detalhes da Conta</span>
@@ -173,9 +172,7 @@
                 <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
               </div>
             </div>
-          </router-link>
-          <router-link to="/bettingrecords">
-            <div class="flex items-center justify-between p-[.2rem]">
+            <div class="flex items-center justify-between p-[.2rem]" @click="showBonusDeSugestiao('/accountdetails', 1)">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/poker.png" alt="" class="w-[.45rem]" />
                 <span class="text-white text-[.26rem]">Recordes de Apostas</span>
@@ -184,9 +181,7 @@
                 <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
               </div>
             </div>
-          </router-link>
-          <router-link to="/accountdetailsrecord">
-            <div class="flex items-center justify-between p-[.2rem]">
+            <div class="flex items-center justify-between p-[.2rem]" @click="showBonusDeSugestiao('/accountdetails', 2)">
               <div class="flex items-center leading-none gap-[.2rem]">
                 <img src="/menuImages/serch.png" alt="" class="w-[.45rem]" />
                 <span class="text-white text-[.26rem]">Relatório</span>
@@ -195,7 +190,6 @@
                 <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
               </div>
             </div>
-          </router-link>
           <router-link to="/withdraw" @click="bankAccount.refetch()">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
