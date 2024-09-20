@@ -1,13 +1,33 @@
+
+<template>
+  <div class="overflow-hidden">
+    <context-holder />
+    <RouterView />
+    <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
+
+    <!-- <RouterView v-slot="{Component}">
+      <transition :name="slideDirection" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </RouterView> -->
+  </div>
+</template>
+
 <script setup>
 import { contextHolder } from "@/components/antUi/antMessage.js";
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView, useRoute } from "vue-router";
 import { useGetDegreeInfo } from "@/global/getDegreeInfo.js";
 import { onMounted, ref, watch } from "vue";
 import { useStore } from "./store/store";
 const store = useStore();
-
-// const store = useStore()
 const { degreeInfo } = useGetDegreeInfo();
+const slideDirection = ref('slide-left'); // Default slide direction
+// const route = useRoute()
+
+// watch(route, (to, from) => {
+//   // Example: Slide left if going to a new route, slide right if going back
+//   slideDirection.value = to.path > from.path ? 'slide-left' : 'slide-right';
+// });
 
 onMounted(() => {
   if (!degreeInfo.data.success) {
@@ -16,12 +36,31 @@ onMounted(() => {
 });
 </script>
 
-<template>
-  <div class="overflow-hidden">
-    <context-holder />
-    <RouterView />
-    <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
-  </div>
-</template>
+<style scoped>
 
-<style scoped></style>
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide-right-enter-from {
+  transform: translateX(100%);
+}
+
+.slide-right-leave-to {
+  transform: translateX(-100%);
+}
+
+/* Slide from the left */
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide-left-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-left-leave-to {
+  transform: translateX(100%);
+}
+</style>

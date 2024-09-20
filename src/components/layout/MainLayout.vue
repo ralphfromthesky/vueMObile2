@@ -75,8 +75,7 @@ import { useStore } from "@/store/store";
 const newStore = useStore();
 import { useGetUserConfig } from "@/global/userConfig";
 import { messageApi } from "../antUi/antMessage";
-import router from "@/router";
-
+import { RouterView } from "vue-router";
 const { userConfig } = useGetUserConfig();
 watchEffect(() => {
   userConfig.refetch();
