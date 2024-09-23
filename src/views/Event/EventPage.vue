@@ -48,7 +48,7 @@
                   :src="eventItems.titleImg"
                   alt=""
                 />
-              </div>
+              </div> 
             </router-link>
           </div>
         </div>
@@ -75,6 +75,7 @@ const id = ref();
 const type = ref();
 
 const clickEvent = (id) => {
+  //  alert(id)
   eventDetails({ actId: id });
 };
 

@@ -38,6 +38,11 @@ app.component('antButton',AntButton)
 app.component('VantTabs', VantTabs)
 // app.use(AntModal)
 app.component('AntModal', AntModal)
+// app.component([
+//     {'antButton' : AntButton},
+//     {'VantTabs': VantTabs},
+//     {'AntModal': AntModal}
+// ])
 
 app.use(router)
 app.use(VueQueryPlugin)

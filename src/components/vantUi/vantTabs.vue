@@ -19,7 +19,7 @@
           :title="tab.title"
           :key="tab.title"
         >
-          <div class="bg-[#1a45b1]">
+          <div class="bg-[#1a45b1] h-[13.5rem] overflow-auto">
             <component :is="props.componentPass[activeComponent]"></component>
           </div>
         </van-tab>
@@ -109,7 +109,7 @@ watch(
   (newVal) => {
     changeTab(newVal);
     active.value = newVal;
-    // alert(newVal)
+     alert(newVal)
   }
 );
 </script>

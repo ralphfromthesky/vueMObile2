@@ -2,6 +2,8 @@
   <div>
     <div>
       <VantTabs
+        title="Promotion"
+        :indexPass=store.state.indexPass
         :title-links="tabNames"
         :component-pass="[
           PromoTuturial,
@@ -34,6 +36,8 @@ import DirectDataPage from "@/views/Invite/DirectDataPage.vue";
 import SubordinatesRequests from "@/views/Invite/SubordinatesRequests.vue";
 import DirectReporting from "@/views/Invite/DirectReporting.vue";
 import CommissionRate from "@/views/Invite/CommissionRate.vue";
+import { useStore } from "@/store/store";
+const store = useStore()
 
 const tabNames = ref([
   { title: "Rede do Agente" },

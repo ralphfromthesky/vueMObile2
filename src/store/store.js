@@ -47,10 +47,14 @@ const store = createStore({
       dark: 'dark',
       standard: 'standard'
     },
-    indexPass: 0
+    indexPass: 0,
+    inviteData: []
 
   },
   mutations: {
+    setInviteData(state, payload) {
+      state.inviteData = payload;
+    },
     setIndexPass(state, payload) {
       state.indexPass = payload
     },
@@ -228,6 +232,8 @@ const store = createStore({
             
           }
         },
+        propsData: state.propsData,
+        inviteData: state.inviteData
        
       
 
