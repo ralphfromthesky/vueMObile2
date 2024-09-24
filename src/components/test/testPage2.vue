@@ -1,30 +1,50 @@
 <template>
   <div>
-    <div class="text-[yellow]"><slot name="header"></slot></div>
-    <div
-      class="bg-white h-[2rem] w-[5rem] flex gap-1 justify-center items-center"
-    >
-      <div class="h-[.5rem] bg-[black] w-[.3rem]">a</div>
-      <div class="h-[.5rem] bg-[black] w-[.3rem]">b</div>
-      <div class="h-[.5rem] bg-[black] w-[.3rem]">c</div>
-      <div class="h-[.5rem] bg-[black] w-[.3rem]">d</div>
+    <input type="text" v-model="todo" />
+    <button class="bg-[white]" @click="add">add</button>
+
+    <div v-for="(data, index) in todoList" :key="index">
+      <input type="text" v-model="data.todos" />
+      <button class="bg-[white]" @click="deleteTodo(data)">DEL</button>
     </div>
-    <div class="text-[white]"><slot name="footer" v-bind:data="data"></slot></div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, onMounted } from "vue";
+const props = define
+const todo = ref("");
+const todoList = ref([]);
 
-const data = ref([
-  {name: 'ralph'}, 
-  {name: 'gadwin'}, 
-  {name: 'shenron'}, 
+const add = () => {
+  if (todo.value === "") {
+    alert("yo input!");
+    return;
+  }
+  todoList.value.push({
+    todos: todo.value,
+  });
+};
 
-  
-])
+const deleteTodo = (x) => {
+  todoList.value = todoList.value.filter((a) => a !== x)
+}
 
+
+watch(todoList, (newVal) => {localStorage.setItem('todos', JSON.stringify(newVal))}, {deep: true})
+
+onMounted(() => {
+  const storedTodo = localStorage.getItem('todos');
+  if(storedTodo) {
+    try {
+      todoList.value = JSON.parse(storedTodo)
+    } catch (error) {
+      alert(error)
+    }
+  }
+})
 
 </script>
+
 
 <style lang="scss" scoped></style>
