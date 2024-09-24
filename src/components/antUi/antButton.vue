@@ -10,6 +10,7 @@
         borderRadius: b,
         fontSize: ft,
         fontWeight: bl,
+        border: bord,
         color: store.state.setThemes.lightTheme ? 'white' : store.state.setThemes.darkTheme ? 'white' : textCol
       }"
     >
@@ -85,7 +86,12 @@ const props = defineProps({
   },
   textCol: {
     type: String,
-    required: false,
+    required: false, 
+    default: "",
+  },
+  bord: {
+    type: String,
+    required: false, 
     default: "",
   },
 });

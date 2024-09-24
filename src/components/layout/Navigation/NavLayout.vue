@@ -3,7 +3,8 @@
     <div>
       <VantTabs
         :title-links="navLinks"
-        :has-padding-left="true"
+        :has-padding-left=true
+        :hasBackButton=true
         :component-pass="[
           EventPage,
           Task,
@@ -12,6 +13,7 @@
           Pendente,
           JurosMainPage,
           Historico,
+          Voucher
         ]"
         :indexPass=store.state.indexPass
       />
@@ -31,6 +33,7 @@ import Pendente from "@/views/Pendente/Pendente.vue";
 import JurosMainPage from "@/views/Juros/JurosMainPage.vue";
 import Historico from "@/views/Records/historico.vue";
 import EventPage from "@/views/Event/EventPage.vue";
+import  Voucher from '@/views/Voucher/Voucher.vue'
 import { useStore } from "@/store/store";
 const store = useStore();
 
@@ -50,6 +53,7 @@ const navLinks = ref([
   { title: "Pendentets" },
   { title: "Juros" },
   { title: "History" },
+  {title: "Voucher"}
 ]);
 </script>
 

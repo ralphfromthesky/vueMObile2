@@ -5,14 +5,17 @@
       <span
         @click="router.go(-1)"
         class="bg-[#05309F] py-[.224rem] pl-[.1rem] absolute top-[.2rem left-[0] z-10"
-        ><img src="/images/back.png" alt="" class="w-[.3rem]"
+        ><img src="/images/back.png" alt="" class="w-[.3rem]" 
       /></span>
+      <!-- v-if="hasBackButton" -->
       <van-tabs
         v-model:active="active"
         @change="changeTab(active)"
         background="#05309F"
         color="white"
+        paddingLeft="10rem"
         animated=""
+        :class="{'vantot' : props.hasBackButton}"
       >
         <van-tab
           v-for="(tab, index) in props.titleLinks"
@@ -100,6 +103,11 @@ const props = defineProps({
     required: false,
     default: 0,
   },
+  hasBackButton :{
+    type: Boolean,
+    required: false, 
+    default: true
+  }
 });
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
 const active = ref(props.indexPass ? props.indexPass : 0);

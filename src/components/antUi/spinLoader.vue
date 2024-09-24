@@ -5,7 +5,12 @@
   import { LoadingOutlined } from '@ant-design/icons-vue';
   import { h } from 'vue';
   const props = defineProps({
-    loading: Boolean,
+    loading: {
+      type: Boolean,
+      required: true,
+      default: true
+    },
+
     isAlign: {
       type: Boolean,
       default: false
@@ -17,7 +22,7 @@
       fontSize: '1.5rem',
       color: '#FFF0BB'
     },
-    spin: true,
+    spin: false,
   });
   </script>
 

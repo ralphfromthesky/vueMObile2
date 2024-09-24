@@ -206,6 +206,17 @@
       <div class="bg-[#1A45B1] w-full h-[.25rem]"></div>
       <div class="flex flex-col p-[.2rem]">
         <div class="flex flex-col">
+          <router-link to="/lottery">
+            <div class="flex items-center justify-between p-[.2rem]">
+              <div class="flex items-center leading-none gap-[.2rem]">
+                <img src="/menuImages/icon_music.png" alt="" class="w-[.45rem]" />
+                <span class="text-white text-[.26rem]">Lottery</span>
+              </div>
+              <div class="flex items-center">
+                <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
+              </div>
+            </div>
+          </router-link>
           <router-link to="/invite">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
