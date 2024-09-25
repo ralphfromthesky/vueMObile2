@@ -5,17 +5,17 @@
       <div class="h-[13.5rem] overflow-auto p-1 text-[white] bg-txt">
         <div class="flex justify-center gap-[1rem] mb-1">
           <span
-            :class="[share ? 'border-b-4 border-b-bg' : '']"
+            :class="[share ? 'border-b-4 border-b-bg transition-all	' : '']"
             @click="showData('share')"
             >My Share</span
           >
           <span
-            :class="[team ? 'border-b-4 border-b-bg' : '']"
+            :class="[team ? 'border-b-4 border-b-bg transition-all	' : '']"
             @click="showData('team')"
             >Team Overview</span
           >
           <span
-            :class="[user ? 'border-b-4 border-b-bg' : '']"
+            :class="[user ? 'border-b-4 border-b-bg transition-all	' : '']"
             @click="showData('user')"
             >User List</span
           >
@@ -62,34 +62,41 @@
           <div v-if="invitation">
             <div class="flex flex-wrap justify-center my-1 gap-1">
               <div
-                class="border-2 h-[3rem] w-[3rem] bg-[red] p-1 flex flex-col gap-2"
+                class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                Toda's invitation <span>0</span>
+                Toda's invitation <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayInvitePerson }}</span>
               </div>
               <div
-                class="border-2 h-[3rem] w-[3rem] bg-[red] p-1 flex flex-col gap-2"
+                class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                today's rebate <span>0</span>
+    
+                today's rebate <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayInviteRebate }}</span>
               </div>
               <div
-                class="border-2 h-[3rem] w-[3rem] bg-[red] p-1 flex flex-col gap-2"
+                class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                today's first deposit <span>0</span>
+            today's first deposit <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayDepositNum }}</span>
               </div>
               <div
-                class="border-2 h-[3rem] w-[3rem] bg-[red] p-1 flex flex-col gap-2"
+                class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                total number of charges <span>0</span>
+                total number of charges <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayDepositBackBonus }}</span>
               </div>
             </div>
             <div>
               <div class="p-1 py-[.5rem] flex justify-between my-1 bg-bg2">
-                <span>invite link:</span>
-                <span>asfsadf</span><span>copy img</span>
+                <span>invite link: </span>
+                <span>{{inviteData.data?.content?.prompInfo?.linkUrlEn || 'not available'}}</span><span @click="copyToClipboard( inviteData.data?.content?.prompInfo?.linkUrlEn)"><img
+                        src="/copyIcons/1c64f5.png"
+                        alt=""
+                    /></span>
               </div>
               <div class="p-1 py-[.5rem] flex justify-between my-1 bg-bg2">
                 <span>invite link:</span>
-                <span>asfsadf</span><span>copy img</span>
+                <span>{{inviteData.data?.content?.prompInfo?.linkUrl}}</span><span @click="copyToClipboard(inviteData.data?.content?.prompInfo?.linkUrl)"><img
+                        src="/copyIcons/1c64f5.png"
+                        alt=""
+                    /></span>
               </div>
             </div>
           </div>
@@ -246,21 +253,42 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="game">2</div>
+                <div v-if="game">
+                  
+                  
+                  
+                2</div>
               </div>
             </div>
           </div>
         </div>
         <div v-if="user">
-        <ReusableInput plhldr="User" w="2rem"  />
-        <ReusableInput plhldr="All levels" w="2rem"  />
-        <ReusableInput plhldr="Amount of deposits reached" w="2rem"  />
-        <ReusableInput plhldr="Balance" w="2rem"  />
-        <ReusableInput plhldr="to" w="2rem"  />
-
-
-        
-        user
+          <div class="flex flex-wrap gap-1 items-center">
+            <ReusableInput plhldr="User" w="2rem" />
+            <ReusableInput plhldr="All levels" w="2rem" dis="true" />
+            <ReusableInput plhldr="Amount of deposits reached" w="2rem" />
+            <ReusableInput plhldr="Balance" w="2rem" /> - to -
+            <ReusableInput plhldr="to" w="2rem" />
+          </div>
+          <div class="flex my-1 gap-2">
+            <span class="flex items-center gap-1">
+              <input type="checkbox" />
+              <label for="checkbox">Include subordinates</label>
+            </span>
+            <AntButton
+              textCol="#1a45b1"
+              bg="#fff0bb"
+              title="Search"
+              h=".8rem"
+              w="2rem"
+              b=".1rem"
+              ft=".3rem"
+              @click="showShare('bonus')"
+            />
+          </div>
+          <div class="border-2 h-[20rem] border-bg">
+            no data
+          </div>
         </div>
       </div>
     </div>
@@ -269,6 +297,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useQuery } from "@tanstack/vue-query";
+import { axiosGet } from "@/components/axios/AxiosHook";
+import { messageApi } from "@/components/antUi/antMessage";
 
 const share = ref(true);
 const team = ref(false);
@@ -278,6 +309,8 @@ const deposit = ref(false);
 const bonus = ref(false);
 const teams = ref(true);
 const game = ref(false);
+
+const inviteData = ref([])
 
 const days = ref([
   { name: "Today" },
@@ -311,6 +344,32 @@ const showTeams = (team) => {
   team === "teams" ? (teams.value = true) : "";
   team === "game" ? (game.value = true) : "";
 };
+
+const copyToClipboard = (textToCopy) => {
+  navigator.clipboard
+    .writeText(textToCopy)
+    .then(() => {
+      messageApi.info(`Copied: ${textToCopy}`);
+    })
+    .catch((err) => {
+      console.error("Failed to copy text: ", err);
+    });
+};
+
+const {} = useQuery({
+  queryKey: ['game'],
+  queryFn: () => axiosGet('https://mt0.yibo22.com/native/v2/agentTeam.do?startDate=2024-09-25+00:00:00&endDate=2024-09-25+23:59:59')
+})
+
+
+const {} = useQuery({
+  queryFn: () => axiosGet('/api/native/v2/inviteOverview2.do?ver=3&lan=en'),
+  enabled: true,
+  select: (data) => inviteData.value = data,
+  onError: (err) => alert(err)
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style coped>
+
+</style>
