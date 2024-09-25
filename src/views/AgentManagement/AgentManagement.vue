@@ -92,8 +92,8 @@
                     /></span>
               </div>
               <div class="p-1 py-[.5rem] flex justify-between my-1 bg-bg2">
-                <span>invite link:</span>
-                <span>{{inviteData.data?.content?.prompInfo?.linkUrl}}</span><span @click="copyToClipboard(inviteData.data?.content?.prompInfo?.linkUrl)"><img
+                <span>invitation promotion code：</span>
+                <span>{{store.state.userInfo.promCode}}</span><span @click="copyToClipboard(store.state.userInfo.promCode)"><img
                         src="/copyIcons/1c64f5.png"
                         alt=""
                     /></span>
@@ -116,7 +116,26 @@
                 />
               </div>
             </div>
-            <div class="text-center border-2">no data at this time</div>
+            <div class="text-center border-2">no data at this timesss
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
           </div>
           <div v-if="bonus" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
@@ -191,55 +210,55 @@
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
                       Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.teamMoney}}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Team withdrawal
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.betNum}}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Team Deposit
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.firstDepositProxyNum}}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Team number of first deposit
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.totalFirstDepositNum }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Agent rebate
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    The number of new user
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Not login for 3 days
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.threeNotLoginNum }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                      Online now
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.onlineNum }}<</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                      Team Balance
-                      <span class="text-[.5rem] text-bg">0</span>
+                    Total number of betting
+                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
                     </div>
                   </div>
                   <div>
@@ -248,16 +267,27 @@
                     >
                       <div>Total number of teams</div>
                       <div class="flex gap-[2rem]">
-                        <span>Agent: 0</span><span>User: 0</span>
+                        <span>Agent: {{ agentData?.data?.content?.proxyCount }}</span><span>User:  {{ agentData?.data?.content?.memberCount }}</span> 
                       </div>
                     </div>
                   </div>
                 </div>
                 <div v-if="game">
+                    <div>
+                      <div class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg">
+                      <div class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2">Sports</div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of bet: <span>0</span></div>
+                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of rebate: <span>0</span></div>
+                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of win: <span>0</span></div>
+                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Betting amount: <span>0</span></div>
+
+                      </div>
+                    </div>
+                    </div>
                   
                   
-                  
-                2</div>
+                </div>
               </div>
             </div>
           </div>
@@ -297,9 +327,14 @@
 
 <script setup>
 import { ref } from "vue";
-import { useQuery } from "@tanstack/vue-query";
+import { useMutation, useQuery } from "@tanstack/vue-query";
 import { axiosGet } from "@/components/axios/AxiosHook";
 import { messageApi } from "@/components/antUi/antMessage";
+import { useStore } from "@/store/store";
+
+
+const store = useStore()
+
 
 const share = ref(true);
 const team = ref(false);
@@ -311,6 +346,8 @@ const teams = ref(true);
 const game = ref(false);
 
 const inviteData = ref([])
+const agentData = ref([])
+
 
 const days = ref([
   { name: "Today" },
@@ -320,6 +357,11 @@ const days = ref([
   { name: "This month" },
   { name: "Last month" },
 ]);
+
+const dates = ref({
+  startDate: '',
+  endDate: ''
+})
 
 const showData = (data) => {
   share.value = false;
@@ -356,18 +398,33 @@ const copyToClipboard = (textToCopy) => {
     });
 };
 
-const {} = useQuery({
-  queryKey: ['game'],
-  queryFn: () => axiosGet('https://mt0.yibo22.com/native/v2/agentTeam.do?startDate=2024-09-25+00:00:00&endDate=2024-09-25+23:59:59')
-})
-
 
 const {} = useQuery({
   queryFn: () => axiosGet('/api/native/v2/inviteOverview2.do?ver=3&lan=en'),
+  queryKey: ['invite'],
   enabled: true,
   select: (data) => inviteData.value = data,
   onError: (err) => alert(err)
 })
+
+
+const {mutate: invite} = useMutation({
+  mutationFn: (payload) => axiosPost('/api/native/v2/inviteDeposits.do?pageSize=100&pageNumber=1&lan=en', payload),
+  onSuccess: (data) => inviteDeposit.value = data,
+  onError: (err) => alert(err) 
+})
+
+const {} = useQuery({
+  queryFn: () => axiosGet('/api/native/v2/agentTeam.do'),
+  queryKey: ['agent'],
+  enabled: true,
+  select: (data) => agentData.value = data,
+  onError: (err) => alert(err)
+})
+
+
+
+
 </script>
 
 <style coped>
