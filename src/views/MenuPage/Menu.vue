@@ -217,6 +217,17 @@
               </div>
             </div>
           </router-link>
+          <router-link to="/agent">
+            <div class="flex items-center justify-between p-[.2rem]">
+              <div class="flex items-center leading-none gap-[.2rem]">
+                <img src="/menuImages/icon_music.png" alt="" class="w-[.45rem]" />
+                <span class="text-white text-[.26rem]">Agent Management</span>
+              </div>
+              <div class="flex items-center">
+                <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
+              </div>
+            </div>
+          </router-link>
           <router-link to="/invite">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">

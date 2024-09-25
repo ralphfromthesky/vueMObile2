@@ -433,10 +433,16 @@ const router = createRouter({
       component: () => import('@/components/layout/NewInvitePage.vue')
     },
     {
+      path: "/agent",
+      name: "agent",
+      component: () => import('@/views/AgentManagement/AgentManagement.vue')
+    },
+    {
       path: "/lottery",
       name: "lottery",
       component: () => import('@/views/Lottery/Lottery.vue')
     },
+
     {
       path: "/invitation",
       name: "invitation",

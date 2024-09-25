@@ -8,6 +8,10 @@ import router from './router'
 import store from './store/store'
 import { Tab, Tabs } from 'vant';
 import VantTabs from '@/components/vantUi/vantTabs.vue';
+import HeaderView from "@/views/ReusableComponent/Head.vue";
+import Select from "@/components/antUi/select.vue";
+
+
 
 
 // import AntModal from "@/components/antUi/antModal.vue";
@@ -21,6 +25,7 @@ import { Dialog } from 'vant';
 import { DatePicker } from 'vant';
 import { RollingText } from 'vant';
 import { CountDown } from 'vant';
+import ReusableInput from '@/views/ReusableComponent/ReusableInput.vue'
 
 
 
@@ -32,18 +37,20 @@ app.use(Dialog)
 app.use(Antd)
 
 
+
+
 app.use(Tab);
 app.use(Tabs);
 
 app.component('antButton',AntButton)
 app.component('VantTabs', VantTabs)
-// app.use(AntModal)
 app.component('AntModal', AntModal)
-// app.component([
-//     {'antButton' : AntButton},
-//     {'VantTabs': VantTabs},
-//     {'AntModal': AntModal}
-// ])
+app.component('HeaderView', HeaderView)
+app.component('Select', Select)
+app.component('ReusableInput', ReusableInput)
+
+
+
 
 app.use(router)
 app.use(VueQueryPlugin)
