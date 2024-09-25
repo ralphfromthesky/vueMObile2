@@ -121,8 +121,8 @@
           </div>
           <div v-if="deposit" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
-              <div><Select :pass="days" @selectedItem="dateSelected"/></div>
-              <div>
+              <div><Select :pass="days" @selectedItem="dateSelected" widthSize="3rem" /></div>
+              <!-- <div>
                 <AntButton
                   textCol="#1a45b1"
                   bg="#fff0bb"
@@ -131,9 +131,9 @@
                   w="2rem"
                   b=".1rem"
                   ft=".3rem"
-                  @click="dateSelected"
+                  @click="searhDate()"
                 />
-              </div>
+              </div> -->
             </div>
             <div class="text-center border-2">no data at this timesss</div>
           </div>
@@ -642,6 +642,7 @@
           <div class="border-2 h-[20rem] border-bg">no data</div>
         </div>
       </div>
+      <SpinLoader v-if="isFetching" />
     </div>
   </div>
 </template>
@@ -652,6 +653,19 @@ import { useMutation, useQuery } from "@tanstack/vue-query";
 import { axiosGet } from "@/components/axios/AxiosHook";
 import { messageApi } from "@/components/antUi/antMessage";
 import { useStore } from "@/store/store";
+import { getTodayStartEnd } from "@/global/newDateRange.js";
+const {
+  todayStartTime,
+  todayEndTime,
+  yesterdayStartTime,
+  yesterdayEndTime,
+  weekStartTime,
+  weekEndTime,
+  monthStartTime,
+  monthEndTime,
+  lastMonthStartTime,
+  lastMonthEndTime,
+} = getTodayStartEnd();
 
 const store = useStore();
 const share = ref(true);
@@ -664,9 +678,8 @@ const teams = ref(true);
 const game = ref(false);
 const inviteData = ref([]);
 const agentData = ref([]);
-const startTime = ref();
-const endTime = ref();
-const receivedDate = ref('')
+ const startTime = ref();
+ const endTime = ref();
 const days = ref([
   { name: "Today" },
   { name: "yesterday" },
@@ -677,18 +690,35 @@ const days = ref([
 ]);
 
 const dateSelected = (date) => {
-  receivedDate.value = date
-  if(date === 'Today') {
-    alert('fuck')
+
+  if (date === "Today") {
+startTime.value =  todayStartTime;
+endTime.value = todayEndTime;
   }
-}
+  if (date === "yesterday") {
+startTime.value =  yesterdayStartTime;
+endTime.value = yesterdayEndTime;
+  }
+  if (date === "This Week") {
+startTime.value =  weekStartTime;
+endTime.value = weekEndTime;
+  }
+  if (date === "This month") {
+startTime.value =  monthStartTime;
+endTime.value = monthEndTime;
+  }
+  if (date === "Last month") {
+startTime.value =  lastMonthStartTime;
+endTime.value = lastMonthEndTime;
+  }
+   invite();
+};
 
-watch(receivedDate, (newVal) => {alert(newVal)})
+// const searhDate = () => {
 
-const dates = ref({
-  startDate: "",
-  endDate: "",
-});
+// }
+
+
 
 const showData = (data) => {
   share.value = false;
@@ -733,10 +763,10 @@ const {} = useQuery({
   onError: (err) => alert(err),
 });
 
-const { refetch: invite } = useQuery({
+const { refetch: invite, isFetching } = useQuery({
   queryFn: () =>
     axiosGet(
-      `https://mt0.yibo22.com/native/v2/inviteDeposits.do?startTime=${startTime}&endTime=${endTime}&id=&pageSize=100&pageNumber=1&lan=en`
+      `https://mt0.yibo22.com/native/v2/inviteDeposits.do?startTime=${startTime.value}&endTime=${endTime.value}&id=&pageSize=100&pageNumber=1&lan=en`
     ),
   queryKey: ["invite"],
   select: (data) => (inviteData.value = data),

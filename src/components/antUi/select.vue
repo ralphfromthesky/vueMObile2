@@ -39,6 +39,10 @@ const props = defineProps({
     type: String,
     default: "120px",
   },
+  h: {
+    type: String,
+    default: "120px",
+  }
 });
 const emits = defineEmits(["selectedItem", 'selectedEvent', 'selectedPlatform']);
 

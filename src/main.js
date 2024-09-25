@@ -10,6 +10,8 @@ import { Tab, Tabs } from 'vant';
 import VantTabs from '@/components/vantUi/vantTabs.vue';
 import HeaderView from "@/views/ReusableComponent/Head.vue";
 import Select from "@/components/antUi/select.vue";
+import SpinLoader from "@/components/antUi/spinLoader.vue";
+
 
 
 
@@ -48,6 +50,8 @@ app.component('AntModal', AntModal)
 app.component('HeaderView', HeaderView)
 app.component('Select', Select)
 app.component('ReusableInput', ReusableInput)
+app.component('SpinLoader', SpinLoader)
+
 
 
 
