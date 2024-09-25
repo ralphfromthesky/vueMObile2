@@ -64,78 +64,78 @@
               <div
                 class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                Toda's invitation <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayInvitePerson }}</span>
+                Toda's invitation
+                <span class="text-[.5rem] text-bg">{{
+                  inviteData.data?.content?.todayInvitePerson
+                }}</span>
               </div>
               <div
                 class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-    
-                today's rebate <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayInviteRebate }}</span>
+                today's rebate
+                <span class="text-[.5rem] text-bg">{{
+                  inviteData.data?.content?.todayInviteRebate
+                }}</span>
               </div>
               <div
                 class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-            today's first deposit <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayDepositNum }}</span>
+                today's first deposit
+                <span class="text-[.5rem] text-bg">{{
+                  inviteData.data?.content?.todayDepositNum
+                }}</span>
               </div>
               <div
                 class="h-[3rem] w-[3rem] bg-bg2 rounded-[.1rem] p-1 flex flex-col gap-2"
               >
-                total number of charges <span class="text-[.5rem] text-bg">{{ inviteData.data?.content?.todayDepositBackBonus }}</span>
+                total number of charges
+                <span class="text-[.5rem] text-bg">{{
+                  inviteData.data?.content?.todayDepositBackBonus
+                }}</span>
               </div>
             </div>
             <div>
               <div class="p-1 py-[.5rem] flex justify-between my-1 bg-bg2">
                 <span>invite link: </span>
-                <span>{{inviteData.data?.content?.prompInfo?.linkUrlEn || 'not available'}}</span><span @click="copyToClipboard( inviteData.data?.content?.prompInfo?.linkUrlEn)"><img
-                        src="/copyIcons/1c64f5.png"
-                        alt=""
-                    /></span>
+                <span>{{
+                  inviteData.data?.content?.prompInfo?.linkUrlEn ||
+                  "not available"
+                }}</span
+                ><span
+                  @click="
+                    copyToClipboard(
+                      inviteData.data?.content?.prompInfo?.linkUrlEn
+                    )
+                  "
+                  ><img src="/copyIcons/1c64f5.png" alt=""
+                /></span>
               </div>
               <div class="p-1 py-[.5rem] flex justify-between my-1 bg-bg2">
                 <span>invitation promotion code：</span>
-                <span>{{store.state.userInfo.promCode}}</span><span @click="copyToClipboard(store.state.userInfo.promCode)"><img
-                        src="/copyIcons/1c64f5.png"
-                        alt=""
-                    /></span>
+                <span>{{ store.state.userInfo.promCode }}</span
+                ><span @click="copyToClipboard(store.state.userInfo.promCode)"
+                  ><img src="/copyIcons/1c64f5.png" alt=""
+                /></span>
               </div>
             </div>
           </div>
           <div v-if="deposit" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
-              <div><Select :pass="days" /></div>
+              <div><Select :pass="days" @selectedItem="dateSelected"/></div>
               <div>
                 <AntButton
                   textCol="#1a45b1"
                   bg="#fff0bb"
-                  title="Bonus Information"
+                  title="Search"
                   h=".8rem"
                   w="2rem"
                   b=".1rem"
                   ft=".3rem"
-                  @click="showShare('bonus')"
+                  @click="dateSelected"
                 />
               </div>
             </div>
-            <div class="text-center border-2">no data at this timesss
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </div>
+            <div class="text-center border-2">no data at this timesss</div>
           </div>
           <div v-if="bonus" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
@@ -210,55 +210,73 @@
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
                       Team Balance
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.teamMoney}}</span>
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.teamMoney
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Team withdrawal
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.betNum}}</span>
+                      Team withdrawal
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.betNum
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Team Deposit
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.firstDepositProxyNum}}</span>
+                      Team Deposit
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.firstDepositProxyNum
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Team number of first deposit
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.totalFirstDepositNum }}</span>
+                      Team number of first deposit
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.totalFirstDepositNum
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Agent rebate
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
+                      Agent rebate
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.registerCount
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    The number of new user
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
+                      The number of new user
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.registerCount
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Not login for 3 days
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.threeNotLoginNum }}</span>
+                      Not login for 3 days
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.threeNotLoginNum
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
                       Online now
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.onlineNum }}<</span>
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.onlineNum
+                      }}</span>
                     </div>
                     <div
                       class="h-[3rem] w-[2.2rem] flex flex-col p-1 gap-2 border-bg bg-bg2 rounded-[.2rem] text-[.3rem]"
                     >
-                    Total number of betting
-                      <span class="text-[.5rem] text-bg">{{ agentData?.data?.content?.registerCount }}</span>
+                      Total number of betting
+                      <span class="text-[.5rem] text-bg">{{
+                        agentData?.data?.content?.registerCount
+                      }}</span>
                     </div>
                   </div>
                   <div>
@@ -267,26 +285,331 @@
                     >
                       <div>Total number of teams</div>
                       <div class="flex gap-[2rem]">
-                        <span>Agent: {{ agentData?.data?.content?.proxyCount }}</span><span>User:  {{ agentData?.data?.content?.memberCount }}</span> 
+                        <span
+                          >Agent:
+                          {{ agentData?.data?.content?.proxyCount }}</span
+                        ><span
+                          >User:
+                          {{ agentData?.data?.content?.memberCount }}</span
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
                 <div v-if="game">
-                    <div>
-                      <div class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg">
-                      <div class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2">Sports</div>
+                  <div class="flex flex-col gap-1 h-[10rem] overflow-auto">
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Sports
+                      </div>
                       <div class="grid grid-cols-2 gap-[.1rem]">
-                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of bet: <span>0</span></div>
-                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of rebate: <span>0</span></div>
-                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Amount of win: <span>0</span></div>
-                        <div class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]">Betting amount: <span>0</span></div>
-
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.sportRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetAmount
+                          }}</span>
+                        </div>
                       </div>
                     </div>
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Slots
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.lotRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotBetAmount
+                          }}</span>
+                        </div>
+                      </div>
                     </div>
-                  
-                  
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Live Casino
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.sportBetNum
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Chess
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.liveBetAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.liveRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.liveWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.liveBetNum
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        E-sports
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.esportBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.esportRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.esportWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.esportBetAmount
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Fishing
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.fishingBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.fishingRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.fishingWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.fishingBetAmount
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-[.01rem] p-[.05rem] pb-1 rounded-[.1rem] bg-bg"
+                    >
+                      <div
+                        class="text-center text-[.5rem] font-bold my-[.2rem] text-bg2"
+                      >
+                        Lottery games
+                      </div>
+                      <div class="grid grid-cols-2 gap-[.1rem]">
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of bet:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotBetNum
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of rebate:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney
+                              ?.lotRebateAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Amount of win:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotWinAmount
+                          }}</span>
+                        </div>
+                        <div
+                          class="h-[1rem] bg-bg2 text-[.3rem] gap-1 flex items-center p-1 rounded-[.1rem]"
+                        >
+                          Betting amount:
+                          <span>{{
+                            agentData?.data?.content?.dailyMoney?.lotBetAmount
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -316,9 +639,7 @@
               @click="showShare('bonus')"
             />
           </div>
-          <div class="border-2 h-[20rem] border-bg">
-            no data
-          </div>
+          <div class="border-2 h-[20rem] border-bg">no data</div>
         </div>
       </div>
     </div>
@@ -326,16 +647,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useMutation, useQuery } from "@tanstack/vue-query";
 import { axiosGet } from "@/components/axios/AxiosHook";
 import { messageApi } from "@/components/antUi/antMessage";
 import { useStore } from "@/store/store";
 
-
-const store = useStore()
-
-
+const store = useStore();
 const share = ref(true);
 const team = ref(false);
 const user = ref(false);
@@ -344,11 +662,11 @@ const deposit = ref(false);
 const bonus = ref(false);
 const teams = ref(true);
 const game = ref(false);
-
-const inviteData = ref([])
-const agentData = ref([])
-
-
+const inviteData = ref([]);
+const agentData = ref([]);
+const startTime = ref();
+const endTime = ref();
+const receivedDate = ref('')
 const days = ref([
   { name: "Today" },
   { name: "yesterday" },
@@ -358,10 +676,19 @@ const days = ref([
   { name: "Last month" },
 ]);
 
+const dateSelected = (date) => {
+  receivedDate.value = date
+  if(date === 'Today') {
+    alert('fuck')
+  }
+}
+
+watch(receivedDate, (newVal) => {alert(newVal)})
+
 const dates = ref({
-  startDate: '',
-  endDate: ''
-})
+  startDate: "",
+  endDate: "",
+});
 
 const showData = (data) => {
   share.value = false;
@@ -398,35 +725,31 @@ const copyToClipboard = (textToCopy) => {
     });
 };
 
+const {} = useQuery({
+  queryFn: () => axiosGet("/api/native/v2/inviteOverview2.do?ver=3&lan=en"),
+  queryKey: ["invite"],
+  enabled: true,
+  select: (data) => (inviteData.value = data),
+  onError: (err) => alert(err),
+});
+
+const { refetch: invite } = useQuery({
+  queryFn: () =>
+    axiosGet(
+      `https://mt0.yibo22.com/native/v2/inviteDeposits.do?startTime=${startTime}&endTime=${endTime}&id=&pageSize=100&pageNumber=1&lan=en`
+    ),
+  queryKey: ["invite"],
+  select: (data) => (inviteData.value = data),
+  onError: (err) => alert(err),
+});
 
 const {} = useQuery({
-  queryFn: () => axiosGet('/api/native/v2/inviteOverview2.do?ver=3&lan=en'),
-  queryKey: ['invite'],
+  queryFn: () => axiosGet("/api/native/v2/agentTeam.do"),
+  queryKey: ["agent"],
   enabled: true,
-  select: (data) => inviteData.value = data,
-  onError: (err) => alert(err)
-})
-
-
-const {mutate: invite} = useMutation({
-  mutationFn: (payload) => axiosPost('/api/native/v2/inviteDeposits.do?pageSize=100&pageNumber=1&lan=en', payload),
-  onSuccess: (data) => inviteDeposit.value = data,
-  onError: (err) => alert(err) 
-})
-
-const {} = useQuery({
-  queryFn: () => axiosGet('/api/native/v2/agentTeam.do'),
-  queryKey: ['agent'],
-  enabled: true,
-  select: (data) => agentData.value = data,
-  onError: (err) => alert(err)
-})
-
-
-
-
+  select: (data) => (agentData.value = data),
+  onError: (err) => alert(err),
+});
 </script>
 
-<style coped>
-
-</style>
+<style coped></style>
