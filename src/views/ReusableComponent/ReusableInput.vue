@@ -33,7 +33,3 @@
 </script>
 
 <style lang="scss" scoped></style>
-
-<!-- v-model="userLogin.username"
-@input="userNameInput = false"
-:class="{ 'border-2 border-red-500': userNameInput }" -->

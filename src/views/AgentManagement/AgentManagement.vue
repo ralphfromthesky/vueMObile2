@@ -121,7 +121,13 @@
           </div>
           <div v-if="deposit" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
-              <div><Select :pass="days" @selectedItem="dateSelected" widthSize="3rem" /></div>
+              <div>
+                <Select
+                  :pass="days"
+                  @selectedItem="dateSelected"
+                  widthSize="3rem"
+                />
+              </div>
               <!-- <div>
                 <AntButton
                   textCol="#1a45b1"
@@ -135,7 +141,17 @@
                 />
               </div> -->
             </div>
-            <div class="text-center border-2">no data at this timesss</div>
+            <div>
+              <div class="flex justify-center flex-col text-center">
+                <img
+                  class="w-[3rem] "
+                  src="/nodataImages/img_none_jl.png"
+                  alt=""
+                />
+                no data at this timesss
+
+              </div>
+            </div>
           </div>
           <div v-if="bonus" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
@@ -618,7 +634,7 @@
         <div v-if="user">
           <div class="flex flex-wrap gap-1 items-center">
             <ReusableInput plhldr="User" w="2rem" />
-            <ReusableInput plhldr="All levels" w="2rem" dis="true" />
+            <ReusableInput plhldr="All levels" w="2rem" :dis=true />
             <ReusableInput plhldr="Amount of deposits reached" w="2rem" />
             <ReusableInput plhldr="Balance" w="2rem" /> - to -
             <ReusableInput plhldr="to" w="2rem" />
@@ -678,8 +694,8 @@ const teams = ref(true);
 const game = ref(false);
 const inviteData = ref([]);
 const agentData = ref([]);
- const startTime = ref();
- const endTime = ref();
+const startTime = ref();
+const endTime = ref();
 const days = ref([
   { name: "Today" },
   { name: "yesterday" },
@@ -690,35 +706,32 @@ const days = ref([
 ]);
 
 const dateSelected = (date) => {
-
   if (date === "Today") {
-startTime.value =  todayStartTime;
-endTime.value = todayEndTime;
+    startTime.value = todayStartTime;
+    endTime.value = todayEndTime;
   }
   if (date === "yesterday") {
-startTime.value =  yesterdayStartTime;
-endTime.value = yesterdayEndTime;
+    startTime.value = yesterdayStartTime;
+    endTime.value = yesterdayEndTime;
   }
   if (date === "This Week") {
-startTime.value =  weekStartTime;
-endTime.value = weekEndTime;
+    startTime.value = weekStartTime;
+    endTime.value = weekEndTime;
   }
   if (date === "This month") {
-startTime.value =  monthStartTime;
-endTime.value = monthEndTime;
+    startTime.value = monthStartTime;
+    endTime.value = monthEndTime;
   }
   if (date === "Last month") {
-startTime.value =  lastMonthStartTime;
-endTime.value = lastMonthEndTime;
+    startTime.value = lastMonthStartTime;
+    endTime.value = lastMonthEndTime;
   }
-   invite();
+  invite();
 };
 
 // const searhDate = () => {
 
 // }
-
-
 
 const showData = (data) => {
   share.value = false;

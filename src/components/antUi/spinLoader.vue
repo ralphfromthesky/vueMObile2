@@ -7,13 +7,14 @@
   const props = defineProps({
     loading: {
       type: Boolean,
-      required: true,
+      required: false,
       default: true
     },
 
     isAlign: {
       type: Boolean,
-      default: false
+      default: false,
+      required: false
     }
     
   })
