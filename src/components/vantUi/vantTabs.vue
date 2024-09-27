@@ -1,11 +1,16 @@
 <template>
   <div>
-    <div class="py-[.21rem] text-[white] bg-[#05309F] border-b-[.05rem] border-[#1a45b1] text-[.3rem] text-center" v-if="props.title">{{props.title}}</div>
+    <div
+      class="py-[.21rem] text-[white] bg-[#05309F] border-b-[.05rem] border-[#1a45b1] text-[.3rem] text-center"
+      v-if="props.title"
+    >
+      {{ props.title }}
+    </div>
     <div class="relative">
       <span
         @click="router.go(-1)"
         class="bg-[#05309F] py-[.224rem] pl-[.1rem] absolute top-[.2rem left-[0] z-10"
-        ><img src="/images/back.png" alt="" class="w-[.3rem]" 
+        ><img src="/images/back.png" alt="" class="w-[.3rem]"
       /></span>
       <!-- v-if="hasBackButton" -->
       <van-tabs
@@ -15,7 +20,7 @@
         color="white"
         paddingLeft="10rem"
         animated=""
-        :class="{'vantot' : props.hasBackButton}"
+        :class="{ vantot: props.hasBackButton }"
       >
         <van-tab
           v-for="(tab, index) in props.titleLinks"
@@ -24,6 +29,11 @@
         >
           <div class="bg-[#1a45b1] h-[13.5rem] overflow-auto">
             <component :is="props.componentPass[activeComponent]"></component>
+            <div v-if="props.hasData">
+              <div class="text-[white] p-1" v-for="(data, index) in props.hasData?.data?.content" :key="index">
+                {{data.content}}
+              </div>
+            </div>
           </div>
         </van-tab>
       </van-tabs>
@@ -81,7 +91,12 @@ const props = defineProps({
   title: {
     type: String,
     required: false,
-    default: ''
+    default: "",
+  },
+  hasData: {
+    type: Array,
+    required: false,
+    default: [],
   },
   titleLinks: {
     type: Array,
@@ -90,8 +105,8 @@ const props = defineProps({
   },
   componentPass: {
     type: Array,
-    required: true,
-    default: "",
+    required: false,
+    default: [],
   },
   hasPaddingLeft: {
     type: Boolean,
@@ -103,11 +118,11 @@ const props = defineProps({
     required: false,
     default: 0,
   },
-  hasBackButton :{
+  hasBackButton: {
     type: Boolean,
-    required: false, 
-    default: true
-  }
+    required: false,
+    default: true,
+  },
 });
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
 const active = ref(props.indexPass ? props.indexPass : 0);
@@ -117,7 +132,7 @@ watch(
   (newVal) => {
     changeTab(newVal);
     active.value = newVal;
-     alert(newVal)
+    alert(newVal);
   }
 );
 </script>

@@ -2,7 +2,7 @@
     <main>
         <div class="mainDiv flex items-center  top-0 h-[.9rem] bg-[#05309F] border-b border-b-[#3A61C2]">
             <div class="flex items-center relative w-screen p-[.2rem]">
-                <div class="absolute" @click="this.$router.go(-1)">
+                <div class="absolute" @click="router.go(-1)">
                     <img src="/images/return.png" class="w-[.3rem]" alt="">
                 </div>
                 <div class="flex justify-center w-full">
@@ -20,6 +20,8 @@
     </main>
 </template>
 <script setup>
+import { useRouter } from "vue-router";
+const router = useRouter()
 const props = defineProps({
     title: { type: String, required: true }
 })

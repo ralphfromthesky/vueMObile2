@@ -11,6 +11,7 @@ import VantTabs from '@/components/vantUi/vantTabs.vue';
 import HeaderView from "@/views/ReusableComponent/Head.vue";
 import Select from "@/components/antUi/select.vue";
 import SpinLoader from "@/components/antUi/spinLoader.vue";
+import ReusableInput from '@/views/ReusableComponent/ReusableInput.vue'
 
 
 
@@ -27,7 +28,6 @@ import { Dialog } from 'vant';
 import { DatePicker } from 'vant';
 import { RollingText } from 'vant';
 import { CountDown } from 'vant';
-import ReusableInput from '@/views/ReusableComponent/ReusableInput.vue'
 
 
 

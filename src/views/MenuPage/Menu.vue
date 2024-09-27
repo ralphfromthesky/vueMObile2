@@ -292,6 +292,17 @@
               </div>
             </div>
           </router-link>
+          <router-link to="/datamanagement">
+            <div class="flex items-center justify-between p-[.2rem]">
+              <div class="flex items-center leading-none gap-[.2rem]">
+                <img src="/menuImages/login_Device.png" alt="" class="w-[.43rem] h-[.45rem]" />
+                <span class="text-white text-[.26rem]">Data Management</span>
+              </div>
+              <div class="flex items-center">
+                <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
+              </div>
+            </div>
+          </router-link>
           <div class="flex items-center justify-between p-[.2rem]" data-twe-toggle="modal"
             data-twe-target="#logOutModal" data-twe-ripple-init>
             <div class="flex items-center leading-none gap-[.2rem]">

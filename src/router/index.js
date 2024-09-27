@@ -355,6 +355,11 @@ const router = createRouter({
       component: () => import("@/views/Records/historico.vue"),
     },
     {
+      path: "/datamanagement",
+      name: "datamanagement",
+      component: () => import("@/views/DataManagement/DataManagement.vue"),
+    },
+    {
       path: "/event",
       name: "event",
       component: () => import("@/views/Event/EventPage.vue"),
