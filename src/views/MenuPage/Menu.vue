@@ -209,7 +209,7 @@
           <router-link to="/lottery">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
-                <img src="/menuImages/icon_music.png" alt="" class="w-[.45rem]" />
+                <img src="/menuImages/card.png" alt="" class="w-[.45rem]" />
                 <span class="text-white text-[.26rem]">Lottery</span>
               </div>
               <div class="flex items-center">
@@ -220,7 +220,7 @@
           <router-link to="/agent">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
-                <img src="/menuImages/icon_music.png" alt="" class="w-[.45rem]" />
+                <img src="/menuImages/icon_dados.png" alt="" class="w-[.45rem]" />
                 <span class="text-white text-[.26rem]">Agent Management</span>
               </div>
               <div class="flex items-center">
@@ -295,7 +295,7 @@
           <router-link to="/datamanagement">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
-                <img src="/menuImages/login_Device.png" alt="" class="w-[.43rem] h-[.45rem]" />
+                <img src="/menuImages/card2.png" alt="" class="w-[.43rem] h-[.45rem]" />
                 <span class="text-white text-[.26rem]">Data Management</span>
               </div>
               <div class="flex items-center">
