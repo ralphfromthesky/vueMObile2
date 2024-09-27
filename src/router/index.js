@@ -640,6 +640,7 @@ const router = createRouter({
       path: "/mainNav",
       name: "nav",
       component: () => import("@/components/layout/Navigation/NavLayout.vue"),
+   
     }
 
 

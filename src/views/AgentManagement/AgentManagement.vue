@@ -143,20 +143,29 @@
             </div>
             <div>
               <div class="flex justify-center flex-col text-center">
-                <img
-                  class="w-[3rem] "
-                  src="/nodataImages/img_none_jl.png"
-                  alt=""
-                />
-                no data at this timesss
-
+                <div
+                  v-for="(data, index) in inviteData?.data?.content?.rows"
+                  :key="index"
+                >
+                  <!-- {{ data }} -->
+                </div>
+                <div v-if="inviteData?.data?.content?.rows?.length === 0">
+                  <span class="text-center flex justify-center">
+                    <img
+                      class="w-[3rem]"
+                      src="/nodataImages/img_none_jl.png"
+                      alt=""
+                    />
+                  </span>
+                  No Data this time
+                </div>
               </div>
             </div>
           </div>
           <div v-if="bonus" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
-              <div><Select :pass="days" /></div>
-              <div>
+              <div><Select :pass="days" @selectedItem="bonusDate"/></div>
+              <!-- <div>
                 <AntButton
                   textCol="#1a45b1"
                   bg="#fff0bb"
@@ -167,9 +176,26 @@
                   ft=".3rem"
                   @click="showShare('bonus')"
                 />
-              </div>
+              </div> -->
             </div>
-            <div class="text-center border-2">no data at this timesss</div>
+            <div class="text-center">
+              <div
+                  v-for="(data, index) in bonusData?.data?.content?.rows"
+                  :key="index"
+                >
+                  <!-- {{ data }} -->
+                </div>
+                <div v-if="bonusData?.data?.content?.rows?.length === 0">
+                  <span class="text-center flex justify-center">
+                    <img
+                      class="w-[3rem]"
+                      src="/nodataImages/img_none_jl.png"
+                      alt=""
+                    />
+                  </span>
+                  No Data this time
+                </div>
+            </div>
           </div>
         </div>
         <div v-if="team">
@@ -204,8 +230,8 @@
             <div>
               <div>
                 <div class="flex gap-1 my-1">
-                  <div><Select :pass="days" /></div>
-                  <div>
+                  <div><Select :pass="days" @selectedItem="teamSelect"/></div>
+                  <!-- <div>
                     <AntButton
                       textCol="#1a45b1"
                       bg="#fff0bb"
@@ -216,7 +242,7 @@
                       ft=".3rem"
                       @click="showShare('bonus')"
                     />
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div>
@@ -634,7 +660,7 @@
         <div v-if="user">
           <div class="flex flex-wrap gap-1 items-center">
             <ReusableInput plhldr="User" w="2rem" />
-            <ReusableInput plhldr="All levels" w="2rem" :dis=true />
+            <ReusableInput plhldr="All levels" w="2rem" :dis="true" />
             <ReusableInput plhldr="Amount of deposits reached" w="2rem" />
             <ReusableInput plhldr="Balance" w="2rem" /> - to -
             <ReusableInput plhldr="to" w="2rem" />
@@ -658,7 +684,7 @@
           <div class="border-2 h-[20rem] border-bg">no data</div>
         </div>
       </div>
-      <SpinLoader v-if="isFetching" />
+      <SpinLoader v-if="isFetching || bonusFetching || teamFetching" />
     </div>
   </div>
 </template>
@@ -693,6 +719,10 @@ const bonus = ref(false);
 const teams = ref(true);
 const game = ref(false);
 const inviteData = ref([]);
+const bonusData = ref([]);
+const teamData = ref([]);
+
+
 const agentData = ref([]);
 const startTime = ref();
 const endTime = ref();
@@ -729,9 +759,53 @@ const dateSelected = (date) => {
   invite();
 };
 
-// const searhDate = () => {
+const bonusDate = (date) => {
+  if (date === "Today") {
+    startTime.value = todayStartTime;
+    endTime.value = todayEndTime;
+  }
+  if (date === "yesterday") {
+    startTime.value = yesterdayStartTime;
+    endTime.value = yesterdayEndTime;
+  }
+  if (date === "This Week") {
+    startTime.value = weekStartTime;
+    endTime.value = weekEndTime;
+  }
+  if (date === "This month") {
+    startTime.value = monthStartTime;
+    endTime.value = monthEndTime;
+  }
+  if (date === "Last month") {
+    startTime.value = lastMonthStartTime;
+    endTime.value = lastMonthEndTime;
+  }
+  bonusRefetch();
+}
 
-// }
+const teamSelect = (date) => {
+  if (date === "Today") {
+    startTime.value = todayStartTime;
+    endTime.value = todayEndTime;
+  }
+  if (date === "yesterday") {
+    startTime.value = yesterdayStartTime;
+    endTime.value = yesterdayEndTime;
+  }
+  if (date === "This Week") {
+    startTime.value = weekStartTime;
+    endTime.value = weekEndTime;
+  }
+  if (date === "This month") {
+    startTime.value = monthStartTime;
+    endTime.value = monthEndTime;
+  }
+  if (date === "Last month") {
+    startTime.value = lastMonthStartTime;
+    endTime.value = lastMonthEndTime;
+  }
+  teamRefetch(); 
+}
 
 const showData = (data) => {
   share.value = false;
@@ -779,10 +853,30 @@ const {} = useQuery({
 const { refetch: invite, isFetching } = useQuery({
   queryFn: () =>
     axiosGet(
-      `https://mt0.yibo22.com/native/v2/inviteDeposits.do?startTime=${startTime.value}&endTime=${endTime.value}&id=&pageSize=100&pageNumber=1&lan=en`
+      `/api/native/v2/inviteDeposits.do?startTime=${startTime.value}&endTime=${endTime.value}&id=&pageSize=100&pageNumber=1&lan=en`
     ),
   queryKey: ["invite"],
   select: (data) => (inviteData.value = data),
+  onError: (err) => alert(err),
+});
+
+const { refetch: bonusRefetch, isFetching: bonusFetching } = useQuery({
+  queryKey: ["bonus"],
+  queryFn: () =>
+    axiosGet(
+      `/api/native/v2/inviteBonus.do?startDate=${startTime.value}&endDate=${endTime.value}&pageSize=100&pageNumber=1`
+    ),
+  select: (data) => (bonusData.value = data),
+  onError: (err) => alert(err),
+});
+const { refetch: teamRefetch, isFetching: teamFetching } = useQuery({ 
+  queryKey: ["bonus"],
+  queryFn: () =>
+    axiosGet(
+      `/api/native/v2/agentTeam.do?startDate=${startTime.value}&endDate=${endTime.value}`
+    ),
+    
+  select: (data) => (teamData.value = data),
   onError: (err) => alert(err),
 });
 
