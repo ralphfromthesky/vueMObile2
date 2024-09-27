@@ -164,7 +164,7 @@
           </div>
           <div v-if="bonus" class="flex my-1 gap-1 flex-col">
             <div class="flex items-center gap-2">
-              <div><Select :pass="days" @selectedItem="bonusDate"/></div>
+              <div><Select :pass="days" @selectedItem="bonusDate" /></div>
               <!-- <div>
                 <AntButton
                   textCol="#1a45b1"
@@ -180,21 +180,21 @@
             </div>
             <div class="text-center">
               <div
-                  v-for="(data, index) in bonusData?.data?.content?.rows"
-                  :key="index"
-                >
-                  <!-- {{ data }} -->
-                </div>
-                <div v-if="bonusData?.data?.content?.rows?.length === 0">
-                  <span class="text-center flex justify-center">
-                    <img
-                      class="w-[3rem]"
-                      src="/nodataImages/img_none_jl.png"
-                      alt=""
-                    />
-                  </span>
-                  No Data this time
-                </div>
+                v-for="(data, index) in bonusData?.data?.content?.rows"
+                :key="index"
+              >
+                <!-- {{ data }} -->
+              </div>
+              <div v-if="bonusData?.data?.content?.rows?.length === 0">
+                <span class="text-center flex justify-center">
+                  <img
+                    class="w-[3rem]"
+                    src="/nodataImages/img_none_jl.png"
+                    alt=""
+                  />
+                </span>
+                No Data this time
+              </div>
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@
             <div>
               <div>
                 <div class="flex gap-1 my-1">
-                  <div><Select :pass="days" @selectedItem="teamSelect"/></div>
+                  <div><Select :pass="days" @selectedItem="teamSelect" /></div>
                   <!-- <div>
                     <AntButton
                       textCol="#1a45b1"
@@ -659,15 +659,16 @@
         </div>
         <div v-if="user">
           <div class="flex flex-wrap gap-1 items-center">
-            <ReusableInput plhldr="User" w="2rem" />
+            <div><Select :pass="days" @selectedItem="userListSelect" /></div>
+            <ReusableInput plhldr="User" w="2rem" @valFromChild="fromChildData('username', $event)" :dataPass="userList.username" />
             <ReusableInput plhldr="All levels" w="2rem" :dis="true" />
-            <ReusableInput plhldr="Amount of deposits reached" w="2rem" />
-            <ReusableInput plhldr="Balance" w="2rem" /> - to -
-            <ReusableInput plhldr="to" w="2rem" />
+            <ReusableInput plhldr="Amount of deposits reached" w="2rem" @valFromChild="fromChildData('depositTotal', $event)" :dataPass="userList.depositTotal" />
+            <ReusableInput plhldr="Balance" w="2rem"  @valFromChild="fromChildData('minBalance', $event)" :dataPass="userList.minBalance"/> - to -
+            <ReusableInput plhldr="to" w="2rem"  @valFromChild="fromChildData('maxBalance', $event)" :dataPass="userList.maxBalance" />
           </div>
           <div class="flex my-1 gap-2">
             <span class="flex items-center gap-1">
-              <input type="checkbox" />
+              <input type="checkbox" v-model="userList.include"/>
               <label for="checkbox">Include subordinates</label>
             </span>
             <AntButton
@@ -678,13 +679,51 @@
               w="2rem"
               b=".1rem"
               ft=".3rem"
-              @click="showShare('bonus')"
+              @click="userListRefetch"
             />
           </div>
-          <div class="border-2 h-[20rem] border-bg">no data</div>
+          <div class="h-[20rem] border-bg">
+
+            <div
+                v-for="(data, index) in userListData?.data?.content?.rows"
+                :key="index"
+              >
+                <div class="h-4rem border-2 border-bord bg-bg2 main gap-1 rounded-[.1rem]">
+                  <div class=" p-1 flex flex-col leading-[.5rem]">
+                      <span>User: {{data.username}}</span>
+        
+
+
+
+                  </div>
+                  <div class=" p-1 flex flex-col leading-[.5rem]">
+                    <span>Money: {{data.money}}</span>
+                      <span>Member Level:  {{data.degreeName}}</span>
+                      <span>User Level: {{data.level}}</span>
+                  </div>
+
+                </div>
+
+              </div>
+            
+              <div v-if="userListData?.data?.content?.rows?.length === 0">
+                <span class="text-center flex justify-center">
+                  <img
+                    class="w-[3rem]"
+                    src="/nodataImages/img_none_jl.png"
+                    alt=""
+                  />
+                </span>
+                <span class="text-center flex justify-center ">
+                No Data this timesss
+              </span>
+              </div>
+
+
+          </div>
         </div>
       </div>
-      <SpinLoader v-if="isFetching || bonusFetching || teamFetching" />
+      <SpinLoader v-if="isFetching || bonusFetching || teamFetching || listRefetch" />
     </div>
   </div>
 </template>
@@ -721,11 +760,24 @@ const game = ref(false);
 const inviteData = ref([]);
 const bonusData = ref([]);
 const teamData = ref([]);
-
-
+const userListData = ref([]);
 const agentData = ref([]);
 const startTime = ref();
 const endTime = ref();
+
+
+const userList = ref({
+  startTime: startTime.value,
+  endTime: endTime.value,
+  pageNumber: "",
+  include: false,
+  username: "",
+  minBalance: "",
+  maxBalance: "",
+  depositTotal: "",
+  level: "",
+});
+
 const days = ref([
   { name: "Today" },
   { name: "yesterday" },
@@ -734,6 +786,10 @@ const days = ref([
   { name: "This month" },
   { name: "Last month" },
 ]);
+
+const fromChildData = (key, value) => {
+  userList.value[key] = value
+}
 
 const dateSelected = (date) => {
   if (date === "Today") {
@@ -781,7 +837,7 @@ const bonusDate = (date) => {
     endTime.value = lastMonthEndTime;
   }
   bonusRefetch();
-}
+};
 
 const teamSelect = (date) => {
   if (date === "Today") {
@@ -804,8 +860,33 @@ const teamSelect = (date) => {
     startTime.value = lastMonthStartTime;
     endTime.value = lastMonthEndTime;
   }
-  teamRefetch(); 
+  teamRefetch();
+};
+
+const userListSelect = (date) => {
+  if (date === "Today") {
+    startTime.value = todayStartTime;
+    endTime.value = todayEndTime;
+  }
+  if (date === "yesterday") {
+    startTime.value = yesterdayStartTime;
+    endTime.value = yesterdayEndTime;
+  }
+  if (date === "This Week") {
+    startTime.value = weekStartTime;
+    endTime.value = weekEndTime;
+  }
+  if (date === "This month") {
+    startTime.value = monthStartTime;
+    endTime.value = monthEndTime;
+  }
+  if (date === "Last month") {
+    startTime.value = lastMonthStartTime;
+    endTime.value = lastMonthEndTime;
+  }
 }
+
+
 
 const showData = (data) => {
   share.value = false;
@@ -842,6 +923,7 @@ const copyToClipboard = (textToCopy) => {
     });
 };
 
+
 const {} = useQuery({
   queryFn: () => axiosGet("/api/native/v2/inviteOverview2.do?ver=3&lan=en"),
   queryKey: ["invite"],
@@ -869,13 +951,13 @@ const { refetch: bonusRefetch, isFetching: bonusFetching } = useQuery({
   select: (data) => (bonusData.value = data),
   onError: (err) => alert(err),
 });
-const { refetch: teamRefetch, isFetching: teamFetching } = useQuery({ 
+const { refetch: teamRefetch, isFetching: teamFetching } = useQuery({
   queryKey: ["bonus"],
   queryFn: () =>
     axiosGet(
       `/api/native/v2/agentTeam.do?startDate=${startTime.value}&endDate=${endTime.value}`
     ),
-    
+
   select: (data) => (teamData.value = data),
   onError: (err) => alert(err),
 });
@@ -887,6 +969,25 @@ const {} = useQuery({
   select: (data) => (agentData.value = data),
   onError: (err) => alert(err),
 });
+
+
+
+const {refetch: userListRefetch, isFetching: listRefetch} = useQuery({
+  // /api/native/v2/userListData.do?startTime=2024-09-27+00:00:00&endTime=2024-09-27+23:59:59&pageNumber=1&include=false&username=&minBalance=&maxBalance=&depositTotal=&level=
+  queryFn: () => axiosGet(`/api/native/v2/userListData.do?startTime=${startTime.value}&endTime=${endTime.value}&pageNumber=1&include=${userList.value.include}&username=${userList.value.username}&minBalance=${userList.value.minBalance}&maxBalance=${userList.value.maxBalance}&depositTotal=${userList.value.depositTotal}&level=`),
+  queryKey: ["userList"],
+  enabled: true,
+  select: (data) => (userListData.value = data),
+  onError: (err) => alert(err),
+});
 </script>
 
-<style coped></style>
+<style scoped>
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1rem, 1fr))
+  
+}
+
+</style>
