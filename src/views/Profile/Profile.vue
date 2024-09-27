@@ -1,6 +1,7 @@
 <template>
-  <PageLayout title="Dados">
+  <!-- <PageLayout title="Dados"> -->
     <div class="w-full bg-[#1A45B1] h-[100vh] gap-[.5rem]">
+      <HeaderView title="Profile"/>
       <div class="flex gap-[.5rem] p-[.2rem]">
         <div class="flex items-center">
           <img src="/images/img_txn15.png" alt="" class="w-[1rem]" />
@@ -232,7 +233,7 @@
 
       <div></div>
     </div>
-  </PageLayout>
+  <!-- </PageLayout> -->
 </template>
 <script setup>
 import { ref, watch } from "vue";

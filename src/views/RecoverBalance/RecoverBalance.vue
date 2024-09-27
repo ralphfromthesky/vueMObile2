@@ -185,7 +185,9 @@
                   class="text-[.25rem] text-[#687079] font-bold break-all"
                   >{{ transferGameValue.title }}</span
                 >
-                <span class="text-[.25rem] text-[#687079] font-bold" ref="elementTransfer"
+                <span
+                  class="text-[.25rem] text-[#687079] font-bold"
+                  ref="elementTransfer"
                   >Balance:
                   <span class="">{{ transferGameValue.balance }}</span></span
                 >
@@ -195,8 +197,8 @@
               >
                 <button
                   class="text-white min-w-full bg-[#f0c059] rounded-[.1rem] p-[.2rem] leading-none text-[.2rem]"
-                @click="openTransfer = !openTransfer"
-                  >
+                  @click="openTransfer = !openTransfer"
+                >
                   Transfer
                 </button>
                 <button
@@ -241,10 +243,7 @@
         :isOpen="openTransfer"
         :componentPass="Transfer"
         :backGrounds="true"
-        
-        
       />
-      
     </div>
   </PageLayout>
 </template>
@@ -255,7 +254,7 @@ import Deposit from "@/components/deposit/Deposit.vue";
 import { getGamesTab } from "@/global/games.js";
 const { getGameType, getGame } = getGamesTab();
 import { useGameType } from "@/global/games.js";
-import Transfer from '@/components/Transfer/transfer.vue'
+import Transfer from "@/components/Transfer/transfer.vue";
 const { gameDatas, typeGame, useType } = useGameType();
 import Slots from "@/views/Slots/Slots.vue";
 import { onMounted, ref, watch } from "vue";
@@ -270,8 +269,8 @@ const gameType = ref(2);
 const gameName = ref("");
 const transferGameData = ref([]);
 const isLogin = ref(false);
-const elementTransfer = ref(null)
-const openTransfer = ref(false)
+const elementTransfer = ref(null);
+const openTransfer = ref(false);
 const closeDeposit = () => {
   isLogin.value = false;
 };
@@ -347,10 +346,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 @media (min-width: 432px) {
-      .mainDiv {
-        width: auto;
-
-      }}
+  .mainDiv {
+    width: auto;
+  }
+}
 </style>
