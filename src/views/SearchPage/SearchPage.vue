@@ -1,6 +1,5 @@
 <template>
   <div class="mainDiv">
-    
     <div v-if="nowShowingGames" class="relative">
       <div class="absolute top-[1rem] left-[.1rem]" @click="backlush">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
@@ -12,13 +11,8 @@
       ></iframe>
     </div>
     <div class="mainDiv bg-[#1A45B1] h-screen w-screen" v-if="hideMain">
-      <div
-        class="border-b-[.02rem] h-[1rem] flex gap-[1rem] text-[#FFFFFF] justify-around items-center"
-      >
-        <span class="text-[.4rem]" @click="router.push('/')"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
-        <span class="text-[.4rem]">Search</span>
-        <span></span>
-      </div>
+      <HeaderView title="Search"/>
+
       <div
         class="flex justify-center items-center px-[.3rem] my-[.2rem] relative"
       >

@@ -176,7 +176,7 @@
         </div>
       </div>
       <div
-        class="bg-txt overflow-auto p-1 text-white border-2 border-[red]"
+        class="bg-txt overflow-auto p-1 text-white"
         v-if="store.state.propsData?.data?.content.type === 11"
       >
         <div>
@@ -447,7 +447,7 @@
           @slideChange="onSlideChange"
           class="border-2 h-[2rem]"
         >
-          <swiper-slide class="border-2 border-[red] h-[2rem]"
+          <swiper-slide class=" h-[2rem]"
             >ide 1</swiper-slide
           >
           <swiper-slide>Slide 2</swiper-slide>

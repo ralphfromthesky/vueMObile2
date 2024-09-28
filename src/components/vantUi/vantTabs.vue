@@ -132,7 +132,7 @@ watch(
   (newVal) => {
     changeTab(newVal);
     active.value = newVal;
-    alert(newVal);
+    // alert(newVal);
   }
 );
 </script>

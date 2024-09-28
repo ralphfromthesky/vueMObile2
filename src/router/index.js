@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory, useRoute, useRouter, } from "vue-router";
 // import HomeView from "../views/HomeView.vue";
 // import AboutView from "../views/AboutView.vue";
 // import PromotionPage from "@/views/Promotion/PromotionPage.vue";
