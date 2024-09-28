@@ -30,7 +30,9 @@
           @click="toSearch"
         />
       </div>
-
+<div class="px-1 my-1">
+  <ReusableInput bg="#05309f" :hasSearch=true plhldr="Search Game here" />
+</div>
       <div
         class="text-[#6fa4ef] mb-[.5rem] px-[.2rem]"
         v-if="searchData.length > 0"

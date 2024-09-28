@@ -50,7 +50,7 @@
             </div>
             <div
               class="flex flex-col justify-between items-center"
-              v-if="voucherData?.data?.content.length === 0"
+              v-if="voucherData?.data?.content?.length === 0"
             >
               <img
                 class="w-[2.5rem] text-txt"
