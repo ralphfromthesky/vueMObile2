@@ -664,7 +664,7 @@
             <ReusableInput plhldr="All levels" w="2rem" :dis="true" />
             <ReusableInput plhldr="Amount of deposits reached" w="2rem" @valFromChild="fromChildData('depositTotal', $event)" :dataPass="userList.depositTotal" />
             <ReusableInput plhldr="Balance" w="2rem"  @valFromChild="fromChildData('minBalance', $event)" :dataPass="userList.minBalance"/> - to -
-            <ReusableInput plhldr="to" w="2rem"  @valFromChild="fromChildData('maxBalance', $event)" :dataPass="userList.maxBalance" />
+            <ReusableInput plhldr="to" w="2rem" :typeNumber=true @valFromChild="fromChildData('maxBalance', $event)" :dataPass="userList.maxBalance" />
           </div>
           <div class="flex my-1 gap-2">
             <span class="flex items-center gap-1">
