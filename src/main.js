@@ -15,8 +15,6 @@ import ReusableInput from '@/views/ReusableComponent/ReusableInput.vue'
 
 
 
-
-
 // import AntModal from "@/components/antUi/antModal.vue";
 const AntModal = defineAsyncComponent(() => import("@/components/antUi/antModal.vue"))
 const AntButton = defineAsyncComponent(() => import('@/components/antUi/antButton.vue'))
