@@ -21,6 +21,7 @@
         paddingLeft="10rem"
         animated=""
         :class="{ vantot: props.hasBackButton }"
+        
       >
         <van-tab
           v-for="(tab, index) in props.titleLinks"
@@ -28,7 +29,7 @@
           :key="tab.title"
         >
           <div class="bg-[#1a45b1] h-[13.5rem] overflow-auto">
-            <component :is="props.componentPass[activeComponent]"></component>
+            <component :is="props.componentPass[active]"></component>
             <div v-if="props.hasData">
               <div class="text-[white] p-1" v-for="(data, index) in props.hasData?.data?.content" :key="index">
                 {{data.content}}

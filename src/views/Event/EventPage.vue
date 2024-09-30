@@ -43,12 +43,16 @@
         <div v-for="(e, index) in event?.content" :key="index">
           <AntButton
             :title="e.actDetailName"
-            bg="#FFF0BB"
+            :bg="activeBtn === index ? ' #05309f' : '#FFF0BB'"
+            :textCol="activeBtn === index ? ' white' : '#1A45B1'"
+            :bord="activeBtn === index ? '1px solid white' : ''"
+
+
             h=".7rem"
             w="1.5rem"
             b=".1rem"
             ft=".22rem"
-            @click="showActiviy(e.titleImg)"
+            @click="showActiviy(e.titleImg, index)"
           />
         </div>
       </div>
@@ -100,6 +104,7 @@ const event = ref([]);
 const eventShow = ref(true);
 const activityShow = ref(false);
 const titleImg = ref();
+const activeBtn = ref(null)
 
 const clickEvent = (id) => {
   eventDetails({ actId: id });
@@ -110,8 +115,9 @@ const navigateTo = (index) => {
   activityShow.value = false;
 };
 
-const showActiviy = (content) => {
+const showActiviy = (content, index) => {
   titleImg.value = content;
+  activeBtn.value = index;
   activityShow.value = true;
   eventShow.value = false;
 };
