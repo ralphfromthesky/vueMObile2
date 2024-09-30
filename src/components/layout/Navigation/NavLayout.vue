@@ -13,7 +13,8 @@
           Pendente,
           JurosMainPage,
           Historico,
-          Voucher
+          Voucher,
+          Rebate
         ]"
         :indexPass=store.state.indexPass
       />
@@ -34,6 +35,7 @@ import JurosMainPage from "@/views/Juros/JurosMainPage.vue";
 import Historico from "@/views/Records/historico.vue";
 import EventPage from "@/views/Event/EventPage.vue";
 import  Voucher from '@/views/Voucher/Voucher.vue'
+import Rebate from '@/views/Rebate/Rebate.vue'
 import { useStore } from "@/store/store";
 const store = useStore();
 
@@ -53,7 +55,10 @@ const navLinks = ref([
   { title: "Pendentets" },
   { title: "Juros" },
   { title: "History" },
-  {title: "Voucher"}
+  {title: "Voucher"},
+  {title: "Rebate"},
+
+  
 ]);
 </script>
 

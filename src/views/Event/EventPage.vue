@@ -46,8 +46,6 @@
             :bg="activeBtn === index ? ' #05309f' : '#FFF0BB'"
             :textCol="activeBtn === index ? ' white' : '#1A45B1'"
             :bord="activeBtn === index ? '1px solid white' : ''"
-
-
             h=".7rem"
             w="1.5rem"
             b=".1rem"

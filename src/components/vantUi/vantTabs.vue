@@ -51,42 +51,42 @@ const router = useRouter();
 const changeTab = (active) => {
     // alert(active)
     store.commit('setIndexPass', active)
-  if (active === 0) {
-    activeComponent.value = 0;
-  }
-  if (active === 1) {
-    activeComponent.value = 1;
-  }
-  if (active === 2) {
-    activeComponent.value = 2;
-  }
-  if (active === 3) {
-    activeComponent.value = 3;
-  }
-  if (active === 4) {
-    activeComponent.value = 4;
-  }
-  if (active === 5) {
-    activeComponent.value = 5;
-  }
-  if (active === 6) {
-    activeComponent.value = 6;
-  }
-  if (active === 7) {
-    activeComponent.value = 7;
-  }
-  if (active === 8) {
-    activeComponent.value = 8;
-  }
-  if (active === 9) {
-    activeComponent.value = 9;
-  }
-  if (active === 10) {
-    activeComponent.value = 10;
-  }
-  if (active === 11) {
-    activeComponent.value = 11;
-  }
+  // if (active === 0) {
+  //   activeComponent.value = 0;
+  // }
+  // if (active === 1) {
+  //   activeComponent.value = 1;
+  // }
+  // if (active === 2) {
+  //   activeComponent.value = 2;
+  // }
+  // if (active === 3) {
+  //   activeComponent.value = 3;
+  // }
+  // if (active === 4) {
+  //   activeComponent.value = 4;
+  // }
+  // if (active === 5) {
+  //   activeComponent.value = 5;
+  // }
+  // if (active === 6) {
+  //   activeComponent.value = 6;
+  // }
+  // if (active === 7) {
+  //   activeComponent.value = 7;
+  // }
+  // if (active === 8) {
+  //   activeComponent.value = 8;
+  // }
+  // if (active === 9) {
+  //   activeComponent.value = 9;
+  // }
+  // if (active === 10) {
+  //   activeComponent.value = 10;
+  // }
+  // if (active === 11) {
+  //   activeComponent.value = 11;
+  // }
 };
 
 const props = defineProps({
@@ -127,7 +127,7 @@ const props = defineProps({
   },
 });
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
-const active = ref(props.indexPass ? props.indexPass : 0);
+const active = ref(props.indexPass ? props.indexPass : 8);
 
 watch(
   () => store.state.indexPass,
