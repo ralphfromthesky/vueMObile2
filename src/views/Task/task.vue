@@ -4,7 +4,7 @@
       <div class="flex flex-col gap-1">
         <Spinloader v-if="missionTasks.isLoading.value" />
         <div v-for="(value, ind) in buttonTasks" :key="ind">
-          <button :class="activebutton === ind ? 'bg-[#c7b678]  text-[#ffffff]' : 'bg-[#fff8df]'
+          <button :class="activebutton === ind ? 'bg-bg2 border-[.01rem] boder-bord  text-[#ffffff]' : 'bg-[#fff8df]'
             " class="w-[1.8rem] p-[.1rem] rounded-sm bg-[rgb(255,240,187)] text-[#1A45B1] text-[.22rem] font-bold"
             @click="handleClick(ind, value)">
             {{ getTrans(value?.type, value?.taskTargetType ? value?.taskTargetType : value?.newArrivalTaskType) }}

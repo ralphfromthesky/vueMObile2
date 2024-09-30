@@ -48,7 +48,8 @@ import { useStore } from "@/store/store";
 const store = useStore();
 const router = useRouter();
 const changeTab = (active) => {
-  //  alert(active)
+    // alert(active)
+    store.commit('setIndexPass', active)
   if (active === 0) {
     activeComponent.value = 0;
   }
