@@ -22,7 +22,7 @@
       </div>
       <div class="flex items-centergap-[.2rem]">
         <span class="text-[#6FA4EF] text-[.25rem]">Lidos</span>
-        <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem]" />
+        <img src="/images/return.png" alt="" class="rotate-180 w-[.3rem] h-[.3rem]" />
       </div>
     </div>
     <!-- <div

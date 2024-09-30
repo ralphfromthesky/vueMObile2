@@ -1,4 +1,4 @@
-<template>\
+<template>
   <div class="bg-[#1a45b1] h-screen">
     <div>
       <VantTabs

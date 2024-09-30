@@ -1,59 +1,86 @@
 <template>
   <!-- <Layout> -->
-    <div class="bg-[#1A45B1] mainDiv w-screen h-auto p-[.2rem]">
-      <div class="flex gap-[.2rem] mb-[.2rem]">
-        <div class="flex flex-col gap-[.2rem] items-center">
-          <div
-            class="w-[1.5rem] h-[1rem] rounded-[.1rem] bg-amber-100 flex flex-col justify-center items-center relative"
-          >
-            <img src="/images/shapelogo.png" alt="" class="w-[.3rem]" />
-            <span class="text-[.2rem] text-blue-900 text-center">Misto</span>
-            <img
-              src="/images/btn_zc1_jr.png"
-              alt=""
-              class="absolute w-[.5rem] top-0 left-0"
-            />
-            <img
-              src="/images/btn_zc1_jr2.png"
-              alt=""
-              class="absolute w-[.5rem] bottom-0 right-0"
-            />
-          </div>
-            <div
-              class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center pointer border-2 border-[red] items-center"
-              @click="navigateTo(6)"
-            >
-              <span class="text-[.2rem] text-blue-900">Historico</span>
-            </div>
-            <div
-              class="w-[1.2rem] h-[.5rem] rounded-[.1rem] bg-amber-100 flex justify-center items-center"
-              @click="navigateTo(3)"
-            >
-              <span class="text-[.2rem] text-blue-900">Redemption</span>
-            </div>
+  <div class="bg-[#1A45B1] mainDiv w-screen h-auto p-[.2rem]">
+    <div class="flex gap-[.2rem] mb-[.2rem]">
+      <div class="flex flex-col gap-[.2rem] items-center">
+        <div
+          class="w-[1.5rem] h-[1rem] rounded-[.1rem] bg-amber-100 flex flex-col justify-center items-center relative"
+          @click="navigateTo()"
+        >
+          <img src="/images/shapelogo.png" alt="" class="w-[.3rem]" />
+          <span class="text-[.2rem] text-blue-900 text-center">Misto</span>
+          <img
+            src="/images/btn_zc1_jr.png"
+            alt=""
+            class="absolute w-[.5rem] top-0 left-0"
+          />
+          <img
+            src="/images/btn_zc1_jr2.png"
+            alt=""
+            class="absolute w-[.5rem] bottom-0 right-0"
+          />
         </div>
 
-        <div class="flex flex-col gap-[.2rem] overflow-auto h-[13.05rem]">
-          <div
-            v-for="(eventItems, indexes) in event.content"
-            class="flex flex-col gap-[.2rem]"
-          >
-            <router-link to="/eventDetail">
-              <div
-                class="w-auto h-auto bg-[#05309F] rounded-[.1rem] p-[.12rem]"
-                @click="clickEvent(eventItems.id)"
-              >
-                <img
-                  class="min-h-[2.1rem] imgs"
-                  :src="eventItems.titleImg"
-                  alt=""
-                />
-              </div> 
-            </router-link>
+        <AntButton
+          title="Historico"
+          bg="#FFF0BB"
+          h=".7rem"
+          w="1.5rem"
+          b=".1rem"
+          ft=".22rem"
+          @click="navigateTo(6)"
+        />
+        <AntButton
+          title="Redemption"
+          bg="#FFF0BB"
+          h=".7rem"
+          w="1.5rem"
+          b=".1rem"
+          ft=".22rem"
+          @click="navigateTo(3)"
+        />
+
+        <div v-for="(e, index) in event?.content" :key="index">
+          <AntButton
+            :title="e.actDetailName"
+            bg="#FFF0BB"
+            h=".7rem"
+            w="1.5rem"
+            b=".1rem"
+            ft=".22rem"
+            @click="showActiviy(e.titleImg)"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-[.2rem] overflow-auto h-[13.05rem]">
+        <div
+          v-for="(eventItems, indexes) in event.content"
+          class="flex flex-col gap-[.2rem]"
+          v-if="eventShow"
+        >
+          <router-link to="/eventDetail">
+            <div
+              class="w-auto h-auto bg-[#05309F] rounded-[.1rem] p-[.12rem]"
+              @click="clickEvent(eventItems.id)"
+            >
+              <img
+                class="min-h-[2.1rem] imgs"
+                :src="eventItems.titleImg"
+                alt=""
+              />
+            </div>
+          </router-link>
+        </div>
+        <div class="h-[10rem]" v-if="activityShow">
+          <div class="text-[white]" v-if="titleImg">
+            <img :src="titleImg" />
           </div>
+          <div v-else class="text-[white]">no data image</div>
         </div>
       </div>
     </div>
+  </div>
   <!-- </Layout> -->
 </template>
 <script setup>
@@ -69,20 +96,25 @@ import {
 } from "../../components/axios/AxiosHook.js";
 import { useRouter } from "vue-router";
 
-const router = useRouter()
 const event = ref([]);
-const id = ref();
-const type = ref();
+const eventShow = ref(true);
+const activityShow = ref(false);
+const titleImg = ref();
 
 const clickEvent = (id) => {
-  //  alert(id)
   eventDetails({ actId: id });
 };
 
 const navigateTo = (index) => {
-store.commit('setIndexPass', index)
-}
+  store.commit("setIndexPass", index);
+  activityShow.value = false;
+};
 
+const showActiviy = (content) => {
+  titleImg.value = content;
+  activityShow.value = true;
+  eventShow.value = false;
+};
 
 const { isLoading } = useQuery({
   queryKey: ["events"],
