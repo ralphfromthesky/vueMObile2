@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      ' h-[calc(100vh-.9rem) w-[3rem] p-[.15rem] overflow-auto]',
+      ' h-[calc(100vh-.9rem)] w-[3rem] p-[.15rem] overflow-auto',
       stores.state.setThemes.lightTheme
         ? 'bg-[#f08abd] text-[white]'
         : 'bg-[#05309F] text-[white]',
@@ -16,6 +16,7 @@
         @click="exclusive"
         >Exclusive</span
       >
+
       <!-- <span>
         <span
           class="bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end"
@@ -55,9 +56,18 @@
       <div
         class="grid grid-cols-2 w-full h-auto bg-[#3A61C2] rounded-[.1rem] gap-[.1rem] p-[.1rem] leading-none"
       >
+        <div v-for="(e, index) in sidebarLinks" :key="e.title" :style="{backgroundImage: `url('${e.img}')`}" class="relative yummyHakdog leading-none"
+          @click="e.func()"
+          >
+        
+          <span
+            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
+            >  {{ e.title }}</span
+          >
+        </div>
         <div
           class="yummyHakdog bg-[url('/sidebarImages/event.png')] leading-none relative"
-          @click="() => navigateTo('/event')"
+          @click="() => navigateTo('/mainNav')"
         >
           <span
             class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
@@ -191,8 +201,11 @@
           <div class="w-[.3rem] h-[.3rem] bg-[#6FA4EF] rounded-[50%]">
             <img src="/images/wenhao.png" alt="" class="w-[.5rem]" />
           </div>
-          <div class="text-[.22rem]" @click="navigateTo('/newsupport')">FAQ</div>
+          <div class="text-[.22rem]" @click="navigateTo('/newsupport')">
+            FAQ
+          </div>
         </div>
+        <div class="h-[4rem] border-2">ds</div>
       </div>
     </div>
     <AntModal
@@ -267,7 +280,30 @@ const exclusive = () => {
   stores.commit("setAntMOdal", true);
 };
 
+const sidebarLinks = ref([
+  {
+    title: "Eventos",
+    img: "/sidebarImages/event.png",
+    bg: "3A61C2",
+    func: () => navigateTo("/mainNav"),
+  },
+  {
+    title: "Pendente",
+    img: "/sidebarImages/gift.png",
+    bg: "3A61C2",
+    func: () => navigateTo("/mainNav"),
+  },
 
+  { title: "History", img: "/sidebarImages/present.png", func: "" },
+  { title: "Juros", img: "/sidebarImages/bank.png", func: "" },
+  { title: "Vip", img: "/sidebarImages/king.png", func: "" },
+  { title: "Mission Center", img: "/sidebarImages/calendar.png", func: "" },
+  { title: "rebate", img: "/sidebarImages/rebate.png", func: "" },
+  { title: "Bonuse wallet", img: "/sidebarImages/cj.png", func: "" },
+  { title: "Redemption code", img: "/sidebarImages/pdd.png", func: "" },
+
+  { title: "Agente", img: "/sidebarImages/convide.png", func: "" },
+]);
 </script>
 
 <style scoped>

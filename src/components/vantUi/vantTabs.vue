@@ -105,19 +105,13 @@ const stateLogin = {
     "Juros" : props.componentPass[5], 
    "Pendentets" : props.componentPass[4], 
    "History" : props.componentPass[6], 
+   "Notice" : props.componentPass[1]
 }
 
-// const stateLogin = {
-//     "Vip": "Vip",
-//    "Redemption": "Redemption",
-//    "Pendentets" : "Pendentets"
-//   }
-//   if(stateLogin[tab.title]) {
-//     alert(stateLogin[tab.title])
-//   }
 
 const tabTitle = (tab) => {
   if(stateLogin[tab.title]) {
+    // alert(tab.title)
     loginModal.value = true;
   } else {
     loginModal.value = false
@@ -128,7 +122,7 @@ const tabTitle = (tab) => {
 
 
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
-const active = ref(props.indexPass ? props.indexPass : 8);
+const active = ref(props.indexPass ? props.indexPass : 0);
 
 watch(
   () => store.state.indexPass,
