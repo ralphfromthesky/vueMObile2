@@ -5,7 +5,6 @@
       <div class="flex flex-col gap-[.2rem] items-center">
         <div
           class="w-[1.5rem] h-[1rem] rounded-[.1rem] bg-amber-100 flex flex-col justify-center items-center relative"
-          @click="navigateTo()"
         >
           <img src="/images/shapelogo.png" alt="" class="w-[.3rem]" />
           <span class="text-[.2rem] text-blue-900 text-center">Misto</span>

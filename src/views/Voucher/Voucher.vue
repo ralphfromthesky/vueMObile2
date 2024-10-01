@@ -67,7 +67,7 @@
             <div v-for="(data, index) in voucherData.data?.content">
                <div>{{ data }}</div>
             </div>
-            <div class="flex flex-col justify-between items-center" v-if="voucherData?.data?.content.length === 0">
+            <div class="flex flex-col justify-between items-center" v-if="voucherData?.data?.content?.length === 0">
               <img
                 class="w-[2.5rem] text-txt"
                 src="/nodataImages/img_none_jl.png"
@@ -83,13 +83,13 @@
             <div v-for="(data, index) in voucherData.data?.content">
                <div>{{ data }}</div>
             </div>
-            <div class="flex flex-col justify-between items-center" v-if="voucherData?.data?.content.length === 0">
+            <div class="flex flex-col justify-between items-center" v-if="voucherData?.data?.content?.length === 0">
               <img
                 class="w-[2.5rem] text-txt"
                 src="/nodataImages/img_none_jl.png"
                 alt=""
               />
-              <div>No data to show...</div>
+              <div>No data to shows...</div>
             </div>
           </div>
         </transition>

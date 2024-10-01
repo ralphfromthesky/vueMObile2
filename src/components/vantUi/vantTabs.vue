@@ -127,7 +127,7 @@ const props = defineProps({
   },
 });
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
-const active = ref(props.indexPass ? props.indexPass : 8);
+const active = ref(props.indexPass ? props.indexPass : 0);
 
 watch(
   () => store.state.indexPass,
