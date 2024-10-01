@@ -24,7 +24,6 @@
 </template>
 
 <script setup>
-// import VantTabs from "@/components/vantUi/vantTabs.vue";
 import BottomNavbar from "./BottomNavbar.vue";
 import { ref, defineAsyncComponent } from "vue";
 import VipPage from "@/views/Vip/VipPage.vue";
@@ -39,14 +38,6 @@ import Rebate from '@/views/Rebate/Rebate.vue'
 import { useStore } from "@/store/store";
 const store = useStore();
 
-// const VipPage = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const Task = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const Redemption = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const Pendente = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const JurosMainPage = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const Historico = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-// const EventPage = defineAsyncComponent(() => import( '@/views/Vip/VipPage.vue'))
-
 const navLinks = ref([
   { title: "Events" },
   { title: "Mission" },
@@ -57,8 +48,6 @@ const navLinks = ref([
   { title: "History" },
   {title: "Voucher"},
   {title: "Rebate"},
-
-  
 ]);
 </script>
 

@@ -16,6 +16,7 @@
       <van-tabs
         v-model:active="active"
         @change="changeTab(active)"
+        @clickTab="tabTitle"
         background="#05309F"
         color="white"
         paddingLeft="10rem"
@@ -29,7 +30,7 @@
           :key="tab.title"
         >
           <div class="bg-[#1a45b1] h-[13.5rem] overflow-auto">
-            <component :is="props.componentPass[active]"></component>
+            <component :is="props.componentPass[active]" v-if="!stateLogin[tab.title]"></component>
             <div v-if="props.hasData">
               <div class="text-[white] p-1" v-for="(data, index) in props.hasData?.data?.content" :key="index">
                 {{data.content}}
@@ -39,6 +40,12 @@
         </van-tab>
       </van-tabs>
     </div>
+    <AntModal
+        :isOpen="loginModal"
+        :componentPass="Login"
+        :backGrounds="true"
+        v-if="!store.state.userInfo.isLogin"
+      />
   </div>
 </template>
 
@@ -46,47 +53,14 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "@/store/store";
+const loginModal = ref(false)
+import Login from "@/components/layout/LoginComponent/LoginForm.vue"
+
 const store = useStore();
 const router = useRouter();
 const changeTab = (active) => {
-    // alert(active)
+    //alert(active)
     store.commit('setIndexPass', active)
-  // if (active === 0) {
-  //   activeComponent.value = 0;
-  // }
-  // if (active === 1) {
-  //   activeComponent.value = 1;
-  // }
-  // if (active === 2) {
-  //   activeComponent.value = 2;
-  // }
-  // if (active === 3) {
-  //   activeComponent.value = 3;
-  // }
-  // if (active === 4) {
-  //   activeComponent.value = 4;
-  // }
-  // if (active === 5) {
-  //   activeComponent.value = 5;
-  // }
-  // if (active === 6) {
-  //   activeComponent.value = 6;
-  // }
-  // if (active === 7) {
-  //   activeComponent.value = 7;
-  // }
-  // if (active === 8) {
-  //   activeComponent.value = 8;
-  // }
-  // if (active === 9) {
-  //   activeComponent.value = 9;
-  // }
-  // if (active === 10) {
-  //   activeComponent.value = 10;
-  // }
-  // if (active === 11) {
-  //   activeComponent.value = 11;
-  // }
 };
 
 const props = defineProps({
@@ -126,6 +100,33 @@ const props = defineProps({
     default: true,
   },
 });
+const stateLogin = {
+    "Vip" : props.componentPass[2], 
+    "Juros" : props.componentPass[5], 
+   "Pendentets" : props.componentPass[4], 
+   "History" : props.componentPass[6], 
+}
+
+// const stateLogin = {
+//     "Vip": "Vip",
+//    "Redemption": "Redemption",
+//    "Pendentets" : "Pendentets"
+//   }
+//   if(stateLogin[tab.title]) {
+//     alert(stateLogin[tab.title])
+//   }
+
+const tabTitle = (tab) => {
+  if(stateLogin[tab.title]) {
+    loginModal.value = true;
+  } else {
+    loginModal.value = false
+  }
+  
+}
+
+
+
 const activeComponent = ref(props.indexPass ? props.indexPass : 0);
 const active = ref(props.indexPass ? props.indexPass : 8);
 
@@ -134,9 +135,11 @@ watch(
   (newVal) => {
     changeTab(newVal);
     active.value = newVal;
-    // alert(newVal);
+     //alert(newVal);
   }
 );
+
+
 </script>
 
 <style scoped>

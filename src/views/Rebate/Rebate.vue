@@ -22,7 +22,7 @@
       >
         <div class="bg-bg p-[.2rem] flex justify-between rounded-[.1rem] text-txt">
           <div class="text-txt">
-            <div class="text-bg text-txt font-bold text-[.3rem]">{{ activeTitle }}</div>
+            <div class=" text-txt font-bold text-[.3rem]">{{ activeTitle }}</div>
             <div class="my-[.1rem] p-[.1rem] rounded-[.2rem] bg-txt text-bg">
               Bet - {{ kickBack?.data?.content?.rows[0].minBet }} / get -
               {{ kickBack?.data?.content?.rows[0].kickback }}
@@ -31,7 +31,7 @@
           <div class="flex flex-col">
             <span>Rebate Max 0%</span>
             <span>Limit</span>
-            <span class="text-bg text-txt font-bold">Rebate {{ 0.01 * kickBack?.data?.content?.rows[0].kickback  }}</span>
+            <span class=" text-txt font-bold">Rebate {{ 0.01 * kickBack?.data?.content?.rows[0].kickback  }}</span>
           </div>
         </div>
         <div class="border-[.01rem] rounded-[.1rem] p-1 overflow-hidden my-[.1rem] border-bord flex flex-col items-center h-[10rem]">
