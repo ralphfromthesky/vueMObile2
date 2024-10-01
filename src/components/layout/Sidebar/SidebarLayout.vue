@@ -77,11 +77,12 @@
         <div
           class="yummyHakdog bg-[url('/sidebarImages/gift.png')] leading-none relative"
           @click="
-            () => {
-              !store.state?.userInfo?.sLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/pendente');
-            }
+            // () => {
+            //   !store.state?.userInfo?.sLogin
+            //     ? (loginModal = !loginModal)
+            //     : gotoPages('/mainNav', 6);
+            // }
+            gotoPages('/mainNav', 4)
           "
         >
           <span
@@ -308,6 +309,16 @@ const sidebarLinks = ref([
 
   { title: "Agente", img: "/sidebarImages/convide.png", func: "" },
 ]);
+
+ const gotoPages = (link, num) => {
+  if(stores.state?.userInfo?.isLogin) {
+    navigateTo(link)
+  stores.commit('setIndexPass', num)
+  } else {
+    loginModal.value = !loginModal.value
+  }
+
+ }
 </script>
 
 <style scoped>
