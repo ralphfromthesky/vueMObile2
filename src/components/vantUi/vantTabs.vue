@@ -30,7 +30,7 @@
           :key="tab.title"
         >
           <div class="bg-[#1a45b1] h-[13.5rem] overflow-auto">
-            <component :is="props.componentPass[active]" v-if="!stateLogin[tab.title]"></component>
+            <component :is="props.componentPass[active]" v-if="store.state?.userInfo?.isLogin ? props.componentPass[active] : !stateLogin[tab.title]"></component>
             <div v-if="props.hasData">
               <div class="text-[white] p-1" v-for="(data, index) in props.hasData?.data?.content" :key="index">
                 {{data.content}}

@@ -56,7 +56,7 @@
       <div
         class="grid grid-cols-2 w-full h-auto bg-[#3A61C2] rounded-[.1rem] gap-[.1rem] p-[.1rem] leading-none"
       >
-        <div v-for="(e, index) in sidebarLinks" :key="e.title" :style="{backgroundImage: `url('${e.img}')`}" class="relative yummyHakdog leading-none"
+        <!-- <div v-for="(e, index) in sidebarLinks" :key="e.title" :style="{backgroundImage: `url('${e.img}')`}" class="relative yummyHakdog leading-none"
           @click="e.func()"
           >
         
@@ -64,7 +64,7 @@
             class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
             >  {{ e.title }}</span
           >
-        </div>
+        </div> -->
         <div
           class="yummyHakdog bg-[url('/sidebarImages/event.png')] leading-none relative"
           @click="() => navigateTo('/mainNav')"
@@ -78,7 +78,7 @@
           class="yummyHakdog bg-[url('/sidebarImages/gift.png')] leading-none relative"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo?.sLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/pendente');
             }
@@ -93,7 +93,7 @@
           class="yummyHakdog bg-[url('/sidebarImages/present.png')] leading-none relative"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo.isLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/records');
             }
@@ -108,7 +108,7 @@
           class="yummyHakdog bg-[url('/sidebarImages/bank.png')] leading-none relative"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo.isLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/juros');
             }
@@ -123,7 +123,7 @@
           class="yummyHakdog bg-[url('/sidebarImages/king.png')] leading-none relative"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo?.isLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/vip');
             }
@@ -138,7 +138,7 @@
           class="yummyHakdog bg-[url('/sidebarImages/calendar.png')] leading-none relative"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo?.isLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/task');
             }
@@ -153,7 +153,7 @@
           class="flex items-center justify-center w-full h-[.8rem] col-span-2 bg-[#05309F] rounded-[.1rem] bg-cover bg-[url('/sidebarImages/convide.png')]"
           @click="
             () => {
-              !store.state.userInfo.isLogin
+              !store.state?.userInfo?.isLogin
                 ? (loginModal = !loginModal)
                 : navigateTo('/invite');
             }
@@ -291,7 +291,11 @@ const sidebarLinks = ref([
     title: "Pendente",
     img: "/sidebarImages/gift.png",
     bg: "3A61C2",
-    func: () => navigateTo("/mainNav"),
+    func: () => {
+              !store.state?.userInfo?.isLogin
+                ? (loginModal = !loginModal)
+                : navigateTo('/pendente');
+            }
   },
 
   { title: "History", img: "/sidebarImages/present.png", func: "" },
