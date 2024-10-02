@@ -37,11 +37,11 @@
         <div
           v-for="({ games, tab }, index) in games"
           :key="index"
-          class="flex flex-col items-center justify-center spicyHotdog"
-          @click="scrollToGames(tab.id)"
+          :class="['flex flex-col items-center justify-center', activeG === index ? 'cheeseDog' : 'spicyHotdog' ]"
+          @click="scrollToGames(tab.id, index)"
         >
           <img :src="`/logo/` + tab?.code + `_active.png`" class="h-[.4rem]" />
-          <div class="text-white text-[.16rem] text-nowrap">
+          <div class="text-[.16rem] text-nowrap">
             {{ tab?.name }}
           </div>
         </div>
@@ -126,6 +126,12 @@
   @apply w-[1.3rem] h-[.9rem] bg-[#3A61C2] rounded-[.1rem];
 }
 
+.cheeseDog {
+  background-color: #FFF0BB;
+  border-radius: 5px;
+  color: blue
+}
+
 .yummyHakdog {
   @apply h-[.8rem] bg-[#05309F] w-full rounded-[.1rem] bg-cover;
 }
@@ -134,11 +140,11 @@
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
 import { useQuery } from "@tanstack/vue-query";
-import { store } from "../../../store";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import { useStore } from "@/store/store";
 import { useRouter } from "vue-router";
 const router = useRouter()
+const activeG = ref(0)
 
 const Register = defineAsyncComponent(() =>
   import("../RegisterComponent/RegisterForm.vue")
@@ -168,17 +174,18 @@ const { isLoading } = useQuery({
   },
 });
 
-const scrollToGames = (id) => {
+const scrollToGames = (id, index) => {
   stores.commit("setScrollTo", id);
   // store.OpenClose();
   stores.commit('setsideBar')
+  activeG.value = index
 };
 
 const exclusive = () => {
   if (!stores.state.userInfo.isLogin) {
-    loginModal.value = !loginModal.value;
+    stores.commit('setloginModal', true)
   }
-  stores.commit("setAntMOdal", true);
+  stores.commit("setnewTask", true);
 };
 
 const sidebarLinks = ref([
@@ -202,10 +209,12 @@ const sidebarLinks = ref([
   { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
   { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  router.push('/invite')  },
   { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : stores.commit('setloginModal', true)},
-  { title: "Earn free", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/lottery') },
+  { title: "Earn free", img: "/sidebarImages/pdd.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setturnLate', true) : stores.commit('setloginModal', true) },
 
   { title: "Bonus wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/lottery') },
   { title: "Redemption code", img: "/sidebarImages/redemp.png", func:  () =>  gotoPages('/mainNav', 3) },
+  // { title: "Merry Christmas", img: "/sidebarImages/christmas.jpg", func:  () =>  gotoPages('/mainNav', 3) },
+
 ]);
 
  const gotoPages = (link, num) => {

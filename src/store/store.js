@@ -35,10 +35,11 @@ const store = createStore({
     getTypes: "",
     modalErr: false,
     openDeposit: false,
-    antMOdal: true,
+    newTask: false,
     loginModal: false,
     RegisterModal: false,
-    sideBar: true,
+    sideBar: false,
+    turnLate: false,
     isDataFetching: true,
     propsData: [],
     openRedPacket: false,
@@ -54,7 +55,10 @@ const store = createStore({
     indexPass: 0,
     inviteData: [],
   },
-  mutations: {
+  mutations: { 
+    setturnLate(state, payload) {
+      state.turnLate = payload;
+    },
     setsideBar(state) {
       state.sideBar = !state.sideBar;
     },
@@ -175,8 +179,8 @@ const store = createStore({
     setOpenDeposit(state, payload) {
       state.openDeposit = payload;
     },
-    setAntMOdal(state, payload) {
-      state.antMOdal = payload;
+    setnewTask(state, payload) {
+      state.newTask = payload;
     },
     setDataFetching(state, payload) {
       state.isDataFetching = payload;

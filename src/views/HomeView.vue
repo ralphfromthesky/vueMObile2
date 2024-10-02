@@ -73,7 +73,7 @@
               @click="scrollToSection(tab.id)"
               class=" text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
             >
-              {{ tab.name }}
+              {{ tab.name }} 
             </button>
           </div>
         </div>
@@ -159,22 +159,19 @@
       <div v-if="store.state?.userInfo?.isLogin">
         <AntModal :isOpen="store.state.openRedPacket" :componentPass="RedPacket" :bgColor="true" />
       </div>
-      <!-- 
-      <AntModal
+      <!-- <AntModal :isOpen="true" :componentPass="Test" /> -->
+
+     <!-- <AntModal :isOpen="true" :componentPass="Notice" /> -->
+     <AntModal
         :isOpen="true"
         :componentPass="GetApplogin"
         v-if="store.state.userGetAppLogin?.length"
       />
-       <AntModal :isOpen="true" :componentPass="Test" />
-
- -->
-      <!-- <AntModal :isOpen="true" :componentPass="Notice" />  -->
-      <!--        
-       <AntModal
-        :isOpen="openModal"
+     <AntModal
+        :isOpen="store.state.turnLate"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      />  -->
+      /> 
       <AntModal
         :isOpen="store.state.loginModal"
         :componentPass="Login"
@@ -187,7 +184,7 @@
         :backGrounds="true"
       />
       <AntModal
-        :isOpen="store.state.antMOdal"
+        :isOpen="store.state.newTask"
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
