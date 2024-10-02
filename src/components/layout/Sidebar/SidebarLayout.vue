@@ -300,10 +300,11 @@ const sidebarLinks = ref([
   { title: "Vip", img: "/sidebarImages/king.png", func:  () =>  gotoPages('/mainNav', 2) },
   { title: "Mission Center", img: "/sidebarImages/calendar.png", func:  () =>  gotoPages('/mainNav', 1) },
   { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
-  { title: "Bonuse wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/pendente') },
-  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/pendente') },
+  { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  gotoPages('/invite', 0)  },
+  { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : loginModal.value = !loginModal.value},
+  { title: "Bonus wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/lottery') },
 
-  { title: "Agente", img: "/sidebarImages/convide.png", func: "" },
+  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/pendente') },
 ]);
 
  const gotoPages = (link, num) => {
@@ -311,7 +312,7 @@ const sidebarLinks = ref([
     navigateTo(link)
   stores.commit('setIndexPass', num)
   } else {
-    loginModal.value = !loginModal.value
+    stores.commit('setloginModal', true)
   }
 
  }

@@ -36,30 +36,37 @@ const store = createStore({
     modalErr: false,
     openDeposit: false,
     antMOdal: true,
+    loginModal: false,
     isDataFetching: true,
     propsData: [],
+    openRedPacket: false,
     setThemes: {
       lightTheme: false,
       darkTheme: false,
     },
     setThemes2: {
-      light: 'light',
-      dark: 'dark',
-      standard: 'standard'
+      light: "light",
+      dark: "dark",
+      standard: "standard",
     },
     indexPass: 0,
-    inviteData: []
-
+    inviteData: [],
   },
   mutations: {
+    setloginModal(state, payload) {
+      state.loginModal = payload;
+    },
+    setopenRedPacket(state, payload) {
+      state.openRedPacket = payload;
+    },
     setInviteData(state, payload) {
       state.inviteData = payload;
     },
     setIndexPass(state, payload) {
-      state.indexPass = payload
+      state.indexPass = payload;
     },
     setPropsData(state, payload) {
-      state.propsData = payload
+      state.propsData = payload;
     },
     setLightTheme(state, payload) {
       state.setThemes.lightTheme = payload;
@@ -164,10 +171,8 @@ const store = createStore({
       state.antMOdal = payload;
     },
     setDataFetching(state, payload) {
-      state.isDataFetching = payload
-    }
-
-    
+      state.isDataFetching = payload;
+    },
   },
   actions: {
     updateUser(context, user) {
@@ -223,20 +228,14 @@ const store = createStore({
         setThemes: {
           lightTheme: state.setThemes.lightTheme,
           darkTheme: state.setThemes.darkTheme,
-          setThemes2 : {
+          setThemes2: {
             light: state.setThemes2.light,
             dark: state.setThemes2.dark,
-            standard: state.setThemes2.standard
-
-
-            
-          }
+            standard: state.setThemes2.standard,
+          },
         },
         propsData: state.propsData,
-        inviteData: state.inviteData
-       
-      
-
+        inviteData: state.inviteData,
       }),
     }),
   ],

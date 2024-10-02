@@ -156,9 +156,10 @@
           />
         </div>
       </div>
-      <!-- <div v-if="store.state?.userInfo?.isLogin">
-        <AntModal :isOpen="true" :componentPass="RedPacket" :bgColor="true" />
+      <div v-if="store.state?.userInfo?.isLogin">
+        <AntModal :isOpen="store.state.openRedPacket" :componentPass="RedPacket" :bgColor="true" />
       </div>
+      <!-- 
       <AntModal
         :isOpen="true"
         :componentPass="GetApplogin"
@@ -175,7 +176,7 @@
         v-if="store.state.degreeInfo.success"
       />  -->
       <AntModal
-        :isOpen="loginModal"
+        :isOpen="store.state.loginModal"
         :componentPass="Login"
         :backGrounds="true"
         v-if="!store.state.userInfo.isLogin"

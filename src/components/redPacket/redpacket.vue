@@ -18,10 +18,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 import { redpacket } from "@/global/missionEvent.js";
 import { messageApi } from "@/components/antUi/antMessage.js";
+import { useStore } from "@/store/store";
+const store = useStore()
 const { red, payload } = redpacket();
+
+
 
 </script>
 

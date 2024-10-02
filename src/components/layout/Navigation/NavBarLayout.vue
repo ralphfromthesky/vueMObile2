@@ -27,7 +27,7 @@
         class="flex gap-[.2rem] items-center"
         v-if="!newStore.state.userInfo.isLogin"
       >
-        <AntButton title="Login" bg="#FFF0BB" h=".5rem" w="1rem" b=".1rem" ft=".22rem"  @click="showLoginModal()"/>
+        <AntButton title="Login" bg="#FFF0BB" h=".5rem" w="1rem" b=".1rem" ft=".22rem"  @click="newStore.commit('setloginModal', true)"/>
         <AntButton title="Register" bg="#1a45b1" h=".5rem" w="1rem" b=".1rem" ft=".22rem" :cla="true"   @click="showRegModal()"/>
 
         <img

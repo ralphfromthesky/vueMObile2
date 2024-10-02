@@ -18,7 +18,7 @@
                     <div class="text-[.25rem]">Promotion</div>
                 </div>
             </router-link>
-            <div class="flex flex-col items-center" v-if="!store.state.userInfo.isLogin" @click="() => store.state.userProfile.isLogin ? '' : loginModal = !loginModal ">
+            <div class="flex flex-col items-center" v-if="!store.state.userInfo.isLogin" @click="() => store.state.userProfile.isLogin ? '' : store.commit('setloginModal', true)">
                 <!-- <div class="w-[.55rem] h-[.55rem] bg-[#1A45B1] rounded-[.1rem]"></div> -->
                 <img src="/bottomNavImages/12.png" alt="" class="w-[.6rem]">
                 <div class="text-[.25rem]">Login</div>
@@ -42,7 +42,7 @@
                     <div class="text-[.25rem]">Help</div>
                 </div>
             </router-link>
-            <div v-if="!store.state.userInfo.isLogin" class="flex flex-col items-center" @click="loginModal = !loginModal">
+            <div v-if="!store.state.userInfo.isLogin" class="flex flex-col items-center" @click="store.commit('setloginModal', true)">
                 <!-- <div class="w-[.55rem] h-[.55rem] bg-[#1A45B1] rounded-[.1rem]"></div> -->
                 <img src="/bottomNavImages/5.png" alt="" class="w-[.6rem]">
                 <div class="text-[.25rem]">My</div>
@@ -56,7 +56,7 @@
             </router-link>
         </div>
     </div>
-    <AntModal :isOpen="loginModal" :componentPass=Login :backGrounds=true />
+    <AntModal :isOpen="store.state.loginModal" :componentPass=Login :backGrounds=true />
     <div v-if="isLogin" class="h-screen bg-[#000000b3] fixed top-0 z-20">
         <div v-if="isLogin" class="flex flex-col slide-in-bottom absolute top-0 left-0 ease-in-out">
             <Deposit @close="closeDeposit" />
