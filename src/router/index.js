@@ -640,7 +640,7 @@ const router = createRouter({
     {
       path: "/testPage",
       name: "testPage",
-      component: () => import("@/components/test/testPage.vue"),
+      component: () => import("@/components/test/testPage4.vue"),
     },
     {
       path: "/mainNav",
@@ -648,6 +648,7 @@ const router = createRouter({
       component: () => import("@/components/layout/Navigation/NavLayout.vue"),
    
     }
+
 
 
   ],

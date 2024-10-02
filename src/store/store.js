@@ -38,7 +38,7 @@ const store = createStore({
     newTask: false,
     loginModal: false,
     RegisterModal: false,
-    sideBar: false,
+    sideBar: true,
     turnLate: false,
     isDataFetching: true,
     propsData: [],
