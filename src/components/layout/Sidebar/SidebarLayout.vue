@@ -112,11 +112,7 @@
         <div class="h-[4rem] border-2">ds</div>
       </div>
     </div>
-    <AntModal
-      :isOpen="loginModal"
-      :componentPass="Register"
-      :backGrounds="true"
-    />
+
     <AntModal
       :isOpen="popLanguage"
       :componentPass="Language"
@@ -143,8 +139,7 @@ import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import { useStore } from "@/store/store";
 import { useRouter } from "vue-router";
 const router = useRouter()
-// import Register from "../RegisterComponent/RegisterForm.vue";
-//import Language from "@/global/Translation/Language.vue";
+
 const Register = defineAsyncComponent(() =>
   import("../RegisterComponent/RegisterForm.vue")
 );
@@ -203,7 +198,7 @@ const sidebarLinks = ref([
   { title: "History", img: "/sidebarImages/present.png", func:  () =>  gotoPages('/mainNav', 6) },
   { title: "Juros", img: "/sidebarImages/bank.png", func:  () =>  gotoPages('/mainNav', 5) },
   { title: "Vip", img: "/sidebarImages/king.png", func:  () =>  gotoPages('/mainNav', 2) },
-  { title: "Mission Center", img: "/sidebarImages/calendar.png", func:  () =>  gotoPages('/mainNav', 1) },
+  { title: "Mission Centers", img: "/sidebarImages/calendar.png", func:  () =>  navigateTo('/mainNav', 1) },
   { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
   { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  router.push('/invite')  },
   { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : loginModal.value = !loginModal.value},
@@ -212,9 +207,8 @@ const sidebarLinks = ref([
 ]);
 
  const gotoPages = (link, num) => {
-
   if(stores.state?.userInfo?.isLogin) {
-    navigateTo(link)
+    navigateTo(link, num)
   stores.commit('setIndexPass', num)
   } else {
     stores.commit('setloginModal', true)

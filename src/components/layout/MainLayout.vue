@@ -22,7 +22,7 @@
         @click="newStore.commit('setsideBar')"
         :class="
          newStore.state.sideBar
-            ? `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeIn transition-all`
+            ? `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#f8f5f5b3] fixed top-0 z-20 fadeIn transition-all`
             : `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeOut transition-all`
         "
         :hidden="newStore.state.sideBar"
