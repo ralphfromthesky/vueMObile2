@@ -48,7 +48,7 @@
       </div>
       <div
         class="w-full h-[.9rem] bg-[#3A61C2] rounded-[.1rem] flex items-center justify-center gap-[.2rem]"
-        @click="showRegModal"
+        @click="gotoPages('/mainNav', 6)"
       >
         <img src="/images/betHist.png" alt="" class="w-[.4rem]" />
         <span class="text-white text-[.24rem]">Betting History</span>
@@ -170,8 +170,8 @@ const { isLoading } = useQuery({
 
 const scrollToGames = (id) => {
   stores.commit("setScrollTo", id);
-  store.OpenClose();
-  // stores.commit('setScrollSide', id)
+  // store.OpenClose();
+  stores.commit('setsideBar')
 };
 
 const exclusive = () => {
@@ -201,9 +201,11 @@ const sidebarLinks = ref([
   { title: "Mission Centers", img: "/sidebarImages/calendar.png", func:  () =>  navigateTo('/mainNav', 1) },
   { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
   { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  router.push('/invite')  },
-  { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : loginModal.value = !loginModal.value},
+  { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : stores.commit('setloginModal', true)},
+  { title: "Earn free", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/lottery') },
+
   { title: "Bonus wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/lottery') },
-  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/mainNav', 3) },
+  { title: "Redemption code", img: "/sidebarImages/redemp.png", func:  () =>  gotoPages('/mainNav', 3) },
 ]);
 
  const gotoPages = (link, num) => {

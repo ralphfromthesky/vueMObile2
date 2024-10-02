@@ -26,7 +26,6 @@
           w="2rem"
           b=".1rem"
           ft=".4rem"
-          @click="showLoginModal()"
         />
     </div>
       </div>

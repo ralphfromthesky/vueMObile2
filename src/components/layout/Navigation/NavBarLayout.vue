@@ -185,9 +185,7 @@ const showRegModal = () => {
   registerConfig.refetch();
   regModal.value = !regModal.value;
 };
-const closedLogin = (event) => {
-  loginModal.value = event;
-};
+
 const toggleRotate = () => {
   isRotate.value = !isRotate.value;
   query.refetch();
@@ -197,9 +195,6 @@ const toggleArrow = () => {
   isUp.value = !isUp.value;
 };
 
-const showLoginModal = () => {
-  loginModal.value = !loginModal.value;
-};
 
 const showDeposit = () => {
   isLogin.value = !isLogin.value;
@@ -209,16 +204,6 @@ const closeDeposit = () => {
   isLogin.value = false;
 };
 
-watch(newStore.state.userInfo.isLogin, (newval) => {
-  loginModal.value = false;
-});
-
-watch(
-  () => newStore.state.userInfo.isLogin,
-  (newVal) => {
-    regModal.value = false;
-  }
-);
 </script>
 
 <style scoped>

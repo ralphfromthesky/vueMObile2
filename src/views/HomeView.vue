@@ -191,7 +191,6 @@
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
-
       />
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <!-- <SpinLoader v-if="isFetching" /> -->

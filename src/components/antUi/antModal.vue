@@ -13,6 +13,7 @@
       @cancel="handeClose"
       class="modal431px"
     >
+    
       <component :is="componentPass" @close="handleOk"></component>
       <div
         class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] h-[4rem] flex-col text-center"
@@ -259,6 +260,12 @@ watch(
     }
   }
 );
+
+watch(() => store.state.userInfo?.isLogin, (newVal) => {
+if(newVal) {
+  handleOk()
+}
+})
 
 </script>
 
