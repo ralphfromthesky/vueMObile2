@@ -56,7 +56,7 @@
       <div
         class="grid grid-cols-2 w-full h-auto bg-[#3A61C2] rounded-[.1rem] gap-[.1rem] p-[.1rem] leading-none"
       >
-        <!-- <div v-for="(e, index) in sidebarLinks" :key="e.title" :style="{backgroundImage: `url('${e.img}')`}" class="relative yummyHakdog leading-none"
+        <div v-for="(e, index) in sidebarLinks" :key="e.title" :style="{backgroundImage: `url('${e.img}')`}" class="relative yummyHakdog leading-none"
           @click="e.func()"
           >
         
@@ -64,8 +64,8 @@
             class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
             >  {{ e.title }}</span
           >
-        </div> -->
-        <div
+        </div>
+        <!-- <div
           class="yummyHakdog bg-[url('/sidebarImages/event.png')] leading-none relative"
           @click="() => navigateTo('/mainNav')"
         >
@@ -161,7 +161,7 @@
           "
         >
           <span class="text-white text-[.24rem]">Agente</span>
-        </div>
+        </div> -->
       </div>
       <div class="flex flex-col gap-[.1rem]">
         <div
@@ -286,26 +286,22 @@ const sidebarLinks = ref([
     title: "Eventos",
     img: "/sidebarImages/event.png",
     bg: "3A61C2",
-    func: () => navigateTo("/mainNav"),
+    func: () => gotoPages("/mainNav"),
   },
   {
     title: "Pendente",
     img: "/sidebarImages/gift.png",
     bg: "3A61C2",
-    func: () => {
-              !store.state?.userInfo?.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/pendente');
-            }
+    func: () =>  gotoPages('/mainNav', 4)
   },
 
-  { title: "History", img: "/sidebarImages/present.png", func: "" },
-  { title: "Juros", img: "/sidebarImages/bank.png", func: "" },
-  { title: "Vip", img: "/sidebarImages/king.png", func: "" },
-  { title: "Mission Center", img: "/sidebarImages/calendar.png", func: "" },
-  { title: "rebate", img: "/sidebarImages/rebate.png", func: "" },
-  { title: "Bonuse wallet", img: "/sidebarImages/cj.png", func: "" },
-  { title: "Redemption code", img: "/sidebarImages/pdd.png", func: "" },
+  { title: "History", img: "/sidebarImages/present.png", func:  () =>  gotoPages('/mainNav', 6) },
+  { title: "Juros", img: "/sidebarImages/bank.png", func:  () =>  gotoPages('/mainNav', 5) },
+  { title: "Vip", img: "/sidebarImages/king.png", func:  () =>  gotoPages('/mainNav', 2) },
+  { title: "Mission Center", img: "/sidebarImages/calendar.png", func:  () =>  gotoPages('/mainNav', 1) },
+  { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
+  { title: "Bonuse wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/pendente') },
+  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/pendente') },
 
   { title: "Agente", img: "/sidebarImages/convide.png", func: "" },
 ]);
