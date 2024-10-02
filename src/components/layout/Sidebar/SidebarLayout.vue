@@ -17,7 +17,7 @@
         >Exclusive</span
       >
 
-      <!-- <span>
+      <span>
         <span
           class="bg-[#3A61C2] rounded-[.1rem] flex items-center justify-end"
         >
@@ -31,7 +31,7 @@
             />
           </span>
         </span>
-      </span> -->
+      </span>
 
       <div class="grid grid-cols-2 gap-[.1rem]">
         <div
@@ -65,103 +65,6 @@
             >  {{ e.title }}</span
           >
         </div>
-        <!-- <div
-          class="yummyHakdog bg-[url('/sidebarImages/event.png')] leading-none relative"
-          @click="() => navigateTo('/mainNav')"
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Eventos</span
-          >
-        </div>
-        <div
-          class="yummyHakdog bg-[url('/sidebarImages/gift.png')] leading-none relative"
-          @click="
-            // () => {
-            //   !store.state?.userInfo?.sLogin
-            //     ? (loginModal = !loginModal)
-            //     : gotoPages('/mainNav', 6);
-            // }
-            gotoPages('/mainNav', 4)
-          "
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Pendente</span
-          >
-        </div>
-        <div
-          class="yummyHakdog bg-[url('/sidebarImages/present.png')] leading-none relative"
-          @click="
-            () => {
-              !store.state?.userInfo.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/records');
-            }
-          "
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Histórico</span
-          >
-        </div>
-        <div
-          class="yummyHakdog bg-[url('/sidebarImages/bank.png')] leading-none relative"
-          @click="
-            () => {
-              !store.state?.userInfo.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/juros');
-            }
-          "
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Juros</span
-          >
-        </div>
-        <div
-          class="yummyHakdog bg-[url('/sidebarImages/king.png')] leading-none relative"
-          @click="
-            () => {
-              !store.state?.userInfo?.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/vip');
-            }
-          "
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Vip</span
-          >
-        </div>
-        <div
-          class="yummyHakdog bg-[url('/sidebarImages/calendar.png')] leading-none relative"
-          @click="
-            () => {
-              !store.state?.userInfo?.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/task');
-            }
-          "
-        >
-          <span
-            class="text-white text-[.15rem] absolute top-[.05rem] left-[.05rem]"
-            >Mission center</span
-          >
-        </div>
-        <div
-          class="flex items-center justify-center w-full h-[.8rem] col-span-2 bg-[#05309F] rounded-[.1rem] bg-cover bg-[url('/sidebarImages/convide.png')]"
-          @click="
-            () => {
-              !store.state?.userInfo?.isLogin
-                ? (loginModal = !loginModal)
-                : navigateTo('/invite');
-            }
-          "
-        >
-          <span class="text-white text-[.24rem]">Agente</span>
-        </div> -->
       </div>
       <div class="flex flex-col gap-[.1rem]">
         <div
@@ -238,6 +141,8 @@ import { useQuery } from "@tanstack/vue-query";
 import { store } from "../../../store";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import { useStore } from "@/store/store";
+import { useRouter } from "vue-router";
+const router = useRouter()
 // import Register from "../RegisterComponent/RegisterForm.vue";
 //import Language from "@/global/Translation/Language.vue";
 const Register = defineAsyncComponent(() =>
@@ -286,7 +191,7 @@ const sidebarLinks = ref([
     title: "Eventos",
     img: "/sidebarImages/event.png",
     bg: "3A61C2",
-    func: () => gotoPages("/mainNav"),
+    func: () => router.push("/mainNav"),
   },
   {
     title: "Pendente",
@@ -300,14 +205,14 @@ const sidebarLinks = ref([
   { title: "Vip", img: "/sidebarImages/king.png", func:  () =>  gotoPages('/mainNav', 2) },
   { title: "Mission Center", img: "/sidebarImages/calendar.png", func:  () =>  gotoPages('/mainNav', 1) },
   { title: "rebate", img: "/sidebarImages/rebate.png", func:  () =>  gotoPages('/mainNav', 8) },
-  { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  gotoPages('/invite', 0)  },
+  { title: "Agente", img: "/sidebarImages/convide.png", func: () =>  router.push('/invite')  },
   { title: "Red envelope", img: "/sidebarImages/red.png", func:  () => stores.state.userInfo.isLogin ? stores.commit('setopenRedPacket', true) : loginModal.value = !loginModal.value},
   { title: "Bonus wallet", img: "/sidebarImages/cj.png", func:  () =>  gotoPages('/lottery') },
-
-  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/pendente') },
+  { title: "Redemption code", img: "/sidebarImages/pdd.png", func:  () =>  gotoPages('/mainNav', 3) },
 ]);
 
  const gotoPages = (link, num) => {
+
   if(stores.state?.userInfo?.isLogin) {
     navigateTo(link)
   stores.commit('setIndexPass', num)

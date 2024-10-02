@@ -182,17 +182,17 @@
         v-if="!store.state.userInfo.isLogin"
       />
       <AntModal
-        :isOpen="regModal"
+        :isOpen="store.state.RegisterModal"
         :componentPass="Register"
         :backGrounds="true"
       />
-      <!-- <AntModal
+      <AntModal
         :isOpen="store.state.antMOdal"
         :componentPass="NewTask"
         :bgColor="true"
         v-if="store.state.userInfo.isLogin"
 
-      /> -->
+      />
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <!-- <SpinLoader v-if="isFetching" /> -->
 

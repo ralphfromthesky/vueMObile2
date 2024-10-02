@@ -19,17 +19,17 @@
       ]"
     >
       <div
-        @click="store.OpenClose()"
+        @click="newStore.commit('setsideBar')"
         :class="
-          store.SideBareSate
+         newStore.state.sideBar
             ? `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeIn transition-all`
             : `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeOut transition-all`
         "
-        :hidden="store.SideBareSate"
+        :hidden="newStore.state.sideBar"
       ></div>
       <div
         :class="
-          store.SideBareSate
+            newStore.state.sideBar
             ? `slide-in z-20 absolute`
             : `slide-out z-20 absolute`
         "

@@ -153,6 +153,8 @@ const handleOk = () => {
   store.commit("setAntMOdal", false); 
   store.commit('setopenRedPacket', false)
   store.commit('setloginModal', false)
+  store.commit('setRegisterModal', false)
+
   
 
 };

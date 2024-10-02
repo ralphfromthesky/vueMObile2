@@ -15,11 +15,11 @@
         <img
           src="/images/logoSide.png"
           :class="
-            store.SideBareSate
+            newStore.state.sideBar
               ? `w-[.5rem] h-[.5rem] -rotate-180 transition-all`
               : `w-[.5rem] h-[.5rem] rotate-0 transition-all`
           "
-          @click="store.OpenClose()"
+          @click="newStore.commit('setsideBar')"
         />
         <img src="/images/logo.png" class="w-full h-[.7rem]" />
       </div>
@@ -27,8 +27,8 @@
         class="flex gap-[.2rem] items-center"
         v-if="!newStore.state.userInfo.isLogin"
       >
-        <AntButton title="Login" bg="#FFF0BB" h=".5rem" w="1rem" b=".1rem" ft=".22rem"  @click="newStore.commit('setloginModal', true)"/>
-        <AntButton title="Register" bg="#1a45b1" h=".5rem" w="1rem" b=".1rem" ft=".22rem" :cla="true"   @click="showRegModal()"/>
+        <AntButton title="Login" bg="#FFF0BB" h=".5rem" w="1rem" b=".1rem" ft=".22rem"  @click="newStore.commit('setloginModal', true)"/> 
+        <AntButton title="Register" bg="#1a45b1" h=".5rem" w="1rem" b=".1rem" ft=".22rem" :cla="true" @click="newStore.commit('setRegisterModal', true)"/>
 
         <img
           src="/images/search.png"

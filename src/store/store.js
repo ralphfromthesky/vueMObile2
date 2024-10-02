@@ -37,6 +37,8 @@ const store = createStore({
     openDeposit: false,
     antMOdal: true,
     loginModal: false,
+    RegisterModal: false,
+    sideBar: true,
     isDataFetching: true,
     propsData: [],
     openRedPacket: false,
@@ -53,6 +55,12 @@ const store = createStore({
     inviteData: [],
   },
   mutations: {
+    setsideBar(state) {
+      state.sideBar = !state.sideBar;
+    },
+    setRegisterModal(state, payload) {
+      state.RegisterModal = payload;
+    },
     setloginModal(state, payload) {
       state.loginModal = payload;
     },
