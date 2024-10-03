@@ -81,7 +81,7 @@
 
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
-          v-for="({ games, tab }, index) in games"
+          v-for="({games, tab }, index) in games"
           :key="index"
           :id="`${tab.id}_tab`"
           class="flex flex-col gap-[.2rem] scroll-smooth scroll-mt-5"
