@@ -237,10 +237,11 @@ const handleshowFalseData = (value) => {
 };
 
 const goBack = () => {
-  router.push('/')
-setTimeout(() => {
-  window.location.reload()
-}, 500)
+//   router.push('/')
+// setTimeout(() => {
+//   window.location.reload()
+// }, 500)
+router.go(-1)
 }
 
 const pagevalue = ref({
@@ -393,6 +394,7 @@ watch(
       // alert("new tabs" + newVal);
       getGameType.value = newVal;
       tabs();
+      refetch()
     }
   }
 );
@@ -415,7 +417,6 @@ watch(
 
 watch(() => store.state.newGameType, (newVal) => {
   if(newVal) {
-    alert(newVal)
     tabs()
   }
 })
@@ -424,8 +425,9 @@ const { refetch } = useQuery({
   queryKey: ["gameTab"],
   queryFn: () =>
     axiosGet2(
-      `/api/native/v2/get_game_datas_v2.do?gameType=${props.gameTypePass}&lan=en&pageSize=30&pageIndex=1`
-      // `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.newGameType}&lan=en&pageSize=30&pageIndex=1`
+      // `/api/native/v2/get_game_datas_v2.do?gameType=${props.gameTypePass}&lan=en&pageSize=30&pageIndex=1`
+      `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.newGameType}&lan=en&pageSize=30&pageIndex=1`
+      
     ),
   enabled: false,
   select: (data) => {
@@ -441,7 +443,7 @@ const { refetch: tabs, isFetching: tabsfetching } = useQuery({
     axiosGet2(
       `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.newGameType}&lan=en&pageSize=30&pageIndex=1`
     ),
-  enabled: false,
+  // enabled: false,
   select: (data) => {
     gameTabs.value = data;
   },
@@ -547,7 +549,6 @@ const showIframGames = computed(() => {
 onMounted(() => {
   store.state.getTypes ? getTypes(store.state.getTypes, 0) : "";
   store.commit('setDataFetching', isFetching);
-  tabs()
 
   
 });

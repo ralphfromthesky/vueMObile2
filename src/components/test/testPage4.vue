@@ -1,17 +1,18 @@
 <template>
   <div class="bg-[white]">
-
-    <div v-if="showGames" class="relative"  @click="showGames = false">
-    <div class="absolute top-[.5rem] left-[.1rem]">
-      <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
-    </div>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit illo dolor quisquam deleniti? Magni, facere at. Eos et sint ut minus labore, dolorum magni sed fuga corrupti! A, sunt debitis.
-    <!-- <iframe
+    <div v-if="showGames" class="relative" @click="showGames = false">
+      <div class="absolute top-[.5rem] left-[.1rem]">
+        <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
+      </div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit illo
+      dolor quisquam deleniti? Magni, facere at. Eos et sint ut minus labore,
+      dolorum magni sed fuga corrupti! A, sunt debitis.
+      <!-- <iframe
       :src="showIframe"
       frameborder="0"
       class="gameContainer w-screen h-screen"
     ></iframe> -->
-  </div>
+    </div>
     <div v-else>
       <van-tabs v-model:active="active" scrollspy sticky>
         <van-tab v-for="({ games, tab }, index) in games" :key="tab.name">
@@ -44,7 +45,7 @@
                 v-for="(g, tab, index) in games"
                 :key="index"
                 class="text-[white]"
-                @click="playGames(g.imgUrl, g.type)"
+                @click="playGames(g.popFrame, g.type)"
               >
                 <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
                 <img
@@ -59,17 +60,17 @@
       </van-tabs>
     </div>
     <AntModal
-        :isOpen="store.state.loginModal"
-        :componentPass="Login"
-        :backGrounds="true"
-        v-if="!store.state.userInfo.isLogin"
-      />
+      :isOpen="store.state.loginModal"
+      :componentPass="Login"
+      :backGrounds="true"
+      v-if="!store.state.userInfo.isLogin"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent  } from "vue";
-const active = ref(0)
+import { ref, defineAsyncComponent } from "vue";
+const active = ref(0);
 const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")
 );
@@ -77,27 +78,40 @@ import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../axios/AxiosHook";
 import { useStore } from "@/store/store";
 import { useRouter } from "vue-router";
-const router = useRouter()
-const store = useStore()
-const showGames = ref(false)
+const router = useRouter();
+const store = useStore();
+const showGames = ref(false);
 const games = ref([]);
+const gameType = ref("");
+const gameTab = ref([]);
 
-const playGames = (url, type) => {
-    if(type === "3") {
-      router.push("/slots")
-      store.commit('setnewGameType', 'pg')
+const playGames = (popFrame, type) => {
+  if (popFrame) {
+    alert(type);
+  }
+  if (popFrame === true && type) {
+    router.push("/slots");
+    if (type === "3") store.commit("setnewGameType", "Slots");
+    gameType.value = 2;
+    gameTabs();
+    if (type === "6") {
+      store.commit("setnewGameType", "Fishing");
+      gameType.value = 7;
+      gameTabs();
     }
 
-  
-  // if(store.state.userInfo.isLogin){
-  //   showGames.value = true;
-  //   return
-  // } else {
-  //   store.commit('setloginModal', true)
-
-  // }
-
-}
+     if(type === "2" ) {
+      store.commit("setnewGameType", "Live Casino");
+      gameType.value = 1;
+      gameTabs();
+     }
+     if(type === "4" ) {
+      store.commit("setnewGameType", "Sports");
+      gameType.value = 0;
+      gameTabs()
+     }
+  }
+};
 
 const {} = useQuery({
   queryKey: ["userGames"],
@@ -107,6 +121,18 @@ const {} = useQuery({
   staleTime: 1000,
   select: (data) => {
     games.value = data.filter((entry) => entry.games.length > 0);
+  },
+});
+
+const { refetch: gameTabs } = useQuery({
+  queryKey: ["forwardGames"],
+  queryFn: async () =>
+    await axiosGet2(
+      `/api/native/v2/getGame2.do?type=${gameType.value}&limitNum=50&lan=en`
+    ),
+  enabled: false,
+  select: (data) => {
+    gameTab.value = data;
   },
 });
 </script>
