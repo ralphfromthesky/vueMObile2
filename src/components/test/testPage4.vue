@@ -15,11 +15,11 @@
 import { ref } from 'vue';
 
 const tablinks = ref([
-    {name: 'fasdfasf'},
-    {name: 'fasddfasdfasf'},
-    {name: 'fasdfasdfasf'},
-    {name: 'fasdasdfafasf'},
-    {name: 'fasdasdffasf'},
+    {name: 'a'},
+    {name: 'b'},
+    {name: 'c'},
+    {name: 'c'},
+    {name: 'e'},
 
 ])
 
