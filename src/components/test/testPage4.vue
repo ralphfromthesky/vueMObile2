@@ -70,7 +70,7 @@
 
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
-const active = ref(0);
+const active = ref(5);
 const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")
 );
@@ -86,30 +86,35 @@ const gameType = ref("");
 const gameTab = ref([]);
 
 const playGames = (popFrame, type) => {
-  if (popFrame) {
-    alert(type);
-  }
+
   if (popFrame === true && type) {
     router.push("/slots");
-    if (type === "3") store.commit("setnewGameType", "Slots");
-    gameType.value = 2;
-    gameTabs();
+    if (type === "3") {
+      store.commit("setnewGameType", "Slots");
+      store.commit("setgType", "pg");
+      gameType.value = 2;
+      gameTabs();
+    }
     if (type === "6") {
       store.commit("setnewGameType", "Fishing");
+      store.commit("setgType", "bbinFish");
       gameType.value = 7;
       gameTabs();
     }
 
-     if(type === "2" ) {
+    if (type === "2") {
       store.commit("setnewGameType", "Live Casino");
+      store.commit("setgType", "bbinLive");
+
       gameType.value = 1;
       gameTabs();
-     }
-     if(type === "4" ) {
+    }
+    if (type === "4") {
       store.commit("setnewGameType", "Sports");
+      store.commit("setgType", "tysbSport");
       gameType.value = 0;
-      gameTabs()
-     }
+      gameTabs();
+    }
   }
 };
 

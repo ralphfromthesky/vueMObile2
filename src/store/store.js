@@ -43,6 +43,7 @@ const store = createStore({
     isDataFetching: true,
     propsData: [],
     newGameType: "",
+    gType: "",
     openRedPacket: false,
     setThemes: {
       lightTheme: false,
@@ -57,6 +58,9 @@ const store = createStore({
     inviteData: [],
   },
   mutations: {
+    setgType(state, payload) {
+      state.gType = payload;
+    },
     setnewGameType(state, payload) {
       state.newGameType = payload;
     },

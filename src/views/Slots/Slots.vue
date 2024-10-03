@@ -16,7 +16,7 @@
         <div class="text-white flex items-center justify-between pt-[.3rem] font-[1rem]">
             <span class="text-[.5rem] pl-[.5rem]" @click="goBack"><img src="/images/back.png" alt="" class="w-[.3rem]"></span>
           
-          <span class="text-[.5rem]">{{ store.state.forwardGame }} - {{ store.state.newGameType }}</span>
+          <span class="text-[.5rem]">{{ store.state.forwardGame }}</span>
           <span></span>
         </div>
         <div class="border-3"></div>
@@ -202,7 +202,10 @@ import { ref, onMounted, watch, computed, defineAsyncComponent } from "vue";
 import SpinLoader from "@/components/antUi/spinLoader.vue";
 import { getGamesTab } from "@/global/games.js";
 import { useQuery } from "@tanstack/vue-query";
+
 import { useStore } from "@/store/store";
+// import Register from "@/components/layout/RegisterComponent/RegisterForm.vue";
+// import Login from "@/components/layout/LoginComponent/LoginForm.vue";
 const Register = defineAsyncComponent(() => import("@/components/layout/RegisterComponent/RegisterForm.vue"))
 const Login = defineAsyncComponent(() => import("@/components/layout/LoginComponent/LoginForm.vue"))
 
@@ -237,11 +240,10 @@ const handleshowFalseData = (value) => {
 };
 
 const goBack = () => {
-//   router.push('/')
-// setTimeout(() => {
-//   window.location.reload()
-// }, 500)
-router.go(-1)
+  router.push('/')
+setTimeout(() => {
+  window.location.reload()
+}, 500)
 }
 
 const pagevalue = ref({
@@ -394,7 +396,6 @@ watch(
       // alert("new tabs" + newVal);
       getGameType.value = newVal;
       tabs();
-      refetch()
     }
   }
 );
@@ -415,19 +416,11 @@ watch(
   }
 );
 
-watch(() => store.state.newGameType, (newVal) => {
-  if(newVal) {
-    tabs()
-  }
-})
-
 const { refetch } = useQuery({
   queryKey: ["gameTab"],
   queryFn: () =>
     axiosGet2(
-      // `/api/native/v2/get_game_datas_v2.do?gameType=${props.gameTypePass}&lan=en&pageSize=30&pageIndex=1`
-      `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.newGameType}&lan=en&pageSize=30&pageIndex=1`
-      
+      `/api/native/v2/get_game_datas_v2.do?gameType=${props.gameTypePass}&lan=en&pageSize=30&pageIndex=1`
     ),
   enabled: false,
   select: (data) => {
@@ -441,9 +434,9 @@ const { refetch: tabs, isFetching: tabsfetching } = useQuery({
   queryKey: ["gameTab"],
   queryFn: () =>
     axiosGet2(
-      `/api/native/v2/get_game_datas_v2.do?gameType=${store.state.newGameType}&lan=en&pageSize=30&pageIndex=1`
+      `/api/native/v2/get_game_datas_v2.do?gameType=${getGameType.value}&lan=en&pageSize=30&pageIndex=1`
     ),
-  // enabled: false,
+  enabled: false,
   select: (data) => {
     gameTabs.value = data;
   },
@@ -548,7 +541,7 @@ const showIframGames = computed(() => {
 
 onMounted(() => {
   store.state.getTypes ? getTypes(store.state.getTypes, 0) : "";
-  store.commit('setDataFetching', isFetching);
+  store.commit('setDataFetching', isFetching)
 
   
 });
