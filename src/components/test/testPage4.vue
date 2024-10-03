@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[white] p-[.1rem]">
+  <div class="bg-[white]">
 
     <div v-if="showGames" class="relative"  @click="showGames = false">
     <div class="absolute top-[.5rem] left-[.1rem]">
@@ -25,7 +25,7 @@
             </div>
           </template>
 
-          <div class="p-[.1rem]">
+          <div>
             <div class="flex justify-between items-center mb-1">
               <div>
                 <img
@@ -41,12 +41,12 @@
 
             <div class="flex flex-wrap gap-1 justify-center relative">
               <div
-                v-for="(g, index) in games"
+                v-for="(g, tab, index) in games"
                 :key="index"
                 class="text-[white]"
-                @click="showImgUrl(g.imgUrl)"
+                @click="playGames(g.imgUrl, g.type)"
               >
-                <img :src="`/api/${g.imgUrl}`" class="h-[2.8rem]" />
+                <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
                 <img
                   src="/images/star.png"
                   alt=""
@@ -76,19 +76,26 @@ const Login = defineAsyncComponent(() =>
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../axios/AxiosHook";
 import { useStore } from "@/store/store";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const store = useStore()
 const showGames = ref(false)
 const games = ref([]);
 
-const showImgUrl = (url) => {
-  // alert(url)
-  if(store.state.userInfo.isLogin){
-    showGames.value = true;
-    return
-  } else {
-    store.commit('setloginModal', true)
+const playGames = (url, type) => {
+    if(type === "3") {
+      router.push("/slots")
+      store.commit('setnewGameType', 'pg')
+    }
 
-  }
+  
+  // if(store.state.userInfo.isLogin){
+  //   showGames.value = true;
+  //   return
+  // } else {
+  //   store.commit('setloginModal', true)
+
+  // }
 
 }
 

@@ -69,7 +69,7 @@
                 <span class="text-[.22rem] text-[#FFF0BB] cursor-pointer" @click="router.push('/passwordRetrieval')">eceu a Senha?</span>
             </div>
             <div class="w-full my-[.2rem]">
-                <AntButton title="Login" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".22rem"  @click="showLoginModal()"/>
+                <AntButton title="Login" bg="#FFF0BB" h=".72rem" w="100%" b=".1rem" ft=".22rem"/>
             </div>
             <div class="flex justify-around">
                 <span class="text-[#FFF0BB] text-[.22rem]" @click=" () => router.push('/support')">Suporte</span>

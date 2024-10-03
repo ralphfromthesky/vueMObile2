@@ -42,6 +42,7 @@ const store = createStore({
     turnLate: false,
     isDataFetching: true,
     propsData: [],
+    newGameType: "",
     openRedPacket: false,
     setThemes: {
       lightTheme: false,
@@ -55,7 +56,10 @@ const store = createStore({
     indexPass: 0,
     inviteData: [],
   },
-  mutations: { 
+  mutations: {
+    setnewGameType(state, payload) {
+      state.newGameType = payload;
+    },
     setturnLate(state, payload) {
       state.turnLate = payload;
     },
