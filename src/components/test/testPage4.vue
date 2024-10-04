@@ -137,7 +137,6 @@ const playGames = (popFrame, type, forwardUrl, code) => {
   
   }
   if(popFrame === false && code === "newpg" || "agLive") {
-    alert('fasfasf')
   }
 };
 
@@ -146,10 +145,16 @@ const {refetch: forward} = useQuery({
   queryKey: ['forward'],
   enabled: false,
   select: (data) => {
-    if(data.data.url) {
+    if(data.data.isLogin === false) {
+      store.commit('setloginModal', true)
+      return
+    }
+    if(data.data.url.includes('ygmmt8test')) {
+     window.location.href = data.data.url
+    } 
+    else {
       showGames.value = true
       forwardGame.value = data.data.url
-      // window.location.href = data.data.url
     }
   },
   onError: (err) => alert(err)
@@ -165,7 +170,6 @@ const {} = useQuery({
     games.value = data.filter((entry) => entry.games.length > 0);
   },
 });
-
 
 const { refetch: gameTabs } = useQuery({
   queryKey: ["forwardGames"],
