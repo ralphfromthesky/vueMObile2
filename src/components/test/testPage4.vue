@@ -76,7 +76,7 @@ const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")
 );
 import { useQuery } from "@tanstack/vue-query";
-import { axiosGet2 } from "../axios/AxiosHook";
+import { axiosGet2, axiosGet } from "../axios/AxiosHook";
 import { useStore } from "@/store/store";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -85,6 +85,7 @@ const showGames = ref(false);
 const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
+const forwardUrls = ref('')
 
 const playGames = (popFrame, type, forwardUrl, code) => {
 
@@ -118,13 +119,25 @@ const playGames = (popFrame, type, forwardUrl, code) => {
     }
   }
   if(popFrame === false && code === "iyg" || "yg") {
-    alert(forwardUrl)
-    // https://ygmmt8test.yicaigame.com/credit/v2/index.do?#/index?code=TOTO_6D&groupCode=DAMA_6D
-    // https://ygmmt8test.yicaigame.com/credit/v2/index.do?#/index?code=TOTO_6D&groupCode=DAMA_6D
-    forwardIyg.do?isApp=1&mobile=1&lotCode=TOTO_6D&lotVersion=V2&groupCode=DAMA_6D
-    https://mt0.yibo22.com/third/forwardIyg.do?isApp=1&mobile=1&lotCode=TOTO_6D&lotVersion=V2&groupCode=DAMA_6D
+    if(forwardUrl) {
+      forwardUrls.value = forwardUrl
+      forward()
+    }
+  
   }
 };
+
+const {refetch: forward} = useQuery({
+  queryFn: () => axiosGet(`/api/${forwardUrls.value}`),
+  queryKey: ['forward'],
+  enabled: false,
+  select: (data) => {
+    if(data) {
+      window.location.href = data.data.url
+    }
+  },
+  onError: (err) => alert(err)
+})
 
 const {} = useQuery({
   queryKey: ["userGames"],
