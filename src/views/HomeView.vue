@@ -46,12 +46,17 @@
           <img src="/images/unread.png" class="w-[.4rem]" alt="" />
         </div>
       </div>
-
-      <div
-        :class="['flex items-center w-full overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]',
-      store.state.setThemes.lightTheme ? 'bg-[#f08abd] text-[white]' : 'bg-[#05309f] border-b-[#3A61C2] text-[white]',
-      store.state.setThemes.darkTheme ? 'bg-[#1d1c1c] text-[white]' : 'bg-[#05309f] border-b-[#3A61C2] text-[white]'
-      ]"
+      <NewVantTab />
+      <!-- <div
+        :class="[
+          'flex items-center w-full overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]',
+          store.state.setThemes.lightTheme
+            ? 'bg-[#f08abd] text-[white]'
+            : 'bg-[#05309f] border-b-[#3A61C2] text-[white]',
+          store.state.setThemes.darkTheme
+            ? 'bg-[#1d1c1c] text-[white]'
+            : 'bg-[#05309f] border-b-[#3A61C2] text-[white]',
+        ]"
         ref="scrollContainer"
       >
         <div class="flex items-center gap-[.7rem] mx-[.2rem]">
@@ -71,17 +76,17 @@
             />
             <button
               @click="scrollToSection(tab.id)"
-              class=" text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
+              class="text-[.25rem] text-nowrap bg-transparent border-none cursor-pointer"
             >
-              {{ tab.name }} 
+              {{ tab.name }}
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
+      <!-- <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
-          v-for="({games, tab }, index) in games"
+          v-for="({ games, tab }, index) in games"
           :key="index"
           :id="`${tab.id}_tab`"
           class="flex flex-col gap-[.2rem] scroll-smooth scroll-mt-5"
@@ -148,30 +153,33 @@
             </div>
           </div>
         </div>
-        <!-- <Toast/> -->
         <div class="absolute top-[7rem] right-0">
           <SupportLink
             @scroll-to="scrollToUp"
             :hideScrollTop="hideScrollToView"
           />
         </div>
-      </div>
+      </div> -->
       <div v-if="store.state?.userInfo?.isLogin">
-        <AntModal :isOpen="store.state.openRedPacket" :componentPass="RedPacket" :bgColor="true" />
+        <AntModal
+          :isOpen="store.state.openRedPacket"
+          :componentPass="RedPacket"
+          :bgColor="true"
+        />
       </div>
       <!-- <AntModal :isOpen="true" :componentPass="Test" /> -->
 
-     <!-- <AntModal :isOpen="true" :componentPass="Notice" /> -->
-     <AntModal
+      <!-- <AntModal :isOpen="true" :componentPass="Notice" /> -->
+      <AntModal
         :isOpen="true"
         :componentPass="GetApplogin"
         v-if="store.state.userGetAppLogin?.length"
       />
-     <AntModal
+      <AntModal
         :isOpen="store.state.turnLate"
         :componentPass="TurnLate"
         v-if="store.state.degreeInfo.success"
-      /> 
+      />
       <AntModal
         :isOpen="store.state.loginModal"
         :componentPass="Login"
@@ -211,7 +219,7 @@ import {
   defineAsyncComponent,
 } from "vue";
 
-
+import NewVantTab from "@/components/test/testPage4.vue";
 
 const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")

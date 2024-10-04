@@ -175,11 +175,27 @@ const { isLoading } = useQuery({
 });
 
 const scrollToGames = (id, index) => {
-  stores.commit("setScrollTo", id);
-  // store.OpenClose();
   stores.commit('setsideBar')
-  activeG.value = index
+
+  const sideBarIndex = {
+    563: 0,
+    562: 1,
+    129: 2,
+    503: 3,
+    263: 4,
+    124: 5,
+    127: 6,
+    123: 7,
+    281: 8, 
+    125: 9,
+    322: 10,
+    280: 11
+  }
+  stores.commit('setScrollTo', sideBarIndex[id])
+  activeG.value = sideBarIndex[id]
+alert(activeG.value)
 };
+
 
 const exclusive = () => {
   if (!stores.state.userInfo.isLogin) {

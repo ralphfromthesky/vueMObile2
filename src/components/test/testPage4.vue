@@ -1,6 +1,6 @@
 <template>
 
-  <div class="bg-[white]">
+  <div class="bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative">
     <div v-if="showGames" class="relative">
       <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
@@ -13,10 +13,10 @@
     ></iframe>
     </div>
     <div v-else>
-      <van-tabs v-model:active="active" scrollspy sticky>
-        <van-tab v-for="({ games, tab }, index) in games" :key="tab.name">
+      <van-tabs v-model:active="active" scrollspy sticky offset-top=".8rem" background="#1A45B1" title-inactive-color="white" color="#FFF0BB" title-active-color="#FFF0BB">
+        <van-tab v-for="({ games, tab }, index) in games" :key="tab.name" class="py-[.4rem]">
           <template #title>
-            <div class="flex flex-col items-center pb-[.1rem]">
+            <div class="flex flex-col items-center pb-[.1rem]" @click="clickThisTab(index)">
               <img
                 :src="`/logo/` + tab.code + `_active.png`"
                 class="h-[.46rem]"
@@ -25,14 +25,14 @@
             </div>
           </template>
 
-          <div>
+          <div >
             <div class="flex justify-between items-center mb-1">
               <div>
                 <img
                   :src="`/logo/` + tab.code + `_active.png`"
                   class="h-[.55rem]"
                 />
-                <div class="text-[black] text-[.3rem]">{{ tab.name }}</div>
+                <div class="text-[white] text-[.3rem]">{{ tab.name }}</div>
               </div>
               <div>
                 <span class="text-[#6FA4EF] text-[.27rem]">Tudos</span>
@@ -68,8 +68,7 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent, computed } from "vue";
-const active = ref(5);
+import { ref, defineAsyncComponent, computed, watch } from "vue";
 const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")
 );
@@ -85,6 +84,18 @@ const gameType = ref("");
 const gameTab = ref([]);
 const forwardUrls = ref('')
 const forwardGame = ref()
+const active = ref()
+
+const clickThisTab = (num) => {
+  store.commit('scrollTo', num)
+}
+
+watch(() => store.state.scrollTo, (newVal) => {
+  if(newVal) {
+    active.value = newVal
+    clickThisTab()
+  }
+} )
 
 const backHome = () => {
   showGames.value = false
@@ -145,10 +156,9 @@ const {refetch: forward} = useQuery({
   queryKey: ['forward'],
   enabled: false,
   select: (data) => {
-    if(data.data.isLogin === false) {
-      store.commit('setloginModal', true)
-      return
-    }
+ if(!data.data.isLogin) {
+  store.commit('setloginModal', true)
+ }
     if(data.data.url.includes('ygmmt8test')) {
      window.location.href = data.data.url
     } 
