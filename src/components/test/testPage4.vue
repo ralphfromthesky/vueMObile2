@@ -1,6 +1,7 @@
 <template>
+
   <div class="bg-[white]">
-    <div v-if="showGames" class="relative" @click="showGames = false">
+    <div v-if="showGames" class="relative">
       <div class="absolute top-[.5rem] left-[.1rem]">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
       </div>
@@ -115,6 +116,9 @@ const playGames = (popFrame, type) => {
       gameType.value = 0;
       gameTabs();
     }
+  }
+  if(popFrame === false) {
+    showGames.value = true
   }
 };
 
