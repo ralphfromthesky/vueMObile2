@@ -2,17 +2,15 @@
 
   <div class="bg-[white]">
     <div v-if="showGames" class="relative">
-      <div class="absolute top-[.5rem] left-[.1rem]">
+      <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
       </div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit illo
-      dolor quisquam deleniti? Magni, facere at. Eos et sint ut minus labore,
-      dolorum magni sed fuga corrupti! A, sunt debitis.
-      <!-- <iframe
-      :src="showIframe"
+    
+      <iframe
+      :src="showThisGame"
       frameborder="0"
       class="gameContainer w-screen h-screen"
-    ></iframe> -->
+    ></iframe>
     </div>
     <div v-else>
       <van-tabs v-model:active="active" scrollspy sticky>
@@ -70,7 +68,7 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent, computed } from "vue";
 const active = ref(5);
 const Login = defineAsyncComponent(() =>
   import("@/components/layout/LoginComponent/LoginForm.vue")
@@ -86,9 +84,22 @@ const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
 const forwardUrls = ref('')
+const forwardGame = ref()
+
+const backHome = () => {
+  showGames.value = false
+  transOut()
+}
+const { refetch: transOut } = useQuery({
+  queryKey: ["transOut"],
+  queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
+});
+
+const showThisGame = computed(() => {
+  return forwardGame.value
+})
 
 const playGames = (popFrame, type, forwardUrl, code) => {
-
   if (popFrame === true && type) {
     router.push("/slots");
     if (type === "3") {
@@ -125,6 +136,9 @@ const playGames = (popFrame, type, forwardUrl, code) => {
     }
   
   }
+  if(popFrame === false && code === "newpg" || "agLive") {
+    alert('fasfasf')
+  }
 };
 
 const {refetch: forward} = useQuery({
@@ -132,8 +146,10 @@ const {refetch: forward} = useQuery({
   queryKey: ['forward'],
   enabled: false,
   select: (data) => {
-    if(data) {
-      window.location.href = data.data.url
+    if(data.data.url) {
+      showGames.value = true
+      forwardGame.value = data.data.url
+      // window.location.href = data.data.url
     }
   },
   onError: (err) => alert(err)
@@ -150,6 +166,7 @@ const {} = useQuery({
   },
 });
 
+
 const { refetch: gameTabs } = useQuery({
   queryKey: ["forwardGames"],
   queryFn: async () =>
@@ -162,3 +179,11 @@ const { refetch: gameTabs } = useQuery({
   },
 });
 </script>
+
+<style scoped>
+@media (min-width: 431px) {
+  .gameContainer {
+    width: 7.4rem;
+  }
+}
+</style>
