@@ -46,7 +46,7 @@
                 v-for="(g, tab, index) in games"
                 :key="index"
                 class="text-[white]"
-                @click="playGames(g.popFrame, g.type)"
+                @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
               >
                 <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
                 <img
@@ -86,7 +86,7 @@ const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
 
-const playGames = (popFrame, type) => {
+const playGames = (popFrame, type, forwardUrl, code) => {
 
   if (popFrame === true && type) {
     router.push("/slots");
@@ -117,8 +117,12 @@ const playGames = (popFrame, type) => {
       gameTabs();
     }
   }
-  if(popFrame === false) {
-    showGames.value = true
+  if(popFrame === false && code === "iyg" || "yg") {
+    alert(forwardUrl)
+    // https://ygmmt8test.yicaigame.com/credit/v2/index.do?#/index?code=TOTO_6D&groupCode=DAMA_6D
+    // https://ygmmt8test.yicaigame.com/credit/v2/index.do?#/index?code=TOTO_6D&groupCode=DAMA_6D
+    forwardIyg.do?isApp=1&mobile=1&lotCode=TOTO_6D&lotVersion=V2&groupCode=DAMA_6D
+    https://mt0.yibo22.com/third/forwardIyg.do?isApp=1&mobile=1&lotCode=TOTO_6D&lotVersion=V2&groupCode=DAMA_6D
   }
 };
 
