@@ -47,6 +47,8 @@
         </div>
       </div>
       <NewVantTab />
+  
+
       <!-- <div
         :class="[
           'flex items-center w-full overflow-auto sticky top-0 left-0 z-10 h-[1.06rem]',
@@ -494,7 +496,7 @@ onMounted(() => {
 @media (min-width: 431px) {
   #mainDiv {
     width: 100%;
-    padding: 0 5px 0 5px;
+    /* padding: 0 5px 0 5px; */
   }
   .gameContainer {
     width: 7.4rem;

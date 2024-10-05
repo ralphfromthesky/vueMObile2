@@ -40,6 +40,8 @@ const store = createStore({
     RegisterModal: false,
     sideBar: true,
     turnLate: false,
+    showGames: false,
+    gameUrl: '',
     isDataFetching: true,
     propsData: [],
     newGameType: "",
@@ -58,6 +60,12 @@ const store = createStore({
     inviteData: [],
   },
   mutations: {
+    setshowGames(state, payload) {
+      state.showGames = payload
+    },
+    setgameUrl(state, payload) {
+      state.gameUrl = payload
+    },
     setgType(state, payload) {
       state.gType = payload;
     },
