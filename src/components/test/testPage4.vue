@@ -1,7 +1,7 @@
 <template>
 
   <div class="bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative">
-    <!-- <div v-if="showGames" class="relative">
+    <div v-if="showGames" class="relative">
       <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
       </div>
@@ -11,9 +11,8 @@
       frameborder="0"
       class="gameContainer w-screen h-screen"
     ></iframe>
-    </div> -->
+    </div>
     <div>
-      ====================={{ store.state.gameUrl }}
       <van-tabs v-model:active="active" scrollspy sticky offset-top=".8rem" background="#1A45B1" title-inactive-color="white" color="#FFF0BB" title-active-color="#FFF0BB">
         <van-tab v-for="({ games, tab }, index) in games" :key="tab.name" class="py-[.4rem]">
           <template #title>

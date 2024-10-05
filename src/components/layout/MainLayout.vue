@@ -1,20 +1,5 @@
 <template>
-  <div>
-    <div v-if="newStore.state.showGames" class="relative w-[5rem] border-2">
-      <div
-        class="absolute top-[.5rem] left-[.1rem]"
-        @click="newStore.commit('setshowGames', false)"
-      >
-        <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
-      </div>
-      <iframe
-        :src="showThisGame"
-        frameborder="0"
-        class="gameContainer w-screen h-screen"
-      ></iframe>
-    </div>
-  </div>
-  <main class="mainDiv" v-if="!newStore.state.showGames">
+  <main class="mainDiv">
     <NavBar></NavBar>
     <div
       :class="[
@@ -36,7 +21,7 @@
       <div
         @click="newStore.commit('setsideBar')"
         :class="
-          newStore.state.sideBar
+         newStore.state.sideBar
             ? `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#f8f5f5b3] fixed top-0 z-20 fadeIn transition-all`
             : `w-screen h-[calc(100vh-.896rem)] mt-[.896rem] bg-[#000000b3] fixed top-0 z-20 fadeOut transition-all`
         "
@@ -44,7 +29,7 @@
       ></div>
       <div
         :class="
-          newStore.state.sideBar
+            newStore.state.sideBar
             ? `slide-in z-20 absolute`
             : `slide-out z-20 absolute`
         "
@@ -68,7 +53,6 @@ import {
   watchEffect,
   watch,
   onUnmounted,
-  computed,
   defineAsyncComponent,
 } from "vue";
 // import NavBar from './Navigation/NavBarLayout.vue'
@@ -93,20 +77,6 @@ import { useGetUserConfig } from "@/global/userConfig";
 import { messageApi } from "../antUi/antMessage";
 import { RouterView } from "vue-router";
 const { userConfig } = useGetUserConfig();
-
-watch(
-  () => newStore.state.gameUrl,
-  (newVal) => {
-    alert(newVal);
-  }
-);
-
-const showThisGame = computed(() => {
-  if (newStore.state.gameUrl) {
-    alert(newStore.state.gameUrl);
-    return newStore.state.gameUrl;
-  }
-});
 watchEffect(() => {
   userConfig.refetch();
 });
