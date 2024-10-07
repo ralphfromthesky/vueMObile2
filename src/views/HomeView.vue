@@ -1,7 +1,4 @@
 <template>
-
-
-
   <MainLayout v-if="store.state.showGames">
     <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" id="mainDiv">
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">

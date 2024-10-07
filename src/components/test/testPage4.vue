@@ -46,14 +46,14 @@
               <div
                 v-for="(g, tab, index) in games"
                 :key="index"
-                class="text-[white]"
+                class="text-[white] relative"
                 @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
               >
                 <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
                 <img
                   src="/images/star.png"
                   alt=""
-                  class="absolute top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
+                  class="absolute border-2 border-[red] top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
                 />
               </div>
             </div>
@@ -91,15 +91,10 @@ const forwardGame = ref()
 const active = ref()
 
 const clickThisTab = (num) => {
-  store.commit('scrollTo', num)
+  store.commit('setScrollTo', num)
+  alert(num)
 }
 
-watch(() => store.state.scrollTo, (newVal) => {
-  if(newVal) {
-    active.value = newVal
-    clickThisTab()
-  }
-} )
 
 const backHome = () => {
   store.commit('setshowGames', false)
@@ -199,6 +194,14 @@ const { refetch: gameTabs } = useQuery({
     gameTab.value = data;
   },
 });
+
+
+watch(() => store.state.scrollTo, (newVal) => {
+  if(newVal) {
+    active.value = newVal
+    clickThisTab(newVal)
+  }
+})
 </script>
 
 <style scoped>

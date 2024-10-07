@@ -174,8 +174,8 @@ const store = createStore({
     setMissiontask(state, payload) {
       state.userMissiontask = payload;
     },
-    setScrollTo(state, id) {
-      state.scrollTo = id;
+    setScrollTo(state, payload) {
+      state.scrollTo = payload;
     },
     setForwardname(state, payload) {
       state.forwardGame = payload;

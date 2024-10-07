@@ -138,7 +138,7 @@
 </style>
 
 <script setup>
-import { ref, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent, watch } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../../../components/axios/AxiosHook.js";
 import { useStore } from "@/store/store";
@@ -176,7 +176,6 @@ const { isLoading } = useQuery({
 
 const scrollToGames = (id, index) => {
   stores.commit('setsideBar')
-
   const sideBarIndex = {
     563: 0,
     562: 1,
@@ -192,8 +191,6 @@ const scrollToGames = (id, index) => {
     280: 11
   }
   stores.commit('setScrollTo', sideBarIndex[id])
-  activeG.value = sideBarIndex[id]
-alert(activeG.value)
 };
 
 
@@ -242,6 +239,13 @@ const sidebarLinks = ref([
   }
 
  }
+
+ watch(() => stores.state.scrollTo, (newVal) => {
+  if(newVal) {
+     activeG.value = newVal
+    // clickThisTab()
+  }
+} )
 </script>
 
 <style scoped>
