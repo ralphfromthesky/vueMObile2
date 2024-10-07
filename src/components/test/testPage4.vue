@@ -1,7 +1,8 @@
 <template>
 
   <div class="bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative">
-    <div v-if="showGames" class="relative">
+    <slot name="game" v-if="!store.state.showGames">
+    <div class="relative">
       <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
         <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
       </div>
@@ -12,6 +13,8 @@
       class="gameContainer w-screen h-screen"
     ></iframe>
     </div>
+  </slot>
+  <slot name="fetch" v-if="store.state.showGames">
     <div>
       <van-tabs v-model:active="active" scrollspy sticky offset-top=".8rem" background="#1A45B1" title-inactive-color="white" color="#FFF0BB" title-active-color="#FFF0BB">
         <van-tab v-for="({ games, tab }, index) in games" :key="tab.name" class="py-[.4rem]">
@@ -58,6 +61,7 @@
         </van-tab>
       </van-tabs>
     </div>
+  </slot>
     <AntModal
       :isOpen="store.state.loginModal"
       :componentPass="Login"
@@ -98,8 +102,10 @@ watch(() => store.state.scrollTo, (newVal) => {
 } )
 
 const backHome = () => {
-  showGames.value = false
-  transOut()
+  store.commit('setshowGames', false)
+  transOut().then(() => {
+    window.location.reload()
+  })
 }
 const { refetch: transOut } = useQuery({
   queryKey: ["transOut"],
@@ -139,13 +145,13 @@ const playGames = (popFrame, type, forwardUrl, code) => {
       gameType.value = 0;
       gameTabs();
     }
+    return
   }
   if(popFrame === false && code === "iyg" || "yg") {
     if(forwardUrl) {
       forwardUrls.value = forwardUrl
       forward()
-      store.commit('setshowGames', true)
-      store.commit('setgameUrl', forwardUrls.value)
+       store.commit('setshowGames', false)
     }
   
   }

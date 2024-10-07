@@ -40,7 +40,7 @@ const store = createStore({
     RegisterModal: false,
     sideBar: true,
     turnLate: false,
-    showGames: false,
+    showGames: true,
     gameUrl: '',
     isDataFetching: true,
     propsData: [],

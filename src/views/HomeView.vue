@@ -1,15 +1,8 @@
 <template>
-  <div v-if="showGames" class="relative">
-    <div class="absolute top-[.5rem] left-[.1rem]" @click="backlush">
-      <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
-    </div>
-    <iframe
-      :src="showIframe"
-      frameborder="0"
-      class="gameContainer w-screen h-screen"
-    ></iframe>
-  </div>
-  <MainLayout v-if="hideMain">
+
+
+
+  <MainLayout v-if="store.state.showGames">
     <div class="flex flex-col w-screen gap-[.2rem] my-[.2rem]" id="mainDiv">
       <div class="flex flex-col gap-[.2rem] w-full p-[.2rem] pb-0 pt-0">
         <div
@@ -46,7 +39,11 @@
           <img src="/images/unread.png" class="w-[.4rem]" alt="" />
         </div>
       </div>
-      <NewVantTab />
+      <NewVantTab>
+        <template #fetch>
+   
+        </template>
+      </NewVantTab>
   
 
       <!-- <div
@@ -209,6 +206,11 @@
       />
     </div>
   </MainLayout>
+  <NewVantTab v-if="!store.state.showGames">
+        <template #game>
+   
+        </template>
+  </NewVantTab>
 </template>
 
 <script setup>
@@ -294,132 +296,6 @@ const scrollContainer = ref(null);
 const itemRefs = ref([]);
 const hideScrollToView = ref(true);
 
-const backlush = () => {
-  transOut();
-  hideMain.value = true;
-  showGames.value = false;
-};
-const { refetch: transOut } = useQuery({
-  queryKey: ["transOut"],
-  queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
-});
-
-const {} = useQuery({
-  queryKey: ["userGames"],
-  queryFn: async () =>
-    await axiosGet2("/api/getGames.do?type=11&limitNum=50&lang=en"),
-  staleTime: 1000,
-  select: (data) => {
-    games.value = data.filter((entry) => entry.games.length > 0);
-    store.commit(
-      "setGetGames",
-      data.filter((entry) => entry.games.length > 0)
-    );
-  },
-});
-
-const gameClick = (index, id) => {
-  gameActive.value = index;
-};
-
-const fetchGames = (url, popFrame, gameTabType) => {
-  if (!store.state.userInfo.isLogin) {
-    loginModal.value = !loginModal.value;
-    return;
-  }
-  if (popFrame === false) {
-    gameUrl.value = url;
-    refetch();
-  }
-  if (popFrame === true) {
-    // alert(popFrame, gameTabType);
-    // router.push("/Slots")
-    return;
-  }
-};
-
-const getTabName = (tabName) => {
-  if (tabName === "Slots") {
-    headTitle.value = "Slots";
-    gameType.value = "pg";
-    getGameType.value = 2;
-    getGame.refetch();
-    router.push("/slots");
-    store.commit("setForwardname", "Slots");
-    store.commit("setTypes", gameType.value);
-  }
-  if (tabName === "Fishing") {
-    gameType.value = "bbinFish";
-    getGameType.value = 7;
-    getGame.refetch();
-    router.push("/slots");
-    store.commit("setForwardname", "Fishing");
-    store.commit("setTypes", gameType.value);
-  }
-  if (tabName === "Live Casino") {
-    gameType.value = "agLive";
-    getGameType.value = 1;
-    getGame.refetch();
-    router.push("/slots");
-    store.commit("setForwardname", "Live Casino");
-    store.commit("setTypes", gameType.value);
-  }
-  if (tabName === "Sports") {
-    gameType.value = "tysbSport";
-    getGameType.value = 0;
-    getGame.refetch();
-    router.push("/slots");
-    store.commit("setForwardname", "Sports");
-    store.commit("setTypes", gameType.value);
-  }
-};
-
-const slide = async (newIndex) => {
-  await nextTick();
-  const container = scrollContainer.value;
-  const item = itemRefs.value[newIndex];
-
-  if (container && item) {
-    const containerRect = container.getBoundingClientRect();
-    const itemRect = item.getBoundingClientRect();
-    const scrollTo =
-      itemRect.left -
-      containerRect.left +
-      container.scrollLeft -
-      containerRect.width / 2 +
-      itemRect.width / 2;
-
-    container.scrollTo({
-      left: scrollTo,
-      behavior: "smooth",
-    });
-  }
-};
-
-const { refetch, isLoading, isFetching } = useQuery({
-  queryKey: ["games", gameUrl.value],
-  queryFn: async () => await axiosGet2(`/api${gameUrl.value}`),
-  select: (data) => {
-    forwardGame.value = data;
-    if (gameUrl.value) {
-      hideMain.value = false;
-      showGames.value = true;
-    }
-  },
-});
-
-const scrollToSection = (id) => {
-  // alert(id)
-  const element = document.getElementById(`${id}_tab`);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-
-  if (id === 263) {
-    hideScrollToView.value = false;
-  }
-};
-
 const scrollToUp = () => {
   const topElement = document.getElementById("topElement");
   if (topElement) {
@@ -427,55 +303,12 @@ const scrollToUp = () => {
   }
 };
 
-const showIframe = computed(() => {
-  return forwardGame.value?.url || "";
-});
-
-const gameTypeName = computed(() => {
-  store.commit("setGameTypes", gameType.value);
-  return gameType.value;
-});
-
 const getFirstThreeImages = (games, tabId) => {
   return showAllGames.value[tabId] ? games : games.slice(0, 3);
 };
 
-const toggleShowAll = (tabId) => {
-  showAllGames.value[tabId] === undefined
-    ? (showAllGames.value[tabId] = false)
-    : (showAllGames.value[tabId] = !showAllGames.value[tabId]);
-};
-
-watch(
-  () => store.state.scrollTo,
-  (newVal) => {
-    // alert(`this alert from home ${newVal}`)
-    const convertedVal = {
-      129: 0,
-      501: 1,
-      263: 2,
-      503: 3,
-      124: 4,
-      127: 5,
-      123: 6,
-      279: 7,
-      322: 8,
-      125: 9,
-      322: 10,
-      280: 11,
-    };
-
-    gameClick(convertedVal[newVal]);
-    slide(convertedVal[newVal]);
-    setTimeout(() => {
-      scrollToSection(newVal);
-    }, 400);
-  }
-);
-
 onMounted(() => {
   getOnline.refetch();
-  store.commit("setDataFetching", isFetching);
 });
 </script>
 
