@@ -41,18 +41,18 @@
                   :src="`/logo/` + tab.code + `_active.png`"
                   class="h-[.46rem]"
                 />
-                {{ tab.name }}
+                {{ tab.name }} 
               </div>
             </template>
 
             <div>
-              <div class="flex justify-between items-center mb-1">
+              <div class="flex justify-between items-center mb-1 ml-1">
                 <div>
                   <img
                     :src="`/logo/` + tab.code + `_active.png`"
                     class="h-[.55rem]"
                   />
-                  <div class="text-[white] text-[.3rem]">{{ tab.name }}</div>
+                  <div class="text-[white] text-[.3rem]">{{ tab.name }} </div>
                 </div>
                 <div>
                   <span class="text-[#6FA4EF] text-[.27rem]">Tudos</span>
@@ -61,7 +61,7 @@
 
               <div class="flex flex-wrap gap-1 justify-center relative">
                 <div
-                  v-for="(g, tab, index) in games"
+                  v-for="(g, tab, index) in showGameImages(games, tab)"
                   :key="index"
                   class="text-[white] relative"
                   @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
@@ -73,6 +73,9 @@
                     class="absolute border-2 border-[red] top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
                   />
                 </div>
+              </div>
+              <div class="border-2 border-[red] mt-1" @click="showListGames(index)">
+                CHANGE
               </div>
             </div>
           </van-tab>
@@ -104,12 +107,23 @@ const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
 const forwardUrls = ref("");
+const showAllGames = ref(true)
 const forwardGame = ref();
 const active = ref();
 
+
+const showGameImages = (games) => {
+  return showAllGames.value ? games.slice(0,3) : games
+}
+const showListGames = (index) => {
+  showAllGames.value = false;
+  index === 2 ? showAllGames.value = true : ''
+
+}
+
 const clickThisTab = (num) => {
   store.commit("setScrollTo", num);
-  alert(num);
+  // alert(num);
 };
 
 const backHome = () => {

@@ -149,13 +149,14 @@
             </div>
           </div>
         </div>
-        <div class="absolute top-[7rem] right-0">
+
+      </div> -->
+      <div class="absolute top-[7rem] right-0">
           <SupportLink
             @scroll-to="scrollToUp"
             :hideScrollTop="hideScrollToView"
           />
         </div>
-      </div> -->
       <div v-if="store.state?.userInfo?.isLogin">
         <AntModal
           :isOpen="store.state.openRedPacket"
@@ -300,9 +301,9 @@ const scrollToUp = () => {
   }
 };
 
-const getFirstThreeImages = (games, tabId) => {
-  return showAllGames.value[tabId] ? games : games.slice(0, 3);
-};
+// const getFirstThreeImages = (games, tabId) => {
+//   return showAllGames.value[tabId] ? games : games.slice(0, 3);
+// };
 
 onMounted(() => {
   getOnline.refetch();
