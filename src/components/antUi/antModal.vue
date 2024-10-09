@@ -151,7 +151,7 @@ const handleOk = () => {
   open.value = false;
   emits("closed", false);
   store.commit("setModalErr", false);
-  store.commit("setAntMOdal", false); 
+  //store.commit("setAntMOdal", false); 
   store.commit('setopenRedPacket', false)
   store.commit('setloginModal', false)
   store.commit('setRegisterModal', false)

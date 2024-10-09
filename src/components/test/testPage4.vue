@@ -1,67 +1,84 @@
 <template>
-
-  <div class="bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative">
+  <div
+    class="bg-[#1A45B1c] bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center relative"
+  >
     <slot name="game" v-if="!store.state.showGames">
-    <div class="relative">
-      <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
-        <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
-      </div>
-    
-      <iframe
-      :src="showThisGame"
-      frameborder="0"
-      class="gameContainer w-screen h-screen"
-    ></iframe>
-    </div>
-  </slot>
-  <slot name="fetch" v-if="store.state.showGames">
-    <div>
-      <van-tabs v-model:active="active" scrollspy sticky offset-top=".8rem" background="#1A45B1" title-inactive-color="white" color="#FFF0BB" title-active-color="#FFF0BB">
-        <van-tab v-for="({ games, tab }, index) in games" :key="tab.name" class="py-[.4rem]">
-          <template #title>
-            <div class="flex flex-col items-center pb-[.1rem]" @click="clickThisTab(index)">
-              <img
-                :src="`/logo/` + tab.code + `_active.png`"
-                class="h-[.46rem]"
-              />
-              {{ tab.name }}
-            </div>
-          </template>
+      <div class="relative">
+        <div class="absolute top-[.5rem] left-[.1rem]" @click="backHome">
+          <img src="/public/home.png" alt="" srcset="" class="h-[1rem]" />
+        </div>
 
-          <div >
-            <div class="flex justify-between items-center mb-1">
-              <div>
+        <iframe
+          :src="showThisGame"
+          frameborder="0"
+          class="gameContainer w-screen h-screen"
+        ></iframe>
+      </div>
+    </slot>
+    <slot name="fetch" v-if="store.state.showGames">
+      <div>
+        <van-tabs
+          v-model:active="active"
+          scrollspy
+          sticky
+          offset-top=".8rem"
+          background="#1A45B1"
+          title-inactive-color="white"
+          color="#FFF0BB"
+          title-active-color="#FFF0BB"
+        >
+          <van-tab
+            v-for="({ games, tab }, index) in games"
+            :key="tab.name"
+            class="py-[.4rem]"
+          >
+            <template #title>
+              <div
+                class="flex flex-col items-center pb-[.1rem]"
+                @click="clickThisTab(index)"
+              >
                 <img
                   :src="`/logo/` + tab.code + `_active.png`"
-                  class="h-[.55rem]"
+                  class="h-[.46rem]"
                 />
-                <div class="text-[white] text-[.3rem]">{{ tab.name }}</div>
+                {{ tab.name }}
               </div>
-              <div>
-                <span class="text-[#6FA4EF] text-[.27rem]">Tudos</span>
-              </div>
-            </div>
+            </template>
 
-            <div class="flex flex-wrap gap-1 justify-center relative">
-              <div
-                v-for="(g, tab, index) in games"
-                :key="index"
-                class="text-[white] relative"
-                @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
-              >
-                <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
-                <img
-                  src="/images/star.png"
-                  alt=""
-                  class="absolute border-2 border-[red] top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
-                />
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <div>
+                  <img
+                    :src="`/logo/` + tab.code + `_active.png`"
+                    class="h-[.55rem]"
+                  />
+                  <div class="text-[white] text-[.3rem]">{{ tab.name }}</div>
+                </div>
+                <div>
+                  <span class="text-[#6FA4EF] text-[.27rem]">Tudos</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-1 justify-center relative">
+                <div
+                  v-for="(g, tab, index) in games"
+                  :key="index"
+                  class="text-[white] relative"
+                  @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
+                >
+                  <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
+                  <img
+                    src="/images/star.png"
+                    alt=""
+                    class="absolute border-2 border-[red] top-0 right-0 w-[.4rem] h-[.4rem] m-[.1rem]"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </van-tab>
-      </van-tabs>
-    </div>
-  </slot>
+          </van-tab>
+        </van-tabs>
+      </div>
+    </slot>
     <AntModal
       :isOpen="store.state.loginModal"
       :componentPass="Login"
@@ -86,30 +103,29 @@ const showGames = ref(false);
 const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
-const forwardUrls = ref('')
-const forwardGame = ref()
-const active = ref()
+const forwardUrls = ref("");
+const forwardGame = ref();
+const active = ref();
 
 const clickThisTab = (num) => {
-  store.commit('setScrollTo', num)
-  alert(num)
-}
-
+  store.commit("setScrollTo", num);
+  alert(num);
+};
 
 const backHome = () => {
-  store.commit('setshowGames', false)
+  store.commit("setshowGames", false);
   transOut().then(() => {
-    window.location.reload()
-  })
-}
+    window.location.reload();
+  });
+};
 const { refetch: transOut } = useQuery({
   queryKey: ["transOut"],
   queryFn: () => axiosGet2("/api/native/v2/autoTranout.do?lan=en"),
 });
 
 const showThisGame = computed(() => {
-  return forwardGame.value
-})
+  return forwardGame.value;
+});
 
 const playGames = (popFrame, type, forwardUrl, code) => {
   if (popFrame === true && type) {
@@ -140,37 +156,37 @@ const playGames = (popFrame, type, forwardUrl, code) => {
       gameType.value = 0;
       gameTabs();
     }
-    return
+    return;
   }
-  if(popFrame === false && code === "iyg" || "yg") {
-    if(forwardUrl) {
-      forwardUrls.value = forwardUrl
-      forward()
-       store.commit('setshowGames', false)
+  if ((popFrame === false && code === "iyg") || "yg") {
+    if (forwardUrl) {
+      forwardUrls.value = forwardUrl;
+      forward();
+      if (store.state.userInfo.isLogin) {
+        store.commit("setshowGames", false);
+        return;
+      }
     }
-  
   }
-
 };
 
-const {refetch: forward} = useQuery({
+const { refetch: forward } = useQuery({
   queryFn: () => axiosGet(`/api/${forwardUrls.value}`),
-  queryKey: ['forward'],
+  queryKey: ["forward"],
   enabled: false,
   select: (data) => {
- if(!data.data.isLogin) {
-  store.commit('setloginModal', true)
- }
-    if(data.data.url.includes('ygmmt8test')) {
-     window.location.href = data.data.url
-    } 
-    else {
-      showGames.value = true
-      forwardGame.value = data.data.url
+    if (!data.data.isLogin) {
+      store.commit("setloginModal", true);
+    }
+    if (data.data.url.includes("ygmmt8test")) {
+      window.location.href = data.data.url;
+    } else {
+      showGames.value = true;
+      forwardGame.value = data.data.url;
     }
   },
-  onError: (err) => alert(err)
-})
+  onError: (err) => alert(err),
+});
 
 const {} = useQuery({
   queryKey: ["userGames"],
@@ -195,13 +211,15 @@ const { refetch: gameTabs } = useQuery({
   },
 });
 
-
-watch(() => store.state.scrollTo, (newVal) => {
-  if(newVal) {
-    active.value = newVal
-    clickThisTab(newVal)
+watch(
+  () => store.state.scrollTo,
+  (newVal) => {
+    if (newVal) {
+      active.value = newVal;
+      clickThisTab(newVal);
+    }
   }
-})
+);
 </script>
 
 <style scoped>
