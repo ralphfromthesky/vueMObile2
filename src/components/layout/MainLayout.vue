@@ -28,6 +28,7 @@
         :hidden="newStore.state.sideBar"
       ></div>
       <div
+      class="slide-in z-20 absolute"
         :class="
             newStore.state.sideBar
             ? `slide-in z-20 absolute`
@@ -83,6 +84,7 @@ watchEffect(() => {
 </script>
 
 <style>
+
 .slide-in {
   animation: slide-in 0.3s forwards;
   -webkit-animation: slide-in 0.3s forwards;

@@ -26,6 +26,7 @@
           title-inactive-color="#A0C5FB"
           color="#FFF0BB"
           title-active-color="#FFF0BB"
+          line-width="1.6rem"
         >
           <van-tab
             v-for="({ games, tab }, index) in games"
@@ -124,7 +125,7 @@ const showGameImages = (games) => {
 };
 const showListGames = (tab) => {
   showAllGames.value = !showAllGames.value;
-  alert(tab);
+  // alert(tab);
 };
 
 const clickThisTab = (num) => {
@@ -183,7 +184,7 @@ const playGames = (popFrame, type, forwardUrl, code) => {
       forward();
       if (store.state.userInfo.isLogin) {
         store.commit("setshowGames", false);
-        store.state.commit('setDataFetching', isFetching)
+        store.state.commit('setDataFetching', true)
         return;
       }
     }

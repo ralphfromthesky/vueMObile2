@@ -42,7 +42,7 @@ const store = createStore({
     turnLate: false,
     showGames: true,
     gameUrl: '',
-    isDataFetching: null,
+    isDataFetching: false,
     propsData: [],
     newGameType: "",
     gType: "",
