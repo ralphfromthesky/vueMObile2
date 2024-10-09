@@ -41,7 +41,7 @@
                   :src="`/logo/` + tab.code + `_active.png`"
                   class="h-[.46rem]"
                 />
-                {{ tab.name }} 
+                {{ tab.name }}
               </div>
             </template>
 
@@ -52,21 +52,21 @@
                     :src="`/logo/` + tab.code + `_active.png`"
                     class="h-[.55rem]"
                   />
-                  <div class="text-[white] text-[.3rem]">{{ tab.name }} </div>
+                  <div class="text-[white] text-[.3rem]">{{ tab.name }}</div>
                 </div>
-                <div>
+                <div class="mr-1">
                   <span class="text-[#6FA4EF] text-[.27rem]">Tudos</span>
                 </div>
               </div>
 
-              <div class="flex flex-wrap gap-1 justify-center relative">
+              <div class="flex flex-wrap gap-1 justify-center relative ">
                 <div
-                  v-for="(g, tab, index) in showGameImages(games, tab)"
-                  :key="index"
-                  class="text-[white] relative"
+                  v-for="(g, tab) in showGameImages(games)"
+                  :key="g.name"
+                  class="text-[white] relative bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center"
                   @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
                 >
-                  <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem]" />
+                  <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem] w-[2rem]" />
                   <img
                     src="/images/star.png"
                     alt=""
@@ -74,8 +74,15 @@
                   />
                 </div>
               </div>
-              <div class="border-2 border-[red] mt-1" @click="showListGames(index)">
-                CHANGE
+              <div
+                class="mt-1"
+                @click="showListGames(tab.name)"
+              >
+                <div class="text-center">A exibir 9 jogos entre 21 Popular jogos</div>
+                <div class="flex justify-center">
+                  Carregar mais
+                  <img class="w-[.25rem]" src="/images/arrow-down.png" alt="" />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -107,23 +114,21 @@ const games = ref([]);
 const gameType = ref("");
 const gameTab = ref([]);
 const forwardUrls = ref("");
-const showAllGames = ref(true)
+const showAllGames = ref(true);
 const forwardGame = ref();
 const active = ref();
 
-
 const showGameImages = (games) => {
-  return showAllGames.value ? games.slice(0,3) : games
-}
-const showListGames = (index) => {
-  showAllGames.value = false;
-  index === 2 ? showAllGames.value = true : ''
-
-}
+  return showAllGames.value ? games.slice(0, 5) : games;
+};
+const showListGames = (tab) => {
+  showAllGames.value = !showAllGames.value;
+  alert(tab);
+};
 
 const clickThisTab = (num) => {
   store.commit("setScrollTo", num);
-  // alert(num);
+  alert(num);
 };
 
 const backHome = () => {
@@ -237,6 +242,10 @@ watch(
 </script>
 
 <style scoped>
+::v-deep .van-tabs--line .van-tabs__wrap {
+  height: 1.2rem;
+  border-bottom: 1px solid #3a61c2;
+}
 @media (min-width: 431px) {
   .gameContainer {
     width: 7.4rem;
