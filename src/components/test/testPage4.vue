@@ -23,7 +23,7 @@
           sticky
           offset-top=".8rem"
           background="#1A45B1"
-          title-inactive-color="white"
+          title-inactive-color="#A0C5FB"
           color="#FFF0BB"
           title-active-color="#FFF0BB"
         >
@@ -38,7 +38,7 @@
                 @click="clickThisTab(index)"
               >
                 <img
-                  :src="`/logo/` + tab.code + `_active.png`"
+                  :src="active === index ? `/logo/${tab.code}_active.png` : `/logo/${tab.code}.png` "
                   class="h-[.46rem]"
                 />
                 {{ tab.name }}
@@ -107,6 +107,7 @@ import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2, axiosGet } from "../axios/AxiosHook";
 import { useStore } from "@/store/store";
 import { useRouter } from "vue-router";
+import { messageApi } from "../antUi/antMessage";
 const router = useRouter();
 const store = useStore();
 const showGames = ref(false);
@@ -116,7 +117,7 @@ const gameTab = ref([]);
 const forwardUrls = ref("");
 const showAllGames = ref(true);
 const forwardGame = ref();
-const active = ref();
+const active = ref(0);
 
 const showGameImages = (games) => {
   return showAllGames.value ? games.slice(0, 5) : games;
@@ -128,7 +129,6 @@ const showListGames = (tab) => {
 
 const clickThisTab = (num) => {
   store.commit("setScrollTo", num);
-  alert(num);
 };
 
 const backHome = () => {
@@ -183,19 +183,23 @@ const playGames = (popFrame, type, forwardUrl, code) => {
       forward();
       if (store.state.userInfo.isLogin) {
         store.commit("setshowGames", false);
+        store.state.commit('setDataFetching', isFetching)
         return;
       }
     }
   }
 };
 
-const { refetch: forward } = useQuery({
+const { refetch: forward, isFetching } = useQuery({
   queryFn: () => axiosGet(`/api/${forwardUrls.value}`),
   queryKey: ["forward"],
   enabled: false,
   select: (data) => {
     if (!data.data.isLogin) {
       store.commit("setloginModal", true);
+    }
+    if(!data.data.success) {
+      messageApi.info(data.data.msg).then(() => backHome())
     }
     if (data.data.url.includes("ygmmt8test")) {
       window.location.href = data.data.url;

@@ -3,7 +3,7 @@
   <div class="overflow-hidden">
     <context-holder />
     <RouterView />
-    <!-- <SpinLoader v-if="store.state.isDataFetching" :is-align="true" /> -->
+    <SpinLoader v-if="store.state.isDataFetching" />
 
     <!-- <RouterView v-slot="{Component}">
       <transition :name="slideDirection" mode="out-in">
@@ -22,12 +22,12 @@ import { useStore } from "./store/store";
 const store = useStore();
 const { degreeInfo } = useGetDegreeInfo();
 const slideDirection = ref('slide-left'); // Default slide direction
-// const route = useRoute()
 
-// watch(route, (to, from) => {
-//   // Example: Slide left if going to a new route, slide right if going back
-//   slideDirection.value = to.path > from.path ? 'slide-left' : 'slide-right';
-// });
+watch(() => store.state.isDataFetching, (newVal) => {
+  if(newVal) {
+    alert(newVal)
+  }
+})
 
 onMounted(() => {
   if (!degreeInfo.data.success) {
