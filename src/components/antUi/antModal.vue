@@ -9,11 +9,15 @@
       :closable="false"
       :maskClosable="false"
       centered
-      :class="{ modas: props.bgColor, customColor: props.backGrounds, customKadyot: store.state.setThemes.lightTheme, customKadyot2:store.state.setThemes.darkTheme }"
+      :class="{
+        modas: props.bgColor,
+        customColor: props.backGrounds,
+        customKadyot: store.state.setThemes.lightTheme,
+        customKadyot2: store.state.setThemes.darkTheme,
+      }"
       @cancel="handeClose"
       class="modal431px"
     >
-    
       <component :is="componentPass" @close="handleOk"></component>
       <div
         class="flex justify-center text-[.7rem] font-bold text-[#d4d0d0] h-[4rem] flex-col text-center"
@@ -26,19 +30,20 @@
         <div
           :class="[
             'border-2  px-1 rounded-[.1rem]',
-            store.state.setThemes.lightTheme ? 'bg-[#f08abd] text-[white] border-[white]' : 'bg-[#05309F] text-[white]',
-            store.state.setThemes.darkTheme ? 'bg-[black] text-[red] border-[white]' : 'bg-[#05309F] text-[white]'
+            store.state.setThemes.lightTheme
+              ? 'bg-[#f08abd] text-[white] border-[white]'
+              : 'bg-[#05309F] text-[white]',
+            store.state.setThemes.darkTheme
+              ? 'bg-[black] text-[red] border-[white]'
+              : 'bg-[#05309F] text-[white]',
           ]"
         >
           <div class="text-[.5rem] text-center">
             {{ props.themePass }}
           </div>
           <div class="flex flex-col text-[.3rem]">
-            <span class="flex justify-between"
-            @click="changeThisTheme('dark')"
-
+            <span class="flex justify-between" @click="changeThisTheme('dark')"
               >Dark
-
               <input
                 type="radio"
                 v-model="selectedTheme"
@@ -47,9 +52,7 @@
                 id=""
               />
             </span>
-            <span class="flex justify-between"
-            @click="changeThisTheme('light')"
-
+            <span class="flex justify-between" @click="changeThisTheme('light')"
               >Light
               <input
                 type="radio"
@@ -59,9 +62,9 @@
                 id=""
               />
             </span>
-            <span class="flex justify-between"
-            @click="changeThisTheme('standard')"
-
+            <span
+              class="flex justify-between"
+              @click="changeThisTheme('standard')"
               >Standard
               <input
                 type="radio"
@@ -119,6 +122,27 @@
         </div>
       </div>
 
+      <div v-if="props.logOut">
+        <div class="text-white text-center">
+          <div class="text-[.5rem] text-[#a0c5fb]">Lembrette</div>
+          <div class="text-[.4rem] logOutModalButton">Log out kana?</div>
+          <div class="flex justify-center gap-[.2rem] mt-[.5rem] mb-1">
+            <button
+              @click="props.functionPass"
+              class="text-nowrap w-[3rem] py-[.25rem] rounded-[.15rem] text-[.3rem] bg-transparent border border-[#FFF0BB] text-[#FFF0BB]"
+            >
+              Exit
+            </button>
+            <button
+              class="w-[3rem] py-[.25rem] rounded-[.15rem] text-[.3rem] bg-[#FFF0BB] text-[#1A45B1]"
+              @click="handleOk"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
       <span
         class="absolute registerModalButton left-[45%] bottom-[-.8rem]"
         id="handleThis"
@@ -140,9 +164,9 @@ import { useStore } from "@/store/store";
 import { messageApi } from "./antMessage";
 const store = useStore();
 const nameInput = ref("");
-const a = ref()
+const a = ref();
 
-const selectedTheme = ref(a.value)
+const selectedTheme = ref(a.value);
 
 const showModal = () => {
   open.value = true;
@@ -151,14 +175,13 @@ const handleOk = () => {
   open.value = false;
   emits("closed", false);
   store.commit("setModalErr", false);
-  //store.commit("setAntMOdal", false); 
-  store.commit('setopenRedPacket', false)
-  store.commit('setloginModal', false)
-  store.commit('setRegisterModal', false)
-  store.commit('setnewTask', false)
-  store.commit('setturnLate', false)
+  //store.commit("setAntMOdal", false);
+  store.commit("setopenRedPacket", false);
+  store.commit("setloginModal", false);
+  store.commit("setRegisterModal", false);
+  store.commit("setnewTask", false);
+  store.commit("setturnLate", false);
 };
-
 
 const paided = () => {
   if (nameInput.value === "") {
@@ -182,19 +205,18 @@ const changeThisTheme = (themes) => {
   store.commit("setDarkTheme", false);
   if (themes === "light") {
     store.commit("setLightTheme", true);
-    a.value = store.state.setThemes2.light
+    a.value = store.state.setThemes2.light;
   }
   if (themes === "dark") {
     store.commit("setDarkTheme", true);
-    a.value = store.state.setThemes2.dark
-
+    a.value = store.state.setThemes2.dark;
   }
   if (themes === "standard") {
-    a.value = store.state.setThemes2.standard
+    a.value = store.state.setThemes2.standard;
     store.commit("setLightTheme", false);
     store.commit("setDarkTheme", false);
   }
-  console.log(a.value)
+  console.log(a.value);
 };
 
 const props = defineProps({
@@ -242,6 +264,17 @@ const props = defineProps({
     default: "",
     required: false,
   },
+  logOut: {
+    type: String,
+    reqires: false,
+    default: ''
+  },
+  functionPass: {
+    type: Function,
+    required: false,
+    default: ''
+
+  }
 });
 
 const open = ref(props.isOpen);
@@ -261,13 +294,14 @@ watch(
   }
 );
 
-watch(() => store.state.userInfo?.isLogin, (newVal) => {
-if(newVal) {
-  handleOk()
-
-}
-})
-
+watch(
+  () => store.state.userInfo?.isLogin,
+  (newVal) => {
+    if (newVal) {
+      handleOk();
+    }
+  }
+);
 </script>
 
 <style>
@@ -284,13 +318,11 @@ if(newVal) {
   }
 }
 
-.customKadyot .ant-modal-content  {
+.customKadyot .ant-modal-content {
   background-color: rgb(219, 131, 183);
 }
 
-
-.customKadyot2 .ant-modal-content  {
+.customKadyot2 .ant-modal-content {
   background-color: rgb(48, 47, 47);
 }
-
 </style>

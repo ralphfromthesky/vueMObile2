@@ -34,17 +34,17 @@
             </div>
           </div>
           <div class="relative">
-          <img src="/images/unread.png" class="w-[1.3rem]" alt="" />
-          <span class="h-1 text-[.20rem] bg-[red] absolute -top-[.1rem] -right-[.19rem] p-[.1rem] flex justify-between items-center rounded border-[.01rem] border-[white]">{{ store.state.userMessage?.content?.totalCount }}</span>
-        </div>
+            <img src="/images/unread.png" class="w-[1.3rem]" alt="" />
+            <span
+              class="h-1 text-[.20rem] bg-[red] absolute -top-[.1rem] -right-[.19rem] p-[.1rem] flex justify-between items-center rounded border-[.01rem] border-[white]"
+              >{{ store.state.userMessage?.content?.totalCount }}</span
+            >
+          </div>
         </div>
       </div>
       <NewVantTab>
-        <template #fetch>
-   
-        </template>
+        <template #fetch> </template>
       </NewVantTab>
-  
 
       <!-- <div
         :class="[
@@ -155,11 +155,11 @@
 
       </div> -->
       <div class="absolute top-[7rem] right-0">
-          <SupportLink
-            @scroll-to="scrollToUp"
-            :hideScrollTop="hideScrollToView"
-          />
-        </div>
+        <SupportLink
+          @scroll-to="scrollToUp"
+          :hideScrollTop="hideScrollToView"
+        />
+      </div>
       <div v-if="store.state?.userInfo?.isLogin">
         <AntModal
           :isOpen="store.state.openRedPacket"
@@ -208,9 +208,7 @@
     </div>
   </MainLayout>
   <NewVantTab v-if="!store.state.showGames">
-        <template #game>
-   
-        </template>
+    <template #game> </template>
   </NewVantTab>
 </template>
 

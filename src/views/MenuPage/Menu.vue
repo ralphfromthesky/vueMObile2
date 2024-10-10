@@ -525,27 +525,13 @@
           </div>
         </div>
       </div> -->
-      <LogOutModal>
-        <div class="text-white text-center">
-          <div class="text-[.5rem] text-[#a0c5fb]">Lembrette</div>
-          <div class="text-[.4rem] logOutModalButton">Log out kana?</div>
-          <div class="flex justify-center gap-[.2rem] mt-[.5rem] mb-1">
-            <button
-              @click="logOutUser.mutate()"
-              class="text-nowrap w-[3rem] py-[.25rem] rounded-[.15rem] text-[.3rem] bg-transparent border border-[#FFF0BB] text-[#FFF0BB]"
-            >
-              Exit
-            </button>
-            <button
-              class="w-[3rem] py-[.25rem] rounded-[.15rem] text-[.3rem] bg-[#FFF0BB] text-[#1A45B1]"
-              data-twe-modal-dismiss
-              aria-label="Close"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </LogOutModal>
+
+      <AntModal
+        :isOpen="logOutModals"
+        :backGrounds="true"
+        :logOut=true
+        :functionPass="logOutUser.mutate"
+      />
       <div v-if="isLogin" class="h-screen bg-[#000000b3] fixed top-0 z-20">
         <div
           v-if="isLogin"
@@ -584,6 +570,7 @@ const vipCurrentLevel = ref([]);
 const isRotate = ref(false);
 const mainDiv = ref(true);
 const isLogin = ref(false);
+const logOutModals = ref(false)
 const showDeposit = () => {
   isLogin.value = !isLogin.value;
 };
@@ -673,7 +660,7 @@ const menuData = ref([
     route: "/datamanagement",
     func: () => {},
   },
-  { title: "Log-out", img: "/menuImages/icon_Logout.png", func: () => {} },
+  { title: "Log-out", img: "/menuImages/icon_Logout.png", func: () => logOutModals.value = !logOutModals.value },
 ]);
 
 onMounted(() => {
