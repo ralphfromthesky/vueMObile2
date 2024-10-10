@@ -1,14 +1,16 @@
 import { axiosPost, axiosPost2 } from "@/components/axios/AxiosHook";
-import { useMutation } from "@tanstack/vue-query";
+import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import store from "@/store/store";
 import { ref, computed, watch } from "vue";
 import { useGetUserInfo } from "@/global/getUserInfo.js";
 import { useGetGlobalConfigInfo } from "./globalConfigInformation";
 import { useStore } from "@/store/store.js";
 import { messageApi } from "@/components/antUi/antMessage";
+import { useMessage } from "./messageCenter";
 
 
 export const useLogin = () => {
+  const client = useQueryClient()
   const userLogin = ref({
     username: "",
     password: "",
@@ -23,6 +25,8 @@ export const useLogin = () => {
   const { query } = useGetUserInfo();
   const { withdrawConfig } = useGetGlobalConfigInfo();
   const store = useStore();
+  const {messageList} = useMessage()
+
 
   const userConfig = store.state.userConfig.content;
 
@@ -31,9 +35,10 @@ export const useLogin = () => {
     onSuccess: (data) => {
       msg.value = data.msg;
       messageApi.info(data.msg)
-
+      messageList.refetch()
       errorToast.value = true;
       query.refetch();
+
       if (data.success === true) {
         document.querySelector(".myEcho").click();
         store.dispatch("updateUser", userLogin.value);

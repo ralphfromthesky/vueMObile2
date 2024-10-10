@@ -18,7 +18,7 @@ export const useMessage = () => {
   const messageList = useQuery({
     queryKey: ["messageList"],
     staleTime: 1000,
-    enabled: false,
+    enabled: true,
     queryFn: async () =>
       axiosGet2("/api/native/v2/message_list.do?pageNumber=1&pageSize=50"),
     select: (data) => {

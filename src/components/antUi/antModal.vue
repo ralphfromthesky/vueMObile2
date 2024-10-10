@@ -143,6 +143,14 @@
         </div>
       </div>
 
+      <div v-if="props.message" @click="redirectTo('/newsupport', 1)">
+        <div class="h-[2rem] flex justify-center items-center">
+          <span class="border-2 p-1 rounded-[.1rem] bg-bg text-txt font-bold">
+          You have a new message 😀 💬
+        </span>
+        </div>
+      </div>
+
       <span
         class="absolute registerModalButton left-[45%] bottom-[-.8rem]"
         id="handleThis"
@@ -159,12 +167,15 @@
 import { ref, watch, onMounted, defineExpose, onUnmounted } from "vue";
 import { CloseOutlined } from "@ant-design/icons-vue";
 import { useLogin } from "@/global/loginQuery.js";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const { loginMutation } = useLogin();
 import { useStore } from "@/store/store";
 import { messageApi } from "./antMessage";
 const store = useStore();
 const nameInput = ref("");
 const a = ref();
+
 
 const selectedTheme = ref(a.value);
 
@@ -197,6 +208,12 @@ const paided = () => {
 const handeClose = () => {
   open.value = false;
 };
+
+const redirectTo = (route, pass) => {
+  router.push(route);
+  store.commit("setIndexPass", pass);
+  store.commit('sethasMessage', false)
+}
 
 const emits = defineEmits(["closed", "paid", "selectedNums", "bettorName"]);
 
@@ -272,8 +289,12 @@ const props = defineProps({
   functionPass: {
     type: Function,
     required: false,
+    default: () => {}
+  },
+  message: {
+    type: String,
+    required: false,
     default: ''
-
   }
 });
 

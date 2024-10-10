@@ -324,7 +324,7 @@
               />
             </div>
           </div>
-          <div class="bg-[#1A45B1] w-full h-[.1rem] my-1" v-if="index === 2"></div>
+          <div class="bg-[#1A45B1] w-full h-[.1rem] mt-1" v-if="index === 2"></div>
         </div>
         </div>
       </div>

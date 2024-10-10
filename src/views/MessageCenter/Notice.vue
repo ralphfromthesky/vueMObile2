@@ -5,7 +5,7 @@
     v-if="showData"
   >
     <div
-      class="flex w-full bg-[#05309F] rounded-[.1rem] p-[.2rem]"
+      class="flex w-full justify-between bg-[#05309F] rounded-[.1rem] p-[.2rem]"
       v-for="(message, index) in messageData"
       :key="index"
       @click="showContent(message.content)"
@@ -66,7 +66,7 @@ const goBack = () => {
   mainMsg.value = false
 };
 
-onMounted(() => {
-  messageList.refetch();
-});
+// onMounted(() => {
+//   messageList.refetch();
+// });
 </script>

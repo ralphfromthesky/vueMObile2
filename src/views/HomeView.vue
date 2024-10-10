@@ -33,10 +33,11 @@
               >
             </div>
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer" @click="redirectTo('/newsupport', 1)">
             <img src="/images/unread.png" class="w-[1.3rem]" alt="" />
             <span
               class="h-1 text-[.20rem] bg-[red] absolute -top-[.1rem] -right-[.19rem] p-[.1rem] flex justify-between items-center rounded border-[.01rem] border-[white]"
+              v-if="store.state.userMessage?.content?.datas?.length"
               >{{ store.state.userMessage?.content?.totalCount }}</span
             >
           </div>
@@ -200,11 +201,11 @@
       <div v-if="store.state?.userInfo?.isLogin"></div>
       <!-- <SpinLoader v-if="isFetching" /> -->
 
-      <Slots
-        :gameTypePass="gameTypeName"
-        :headerName="headTitle"
-        v-if="false"
-      />
+      <AntModal
+        :isOpen=store.state.hasMessage
+        message="message"
+        :bgColor=true
+        />
     </div>
   </MainLayout>
   <NewVantTab v-if="!store.state.showGames">
@@ -265,6 +266,8 @@ const SupportLink = defineAsyncComponent(() =>
 
 import { useQuery } from "@tanstack/vue-query";
 import { axiosGet2 } from "../components/axios/AxiosHook.js";
+import { useRouter } from "vue-router";
+const router = useRouter()
 import { getGamesTab } from "@/global/games.js";
 const { getGameType, getGame } = getGamesTab();
 import { getOnlineStatus } from "@/global/userConfig";
@@ -288,7 +291,6 @@ const gameUrl = ref("");
 const games = ref([]);
 const gameType = ref("");
 const gameButtons = ref([]);
-import router from "@/router";
 const gameActive = ref(0);
 const showAllGames = ref({});
 const scrollContainer = ref(null);
@@ -305,6 +307,12 @@ const scrollToUp = () => {
 // const getFirstThreeImages = (games, tabId) => {
 //   return showAllGames.value[tabId] ? games : games.slice(0, 3);
 // };
+
+const redirectTo = (route, pass) => {
+router.push(route);
+store.commit("setIndexPass", pass);
+
+}
 
 onMounted(() => {
   getOnline.refetch();

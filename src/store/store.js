@@ -43,6 +43,7 @@ const store = createStore({
     showGames: true,
     gameUrl: '',
     isDataFetching: false,
+    hasMessage: false,
     propsData: [],
     newGameType: "",
     gType: "",
@@ -60,6 +61,9 @@ const store = createStore({
     inviteData: [],
   },
   mutations: {
+    sethasMessage(state, payload) {
+      state.hasMessage = payload
+    },
     setshowGames(state, payload) {
       state.showGames = payload
     },
@@ -253,6 +257,7 @@ const store = createStore({
         useGetGames: state.useGetGames,
         userSignInRule: state.userSignInRule,
         userMissiontask: state.userMissiontask,
+        hasMessage: state.hasMessage,
         setThemes: {
           lightTheme: state.setThemes.lightTheme,
           darkTheme: state.setThemes.darkTheme,

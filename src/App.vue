@@ -29,10 +29,16 @@ watch(() => store.state.isDataFetching, (newVal) => {
   }
 })
 
+
+
 onMounted(() => {
   if (!degreeInfo.data.success) {
     degreeInfo.refetch();
   }
+  if(store.state.userMessage?.content?.datas?.length > 0) {
+        store.commit('sethasMessage', true)
+      }
+      
 });
 </script>
 
