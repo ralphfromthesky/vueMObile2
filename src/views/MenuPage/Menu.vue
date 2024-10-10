@@ -218,7 +218,8 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col">
+
+        <!-- <div class="flex flex-col">
           <router-link to="/recoverbalance" @click="showComponent">
             <div class="flex items-center justify-between p-[.2rem]">
               <div class="flex items-center leading-none gap-[.2rem]">
@@ -299,9 +300,35 @@
               </div>
             </div>
           </router-link>
+        </div> -->
+
+        <div class="flex flex-col">
+          <div
+            class="flex flex-col p-[.2rem]"
+            v-for="(data, index) in menuData"
+            :key="data.title"
+            @click="data.func"
+          >
+          <div class="flex justify-between w-full">
+            <div class="flex items-center leading-none gap-[.2rem]">
+              <router-link :to="data.route" class="flex gap-1 items-center">
+                <img :src="data.img" alt="" class="w-[.45rem]" />
+                <span class="text-white text-[.26rem]">{{ data.title }}</span>
+              </router-link>
+            </div>
+            <div class="flex items-center">
+              <img
+                src="/images/return.png"
+                alt=""
+                class="rotate-180 w-[.3rem]"
+              />
+            </div>
+          </div>
+          <div class="bg-[#1A45B1] w-full h-[.1rem] my-1" v-if="index === 2"></div>
+        </div>
         </div>
       </div>
-      <div class="bg-[#1A45B1] w-full h-[.25rem]"></div>
+      <!-- <div class="bg-[#1A45B1] w-full h-[.25rem]"></div>
       <div class="flex flex-col p-[.2rem]">
         <div class="flex flex-col">
           <router-link to="/lottery">
@@ -497,7 +524,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <LogOutModal>
         <div class="text-white text-center">
           <div class="text-[.5rem] text-[#a0c5fb]">Lembrette</div>
@@ -549,7 +576,6 @@ import { useGetUserInfo } from "@/global/getUserInfo.js";
 import { useMutation } from "@tanstack/vue-query";
 import { getSecurityInfo } from "@/global/getUserInfo.js";
 import { useGetBankAccounts } from "@/global/withdrawBankAccounts";
-
 const { bankAccount } = useGetBankAccounts();
 const { useSecurity } = getSecurityInfo();
 const { query, userData } = useGetUserInfo();
@@ -557,9 +583,7 @@ const store = useStore();
 const vipCurrentLevel = ref([]);
 const isRotate = ref(false);
 const mainDiv = ref(true);
-
 const isLogin = ref(false);
-
 const showDeposit = () => {
   isLogin.value = !isLogin.value;
 };
@@ -567,6 +591,90 @@ const closeDeposit = () => {
   isLogin.value = false;
   // hideThis()
 };
+
+const menuData = ref([
+  {
+    title: "Recover Balance",
+    img: "/menuImages/search2.png",
+    route: "/recoverbalance",
+    func: () => showComponent(),
+  },
+  {
+    title: "Account  Details",
+    img: "/menuImages/poker2.png",
+    func: () => showBonusDeSugestiao("/accountdetails", 0),
+  },
+  {
+    title: "Betting  Records",
+    img: "/menuImages/poker.png",
+    func: () => showBonusDeSugestiao("/accountdetails", 1),
+  },
+  {
+    title: "Report",
+    img: "/menuImages/serch.png",
+    func: () => showBonusDeSugestiao("/accountdetails", 2),
+  },
+  {
+    title: "Withdrawal management",
+    img: "/menuImages/card3.png",
+    route: "/withdraw",
+    func: () => bankAccount.refetch(),
+  },
+  {
+    title: "Lottery Balance",
+    img: "/menuImages/card.png",
+    route: "/lottery",
+    func: () => {},
+  },
+  {
+    title: "Agent Management",
+    img: "/menuImages/icon_dados.png",
+    route: "/agent",
+    func: () => {},
+  },
+  {
+    title: "Invite",
+    img: "/menuImages/icon_music.png",
+    route: "/invite",
+    func: () => {},
+  },
+  {
+    title: "User Data",
+    img: "/menuImages/icon_ProfileInformation.png",
+    route: "/profile",
+    func: () => {},
+  },
+  {
+    title: "Security Center",
+    img: "/menuImages/icon_SecurityCenter.png",
+    route: "/securitycenter",
+    func: () => {},
+  },
+  {
+    title: "FAQ",
+    img: "/menuImages/icon_help.png",
+    route: "/newsupport",
+    func: () => {},
+  },
+  {
+    title: "Suggestion Box",
+    img: "/menuImages/icon_Suggestion1.png",
+    func: () => showBonusDeSugestiao("/newsupport", 4),
+  },
+  {
+    title: "Face Detection",
+    img: "/menuImages/login_Device.png",
+    route: "deviceinfo",
+    func: () => {},
+  },
+  {
+    title: "Data management",
+    img: "/menuImages/icon_ProfileInformation.png",
+    route: "/datamanagement",
+    func: () => {},
+  },
+  { title: "Log-out", img: "/menuImages/icon_Logout.png", func: () => {} },
+]);
 
 onMounted(() => {
   vipCurrentLevel.value = store.state.degreeInfo.content;

@@ -737,9 +737,14 @@ onMounted(() => {
   transition: all 0.3s ease-in;
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (max-width: 440px) {
   .custom1 {
     width: 7.3rem;
+  }
+}
+@media screen and (min-width: 441px) {
+  .custom1 {
+    width: 8.8rem;
   }
 }
 </style>

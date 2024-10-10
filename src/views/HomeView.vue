@@ -33,7 +33,10 @@
               >
             </div>
           </div>
-          <img src="/images/unread.png" class="w-[.4rem]" alt="" />
+          <div class="relative">
+          <img src="/images/unread.png" class="w-[1.3rem]" alt="" />
+          <span class="h-1 text-[.20rem] bg-[red] absolute -top-[.1rem] -right-[.19rem] p-[.1rem] flex justify-between items-center rounded border-[.01rem] border-[white]">{{ store.state.userMessage?.content?.totalCount }}</span>
+        </div>
         </div>
       </div>
       <NewVantTab>

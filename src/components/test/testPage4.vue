@@ -184,8 +184,6 @@ const playGames = (popFrame, type, forwardUrl, code) => {
       forward();
       if (store.state.userInfo.isLogin) {
         store.commit("setshowGames", false);
-        store.state.commit('setDataFetching', true)
-        return;
       }
     }
   }
@@ -200,7 +198,7 @@ const { refetch: forward, isFetching } = useQuery({
       store.commit("setloginModal", true);
     }
     if(!data.data.success) {
-      messageApi.info(data.data.msg ? data.data.msg : 'Comeback late something went wrong')
+      messageApi.info('Comeback later something went wrong')
     }
     if (data.data.url.includes("ygmmt8test")) {
       window.location.href = data.data.url;
@@ -253,7 +251,8 @@ watch(
 }
 @media (min-width: 431px) {
   .gameContainer {
-    width: 7.4rem;
+    width: 8.8rem;
   }
 }
+
 </style>
