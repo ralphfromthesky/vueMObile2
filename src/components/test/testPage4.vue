@@ -21,7 +21,7 @@
           v-model:active="active"
           scrollspy
           sticky
-          offset-top=".8rem"
+          offset-top="1rem"
           background="#1A45B1"
           title-inactive-color="#A0C5FB"
           color="#FFF0BB"
@@ -200,7 +200,7 @@ const { refetch: forward, isFetching } = useQuery({
       store.commit("setloginModal", true);
     }
     if(!data.data.success) {
-      messageApi.info(data.data.msg).then(() => backHome())
+      messageApi.info(data.data.msg)
     }
     if (data.data.url.includes("ygmmt8test")) {
       window.location.href = data.data.url;
