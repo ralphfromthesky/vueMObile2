@@ -21,14 +21,14 @@
           "
           @click="newStore.commit('setsideBar')"
         />
-        <img src="/images/logo.png" class="w-full h-[.8rem]" />
+        <img src="/images/logo.png" class="w-full h-[1rem]" />
       </div>
       <div
         class="flex gap-[.2rem] items-center"
         v-if="!newStore.state.userInfo.isLogin"
       >
-        <AntButton title="Login" bg="#FFF0BB" h=".6rem" w="1.4rem" b=".1rem" ft=".22rem"  @click="newStore.commit('setloginModal', true)"/> 
-        <AntButton title="Register" bg="#1a45b1" h=".6rem" w="1.4rem" b=".1rem" ft=".22rem" :cla="true" @click="newStore.commit('setRegisterModal', true)"/>
+        <AntButton title="Login" bg="#FFF0BB" h=".6rem" w="1.5rem" b=".1rem" ft=".22rem"  @click="newStore.commit('setloginModal', true)"/> 
+        <AntButton title="Register" bg="#05309f" h=".6rem" w="1.5rem" b=".1rem" ft=".22rem" :cla="true" @click="newStore.commit('setRegisterModal', true)"/>
 
         <img
           src="/images/search.png"

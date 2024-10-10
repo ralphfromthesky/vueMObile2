@@ -21,7 +21,7 @@
           v-model:active="active"
           scrollspy
           sticky
-          offset-top="1rem"
+          offset-top=".9rem"
           background="#1A45B1"
           title-inactive-color="#A0C5FB"
           color="#FFF0BB"
@@ -67,7 +67,7 @@
                   class="text-[white] relative bg-[url('/images/BG.png')] bg-[length:1.2rem] bg-no-repeat bg-center"
                   @click="playGames(g.popFrame, g.type, g.forwardUrl, g.czCode)"
                 >
-                  <img :src="`/api/${g.imgUrl}`" class="h-[2.7rem] w-[2rem]" />
+                  <img :src="`/api/${g.imgUrl}`" class="h-[3.5rem] w-[2.4rem]" />
                   <img
                     src="/images/star.png"
                     alt=""
@@ -200,7 +200,7 @@ const { refetch: forward, isFetching } = useQuery({
       store.commit("setloginModal", true);
     }
     if(!data.data.success) {
-      messageApi.info(data.data.msg)
+      messageApi.info(data.data.msg ? data.data.msg : 'Comeback late something went wrong')
     }
     if (data.data.url.includes("ygmmt8test")) {
       window.location.href = data.data.url;

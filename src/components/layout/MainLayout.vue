@@ -44,7 +44,7 @@
         <Footer></Footer>
       </section>
     </div>
-    <BottomNavbar></BottomNavbar>
+    <BottomNavbar/>
   </main>
 </template>
 <script setup>

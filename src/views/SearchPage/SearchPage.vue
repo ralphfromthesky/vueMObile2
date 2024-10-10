@@ -30,9 +30,9 @@
           @click="toSearch"
         />
       </div>
-<div class="px-1 my-1">
+<!-- <div class="px-1 my-1">
   <ReusableInput bg="#05309f" :hasSearch=true plhldr="Search Game here" />
-</div>
+</div> -->
       <div
         class="text-[#6fa4ef] mb-[.5rem] px-[.2rem]"
         v-if="searchData.length > 0"
@@ -144,7 +144,7 @@
                 <span>
                   <img
                     :src="`/api/${tab.buttonImagePath}`"
-                    class="h-[2.5rem]"
+                    class="h-[3rem] w-[3rem] border-2 border-[red]"
                     srcset=""
                 /></span>
                 <img
